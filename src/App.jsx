@@ -1,4 +1,4 @@
-import GlobalStyles from "./GlobalStyles";
+import GlobalStyles from "./styles/GlobalStyles";
 import React from "react";
 
 function App() {
