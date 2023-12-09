@@ -10,6 +10,10 @@ a{
 *{
     box-sizing: border-box;
 }
+
+button{
+    border: unset;
+}
 `;
 
 export default GlobalStyles;
