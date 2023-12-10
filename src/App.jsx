@@ -6,6 +6,7 @@ function App() {
     <>
       <GlobalStyles />
       {/* 여기 밑으로 컴포넌트 사용 */}
+      <h1>test</h1>
     </>
   );
 }
