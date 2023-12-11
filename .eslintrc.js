@@ -20,5 +20,8 @@ module.exports = {
     sourceType: "module",
   },
   plugins: ["react"],
-  rules: {},
+  rules: {
+    "react/react-in-jsx-scope": 0,
+    "no-unused-vars": "warn",
+  },
 };

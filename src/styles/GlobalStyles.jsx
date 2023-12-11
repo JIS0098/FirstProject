@@ -1,14 +1,18 @@
+import reset from "./reset";
 import { createGlobalStyle } from "styled-components";
-import reset from "styled-reset";
 
 const GlobalStyles = createGlobalStyle`
+
+/* reset */
 ${reset}
+
+/* Custom-Global-Styled */
+*{
+    box-sizing: border-box;
+}
 a{
     text-decoration: none;
     color: inherit;
-}
-*{
-    box-sizing: border-box;
 }
 `;
 
