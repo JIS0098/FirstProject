@@ -4,6 +4,7 @@ import person from "./person.svg";
 import profileImg from "./profileImg.png";
 import WriteInput from "./WriteInput";
 import arrow_down from "../../assets/icon/arrow_down.svg";
+import { css } from "styled-components";
 // 여러개 요소를 감싸는 컴포넌트는 Box
 // 최상위 레이아웃 설정 컴포넌트는 Layout
 
@@ -39,17 +40,15 @@ const Message = () => {
         </ProfileLayout>
         <RelationshipInputBox>
           <h2>상대와의 관계</h2>
-          <RelationshipInput>
-            <div>
-              지인
-              <img src={arrow_down} />
-            </div>
-            {/* <ul>
+          <div>
+            지인
+            <img src={arrow_down} />
+          </div>
+          {/* <ul>
               {arr.relationship.map((item) => (
                 <li key={item}>{item}</li>
               ))}
             </ul> */}
-          </RelationshipInput>
         </RelationshipInputBox>
         <WriteInputBox>
           <h2>내용을 입력해주세요</h2>
@@ -73,6 +72,49 @@ const Message = () => {
   );
 };
 
+const TitleStyled = css`
+  font-size: 2.4rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 3.66rem;
+  letter-spacing: -0.024rem;
+  margin-bottom: 1.2rem;
+`;
+
+const SelectInputStyled = css`
+  & div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 32rem;
+    padding: 1.2rem 1.6rem;
+    border-radius: 0.8rem;
+    border: 0.1rem solid var(--gray-300, #ccc);
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 2.6rem;
+    letter-spacing: -0.016rem;
+    margin-bottom: 1.2rem;
+  }
+
+  & ul {
+    width: 32rem;
+    border-radius: 0.8rem;
+    border: 0.1rem solid var(--gray-300, #ccc);
+  }
+
+  & li {
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 2.6rem;
+    letter-spacing: -0.016rem;
+    list-style-type: none;
+    padding: 1.2rem 1.6rem;
+  }
+`;
+
 const MessageLayout = styled.form``;
 
 const MessageBox = styled.div`
@@ -84,14 +126,10 @@ const MessageBox = styled.div`
   flex-direction: column;
   gap: 5rem;
 `;
+
 const FromInputBox = styled.div`
   & h2 {
-    font-size: 2.4rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 3.66rem;
-    letter-spacing: -0.024rem;
-    margin-bottom: 1.2rem;
+    ${TitleStyled};
   }
 
   & input {
@@ -111,12 +149,7 @@ const FromInputBox = styled.div`
 
 const ProfileLayout = styled.div`
   & h2 {
-    font-size: 2.4rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 3.66rem;
-    letter-spacing: -0.024rem;
-    margin-bottom: 1.2rem;
+    ${TitleStyled};
   }
 `;
 
@@ -164,100 +197,22 @@ const ImgList = styled.div`
 
 const RelationshipInputBox = styled.div`
   & h2 {
-    font-size: 2.4rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 3.66rem;
-    letter-spacing: -0.024rem;
-    margin-bottom: 1.2rem;
+    ${TitleStyled};
   }
-`;
-
-const RelationshipInput = styled.div`
-  & div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 32rem;
-    padding: 1.2rem 1.6rem;
-    border-radius: 0.8rem;
-    border: 0.1rem solid var(--gray-300, #ccc);
-    font-size: 1.6rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 2.6rem; 
-    letter-spacing: -0.016rem;
-    margin-bottom: 1.2rem;
-  }
-
-  & ul {
-    width: 32rem;
-    border-radius: 0.8rem;
-    border: 0.1rem solid var(--gray-300, #ccc);
-  }
-
-  & li {
-    font-size: 1.6rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 2.6rem;
-    letter-spacing: -0.016rem;
-    list-style-type: none;
-    padding: 1.2rem 1.6rem;
-  }
+  ${SelectInputStyled}
 `;
 
 const WriteInputBox = styled.div`
   & h2 {
-    font-size: 2.4rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 3.66rem;
-    letter-spacing: -0.024rem;
-    margin-bottom: 1.2rem;
+    ${TitleStyled};
   }
 `;
 
 const FontSelectBox = styled.div`
   & h2 {
-    font-size: 2.4rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 3.66rem;
-    letter-spacing: -0.024rem;
-    margin-bottom: 1.2rem;
+    ${TitleStyled};
   }
-  & div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 32rem;
-    padding: 1.2rem 1.6rem;
-    border-radius: 0.8rem;
-    border: 0.1rem solid var(--gray-300, #ccc);
-    font-size: 1.6rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 2.6rem; /* 162.5% */
-    letter-spacing: -0.016rem;
-    margin-bottom: 1.2rem;
-  }
-
-  & ul {
-    width: 32rem;
-    border-radius: 0.8rem;
-    border: 0.1rem solid var(--gray-300, #ccc);
-  }
-
-  & li {
-    font-size: 1.6rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 2.6rem; 
-    letter-spacing: -0.016rem;
-    list-style-type: none;
-    padding: 1.2rem 1.6rem;
-  }
+  ${SelectInputStyled}
 `;
 
 const MessageCreateButton = styled.button`
@@ -269,7 +224,7 @@ const MessageCreateButton = styled.button`
   font-size: 1.8rem;
   font-style: normal;
   font-weight: 700;
-  line-height: 2.8rem; 
+  line-height: 2.8rem;
   letter-spacing: -0.018rem;
 `;
 
