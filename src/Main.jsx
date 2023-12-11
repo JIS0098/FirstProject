@@ -1,11 +1,12 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Message from "./pages/Message/Message";
 
 function Main() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<div>랜딩 페이지</div>} />
+        <Route path="/" element={<Message/>} />
         <Route path="post" element={<div>롤링 카드 생성 페이지</div>} />
         <Route
           path="post/:id"
