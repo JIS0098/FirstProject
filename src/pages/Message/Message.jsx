@@ -1,17 +1,15 @@
-import React from "react";
-import styled from "styled-components";
-import person from "./person.svg";
-import profileImg from "./profileImg.png";
-import WriteInput from "./WriteInput";
-import arrow_down from "../../assets/icon/arrow_down.svg";
-import { css } from "styled-components";
-// 여러개 요소를 감싸는 컴포넌트는 Box
-// 최상위 레이아웃 설정 컴포넌트는 Layout
+import React from 'react';
+import styled from 'styled-components';
+import person from './person.svg';
+import profileImg from './profileImg.png';
+import WriteInput from './WriteInput';
+import arrow_down from '../../assets/icon/arrow_down.svg';
+import { css } from 'styled-components';
 
 const Message = () => {
   const arr = {
-    font: ["Noto Sans", "Pretendard", "나눔명조", "나눔손글씨 손편지체"],
-    relationship: ["지인", "동료", "가족", "친구"],
+    font: ['Noto Sans', 'Pretendard', '나눔명조', '나눔손글씨 손편지체'],
+    relationship: ['지인', '동료', '가족', '친구'],
     profileImages: [profileImg],
   };
 
@@ -44,15 +42,15 @@ const Message = () => {
             지인
             <img src={arrow_down} />
           </div>
-          {/* <ul>
-              {arr.relationship.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul> */}
+          <ul>
+            {arr.relationship.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
         </RelationshipInputBox>
         <WriteInputBox>
           <h2>내용을 입력해주세요</h2>
-          {/* <WriteInput /> 내용입력창*/}
+          <WriteInput />
         </WriteInputBox>
         <FontSelectBox>
           <h2>폰트 선택</h2>
@@ -60,11 +58,11 @@ const Message = () => {
             Noto Sans
             <img src={arrow_down} />
           </div>
-          {/* <ul>
+          <ul>
             {arr.font.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-          </ul> */}
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
         </FontSelectBox>
         <MessageCreateButton>생성하기</MessageCreateButton>
       </MessageBox>
@@ -102,6 +100,7 @@ const SelectInputStyled = css`
     width: 32rem;
     border-radius: 0.8rem;
     border: 0.1rem solid var(--gray-300, #ccc);
+    overflow: hidden;
   }
 
   & li {
@@ -112,6 +111,10 @@ const SelectInputStyled = css`
     letter-spacing: -0.016rem;
     list-style-type: none;
     padding: 1.2rem 1.6rem;
+
+    &:hover {
+      background-color: var(--gray-300, #f0f0f0);
+    }
   }
 `;
 
