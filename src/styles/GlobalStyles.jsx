@@ -14,6 +14,9 @@ a{
     text-decoration: none;
     color: inherit;
 }
+button{
+    border: unset;
+}
 `;
 
 export default GlobalStyles;
