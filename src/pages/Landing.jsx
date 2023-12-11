@@ -92,7 +92,7 @@ const StyledLandingSection = styled.section`
   border-radius: 16px;
   margin-bottom: 3rem;
   min-height: 30rem;
-
+  min-width: 360px;
   @media screen and (max-width: 1248px) {
     display: grid;
     padding: 4rem 0;
@@ -176,6 +176,7 @@ const StyledGoToListButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-bottom: 6rem;
+  min-width: 360px;
 `;
 const StyledGoToListButton = styled.button`
   width: 28rem;
