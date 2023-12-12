@@ -2,13 +2,16 @@ import React from "react";
 import { CardContent } from "./CardContent";
 import { Reactions } from "./Reactions";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 function CardItem({ recipient }) {
   const { name, recentMessages, messageCount, topReactions, backgroundColor, backgroundImageURL } = recipient;
   return (
     <Container $bgUrl={backgroundImageURL} $bgColor={backgroundColor}>
       <Wrapper $bgUrl={backgroundImageURL} $bgColor={backgroundColor}>
-        <CardContent name={name} messages={recentMessages} messageCount={messageCount} $bgUrl={backgroundImageURL} />
+        <Link to={`/post/${recipient.id}`}>
+          <CardContent name={name} messages={recentMessages} messageCount={messageCount} $bgUrl={backgroundImageURL} />
+        </Link>
         <TopReactions>
           {topReactions.map((data) => (
             <Reactions key={data.id} emoji={data.emoji} count={data.count} />

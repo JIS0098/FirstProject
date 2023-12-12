@@ -1,62 +1,85 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import styled from "styled-components";
 import { ReactComponent as ALeft } from "../../assets/icon/arrow_left.svg";
 import { ReactComponent as ARight } from "../../assets/icon/arrow_right.svg";
-import { DEVICE_MAX_SIZE } from "../../constants";
+import { CARD_WIDTH, DEVICE_MAX_SIZE, ITEMS_PER_PAGE } from "../../constants";
 import CardItem from "./CardItem";
 import { Link } from "react-router-dom";
 import { CardList } from "./CardList";
 
 function CardSection({ title, recipients }) {
-  const itemsPerPage = 4;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [offset, setOffset] = useState(0);
+  const [startX, setStartX] = useState(0);
+  const [endX, setEndX] = useState(0);
 
-  const cardWidth = 29.5;
+  const maxIndex = recipients.length - ITEMS_PER_PAGE;
 
-  const maxIndex = recipients.length - itemsPerPage;
+  const updateOffset = (index) => {
+    setOffset(-index * CARD_WIDTH);
+  };
 
   const handlePrevClick = () => {
     setCurrentIndex((prevIndex) => {
-      const newIndex = prevIndex > 0 ? prevIndex - itemsPerPage : 0;
-      setOffset(-newIndex * cardWidth);
+      const newIndex = Math.max(prevIndex - ITEMS_PER_PAGE, 0);
+      updateOffset(newIndex);
       return newIndex;
     });
   };
 
   const handleNextClick = () => {
     setCurrentIndex((prevIndex) => {
-      const newIndex = prevIndex < maxIndex ? prevIndex + itemsPerPage : maxIndex;
-      setOffset(-newIndex * cardWidth);
+      const newIndex = Math.min(prevIndex + ITEMS_PER_PAGE, maxIndex);
+      updateOffset(newIndex);
       return newIndex;
     });
   };
 
-  const renderItems = recipients.map((recipient, index) => (
-    <Link key={index} to={`/post/${recipient.id}`}>
-      <CardItem recipient={recipient} />
-    </Link>
-  ));
+  //드래그 이벤트
+  const handleMouseDown = (e) => {
+    console.log("down", e.pageX);
+    setStartX(e.pageX);
+  };
+
+  const handleMouseUp = (e) => {
+    console.log("up", e.pageX);
+    setEndX(e.pageX);
+
+    const deltaX = endX - startX;
+
+    // If deltaX is negative, it's a swipe to the left, call handlePrevClick
+    if (deltaX < 0) {
+      console.log("0");
+      handlePrevClick();
+    }
+    // If deltaX is positive, it's a swipe to the right, call handleNextClick
+    else if (deltaX > 0) {
+      console.log("1");
+      handleNextClick();
+    }
+  };
+
+  const renderItems = recipients.map((recipient, index) => <CardItem key={index} recipient={recipient} />);
 
   return (
     <Container>
       <SubTitle>{title}</SubTitle>
-      <div style={{ position: "relative" }}>
+      <Relative>
         <ArrowButton $left onClick={handlePrevClick} $hide={currentIndex === 0}>
           <ALeft />
         </ArrowButton>
-        <Wrapper>
+        <Wrapper onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
           <CardList offset={offset}>{renderItems}</CardList>
         </Wrapper>
         <ArrowButton onClick={handleNextClick} $hide={currentIndex >= maxIndex}>
           <ARight />
         </ArrowButton>
-      </div>
+      </Relative>
     </Container>
   );
 }
 
-export default CardSection;
+export default React.memo(CardSection);
 
 const Container = styled.div`
   display: flex;
@@ -68,6 +91,10 @@ const Container = styled.div`
     align-self: flex-start;
     margin-left: 2rem;
   }
+`;
+
+const Relative = styled.div`
+  position: relative;
 `;
 
 const Wrapper = styled.div`
