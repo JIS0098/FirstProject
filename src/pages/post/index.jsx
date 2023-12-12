@@ -50,6 +50,7 @@ function Post() {
                 <img src={addEmojiImg} />
                 <ButtonWrapP>추가</ButtonWrapP>
               </ButtonWrap>
+              <Line></Line>
               <ButtonWrap onClick={shareToggle}>
                 <img src={shareImg} />
               </ButtonWrap>
@@ -60,7 +61,13 @@ function Post() {
 
       <PostWrap>
         <PostDeleteButton>삭제하기</PostDeleteButton>
+        <EditDeleteButton>편집하기</EditDeleteButton>
         <PostCard>
+          <ImgBox>
+            <img src={MoreCardImg} />
+          </ImgBox>
+        </PostCard>
+        {/* <PostCard>
           <ImgBox>
             <img src={MoreCardImg} />
           </ImgBox>
@@ -74,12 +81,7 @@ function Post() {
           <ImgBox>
             <img src={MoreCardImg} />
           </ImgBox>
-        </PostCard>
-        <PostCard>
-          <ImgBox>
-            <img src={MoreCardImg} />
-          </ImgBox>
-        </PostCard>
+        </PostCard> */}
         <PostCard>
           <ImgBox>
             <img src={MoreCardImg} />
@@ -143,7 +145,7 @@ function Post() {
               atque nulla corrupti voluptatibus error!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit
               esse quae at cumque corporis culpa atque nulla corrupti voluptatibus error!
             </ModalText>
-            <div onClick={modalToggle}>확인</div>
+            <ModalClose onClick={modalToggle}>확인</ModalClose>
           </ModalInner>
         </Modal>
       ) : null}
@@ -174,6 +176,7 @@ const HeaderService = styled.div`
   @media all and (max-width: 768px) {
     flex-direction: column;
     align-items: flex-start;
+    gap: 1.2rem;
   }
 `;
 const ToName = styled.h2`
@@ -192,7 +195,7 @@ const HeaderServicePost = styled.div`
   font-size: 1.8rem;
   color: #181818;
   width: 21rem;
-  @media all and (max-width: 900px) {
+  @media all and (max-width: 1248px) {
     display: none;
   }
 `;
@@ -228,6 +231,7 @@ const ServiceP = styled.p`
   align-items: center;
 `;
 const Emoji = styled.div`
+  min-width: 6rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -237,6 +241,9 @@ const Emoji = styled.div`
   color: #fff;
   font-size: 16px;
   cursor: pointer;
+  @media all and (max-width: 768px) {
+    font-size: 1.4rem;
+  }
 `;
 const EmojiWrap = styled.div`
   display: flex;
@@ -244,11 +251,18 @@ const EmojiWrap = styled.div`
   align-items: center;
   gap: 1rem;
   position: relative;
+  @media all and (max-width: 768px) {
+    gap: 0.8rem;
+  }
 `;
 const EmojiButton = styled.img`
   width: 2.4rem;
   height: 2.4rem;
   cursor: pointer;
+  @media all and (max-width: 768px) {
+    width: 2rem;
+    height: 2rem;
+  }
 `;
 const ToggleAddEmoji = styled.div`
   max-width: 26.4rem;
@@ -256,6 +270,7 @@ const ToggleAddEmoji = styled.div`
   padding: 24px;
   flex-wrap: wrap;
   align-items: flex-start;
+  justify-content: space-around;
   gap: 10px;
   border-radius: 8px;
   border: 1px solid #b6b6b6;
@@ -265,6 +280,14 @@ const ToggleAddEmoji = styled.div`
   position: absolute;
   top: 13rem;
   right: 25rem;
+  @media all and (max-width: 1248px) {
+    right: 20rem;
+  }
+  @media all and (max-width: 768px) {
+    right: auto;
+    left: 1rem;
+    top: 16rem;
+  }
 `;
 const ButtonWrap = styled.div`
   display: flex;
@@ -276,9 +299,15 @@ const ButtonWrap = styled.div`
   border: 1px solid #ccc;
   background-color: #fff;
   cursor: pointer;
+  @media all and (max-width: 768px) {
+    padding: 0.6rem 0.8rem;
+  }
 `;
 const ButtonWrapP = styled.p`
   font-size: 1.6rem;
+  @media all and (max-width: 768px) {
+    display: none;
+  }
 `;
 const PostBack = styled.div`
   background-color: #ffe2ad;
@@ -288,7 +317,9 @@ const PostBack = styled.div`
 const DeleteButton = styled.div`
   width: 9.2rem;
   height: 3.9rem;
-  line-height: 3.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: #fff;
   font-size: 1.6rem;
   text-align: center;
@@ -296,26 +327,62 @@ const DeleteButton = styled.div`
   background: #9935ff;
   cursor: pointer;
 `;
+const EditDeleteButton = styled(DeleteButton)`
+  display: none;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+  color: black;
+  @media all and (max-width: 1248px) {
+    display: flex;
+    position: absolute;
+    top: 8rem;
+    right: 2.5rem;
+  }
+`;
 const PostDeleteButton = styled(DeleteButton)`
   position: absolute;
   top: 8rem;
   right: 2.5rem;
+  @media all and (max-width: 1248px) {
+    max-width: 72rem;
+    width: calc(100% - 48px);
+    height: 5.6rem;
+    position: fixed;
+    padding: 0 2.4rem;
+    top: auto;
+    bottom: 6rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 `;
 const PostWrap = styled.div`
   max-width: 124.8rem;
   width: 100%;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   margin: 0 auto;
   padding: 13rem 2.4rem;
   gap: 2.4rem;
   position: relative;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
+  @media all and (max-width: 1248px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media all and (max-width: 768px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+`;
+const Line = styled.div`
+  width: 1px;
+  height: 2.8rem;
+  background-color: #eee;
 `;
 const PostCard = styled.div`
-  display: flex;
   width: 38.4rem;
   height: 28rem;
+  margin: 0 auto;
+  display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 16px;
@@ -323,6 +390,12 @@ const PostCard = styled.div`
   box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.08);
   padding: 2.8rem 2.4rem;
   cursor: pointer;
+  @media all and (max-width: 1248px) {
+    width: 35.2rem;
+  }
+  @media all and (max-width: 768px) {
+    width: 100%;
+  }
 `;
 const ImgBox = styled.div`
   width: 5.6rem;
@@ -407,7 +480,15 @@ const ShareBox = styled.div`
   border: 1px solid #ccc;
   background: #fff;
   box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.08);
-  /* z-index: 2; */
+
+  @media all and (max-width: 1248px) {
+    right: 2rem;
+  }
+  @media all and (max-width: 768px) {
+    top: 16rem;
+    right: auto;
+    left: 28rem;
+  }
 `;
 const Share = styled.div`
   width: 100%;
@@ -430,8 +511,10 @@ const Modal = styled.div`
   margin: 0 auto;
 `;
 const ModalInner = styled.div`
-  width: 60rem;
+  max-width: 60rem;
+  width: 100%;
   height: 47.6rem;
+  padding: 0 2.4rem;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -443,24 +526,38 @@ const ModalInner = styled.div`
 `;
 const ModalText = styled.div`
   margin: 2.4rem;
-  width: 50rem;
+  max-width: 50rem;
   height: 24rem;
   color: #5a5a5a;
   font-size: 1.8rem;
   overflow: scroll;
 `;
+const ModalClose = styled.div`
+  width: 12rem;
+  height: 4rem;
+  padding: 0.7rem 1.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  color: #fff;
+  font-size: 1.6rem;
+  border-radius: 6px;
+  background: var(--purple-600, #9935ff);
+  cursor: pointer;
+`;
 // share
 const ShareFinish = styled.div`
   display: flex;
   max-width: 52.4rem;
-  width: 100%;
+  width: calc(100% - 48px);
   height: 6.4rem;
   padding: 1.9rem 3rem;
   justify-content: space-between;
   align-items: center;
   border-radius: 8px;
   background: rgba(0, 0, 0, 0.8);
-  position: absolute;
+  position: fixed;
   bottom: 40px;
   left: 50%;
   transform: translateX(-50%);
