@@ -5,7 +5,6 @@ import addEmojiImg from "../../assets/icon/add-24.svg";
 import shareImg from "../../assets/icon/share-24.svg";
 import MoreCardImg from "../../assets/icon/plus.svg";
 import shareFin from "../../assets/icon/check.svg";
-import shareClose from "../../assets/icon/deleted.svg";
 
 function Post() {
   const [emojiAdd, setEmojiAdd] = useState(false);
@@ -25,7 +24,6 @@ function Post() {
   return (
     <PostBack>
       <WhiteBack>
-        <Head></Head>
         <HeaderService>
           <ToName>To. Ashley Kim</ToName>
 
@@ -101,10 +99,7 @@ function Post() {
                 <FromTag>가족</FromTag>
               </FromBox>
             </From>
-            <PostCardDescrip>
-              코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두 조심 또
-              하세요!
-            </PostCardDescrip>
+            <PostCardDescrip>코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두 조심 또 하세요!</PostCardDescrip>
             <Ago>2023.07.08</Ago>
           </PostCardWrap>
         </PostCard>
@@ -144,11 +139,9 @@ function Post() {
               <Ago>2023.07.08</Ago>
             </From>
             <ModalText>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit
-              esse quae at cumque corporis culpa atque nulla corrupti
-              voluptatibus error!Lorem ipsum dolor sit amet consectetur,
-              adipisicing elit. Suscipit esse quae at cumque corporis culpa
-              atque nulla corrupti voluptatibus error!
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit esse quae at cumque corporis culpa
+              atque nulla corrupti voluptatibus error!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit
+              esse quae at cumque corporis culpa atque nulla corrupti voluptatibus error!
             </ModalText>
             <div onClick={modalToggle}>확인</div>
           </ModalInner>
@@ -169,11 +162,7 @@ const WhiteBack = styled.div`
   width: 100%;
   background-color: #fff;
 `;
-const Head = styled.div`
-  width: 100%;
-  height: 65px;
-  background-color: pink;
-`;
+
 const HeaderService = styled.div`
   max-width: 120rem;
   width: 100%;
