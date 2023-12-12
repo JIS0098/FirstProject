@@ -1,22 +1,27 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import person from "./person.svg";
-import profileImg from "./profileImg.png";
+import person from "../../assets/icon/person.svg";
+import profileImg from "../../assets/img/profileImg.png";
 import WriteInput from "./WriteInput";
 import arrow_down from "../../assets/icon/arrow_down.svg";
 import { css } from "styled-components";
-
+import useToggle from "../../hooks/useToggle";
 // 여러개 요소를 감싸는 컴포넌트는 Box
 // 최상위 레이아웃 설정 컴포넌트는 Layout
 /* 위치와 크기 */
 /* 레이아웃과 정렬 */
 /* 모양과 스타일 */
 
-// max-width 1248 / 768
+// 임포트 자동바꾸기 패키징 설치 
 
-const [showList, setShowList] = useState(false);
+
 
 const Message = () => {
+  // 관계, 폰트 stat 만들기 setState가 토그함수 역할 , useToggle
+
+  const [relationship,relationshipToggle ] =useToggle()
+  const [font,fontToggle ] = useToggle()
+
   const arr = {
     font: ["Noto Sans", "Pretendard", "나눔명조", "나눔손글씨 손편지체"],
     relationship: ["지인", "동료", "가족", "친구"],
@@ -30,12 +35,10 @@ const Message = () => {
       profileImg,
       profileImg,
       profileImg,
-      profileImg,
+
     ],
   };
-  const handleList = () => {
-    showList? setShowList(false) : setShowList(true);
-  };
+
   return (
     <MessageLayout>
       <MessageBox>
@@ -48,7 +51,7 @@ const Message = () => {
           <ProfileImgBox>
             <PreviewImg>
               <div>
-                <img src={person} />
+                <img src={person}  />
               </div>
             </PreviewImg>
             <ImgSelectBox>
@@ -65,33 +68,35 @@ const Message = () => {
           <h2>상대와의 관계</h2>
           <div>
             지인
-            <img src={arrow_down} onClick={handleList} />
+            <img src={arrow_down} onClick={relationshipToggle} />
           </div>
-          {
-            
+          {relationship?
           <ul>
             {arr.relationship.map((item) => (
-              <li key={item}>{item}</li>
+              <li  key={item}>{item}</li>
             ))}
           </ul>
-
+  : null
           }
         </RelationshipInputBox>
         <WriteInputBox>
           <h2>내용을 입력해주세요</h2>
-          <div>React-Quill 들어갈 곳</div>
+          <div>메세지 작성 에디터 들어갈 곳</div>
         </WriteInputBox>
         <FontSelectBox>
           <h2>폰트 선택</h2>
           <div>
             Noto Sans
-            <img src={arrow_down} />
+            <img src={arrow_down} onClick={fontToggle} />
           </div>
+          {font?
           <ul>
             {arr.font.map((item) => (
               <li key={item}>{item}</li>
             ))}
           </ul>
+:null
+          }
         </FontSelectBox>
         {/* <MessageCreateButton>생성하기</MessageCreateButton> */}
       </MessageBox>
@@ -123,6 +128,9 @@ const SelectInputStyled = css`
     line-height: 2.6rem;
     letter-spacing: -0.016rem;
     margin-bottom: 1.2rem;
+    position:relative;
+
+  
   }
 
   & ul {
@@ -130,6 +138,7 @@ const SelectInputStyled = css`
     border-radius: 0.8rem;
     border: 0.1rem solid var(--gray-300, #ccc);
     overflow: hidden;
+    position: absolute;
   }
 
   & li {
@@ -140,7 +149,7 @@ const SelectInputStyled = css`
     letter-spacing: -0.016rem;
     list-style-type: none;
     padding: 1.2rem 1.6rem;
-
+    background-color: white;
     &:hover {
       background-color: var(--gray-300, #f0f0f0);
     }
