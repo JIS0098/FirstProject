@@ -12,15 +12,13 @@ import useToggle from "../../hooks/useToggle";
 /* 레이아웃과 정렬 */
 /* 모양과 스타일 */
 
-// 임포트 자동바꾸기 패키징 설치 
-
-
+// 임포트 자동바꾸기 패키징 설치
 
 const Message = () => {
   // 관계, 폰트 stat 만들기 setState가 토그함수 역할 , useToggle
 
-  const [relationship,relationshipToggle ] =useToggle()
-  const [font,fontToggle ] = useToggle()
+  const [relationship, relationshipToggle] = useToggle();
+  const [font, fontToggle] = useToggle();
 
   const arr = {
     font: ["Noto Sans", "Pretendard", "나눔명조", "나눔손글씨 손편지체"],
@@ -35,7 +33,6 @@ const Message = () => {
       profileImg,
       profileImg,
       profileImg,
-
     ],
   };
 
@@ -51,7 +48,7 @@ const Message = () => {
           <ProfileImgBox>
             <PreviewImg>
               <div>
-                <img src={person}  />
+                <img src={person} />
               </div>
             </PreviewImg>
             <ImgSelectBox>
@@ -70,14 +67,13 @@ const Message = () => {
             지인
             <img src={arrow_down} onClick={relationshipToggle} />
           </div>
-          {relationship?
-          <ul>
-            {arr.relationship.map((item) => (
-              <li  key={item}>{item}</li>
-            ))}
-          </ul>
-  : null
-          }
+          {relationship ? (
+            <ul>
+              {arr.relationship.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          ) : null}
         </RelationshipInputBox>
         <WriteInputBox>
           <h2>내용을 입력해주세요</h2>
@@ -89,14 +85,13 @@ const Message = () => {
             Noto Sans
             <img src={arrow_down} onClick={fontToggle} />
           </div>
-          {font?
-          <ul>
-            {arr.font.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-:null
-          }
+          {font ? (
+            <ul>
+              {arr.font.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          ) : null}
         </FontSelectBox>
         {/* <MessageCreateButton>생성하기</MessageCreateButton> */}
       </MessageBox>
@@ -128,9 +123,7 @@ const SelectInputStyled = css`
     line-height: 2.6rem;
     letter-spacing: -0.016rem;
     margin-bottom: 1.2rem;
-    position:relative;
-
-  
+    position: relative;
   }
 
   & ul {
