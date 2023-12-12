@@ -18,6 +18,10 @@ export const theme = {
         focus: "",
       },
     },
+    subtitleColor: color.black,
+    nameColor: color.gray[900],
+    authorColor: color.gray[700],
+    cardMainColor: color.purple[200],
   },
   years: {
     button: {
