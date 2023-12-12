@@ -1,20 +1,41 @@
-import React from 'react';
-import styled from 'styled-components';
-import person from './person.svg';
-import profileImg from './profileImg.png';
-import WriteInput from './WriteInput';
-import arrow_down from '../../assets/icon/arrow_down.svg';
-import { css } from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
+import person from "./person.svg";
+import profileImg from "./profileImg.png";
+import WriteInput from "./WriteInput";
+import arrow_down from "../../assets/icon/arrow_down.svg";
+import { css } from "styled-components";
 
 // 여러개 요소를 감싸는 컴포넌트는 Box
 // 최상위 레이아웃 설정 컴포넌트는 Layout
+/* 위치와 크기 */
+/* 레이아웃과 정렬 */
+/* 모양과 스타일 */
+
+// max-width 1248 / 768
+
+const [showList, setShowList] = useState(false);
+
 const Message = () => {
   const arr = {
-    font: ['Noto Sans', 'Pretendard', '나눔명조', '나눔손글씨 손편지체'],
-    relationship: ['지인', '동료', '가족', '친구'],
-    profileImages: [profileImg],
+    font: ["Noto Sans", "Pretendard", "나눔명조", "나눔손글씨 손편지체"],
+    relationship: ["지인", "동료", "가족", "친구"],
+    profileImages: [
+      profileImg,
+      profileImg,
+      profileImg,
+      profileImg,
+      profileImg,
+      profileImg,
+      profileImg,
+      profileImg,
+      profileImg,
+      profileImg,
+    ],
   };
-
+  const handleList = () => {
+    showList? setShowList(false) : setShowList(true);
+  };
   return (
     <MessageLayout>
       <MessageBox>
@@ -26,7 +47,9 @@ const Message = () => {
           <h2>프로필 이미지</h2>
           <ProfileImgBox>
             <PreviewImg>
-              <img src={person} />
+              <div>
+                <img src={person} />
+              </div>
             </PreviewImg>
             <ImgSelectBox>
               <p>프로필 이미지를 선택해주세요!</p>
@@ -42,17 +65,21 @@ const Message = () => {
           <h2>상대와의 관계</h2>
           <div>
             지인
-            <img src={arrow_down} />
+            <img src={arrow_down} onClick={handleList} />
           </div>
+          {
+            
           <ul>
             {arr.relationship.map((item) => (
               <li key={item}>{item}</li>
             ))}
           </ul>
+
+          }
         </RelationshipInputBox>
         <WriteInputBox>
           <h2>내용을 입력해주세요</h2>
-          <WriteInput />
+          <div>React-Quill 들어갈 곳</div>
         </WriteInputBox>
         <FontSelectBox>
           <h2>폰트 선택</h2>
@@ -66,7 +93,7 @@ const Message = () => {
             ))}
           </ul>
         </FontSelectBox>
-        <MessageCreateButton>생성하기</MessageCreateButton>
+        {/* <MessageCreateButton>생성하기</MessageCreateButton> */}
       </MessageBox>
     </MessageLayout>
   );
@@ -120,13 +147,24 @@ const SelectInputStyled = css`
   }
 `;
 
-const MessageLayout = styled.form``;
+const MessageLayout = styled.form`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4.7rem 0rem 6rem;
+
+  @media (max-width: 1248px) {
+    padding: 5rem 2.4rem 2.4rem;
+  }
+  @media (max-width: 768px) {
+    padding: 5rem 2rem 2rem;
+  }
+`;
 
 const MessageBox = styled.div`
   color: var(--gray-900, #181818);
   width: 72rem;
   height: 94.4rem;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 5rem;
@@ -165,18 +203,28 @@ const ProfileImgBox = styled.div`
 `;
 
 const PreviewImg = styled.div`
-  width: 8rem;
-  height: 8rem;
-  background-color: var(--gray-300, #ccc);
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
 
+  & div {
+    width: 8rem;
+    height: 8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--gray-300, #ccc);
+    border-radius: 50%;
+  }
+
   & img {
     width: 3.2rem;
     height: 3.2rem;
-    background-color: var(--gray-300, #ccc);
+  }
+
+  @media (max-width: 768px) {
+    padding: 5rem 2rem 2rem;
   }
 `;
 
@@ -193,10 +241,16 @@ const ImgSelectBox = styled.div`
 
 const ImgList = styled.div`
   display: flex;
-  gap: 0.4rem;
+  flex-wrap: wrap;
+  gap: 0 0.4rem;
   & img {
     margin-top: 1.2rem;
     width: 5.6rem;
+
+    @media (max-width: 360px) {
+      width: 4rem;
+      height: 4rem;
+    }
   }
 `;
 
@@ -208,7 +262,7 @@ const RelationshipInputBox = styled.div`
 `;
 
 const WriteInputBox = styled.div`
-display: block;
+  display: block;
   & h2 {
     ${TitleStyled};
   }
@@ -221,17 +275,17 @@ const FontSelectBox = styled.div`
   ${SelectInputStyled}
 `;
 
-const MessageCreateButton = styled.button`
-  width: 72rem;
-  padding: 1.4rem 2.4rem;
-  color: white;
-  border-radius: 1.2rem;
-  background: var(--purple-600, #9935ff);
-  font-size: 1.8rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 2.8rem;
-  letter-spacing: -0.018rem;
-`;
+// const MessageCreateButton = styled.button`
+//   width: 72rem;
+//   padding: 1.4rem 2.4rem;
+//   color: white;
+//   border-radius: 1.2rem;
+//   background: var(--purple-600, #9935ff);
+//   font-size: 1.8rem;
+//   font-style: normal;
+//   font-weight: 700;
+//   line-height: 2.8rem;
+//   letter-spacing: -0.018rem;
+// `;
 
 export default Message;
