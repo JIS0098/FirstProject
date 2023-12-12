@@ -5,7 +5,6 @@ import addEmojiImg from "../../assets/icon/add-24.svg";
 import shareImg from "../../assets/icon/share-24.svg";
 import MoreCardImg from "../../assets/icon/plus.svg";
 import shareFin from "../../assets/icon/check.svg";
-import shareClose from "../../assets/icon/deleted.svg";
 
 function Post() {
   const [emojiAdd, setEmojiAdd] = useState(false);
@@ -25,7 +24,6 @@ function Post() {
   return (
     <PostBack>
       <WhiteBack>
-        <Head></Head>
         <HeaderService>
           <ToName>To. Ashley Kim</ToName>
 
@@ -164,11 +162,7 @@ const WhiteBack = styled.div`
   width: 100%;
   background-color: #fff;
 `;
-const Head = styled.div`
-  width: 100%;
-  height: 65px;
-  background-color: pink;
-`;
+
 const HeaderService = styled.div`
   max-width: 120rem;
   width: 100%;
