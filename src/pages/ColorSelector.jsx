@@ -5,19 +5,28 @@ import selectedColorIcon from "../assets/icon/color-selected.png";
 import backgroundImage1 from "../assets/img/background-image-1.png";
 import backgroundImage2 from "../assets/img/background-image-2.png";
 
+import { Link } from "react-router-dom";
+
 const ColorSelector = () => {
   const [isChecked, setIsChecked] = useState(false);
+  const [isName, setIsName] = useState("");
 
   const handleToggle = () => {
     setIsChecked((prev) => !prev);
   };
+
+  const handleNameChange = (name) => {
+    setIsName(name);
+  };
+
+  const isCreateButtonDisabled = isName === "";
 
   return (
     <Wrapper>
       <Container>
         <Create>
           <p>To.</p>
-          <CreateInput placeholder="받는 사람 이름을 입력해 주세요." />
+          <CreateInput value={isName} onChange={handleNameChange} />
         </Create>
         <SelectBackground>
           <p>배경화면을 선택해주세요.</p>
@@ -25,7 +34,13 @@ const ColorSelector = () => {
         </SelectBackground>
         <ToggleButton isChecked={isChecked} onToggle={handleToggle} />
         {isChecked ? <SelectImage /> : <SelectColor />}
-        <CreateButton>생성하기</CreateButton>
+        <Link to="/post/id">
+          <CreateButtonContainer>
+            <CreateButton disabled={isCreateButtonDisabled}>
+              생성하기
+            </CreateButton>
+          </CreateButtonContainer>
+        </Link>
       </Container>
     </Wrapper>
   );
@@ -42,6 +57,15 @@ const IMAGE = {
   1: `${backgroundImage1}`,
   2: `${backgroundImage2}`,
 };
+
+const CreateInput = ({ value, onChange }) => (
+  <StyledInput
+    type="text"
+    placeholder="받는 사람 이름을 입력해 주세요."
+    value={value}
+    onChange={(e) => onChange(e.target.value)}
+  />
+);
 
 const ToggleButton = ({ isChecked, onToggle }) => {
   return (
@@ -163,7 +187,7 @@ const Create = styled.div`
   }
 `;
 
-const CreateInput = styled.input`
+const StyledInput = styled.input`
   width: 72rem;
   padding: 1.2rem 1.6rem;
   border-radius: 0.8rem;
@@ -174,8 +198,8 @@ const CreateInput = styled.input`
   font-weight: 400;
   line-height: 150%;
 
-  @media screen and (max-width: 1248px) {
-    max-width: 720px;
+  &:focus {
+    outline: 0.2rem solid ${color.gray[500]};
   }
 
   @media screen and (max-width: 768px) {
@@ -187,12 +211,14 @@ const SelectBackground = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+
   p {
     font-size: 2.4rem;
     font-weight: 700;
     color: ${color.gray[900]};
     line-height: 150%;
   }
+
   span {
     font-size: 1.6rem;
     font-weight: 400;
@@ -305,18 +331,28 @@ const CheckIcon = styled.img`
   pointer-events: none;
 `;
 
+const CreateButtonContainer = styled.div`
+  width: 72rem;
+
+  @media screen and (max-width: 768px) {
+    max-width: 320px;
+  }
+`;
+
 const CreateButton = styled.button`
   width: 100%;
+  background: ${color.purple[600]};
   padding: 1.4rem 2.4rem;
   border-radius: 1.2rem;
-  background: ${color.purple[600]};
+  line-height: 150%;
   color: ${color.white};
   font-size: 1.8rem;
   font-weight: 700;
-  line-height: 150%;
   cursor: pointer;
 
   &:disabled {
+    filter: opacity(50%);
+    cursor: initial;
   }
 `;
 
