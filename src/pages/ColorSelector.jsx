@@ -52,6 +52,36 @@ const ToggleButton = ({ isChecked, onToggle }) => {
   );
 };
 
+const SelectColor = () => {
+  const [selectedColor, setSelectedColor] = useState(COLOR.orange);
+
+  const handleColorChange = (color) => {
+    setSelectedColor(color);
+  };
+
+  return (
+    <ColorPalette
+      onSelectColor={handleColorChange}
+      selectedColor={selectedColor}
+    />
+  );
+};
+
+const SelectImage = () => {
+  const [selectedImage, setSelectedImage] = useState(IMAGE[1]);
+
+  const handleImageChange = (image) => {
+    setSelectedImage(image);
+  };
+
+  return (
+    <ImagePalette
+      onSelectImage={handleImageChange}
+      selectedImage={selectedImage}
+    />
+  );
+};
+
 const ColorPalette = ({ onSelectColor, selectedColor }) => {
   const handleColorClick = (selectedColor) => {
     onSelectColor(selectedColor);
@@ -97,36 +127,7 @@ const ImagePalette = ({ onSelectImage, selectedImage }) => {
   );
 };
 
-const SelectColor = () => {
-  const [selectedColor, setSelectedColor] = useState(COLOR.orange);
-
-  const handleColorChange = (color) => {
-    setSelectedColor(color);
-  };
-
-  return (
-    <ColorPalette
-      onSelectColor={handleColorChange}
-      selectedColor={selectedColor}
-    />
-  );
-};
-
-const SelectImage = () => {
-  const [selectedImage, setSelectedImage] = useState(IMAGE[1]);
-
-  const handleImageChange = (image) => {
-    setSelectedImage(image);
-  };
-
-  return (
-    <ImagePalette
-      onSelectImage={handleImageChange}
-      selectedImage={selectedImage}
-    />
-  );
-};
-
+// styled-components
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
