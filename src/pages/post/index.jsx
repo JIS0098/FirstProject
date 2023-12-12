@@ -101,10 +101,7 @@ function Post() {
                 <FromTag>가족</FromTag>
               </FromBox>
             </From>
-            <PostCardDescrip>
-              코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두 조심 또
-              하세요!
-            </PostCardDescrip>
+            <PostCardDescrip>코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두 조심 또 하세요!</PostCardDescrip>
             <Ago>2023.07.08</Ago>
           </PostCardWrap>
         </PostCard>
@@ -144,11 +141,9 @@ function Post() {
               <Ago>2023.07.08</Ago>
             </From>
             <ModalText>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit
-              esse quae at cumque corporis culpa atque nulla corrupti
-              voluptatibus error!Lorem ipsum dolor sit amet consectetur,
-              adipisicing elit. Suscipit esse quae at cumque corporis culpa
-              atque nulla corrupti voluptatibus error!
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit esse quae at cumque corporis culpa
+              atque nulla corrupti voluptatibus error!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit
+              esse quae at cumque corporis culpa atque nulla corrupti voluptatibus error!
             </ModalText>
             <div onClick={modalToggle}>확인</div>
           </ModalInner>
