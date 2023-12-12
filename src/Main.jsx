@@ -1,8 +1,10 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Post from "../src/pages/post";
 import ListPage from "./pages/list";
 import Landing from "./pages/Landing";
 import Header from "./components/commons/Header";
+
 
 
 function Main() {
@@ -10,14 +12,12 @@ function Main() {
     <BrowserRouter>
       <Header />
       <Routes>
-
         <Route path="/" element={<Landing />} />
         <Route path="/list" element={<ListPage />} />
         <Route path="post" element={<div>롤링 카드 생성 페이지</div>} />
-        <Route
-          path="post/:id"
+        <Route path="post/:id"
           element={
-            <div>카드 리스트에서 선택한 롤링페이퍼를 보여주는 페이지</div>
+           <Post />
           }
         />
         <Route
