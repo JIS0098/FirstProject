@@ -25,7 +25,7 @@ export function CardList({ recipients }) {
               $bgUrl={backgroundImageURL}
               $bgColor={backgroundColor}
             >
-              <Wrapper $bgUrl={backgroundImageURL} $bgColor={backgroundColor}>
+              <Layout $bgUrl={backgroundImageURL} $bgColor={backgroundColor}>
                 <CardContent
                   name={name}
                   messages={recentMessages}
@@ -43,7 +43,7 @@ export function CardList({ recipients }) {
                     );
                   })}
                 </TopReactions>
-              </Wrapper>
+              </Layout>
             </Item>
           );
         }
@@ -75,7 +75,7 @@ const Item = styled.div`
   box-shadow: 0 0.2rem 1.2rem 0px rgba(0, 0, 0, 0.08);
 `;
 
-const Wrapper = styled.div`
+const Layout = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
