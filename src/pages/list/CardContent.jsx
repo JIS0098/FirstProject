@@ -15,10 +15,10 @@ export function CardContent({ name, messages, messageCount, $bgUrl }) {
           </AdditionalProfiles>
         )}
       </ProfileImages>
-      <Author $bgUrl={$bgUrl}>
+      <AuthorLabel $bgUrl={$bgUrl}>
         <AuthorCount $bgUrl={$bgUrl}>{messageCount}</AuthorCount>명이
         작성했어요!
-      </Author>
+      </AuthorLabel>
     </Container>
   );
 }
@@ -31,37 +31,35 @@ const Container = styled.div`
 
 const Name = styled.div`
   overflow: hidden;
-  color: ${({ $bgUrl, theme }) => ($bgUrl ? "white" : theme.nameColor)};
   text-overflow: ellipsis;
-
+  color: ${({ $bgUrl, theme }) => ($bgUrl ? "white" : theme.nameColor)};
   font-size: 2.4rem;
-  font-style: normal;
   font-weight: 700;
   line-height: 3.6rem;
   letter-spacing: -0.24px;
+  font-style: normal;
 `;
 
-const Author = styled.span`
+const AuthorLabel = styled.span`
   color: ${({ $bgUrl, theme }) => ($bgUrl ? "white" : theme.authorColor)};
   font-size: 1.6rem;
-  font-style: normal;
   font-weight: 400;
   line-height: 2.6rem;
   letter-spacing: -0.16px;
+  font-style: normal;
 `;
 
-const AuthorCount = styled(Author)`
-  color: ${({ $bgUrl, theme }) => ($bgUrl ? "white" : theme.authorColor)};
+const AuthorCount = styled(AuthorLabel)`
   font-weight: 700;
 `;
 
 const ProfileIcon = styled.div`
   position: absolute;
+  left: ${({ $left }) => $left}rem;
   width: 2.8rem;
   height: 2.8rem;
   border-radius: 50%;
   border: 2px solid white;
-  left: ${({ $left }) => $left}rem;
 `;
 
 const ProfileImg = styled(ProfileIcon)`
@@ -76,9 +74,9 @@ const AdditionalProfiles = styled(ProfileIcon)`
 `;
 
 const ProfileImages = styled.div`
-  width: 10rem;
-  height: 3rem;
   position: relative;
   display: flex;
   align-items: center;
+  width: 10rem;
+  height: 3rem;
 `;

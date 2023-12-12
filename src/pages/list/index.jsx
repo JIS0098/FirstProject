@@ -80,40 +80,39 @@ function ListPage() {
 export default ListPage;
 
 const Layout = styled.div`
-  margin: 0px auto 13.7rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  margin: 0px auto 13.7rem;
 `;
 
 const Footer = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
   max-width: 116rem;
   margin-top: 4rem;
   padding: 2.4rem 0.8rem;
-  justify-content: center;
-  align-items: center;
 `;
 
 const CreateButton = styled.button`
   position: fixed;
   bottom: 10rem;
   display: flex;
-  width: 28rem;
-  padding: 1.4rem 2.4rem;
   justify-content: center;
   align-items: center;
+  width: 28rem;
+  padding: 1.4rem 2.4rem;
   gap: 1rem;
 
   color: white;
   font-size: 1.8rem;
   font-weight: 700;
   text-align: center;
-
   border-radius: 1.2rem;
-  cursor: pointer;
   background-color: ${({ theme }) => theme.button.primary.enabled};
+  cursor: pointer;
 
   &:disabled {
     background-color: ${({ theme }) => theme.button.primary.disabled};
