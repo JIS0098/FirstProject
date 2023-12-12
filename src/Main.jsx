@@ -4,8 +4,7 @@ import Post from "../src/pages/post";
 import ListPage from "./pages/list";
 import Landing from "./pages/Landing";
 import Header from "./components/commons/Header";
-
-
+import Message from './pages/Message/Message';
 
 function Main() {
   return (
@@ -30,11 +29,7 @@ function Main() {
           path="post/:id/message"
           element={<div>수신인에게 전하고 싶은 메시지를 작성하는 페이지</div>}
         />
-
-        <Route
-          path="*"
-          element={<div>잘못된 경로로 접근 시, 표시되는 에러 페이지</div>}
-        />
+        <Route path="*" element={<div>잘못된 경로로 접근 시, 표시되는 에러 페이지</div>} />
       </Routes>
     </BrowserRouter>
   );

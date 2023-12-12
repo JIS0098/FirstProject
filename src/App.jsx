@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { ThemeProvider } from "styled-components";
-import Main from "./Main";
-import ThemaTest from "./ThemaTest";
-import GlobalStyles from "./styles/GlobalStyles";
-import { theme } from "./styles/theme";
+import React, { useState } from 'react';
+import { ThemeProvider } from 'styled-components';
+import Main from './Main';
+import ThemaTest from './ThemaTest';
+import GlobalStyles from './styles/GlobalStyles';
+import { theme } from './styles/theme';
 
 function App() {
-  const [currentTheme, setCurrentTheme] = useState(theme["default"]);
+  const [currentTheme, setCurrentTheme] = useState(theme['default']);
 
   return (
     <>
