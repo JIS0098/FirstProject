@@ -5,21 +5,12 @@ import addEmojiImg from "../../assets/icon/add-24.svg";
 import shareImg from "../../assets/icon/share-24.svg";
 import MoreCardImg from "../../assets/icon/plus.svg";
 import shareFin from "../../assets/icon/check.svg";
+import useToggle from "../../hooks/useToggle";
 
 function Post() {
-  const [emojiAdd, setEmojiAdd] = useState(false);
-  const [showShare, setShowShare] = useState(false);
-  const [showModal, setshowModal] = useState(false);
-
-  const addEmoji = () => {
-    setEmojiAdd((prev) => !prev);
-  };
-  const shareToggle = () => {
-    setShowShare((prev) => !prev);
-  };
-  const modalToggle = () => {
-    setshowModal((prev) => !prev);
-  };
+  const [emojiAdd, toggleEmoji] = useToggle(false);
+  const [showShare, toggleShare] = useToggle(false);
+  const [showModal, toggleModal] = useToggle(false);
 
   return (
     <PostBack>
@@ -44,14 +35,14 @@ function Post() {
               <Emoji>🥶 10</Emoji>
               <Emoji>🤢 13</Emoji>
 
-              <EmojiButton src={downImg} onClick={addEmoji} />
+              <EmojiButton src={downImg} onClick={toggleEmoji} />
 
               <ButtonWrap>
                 <img src={addEmojiImg} />
                 <ButtonWrapP>추가</ButtonWrapP>
               </ButtonWrap>
               <Line></Line>
-              <ButtonWrap onClick={shareToggle}>
+              <ButtonWrap onClick={toggleShare}>
                 <img src={shareImg} />
               </ButtonWrap>
             </EmojiWrap>
@@ -88,7 +79,7 @@ function Post() {
           </ImgBox>
         </PostCard>
 
-        <PostCard onClick={modalToggle}>
+        <PostCard onClick={toggleModal}>
           <PostCardWrap>
             <From>
               <ImgBox>
@@ -145,7 +136,7 @@ function Post() {
               atque nulla corrupti voluptatibus error!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit
               esse quae at cumque corporis culpa atque nulla corrupti voluptatibus error!
             </ModalText>
-            <ModalClose onClick={modalToggle}>확인</ModalClose>
+            <ModalClose onClick={toggleModal}>확인</ModalClose>
           </ModalInner>
         </Modal>
       ) : null}
