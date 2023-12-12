@@ -1,14 +1,18 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import ListPage from "./pages/list";
 import Landing from "./pages/Landing";
 import Header from "./components/commons/Header";
+
 
 function Main() {
   return (
     <BrowserRouter>
       <Header />
       <Routes>
+
         <Route path="/" element={<Landing />} />
+        <Route path="/list" element={<ListPage />} />
         <Route path="post" element={<div>롤링 카드 생성 페이지</div>} />
         <Route
           path="post/:id"
