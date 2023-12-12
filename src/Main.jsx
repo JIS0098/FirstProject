@@ -12,12 +12,16 @@ function Main() {
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="/list" element={<ListPage />} />
-        <Route path="post" element={<ColorSelector />} />
-        <Route path="post/:id" element={<Post />} />
-        <Route path="post/:id/edit" element={<div>카드 삭제, 페이지 삭제 등의 편집 기능을 수행하는 페이지</div>} />
-        <Route path="post/:id/message" element={<Message />} />
+        <Route path="/">
+          <Route index element={<Landing />} />
+          <Route path="/list" element={<ListPage />} />
+        </Route>
+        <Route path="/post">
+          <Route index element={<ColorSelector />} />
+          <Route path=":id" element={<Post />} />
+          <Route path=":id/edit" element={<Post />} />
+          <Route path=":id/message" element={<Message />} />
+        </Route>
         <Route path="*" element={<div>잘못된 경로로 접근 시, 표시되는 에러 페이지</div>} />
       </Routes>
     </BrowserRouter>
