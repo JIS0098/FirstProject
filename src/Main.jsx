@@ -7,8 +7,14 @@ function Main() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<div>랜딩 페이지</div>} />
+        <Route path="/list" element={<ListPage />} />
         <Route path="post" element={<div>롤링 카드 생성 페이지</div>} />
-        <Route path="post/:id" element={<ListPage />} />
+        <Route
+          path="post/:id"
+          element={
+            <div>카드 리스트에서 선택한 롤링페이퍼를 보여주는 페이지</div>
+          }
+        />
         <Route
           path="post/:id/edit"
           element={
