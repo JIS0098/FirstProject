@@ -6,7 +6,7 @@ import Landing from "./pages/Landing";
 import Header from "./components/commons/Header";
 import Message from "./pages/Message/Message";
 import ColorSelector from "./pages/ColorSelector";
-import NotPound from "./pages/NotPound";
+import NotPound from "./pages/not_pound/NotPound";
 
 function Main() {
   return (
