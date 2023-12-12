@@ -6,6 +6,8 @@ import WriteInput from './WriteInput';
 import arrow_down from '../../assets/icon/arrow_down.svg';
 import { css } from 'styled-components';
 
+// 여러개 요소를 감싸는 컴포넌트는 Box
+// 최상위 레이아웃 설정 컴포넌트는 Layout
 const Message = () => {
   const arr = {
     font: ['Noto Sans', 'Pretendard', '나눔명조', '나눔손글씨 손편지체'],
@@ -206,6 +208,7 @@ const RelationshipInputBox = styled.div`
 `;
 
 const WriteInputBox = styled.div`
+display: block;
   & h2 {
     ${TitleStyled};
   }

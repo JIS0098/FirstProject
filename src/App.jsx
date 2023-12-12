@@ -15,7 +15,7 @@ function App() {
         {/* 여기 밑으로 컴포넌트 사용 */}
         <Main />
         {/* 필요에따라 주석처리 !  */}
-        <ThemaTest currentTheme={currentTheme} setCurrentTheme={setCurrentTheme} />
+        {/* <ThemaTest currentTheme={currentTheme} setCurrentTheme={setCurrentTheme} /> */}
       </ThemeProvider>
     </>
   );
