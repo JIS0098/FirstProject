@@ -19,8 +19,6 @@ const ColorSelector = () => {
     setIsName(name);
   };
 
-  const isCreateButtonDisabled = isName === "";
-
   return (
     <Wrapper>
       <Container>
@@ -36,9 +34,7 @@ const ColorSelector = () => {
         {isChecked ? <SelectImage /> : <SelectColor />}
         <Link to="/post/id">
           <CreateButtonContainer>
-            <CreateButton disabled={isCreateButtonDisabled}>
-              생성하기
-            </CreateButton>
+            <CreateButton disabled={!isName}>생성하기</CreateButton>
           </CreateButtonContainer>
         </Link>
       </Container>
@@ -58,14 +54,21 @@ const IMAGE = {
   2: `${backgroundImage2}`,
 };
 
-const CreateInput = ({ value, onChange }) => (
-  <StyledInput
-    type="text"
-    placeholder="받는 사람 이름을 입력해 주세요."
-    value={value}
-    onChange={(e) => onChange(e.target.value)}
-  />
-);
+const CreateInput = ({ value, onChange }) => {
+  const [isName, setIsName] = useState(true);
+  return (
+    <>
+      <StyledInput
+        type="text"
+        placeholder="받는 사람 이름을 입력해 주세요."
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        onBlur={() => setIsName(value)}
+      />
+      {!isName && <ErrorText>값을 입력해 주세요.</ErrorText>}
+    </>
+  );
+};
 
 const ToggleButton = ({ isChecked, onToggle }) => {
   return (
@@ -207,6 +210,12 @@ const StyledInput = styled.input`
   }
 `;
 
+const ErrorText = styled.div`
+  font-size: 1.6rem;
+  font-weight: 300;
+  color: ${color.error};
+`;
+
 const SelectBackground = styled.div`
   display: flex;
   flex-direction: column;
@@ -271,8 +280,6 @@ const CheckBox = styled.input`
 
   &:checked + ${ToggleSlider}:before {
     content: "이미지";
-    -webkit-transform: translateX(2.6rem);
-    -ms-transform: translateX(2.6rem);
     transform: translateX(8.6rem);
   }
 `;
