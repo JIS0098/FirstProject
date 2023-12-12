@@ -35,32 +35,32 @@ const Wrapper = styled.div`
 `;
 
 const SubTitle = styled.span`
-  color: ${({ theme }) => theme.subtitle};
+  margin-top: 5rem;
   display: block;
+  color: ${({ theme }) => theme.subtitle};
   font-family: Pretendard;
   font-size: 2.4rem;
-  font-style: normal;
   font-weight: 700;
   line-height: 3.6rem;
   letter-spacing: -0.24px;
-
-  margin-top: 5rem;
+  font-style: normal;
 `;
 
 const ArrowButton = styled.button`
   position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  ${(props) => (props.$left ? "left: -2rem" : "right: -2rem")};
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  transform: translateY(-50%);
-  top: 50%;
-  z-index: 1;
+  border: 1px solid #ccc;
+  background-color: white;
 
-  ${(props) => (props.$left ? "left: -2rem" : "right: -2rem")};
-
-  fill: rgba(255, 255, 255, 0.9);
-  stroke-width: 1px;
-  stroke: var(--gray-300, #ccc);
-  filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.08));
-  backdrop-filter: blur(2px);
+  cursor: pointer;
 `;
