@@ -139,6 +139,14 @@ const Container = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 5rem;
+
+  @media screen and (max-width: 1248px) {
+    max-width: 720px;
+  }
+
+  @media screen and (max-width: 768px) {
+    max-width: 320px;
+  }
 `;
 
 const Create = styled.div`
@@ -165,6 +173,14 @@ const CreateInput = styled.input`
   font-size: 1.6rem;
   font-weight: 400;
   line-height: 150%;
+
+  @media screen and (max-width: 1248px) {
+    max-width: 720px;
+  }
+
+  @media screen and (max-width: 768px) {
+    max-width: 320px;
+  }
 `;
 
 const SelectBackground = styled.div`
@@ -190,6 +206,7 @@ const ToggleWrapper = styled.div`
   width: 19rem;
   height: 4rem;
 `;
+
 const ToggleSlider = styled.span`
   cursor: pointer;
   position: absolute;
@@ -236,6 +253,9 @@ const CheckBox = styled.input`
 
 const PaletteWrapper = styled.div`
   display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-grow: 0;
   gap: 1rem;
 `;
 
@@ -246,6 +266,11 @@ const ColorButton = styled.button`
   border-radius: 1.6rem;
   border: 1px solid rgba(0, 0, 0, 0.08);
   cursor: pointer;
+
+  @media screen and (max-width: 768px) {
+    width: 15.4rem;
+    height: 15.4rem;
+  }
 `;
 
 const ImageButton = styled.button`
@@ -256,6 +281,11 @@ const ImageButton = styled.button`
   border-radius: 1.6rem;
   cursor: pointer;
   padding: 0;
+
+  @media screen and (max-width: 768px) {
+    width: 15.4rem;
+    height: 15.4rem;
+  }
 `;
 
 const Image = styled.img`
@@ -272,10 +302,11 @@ const CheckIcon = styled.img`
   transform: translate(-50%, -50%);
   width: 4.4rem;
   height: 4.4rem;
+  pointer-events: none;
 `;
 
 const CreateButton = styled.button`
-  width: 72rem;
+  width: 100%;
   padding: 1.4rem 2.4rem;
   border-radius: 1.2rem;
   background: ${color.purple[600]};
@@ -283,6 +314,10 @@ const CreateButton = styled.button`
   font-size: 1.8rem;
   font-weight: 700;
   line-height: 150%;
+  cursor: pointer;
+
+  &:disabled {
+  }
 `;
 
 export default ColorSelector;
