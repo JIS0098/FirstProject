@@ -1,9 +1,9 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
-import person from '../../assets/icon/person.svg';
-import profileImg from '../../assets/img/profileImg.png';
-import arrow_down from '../../assets/icon/arrow_down.svg';
-import useToggle from '../../hooks/useToggle';
+import React from "react";
+import styled, { css } from "styled-components";
+import person from "../../assets/icon/person.svg";
+import profileImg from "../../assets/img/profileImg.png";
+import arrow_down from "../../assets/icon/arrow_down.svg";
+import useToggle from "../../hooks/useToggle";
 // import WriteInput from './WriteInput';
 
 const Message = () => {
@@ -11,8 +11,8 @@ const Message = () => {
   const [font, fontToggle] = useToggle();
 
   const arr = {
-    font: ['Noto Sans', 'Pretendard', '나눔명조', '나눔손글씨 손편지체'],
-    relationship: ['지인', '동료', '가족', '친구'],
+    font: ["Noto Sans", "Pretendard", "나눔명조", "나눔손글씨 손편지체"],
+    relationship: ["지인", "동료", "가족", "친구"],
     profileImages: [
       profileImg,
       profileImg,
@@ -44,7 +44,7 @@ const Message = () => {
             <ImgSelectBox>
               <p>프로필 이미지를 선택해주세요!</p>
               <ImgList>
-                {arr.profileImages.map(item => (
+                {arr.profileImages.map((item) => (
                   <img key={item} src={item} />
                 ))}
               </ImgList>
@@ -59,7 +59,7 @@ const Message = () => {
           </div>
           {relationship ? (
             <ul>
-              {arr.relationship.map(item => (
+              {arr.relationship.map((item) => (
                 <li key={item}>{item}</li>
               ))}
             </ul>
@@ -77,7 +77,7 @@ const Message = () => {
           </div>
           {font ? (
             <ul>
-              {arr.font.map(item => (
+              {arr.font.map((item) => (
                 <li key={item}>{item}</li>
               ))}
             </ul>
