@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import color from "../styles/color";
 import selectedColorIcon from "../assets/icon/color-selected.png";
-import backgroundImage1 from "../assets/img/background-image-1.png";
-import backgroundImage2 from "../assets/img/background-image-2.png";
+import backgroundImage1 from "../assets/img/background-img-1.JPG";
+import backgroundImage2 from "../assets/img/background-img-2.JPG";
+import backgroundImage3 from "../assets/img/background-img-3.JPG";
+import backgroundImage4 from "../assets/img/background-img-4.JPG";
 
 import { Link } from "react-router-dom";
 
@@ -52,6 +54,8 @@ const COLOR = {
 const IMAGE = {
   1: `${backgroundImage1}`,
   2: `${backgroundImage2}`,
+  3: `${backgroundImage3}`,
+  4: `${backgroundImage4}`,
 };
 
 const CreateInput = ({ value, onChange }) => {
@@ -62,7 +66,10 @@ const CreateInput = ({ value, onChange }) => {
         type="text"
         placeholder="받는 사람 이름을 입력해 주세요."
         value={value}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(e) => {
+          onChange(e.target.value);
+          setIsName(e.target.value);
+        }}
         onBlur={() => setIsName(value)}
       />
       {!isName && <ErrorText>값을 입력해 주세요.</ErrorText>}
@@ -86,12 +93,7 @@ const SelectColor = () => {
     setSelectedColor(color);
   };
 
-  return (
-    <ColorPalette
-      onSelectColor={handleColorChange}
-      selectedColor={selectedColor}
-    />
-  );
+  return <ColorPalette onSelectColor={handleColorChange} selectedColor={selectedColor} />;
 };
 
 const SelectImage = () => {
@@ -101,12 +103,7 @@ const SelectImage = () => {
     setSelectedImage(image);
   };
 
-  return (
-    <ImagePalette
-      onSelectImage={handleImageChange}
-      selectedImage={selectedImage}
-    />
-  );
+  return <ImagePalette onSelectImage={handleImageChange} selectedImage={selectedImage} />;
 };
 
 const ColorPalette = ({ onSelectColor, selectedColor }) => {
@@ -117,14 +114,8 @@ const ColorPalette = ({ onSelectColor, selectedColor }) => {
   return (
     <PaletteWrapper>
       {Object.keys(COLOR).map((key) => (
-        <ColorButton
-          key={key}
-          onClick={() => handleColorClick(COLOR[key])}
-          style={{ background: COLOR[key] }}
-        >
-          {selectedColor === COLOR[key] && (
-            <CheckIcon src={selectedColorIcon} alt="선택된 색상" />
-          )}
+        <ColorButton key={key} onClick={() => handleColorClick(COLOR[key])} style={{ background: COLOR[key] }}>
+          {selectedColor === COLOR[key] && <CheckIcon src={selectedColorIcon} alt="선택된 색상" />}
         </ColorButton>
       ))}
     </PaletteWrapper>
@@ -140,14 +131,8 @@ const ImagePalette = ({ onSelectImage, selectedImage }) => {
     <PaletteWrapper>
       {Object.keys(IMAGE).map((key) => (
         <ImageButton key={key} onClick={() => handleImageClick(IMAGE[key])}>
-          <Image
-            src={IMAGE[key]}
-            alt={`이미지 ${key}`}
-            selected={selectedImage === IMAGE[key]}
-          />
-          {selectedImage === IMAGE[key] && (
-            <CheckIcon src={selectedColorIcon} alt="선택된 이미지" />
-          )}
+          <Image src={IMAGE[key]} alt={`이미지 ${key}`} selected={selectedImage === IMAGE[key]} />
+          {selectedImage === IMAGE[key] && <CheckIcon src={selectedColorIcon} alt="선택된 이미지" />}
         </ImageButton>
       ))}
     </PaletteWrapper>
@@ -297,8 +282,11 @@ const ColorButton = styled.button`
   width: 16.8rem;
   height: 16.8rem;
   border-radius: 1.6rem;
-  border: 1px solid rgba(0, 0, 0, 0.08);
   cursor: pointer;
+
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+  }
 
   @media screen and (max-width: 768px) {
     width: 15.4rem;
@@ -307,13 +295,16 @@ const ColorButton = styled.button`
 `;
 
 const ImageButton = styled.button`
-  background-size: cover;
   position: relative;
   width: 16.8rem;
   height: 16.8rem;
   border-radius: 1.6rem;
   cursor: pointer;
   padding: 0;
+
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+  }
 
   @media screen and (max-width: 768px) {
     width: 15.4rem;
@@ -325,6 +316,8 @@ const Image = styled.img`
   width: 100%;
   height: 100%;
   border-radius: 1.6rem;
+  object-fit: cover;
+  pointer-events: none;
   ${({ selected }) => selected && "opacity: 0.5"}
 `;
 
