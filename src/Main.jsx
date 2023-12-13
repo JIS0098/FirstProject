@@ -6,6 +6,7 @@ import Landing from "./pages/Landing";
 import Header from "./components/commons/Header";
 import Message from "./pages/Message/Message";
 import ColorSelector from "./pages/ColorSelector";
+import NotPound from "./pages/not_pound/NotPound";
 
 function Main() {
   return (
@@ -22,7 +23,7 @@ function Main() {
           <Route path=":id/edit" element={<Post />} />
           <Route path=":id/message" element={<Message />} />
         </Route>
-        <Route path="*" element={<div>잘못된 경로로 접근 시, 표시되는 에러 페이지</div>} />
+        <Route path="*" element={<NotPound />} />
       </Routes>
     </BrowserRouter>
   );
