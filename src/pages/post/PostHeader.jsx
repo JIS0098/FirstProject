@@ -1,8 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import ProfileImgs from "../../components/commons/ProfileImages";
 import downImg from "../../assets/icon/arrow_down.svg";
 import addEmojiImg from "../../assets/icon/add-24.svg";
 import shareImg from "../../assets/icon/share-24.svg";
+import Emoji from "../../components/commons/Emoji";
 
 function PostHeader({ toggleShare, toggleEmoji }) {
   return (
@@ -12,11 +14,7 @@ function PostHeader({ toggleShare, toggleEmoji }) {
 
         <HeaderServiceBox>
           <HeaderServicePost>
-            <ServiceImgBox>
-              <ServiceImg />
-              <ServiceImg />
-              <ServiceImg />
-            </ServiceImgBox>
+            <ProfileImgs />
             <ServiceP>
               <ServiceSpan>23</ServiceSpan> 명이 작성했어요!
             </ServiceP>
@@ -82,29 +80,6 @@ const HeaderServicePost = styled.div`
     display: none;
   }
 `;
-const ServiceImgBox = styled.div`
-  min-width: 7.6rem;
-  height: 2.8rem;
-  display: flex;
-`;
-const ServiceImg = styled.div`
-  width: 2.8rem;
-  height: 2.8rem;
-  background-color: pink;
-  /* background-image */
-  border-radius: 100px;
-  border: 1px solid white;
-  position: relative;
-
-  &:nth-child(1) {
-    left: 20px;
-    background-color: greenyellow;
-  }
-  &:nth-child(2) {
-    left: 10px;
-    background-color: peru;
-  }
-`;
 const ServiceSpan = styled.span`
   font-size: 1.8rem;
   font-weight: 700;
@@ -113,21 +88,7 @@ const ServiceP = styled.p`
   display: flex;
   align-items: center;
 `;
-const Emoji = styled.div`
-  min-width: 6rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.8rem 1.2rem;
-  border-radius: 32px;
-  background: rgba(0, 0, 0, 0.54);
-  color: #fff;
-  font-size: 16px;
-  cursor: pointer;
-  @media all and (max-width: 768px) {
-    font-size: 1.4rem;
-  }
-`;
+
 const EmojiWrap = styled.div`
   display: flex;
   justify-content: space-between;

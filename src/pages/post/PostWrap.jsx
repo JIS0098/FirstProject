@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { useLocation } from "react-router-dom";
 import MoreCardImg from "../../assets/icon/plus.svg";
+import Emoji from "../../components/commons/Emoji";
+import Card from "../../components/commons/Card";
 
 function PostWrap({ showShare, emojiAdd, setShare, toggleModal }) {
   const location = useLocation();
@@ -28,23 +30,9 @@ function PostWrap({ showShare, emojiAdd, setShare, toggleModal }) {
         </ImgBox>
       </PostCard>
 
-      <PostCard onClick={toggleModal}>
-        <PostCardWrap>
-          <From>
-            <ImgBox>
-              <img src={MoreCardImg} />
-            </ImgBox>
-            <FromBox>
-              <FromP>
-                From. <FromSpan>김동훈</FromSpan>
-              </FromP>
-              <FromTag>가족</FromTag>
-            </FromBox>
-          </From>
-          <PostCardDescrip>코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두 조심 또 하세요!</PostCardDescrip>
-          <Ago>2023.07.08</Ago>
-        </PostCardWrap>
-      </PostCard>
+      <div onClick={toggleModal}>
+        <Card profileImg={MoreCardImg} name={"김윤수"} description={"내용"} tag={"가족"} ago={"2023.07.08"} />
+      </div>
 
       {emojiAdd ? (
         <ToggleAddEmoji>
@@ -65,19 +53,25 @@ function PostWrap({ showShare, emojiAdd, setShare, toggleModal }) {
     </PostInner>
   );
 }
-const Emoji = styled.div`
-  min-width: 6rem;
+
+const PostCard = styled.div`
+  width: 38.4rem;
+  height: 28rem;
+  margin: 0 auto;
   display: flex;
-  align-items: center;
   justify-content: center;
-  padding: 0.8rem 1.2rem;
-  border-radius: 32px;
-  background: rgba(0, 0, 0, 0.54);
-  color: #fff;
-  font-size: 16px;
+  align-items: center;
+  border-radius: 16px;
+  background-color: #fff;
+  box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.08);
+  padding: 2.8rem 2.4rem;
   cursor: pointer;
+  @media all and (max-width: 1248px) {
+    width: 100%;
+    max-width: 50rem;
+  }
   @media all and (max-width: 768px) {
-    font-size: 1.4rem;
+    width: 100%;
   }
 `;
 const ToggleAddEmoji = styled.div`
@@ -165,47 +159,6 @@ const PostInner = styled.div`
   }
 `;
 
-const PostCard = styled.div`
-  width: 38.4rem;
-  height: 28rem;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 16px;
-  background-color: #fff;
-  box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.08);
-  padding: 2.8rem 2.4rem;
-  cursor: pointer;
-  @media all and (max-width: 1248px) {
-    width: 100%;
-    max-width: 50rem;
-  }
-  @media all and (max-width: 768px) {
-    width: 100%;
-  }
-`;
-const PostCardWrap = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 15px;
-`;
-
-const PostCardDescrip = styled.div`
-  width: 100%;
-  height: 10.6rem;
-  font-size: 1.8rem;
-  font-weight: 400;
-  display: -webkit-box;
-  -webkit-line-clamp: 5;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: normal;
-`;
-
 const ShareBox = styled.div`
   width: 13.8rem;
   height: 10rem;
@@ -242,41 +195,7 @@ const Share = styled.div`
 `;
 
 // 공통된거
-const From = styled.div`
-  display: flex;
-  width: 100%;
-  padding-bottom: 1.5rem;
-  align-items: center;
-  gap: 1rem;
-  border-bottom: 1px solid #eee;
-`;
-const FromBox = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 1rem;
-`;
-const FromTag = styled.div`
-  width: 4.1rem;
-  height: 2rem;
-  display: flex;
-  padding: 0px 8px;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  border-radius: 4px;
-  background: var(--green-100, #e4fbdc);
-  color: var(--green-500, #2ba600);
-  font-size: 1.4rem;
-`;
-const FromP = styled.p`
-  font-size: 2rem;
-`;
-const FromSpan = styled.span`
-  font-size: 2rem;
-  font-weight: 700;
-`;
+
 const ImgBox = styled.div`
   width: 5.6rem;
   height: 5.6rem;
@@ -287,10 +206,6 @@ const ImgBox = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-`;
-const Ago = styled.div`
-  color: #999;
-  font-size: 1.2rem;
 `;
 
 export default PostWrap;

@@ -16,6 +16,7 @@ function Post() {
     <PostBack>
       <PostHeader toggleShare={toggleShare} toggleEmoji={toggleEmoji} />
       <PostWrap showShare={showShare} emojiAdd={emojiAdd} setShare={setShare} toggleModal={toggleModal} />
+
       {/* modal */}
       {showModal ? <PostModal toggleModal={toggleModal} /> : null}
 
