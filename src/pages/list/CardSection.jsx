@@ -1,37 +1,87 @@
 import React from "react";
 import styled from "styled-components";
+import useIsTablet from "../../hooks/useIsTablet";
 import { ReactComponent as ALeft } from "../../assets/icon/arrow_left.svg";
 import { ReactComponent as ARight } from "../../assets/icon/arrow_right.svg";
+import CardItem from "./CardItem";
 import { CardList } from "./CardList";
+import useSwipe from "../../hooks/useSwipe";
 
 function CardSection({ title, recipients }) {
+  const isTablet = useIsTablet();
+  const { currentIndex, offset, maxIndex, handleSwipe, startDrag, endDrag, moveItem } = useSwipe(
+    recipients.length,
+    isTablet
+  );
+
+  const handleMouseDown = (e) => {
+    startDrag(e.pageX);
+  };
+
+  const handleMouseMove = (e) => {
+    if (isTablet) moveItem(e.pageX);
+  };
+
+  const handleMouseUp = () => {
+    if (isTablet) endDrag();
+  };
+
+  const handleTouchStart = (e) => {
+    startDrag(e.touches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    moveItem(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    endDrag();
+  };
+
+  const renderItems = recipients.map((recipient, index) => <CardItem key={index} recipient={recipient} />);
+
   return (
     <Container>
       <SubTitle>{title}</SubTitle>
-      <Wrapper>
-        <ArrowButton $left>
+      <Relative>
+        <ArrowButton $left onClick={() => handleSwipe("prev")} $hide={isTablet || currentIndex === 0}>
           <ALeft />
         </ArrowButton>
-        <CardList recipients={recipients} />
-        <ArrowButton>
+        <Wrapper
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
+          <CardList offset={offset}>{renderItems}</CardList>
+        </Wrapper>
+        <ArrowButton onClick={() => handleSwipe("next")} $hide={isTablet || currentIndex >= maxIndex}>
           <ARight />
         </ArrowButton>
-      </Wrapper>
+      </Relative>
     </Container>
   );
 }
 
-export default CardSection;
+export default React.memo(CardSection);
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
+  max-width: 116rem;
+  width: 100%;
+`;
+
+const Relative = styled.div`
+  position: relative;
 `;
 
 const Wrapper = styled.div`
-  position: relative;
-  max-width: 116rem;
+  overflow: hidden;
 `;
 
 const SubTitle = styled.span`
@@ -52,9 +102,11 @@ const ArrowButton = styled.button`
   transform: translateY(-50%);
   ${(props) => (props.$left ? "left: -2rem" : "right: -2rem")};
 
-  display: flex;
+  display: ${({ $hide }) => ($hide ? "none" : "flex")};
   align-items: center;
   justify-content: center;
+
+  z-index: 1;
 
   width: 40px;
   height: 40px;

@@ -5,11 +5,18 @@ import selectedColorIcon from "../assets/icon/color-selected.png";
 import backgroundImage1 from "../assets/img/background-image-1.png";
 import backgroundImage2 from "../assets/img/background-image-2.png";
 
+import { Link } from "react-router-dom";
+
 const ColorSelector = () => {
   const [isChecked, setIsChecked] = useState(false);
+  const [isName, setIsName] = useState("");
 
   const handleToggle = () => {
     setIsChecked((prev) => !prev);
+  };
+
+  const handleNameChange = (name) => {
+    setIsName(name);
   };
 
   return (
@@ -17,7 +24,7 @@ const ColorSelector = () => {
       <Container>
         <Create>
           <p>To.</p>
-          <CreateInput placeholder="받는 사람 이름을 입력해 주세요." />
+          <CreateInput value={isName} onChange={handleNameChange} />
         </Create>
         <SelectBackground>
           <p>배경화면을 선택해주세요.</p>
@@ -25,7 +32,11 @@ const ColorSelector = () => {
         </SelectBackground>
         <ToggleButton isChecked={isChecked} onToggle={handleToggle} />
         {isChecked ? <SelectImage /> : <SelectColor />}
-        <CreateButton>생성하기</CreateButton>
+        <Link to="/post/id">
+          <CreateButtonContainer>
+            <CreateButton disabled={!isName}>생성하기</CreateButton>
+          </CreateButtonContainer>
+        </Link>
       </Container>
     </Wrapper>
   );
@@ -41,6 +52,22 @@ const COLOR = {
 const IMAGE = {
   1: `${backgroundImage1}`,
   2: `${backgroundImage2}`,
+};
+
+const CreateInput = ({ value, onChange }) => {
+  const [isName, setIsName] = useState(true);
+  return (
+    <>
+      <StyledInput
+        type="text"
+        placeholder="받는 사람 이름을 입력해 주세요."
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        onBlur={() => setIsName(value)}
+      />
+      {!isName && <ErrorText>값을 입력해 주세요.</ErrorText>}
+    </>
+  );
 };
 
 const ToggleButton = ({ isChecked, onToggle }) => {
@@ -139,6 +166,14 @@ const Container = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 5rem;
+
+  @media screen and (max-width: 1248px) {
+    max-width: 720px;
+  }
+
+  @media screen and (max-width: 768px) {
+    max-width: 320px;
+  }
 `;
 
 const Create = styled.div`
@@ -155,7 +190,7 @@ const Create = styled.div`
   }
 `;
 
-const CreateInput = styled.input`
+const StyledInput = styled.input`
   width: 72rem;
   padding: 1.2rem 1.6rem;
   border-radius: 0.8rem;
@@ -165,18 +200,34 @@ const CreateInput = styled.input`
   font-size: 1.6rem;
   font-weight: 400;
   line-height: 150%;
+
+  &:focus {
+    outline: 0.2rem solid ${color.gray[500]};
+  }
+
+  @media screen and (max-width: 768px) {
+    max-width: 320px;
+  }
+`;
+
+const ErrorText = styled.div`
+  font-size: 1.6rem;
+  font-weight: 300;
+  color: ${color.error};
 `;
 
 const SelectBackground = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+
   p {
     font-size: 2.4rem;
     font-weight: 700;
     color: ${color.gray[900]};
     line-height: 150%;
   }
+
   span {
     font-size: 1.6rem;
     font-weight: 400;
@@ -190,6 +241,7 @@ const ToggleWrapper = styled.div`
   width: 19rem;
   height: 4rem;
 `;
+
 const ToggleSlider = styled.span`
   cursor: pointer;
   position: absolute;
@@ -228,14 +280,15 @@ const CheckBox = styled.input`
 
   &:checked + ${ToggleSlider}:before {
     content: "이미지";
-    -webkit-transform: translateX(2.6rem);
-    -ms-transform: translateX(2.6rem);
     transform: translateX(8.6rem);
   }
 `;
 
 const PaletteWrapper = styled.div`
   display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-grow: 0;
   gap: 1rem;
 `;
 
@@ -246,6 +299,11 @@ const ColorButton = styled.button`
   border-radius: 1.6rem;
   border: 1px solid rgba(0, 0, 0, 0.08);
   cursor: pointer;
+
+  @media screen and (max-width: 768px) {
+    width: 15.4rem;
+    height: 15.4rem;
+  }
 `;
 
 const ImageButton = styled.button`
@@ -256,6 +314,11 @@ const ImageButton = styled.button`
   border-radius: 1.6rem;
   cursor: pointer;
   padding: 0;
+
+  @media screen and (max-width: 768px) {
+    width: 15.4rem;
+    height: 15.4rem;
+  }
 `;
 
 const Image = styled.img`
@@ -272,17 +335,32 @@ const CheckIcon = styled.img`
   transform: translate(-50%, -50%);
   width: 4.4rem;
   height: 4.4rem;
+  pointer-events: none;
+`;
+
+const CreateButtonContainer = styled.div`
+  width: 72rem;
+
+  @media screen and (max-width: 768px) {
+    max-width: 320px;
+  }
 `;
 
 const CreateButton = styled.button`
-  width: 72rem;
+  width: 100%;
+  background: ${color.purple[600]};
   padding: 1.4rem 2.4rem;
   border-radius: 1.2rem;
-  background: ${color.purple[600]};
+  line-height: 150%;
   color: ${color.white};
   font-size: 1.8rem;
   font-weight: 700;
-  line-height: 150%;
+  cursor: pointer;
+
+  &:disabled {
+    filter: opacity(50%);
+    cursor: initial;
+  }
 `;
 
 export default ColorSelector;
