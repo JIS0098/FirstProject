@@ -2,7 +2,22 @@ import { motion } from "framer-motion";
 import React from "react";
 import styled from "styled-components";
 
-export const StyledButton = styled(motion.button)`
+export function Button({ children, width, tabletWidth, mobileWidth, disabled }) {
+  return (
+    <StyledButton
+      width={width}
+      tabletwidth={tabletWidth}
+      mobilewidth={mobileWidth}
+      disabled={disabled}
+      whileHover={!disabled && { scale: 1.05 }}
+      whileTap={!disabled && { scale: 1 }}
+    >
+      {children}
+    </StyledButton>
+  );
+}
+
+const StyledButton = styled(motion.button)`
   padding: 1.4rem 2.4rem;
   border-radius: 12px;
   background: #9935ff;
@@ -31,18 +46,3 @@ export const StyledButton = styled(motion.button)`
     width: ${({ mobileWidth }) => mobileWidth};
   }
 `;
-
-export function Button({ children, width, disabled, tabletWidth, mobileWidth }) {
-  return (
-    <StyledButton
-      width={width}
-      tabletWidth={tabletWidth}
-      mobileWidth={mobileWidth}
-      disabled={disabled}
-      whileHover={!disabled && { scale: 1.05 }}
-      whileTap={!disabled && { scale: 1 }}
-    >
-      {children}
-    </StyledButton>
-  );
-}

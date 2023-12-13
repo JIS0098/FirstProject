@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+
 import color from "../../styles/color";
 import NameInput from "../../components/commons/NameInput";
 import ToggleButton from "./ToggleButton";
@@ -11,18 +12,18 @@ const CreatePost = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [isName, setIsName] = useState("");
 
-  const handleToggle = () => {
-    setIsChecked((prev) => !prev);
-  };
-
   const handleNameChange = (name) => {
     setIsName(name);
+  };
+
+  const handleToggle = () => {
+    setIsChecked((prev) => !prev);
   };
 
   return (
     <Wrapper>
       <Container>
-        <NameInput value={isName} onChange={handleNameChange} placeholder={"받는 사람을 입력해 주세요."}>
+        <NameInput onChange={handleNameChange} placeholder={"받는 사람을 입력해 주세요."}>
           To.
         </NameInput>
         <SelectBackground>
