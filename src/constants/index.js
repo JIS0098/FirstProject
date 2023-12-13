@@ -1,6 +1,7 @@
 export const DEVICE_MAX_SIZE = {
   MOBILE: 425,
   TABLET: 768,
+  NOTEBOOK: 1024,
   PC: 1248,
 };
 

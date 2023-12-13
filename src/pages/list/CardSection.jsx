@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { ReactComponent as ALeft } from "../../assets/icon/arrow_left.svg";
 import { ReactComponent as ARight } from "../../assets/icon/arrow_right.svg";
@@ -9,23 +9,21 @@ import { CARD_WIDTH, DEVICE_MAX_SIZE, ITEMS_PER_PAGE } from "../../constants";
 import useDeviceSize from "../../hooks/useDeviceSize";
 
 function CardSection({ title, recipients }) {
-  const deivce = useDeviceSize();
-  const maxIndex = recipients.length - ITEMS_PER_PAGE.PC;
+  const { isMobile, isTablet, isNotebook, isPC } = useDeviceSize();
+  const [maxIndex, setMaxIndex] = useState(4);
 
-  console.log(deivce);
-
-  const { currentIndex, offset, handleSwipe, startDrag, endDrag, moveItem } = useSwipe(maxIndex, !deivce.isPC);
+  const { currentIndex, offset, handleSwipe, startDrag, endDrag, moveItem } = useSwipe(maxIndex, !isPC);
 
   const handleMouseDown = (e) => {
     startDrag(e.pageX);
   };
 
   const handleMouseMove = (e) => {
-    if (!deivce.isPC) moveItem(e.pageX);
+    if (!isPC) moveItem(e.pageX);
   };
 
   const handleMouseUp = () => {
-    if (!deivce.isPC) endDrag();
+    if (!isPC) endDrag();
   };
 
   const handleTouchStart = (e) => {
@@ -42,11 +40,31 @@ function CardSection({ title, recipients }) {
 
   const renderItems = recipients.map((recipient, index) => <CardItem key={index} recipient={recipient} />);
 
+  useEffect(() => {
+    const updateMaxIndex = () => {
+      if (isPC) {
+        setMaxIndex(recipients.length - ITEMS_PER_PAGE.PC);
+      } else if (isNotebook) {
+        setMaxIndex(recipients.length - ITEMS_PER_PAGE.NOTEBOOK);
+      } else if (isTablet) {
+        setMaxIndex(recipients.length - ITEMS_PER_PAGE.TABLET);
+      } else if (isMobile) {
+        setMaxIndex(recipients.length - ITEMS_PER_PAGE.MOBILE);
+      }
+    };
+
+    updateMaxIndex();
+    window.addEventListener("resize", updateMaxIndex);
+    return () => {
+      window.removeEventListener("resize", updateMaxIndex);
+    };
+  }, [isMobile, isTablet, isNotebook, isPC]);
+
   return (
     <Container>
       <SubTitle>{title}</SubTitle>
       <Relative>
-        <ArrowButton $left onClick={() => handleSwipe("prev")} $hide={!deivce.isPC || currentIndex === 0}>
+        <ArrowButton $left onClick={() => handleSwipe("prev")} $hide={!isPC || currentIndex === 0}>
           <ALeft />
         </ArrowButton>
         <Wrapper
@@ -60,7 +78,7 @@ function CardSection({ title, recipients }) {
         >
           <CardList offset={offset}>{renderItems}</CardList>
         </Wrapper>
-        <ArrowButton onClick={() => handleSwipe("next")} $hide={!deivce.isPC || currentIndex >= maxIndex}>
+        <ArrowButton onClick={() => handleSwipe("next")} $hide={!isPC || currentIndex >= maxIndex}>
           <ARight />
         </ArrowButton>
       </Relative>

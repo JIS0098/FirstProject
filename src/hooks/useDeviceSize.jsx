@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import { DEVICE_MAX_SIZE } from "../constants";
 
 function useDeviceSize() {
-  const [device, setDevice] = useState("PC"); // 기본값을 'PC'로 설정
-
+  const [device, setDevice] = useState("PC");
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
@@ -13,7 +12,7 @@ function useDeviceSize() {
         case width < DEVICE_MAX_SIZE.MOBILE:
           currentDevice = "MOBILE";
           break;
-        case width >= DEVICE_MAX_SIZE.MOBILE && width < DEVICE_MAX_SIZE.TABLET:
+        case width >= DEVICE_MAX_SIZE.MOBILE && width < DEVICE_MAX_SIZE.NOTEBOOK:
           currentDevice = "TABLET";
           break;
         case width >= DEVICE_MAX_SIZE.TABLET && width < DEVICE_MAX_SIZE.PC:
@@ -29,7 +28,7 @@ function useDeviceSize() {
       setDevice(currentDevice);
     };
 
-    handleResize(); // 초기값 설정을 위해 호출
+    handleResize();
     window.addEventListener("resize", handleResize);
 
     return () => {
