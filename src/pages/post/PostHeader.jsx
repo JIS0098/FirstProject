@@ -7,6 +7,7 @@ import shareImg from "../../assets/icon/share-24.svg";
 import Emoji from "../../components/commons/Emoji";
 
 function PostHeader({ toggleShare, toggleEmoji }) {
+  const list = [{ img: { addEmojiImg } }, { img: { shareImg } }, { img: { shareImg } }];
   return (
     <PostHead>
       <HeaderService>
@@ -14,7 +15,7 @@ function PostHeader({ toggleShare, toggleEmoji }) {
 
         <HeaderServiceBox>
           <HeaderServicePost>
-            <ProfileImgs />
+            <ProfileImgs list={list} />
             <ServiceP>
               <ServiceSpan>23</ServiceSpan> 명이 작성했어요!
             </ServiceP>

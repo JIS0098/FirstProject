@@ -3,6 +3,8 @@ import styled from "styled-components";
 import MoreCardImg from "../../assets/icon/plus.svg";
 
 function PostModal({ toggleModal }) {
+  //나중에 카드를 눌렀을 때 필터를 돌리던지 해서 해당 카드에 대한 정보를 넘겨받아 뿌려주자
+  // id값에 따라 가져오는식..?
   return (
     <Modal>
       <ModalInner>
