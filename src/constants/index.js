@@ -11,3 +11,4 @@ export const DEVICE_MAX_SIZE = {
 
 export const ITEMS_PER_PAGE = 4;
 export const CARD_WIDTH = 29.5;
+export const SWIPE_X = 50;

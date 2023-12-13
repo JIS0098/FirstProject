@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CARD_WIDTH, ITEMS_PER_PAGE } from "../constants";
+import { CARD_WIDTH, ITEMS_PER_PAGE, SWIPE_X } from "../constants";
 function useSwipe(length, condition) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [offset, setOffset] = useState(0);
@@ -39,10 +39,10 @@ function useSwipe(length, condition) {
   const moveItem = (currentX) => {
     if (!isDrag || !condition) return;
     const swipeX = currentX - startX;
-    if (swipeX < -50) {
+    if (swipeX < -SWIPE_X) {
       handleSwipe("next");
       endDrag();
-    } else if (swipeX > 50) {
+    } else if (swipeX > SWIPE_X) {
       handleSwipe("prev");
       endDrag();
     }
