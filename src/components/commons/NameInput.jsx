@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import color from "../../styles/color";
 
-const NameInput = ({ value, onChange, placeholder }) => {
+const NameInput = ({ children, value, onChange, placeholder }) => {
   const [isName, setIsName] = useState(true);
   return (
-    <>
+    <Create>
+      <p>{children}</p>
       <StyledInput
         type="text"
         value={value}
@@ -17,11 +18,25 @@ const NameInput = ({ value, onChange, placeholder }) => {
         onBlur={() => setIsName(value)}
       />
       {!isName && <ErrorText>값을 입력해 주세요.</ErrorText>}
-    </>
+    </Create>
   );
 };
 
 export default NameInput;
+
+const Create = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.2rem;
+
+  p {
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: ${color.gray[900]};
+    line-height: 150%;
+  }
+`;
 
 const StyledInput = styled.input`
   width: 72rem;
