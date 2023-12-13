@@ -1,29 +1,31 @@
 import React from "react";
 import styled from "styled-components";
-import useIsTablet from "../../hooks/useIsTablet";
 import { ReactComponent as ALeft } from "../../assets/icon/arrow_left.svg";
 import { ReactComponent as ARight } from "../../assets/icon/arrow_right.svg";
 import CardItem from "./CardItem";
 import { CardList } from "./CardList";
 import useSwipe from "../../hooks/useSwipe";
+import { CARD_WIDTH, DEVICE_MAX_SIZE, ITEMS_PER_PAGE } from "../../constants";
+import useDeviceSize from "../../hooks/useDeviceSize";
 
 function CardSection({ title, recipients }) {
-  const isTablet = useIsTablet();
-  const { currentIndex, offset, maxIndex, handleSwipe, startDrag, endDrag, moveItem } = useSwipe(
-    recipients.length,
-    isTablet
-  );
+  const deivce = useDeviceSize();
+  const maxIndex = recipients.length - ITEMS_PER_PAGE.PC;
+
+  console.log(deivce);
+
+  const { currentIndex, offset, handleSwipe, startDrag, endDrag, moveItem } = useSwipe(maxIndex, !deivce.isPC);
 
   const handleMouseDown = (e) => {
     startDrag(e.pageX);
   };
 
   const handleMouseMove = (e) => {
-    if (isTablet) moveItem(e.pageX);
+    if (!deivce.isPC) moveItem(e.pageX);
   };
 
   const handleMouseUp = () => {
-    if (isTablet) endDrag();
+    if (!deivce.isPC) endDrag();
   };
 
   const handleTouchStart = (e) => {
@@ -44,7 +46,7 @@ function CardSection({ title, recipients }) {
     <Container>
       <SubTitle>{title}</SubTitle>
       <Relative>
-        <ArrowButton $left onClick={() => handleSwipe("prev")} $hide={isTablet || currentIndex === 0}>
+        <ArrowButton $left onClick={() => handleSwipe("prev")} $hide={!deivce.isPC || currentIndex === 0}>
           <ALeft />
         </ArrowButton>
         <Wrapper
@@ -58,7 +60,7 @@ function CardSection({ title, recipients }) {
         >
           <CardList offset={offset}>{renderItems}</CardList>
         </Wrapper>
-        <ArrowButton onClick={() => handleSwipe("next")} $hide={isTablet || currentIndex >= maxIndex}>
+        <ArrowButton onClick={() => handleSwipe("next")} $hide={!deivce.isPC || currentIndex >= maxIndex}>
           <ARight />
         </ArrowButton>
       </Relative>
@@ -78,10 +80,21 @@ const Container = styled.div`
 
 const Relative = styled.div`
   position: relative;
+  display: flex;
+  justify-content: center;
 `;
 
 const Wrapper = styled.div`
   overflow: hidden;
+  @media screen and (max-width: ${DEVICE_MAX_SIZE.PC}px) {
+    max-width: ${CARD_WIDTH * ITEMS_PER_PAGE.NOTEBOOK}rem;
+  }
+  @media screen and (max-width: ${DEVICE_MAX_SIZE.TABLET}px) {
+    max-width: ${CARD_WIDTH * ITEMS_PER_PAGE.TABLET}rem;
+  }
+  @media screen and (max-width: ${DEVICE_MAX_SIZE.MOBILE}px) {
+    max-width: ${CARD_WIDTH * ITEMS_PER_PAGE.MOBILE}rem;
+  }
 `;
 
 const SubTitle = styled.span`

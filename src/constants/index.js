@@ -1,14 +1,14 @@
-export const DEVICE_MIN_SIZE = {
-  MOBILE: 360,
+export const DEVICE_MAX_SIZE = {
+  MOBILE: 425,
   TABLET: 768,
   PC: 1248,
 };
 
-export const DEVICE_MAX_SIZE = {
-  MOBILE: 768,
-  TABLET: 1248,
+export const ITEMS_PER_PAGE = {
+  PC: 4,
+  NOTEBOOK: 3,
+  TABLET: 2,
+  MOBILE: 1,
 };
-
-export const ITEMS_PER_PAGE = 4;
 export const CARD_WIDTH = 29.5;
 export const SWIPE_X = 50;
