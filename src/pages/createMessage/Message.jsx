@@ -55,7 +55,7 @@ const MessageLayout = styled.form`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 4.7rem 0rem 6rem;
+  padding-top: 4.7rem;
 
   @media (max-width: 1248px) {
     padding: 5rem 2.4rem 2.4rem;
@@ -67,11 +67,11 @@ const MessageLayout = styled.form`
 
 const MessageBox = styled.div`
   width: 72rem;
-  height: 94.4rem;
   flex-direction: column;
   gap: 5rem;
   color: var(--gray-900, #181818);
   display: flex;
+  margin-bottom: 6rem;
 `;
 
 export default Message;
