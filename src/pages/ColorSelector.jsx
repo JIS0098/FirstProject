@@ -282,8 +282,11 @@ const ColorButton = styled.button`
   width: 16.8rem;
   height: 16.8rem;
   border-radius: 1.6rem;
-  border: 1px solid rgba(0, 0, 0, 0.08);
   cursor: pointer;
+
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+  }
 
   @media screen and (max-width: 768px) {
     width: 15.4rem;
@@ -292,13 +295,16 @@ const ColorButton = styled.button`
 `;
 
 const ImageButton = styled.button`
-  background-size: cover;
   position: relative;
   width: 16.8rem;
   height: 16.8rem;
   border-radius: 1.6rem;
   cursor: pointer;
   padding: 0;
+
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+  }
 
   @media screen and (max-width: 768px) {
     width: 15.4rem;
