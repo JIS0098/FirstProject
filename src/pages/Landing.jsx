@@ -4,6 +4,7 @@ import AddPostPreview from "../assets/img/AddPostPreview.png";
 import PostPreview from "../assets/img/PostPreview.png";
 import EmojiPreview from "../assets/img/EmojiPreview.png";
 import { Link } from "react-router-dom";
+import { Button } from "../components/commons/Button";
 
 function Landing() {
   return (
@@ -19,9 +20,7 @@ function Landing() {
               <StyledBr />
               롤링 페이퍼를 만들 수 있어요
             </StyledPageMainIntroText>
-            <StyledPagSideIntroText>
-              로그인 없이 자유롭게 만들어요.
-            </StyledPagSideIntroText>
+            <StyledPagSideIntroText>로그인 없이 자유롭게 만들어요.</StyledPagSideIntroText>
           </StyledPageIntroContainer>
           <StyledCardContainer>
             <StyledPostCard src={PostPreview} alt="PostPreview" />
@@ -43,14 +42,14 @@ function Landing() {
               <StyledBr />
               표현해보세요
             </StyledPageMainIntroText>
-            <StyledPagSideIntroText>
-              롤링 페이퍼에 이모지를 추가할 수 있어요.
-            </StyledPagSideIntroText>
+            <StyledPagSideIntroText>롤링 페이퍼에 이모지를 추가할 수 있어요.</StyledPagSideIntroText>
           </StyledPageIntroContainer>
         </StyledLandingSectionSecond>
         <Link to="/list">
           <StyledGoToListButtonContainer>
-            <StyledGoToListButton>구경해보기</StyledGoToListButton>
+            <Button width="28rem" tabletWidth="100%">
+              구경해보기
+            </Button>
           </StyledGoToListButtonContainer>
         </Link>
       </StyledMainContainer>
@@ -172,31 +171,14 @@ const StyledPostCard = styled.img`
 const StyledEmojiCard = styled.img`
   width: 47rem;
 `;
+
 const StyledGoToListButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-bottom: 6rem;
   min-width: 360px;
 `;
-const StyledGoToListButton = styled.button`
-  width: 28rem;
-  padding: 1.4rem 2.4rem;
-  border-radius: 12px;
-  background: #9935ff;
-  color: white;
-  text-align: center;
-  font-size: 1.8rem;
-  font-weight: 700;
-  cursor: pointer;
 
-  &:hover {
-    background: #861dee;
-  }
-
-  @media screen and (max-width: 1248px) {
-    width: 100%;
-  }
-`;
 const StyledBr = styled.br`
   display: block;
 
