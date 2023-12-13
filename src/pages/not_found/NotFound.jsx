@@ -3,7 +3,7 @@ import styled from "styled-components";
 import ErrorCard from "./ErrorCard";
 import data from "./moc";
 
-function NotPound() {
+function NotFound() {
   const dummyData = data;
 
   return (
@@ -50,4 +50,4 @@ const StyledBlurCard = styled.div`
   padding-top: 6rem;
 `;
 
-export default NotPound;
+export default NotFound;

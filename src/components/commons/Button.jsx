@@ -1,7 +1,8 @@
+import { motion } from "framer-motion";
 import React from "react";
 import styled from "styled-components";
 
-export const StyledButton = styled.button`
+export const StyledButton = styled(motion.button)`
   padding: 1.4rem 2.4rem;
   border-radius: 12px;
   background-color: #9935ff;
@@ -27,7 +28,13 @@ export const StyledButton = styled.button`
 
 export function Button({ children, width, tabletWidth, MobileWidth }) {
   return (
-    <StyledButton width={width} tabletWidth={tabletWidth} MobileWidth={MobileWidth}>
+    <StyledButton
+      width={width}
+      tabletWidth={tabletWidth}
+      MobileWidth={MobileWidth}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 1 }}
+    >
       {children}
     </StyledButton>
   );

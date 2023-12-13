@@ -6,7 +6,7 @@ import Landing from "./pages/Landing";
 import Header from "./components/commons/Header";
 import Message from "./pages/Message/Message";
 import CreastePost from "./pages/createPost/CreatePost";
-import NotPound from "./pages/not_pound/NotPound";
+import NotFound from "./pages/not_found/NotFound";
 
 function Main() {
   return (
@@ -23,7 +23,7 @@ function Main() {
           <Route path=":id/edit" element={<Post />} />
           <Route path=":id/message" element={<Message />} />
         </Route>
-        <Route path="*" element={<NotPound />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
