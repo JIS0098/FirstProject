@@ -9,7 +9,7 @@ function useDeviceSize() {
 
       let currentDevice;
       switch (true) {
-        case width < DEVICE_MAX_SIZE.MOBILE:
+        case width <= DEVICE_MAX_SIZE.MOBILE:
           currentDevice = "MOBILE";
           break;
         case width >= DEVICE_MAX_SIZE.MOBILE && width < DEVICE_MAX_SIZE.NOTEBOOK:

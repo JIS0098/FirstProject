@@ -12,6 +12,7 @@ function CardSection({ title, recipients }) {
   const { isMobile, isTablet, isNotebook, isPC } = useDeviceSize();
   const [maxIndex, setMaxIndex] = useState(4);
 
+  //To Do. 마지막 요소에서 브라우저 크기 변경 시, offset 조절 해야됨.
   const { currentIndex, offset, handleSwipe, startDrag, endDrag, moveItem } = useSwipe(maxIndex, !isPC);
 
   const handleMouseDown = (e) => {
@@ -58,7 +59,7 @@ function CardSection({ title, recipients }) {
     return () => {
       window.removeEventListener("resize", updateMaxIndex);
     };
-  }, [isMobile, isTablet, isNotebook, isPC]);
+  }, [isPC, isNotebook, isTablet, isMobile]);
 
   return (
     <Container>
