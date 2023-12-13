@@ -1,16 +1,33 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import downImg from "../../assets/icon/arrow_down.svg";
 import addEmojiImg from "../../assets/icon/add-24.svg";
 import shareImg from "../../assets/icon/share-24.svg";
 import MoreCardImg from "../../assets/icon/plus.svg";
 import shareFin from "../../assets/icon/check.svg";
 import useToggle from "../../hooks/useToggle";
+import { useLocation } from "react-router-dom";
 
 function Post() {
   const [emojiAdd, toggleEmoji] = useToggle(false);
   const [showShare, toggleShare] = useToggle(false);
   const [showModal, toggleModal] = useToggle(false);
+  const [share, setShare] = useState(false);
+
+  const location = useLocation();
+  const baseUrl = window.location.host;
+
+  const urlShare = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setShare(true);
+      setTimeout(() => {
+        setShare(false);
+      }, 4000);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <PostBack>
@@ -96,24 +113,24 @@ function Post() {
             <Ago>2023.07.08</Ago>
           </PostCardWrap>
         </PostCard>
-      </PostWrap>
 
-      {emojiAdd ? (
-        <ToggleAddEmoji>
-          <Emoji>😀 8</Emoji>
-          <Emoji>🥶 10</Emoji>
-          <Emoji>🤢 13</Emoji>
-          <Emoji>😂 7</Emoji>
-          <Emoji>💩 21</Emoji>
-          <Emoji>☠️ 2</Emoji>
-        </ToggleAddEmoji>
-      ) : null}
-      {showShare ? (
-        <ShareBox>
-          <Share>카카오톡 공유</Share>
-          <Share>URL 공유</Share>
-        </ShareBox>
-      ) : null}
+        {emojiAdd ? (
+          <ToggleAddEmoji>
+            <Emoji>😀 8</Emoji>
+            <Emoji>🥶 10</Emoji>
+            <Emoji>🤢 13</Emoji>
+            <Emoji>😂 7</Emoji>
+            <Emoji>💩 21</Emoji>
+            <Emoji>☠️ 2</Emoji>
+          </ToggleAddEmoji>
+        ) : null}
+        {showShare ? (
+          <ShareBox>
+            <Share>카카오톡 공유</Share>
+            <Share onClick={() => urlShare(`${baseUrl}${location.pathname}`)}>URL 공유</Share>
+          </ShareBox>
+        ) : null}
+      </PostWrap>
 
       {/* modal */}
       {showModal ? (
@@ -142,14 +159,27 @@ function Post() {
       ) : null}
 
       {/* URL이 복사되었습니다. */}
-      <ShareFinish>
-        <ShareImg src={shareFin} />
-        <ShareP>URL이 복사 되었습니다.</ShareP>
-        <ShareClose>X</ShareClose>
-      </ShareFinish>
+      {share ? (
+        <ShareFinish>
+          <ShareImg src={shareFin} />
+          <ShareP>URL이 복사 되었습니다.</ShareP>
+          <ShareClose>X</ShareClose>
+        </ShareFinish>
+      ) : null}
     </PostBack>
   );
 }
+
+const fadeInTop = keyframes`
+  0%,100% {
+    opacity: 0;
+    transform: translateY(30px) translateX(-50%);
+  }
+  10%,90% {
+    opacity: 1;
+    transform: translateY(0) translateX(-50%);
+  }
+`;
 
 const WhiteBack = styled.div`
   width: 100%;
@@ -269,15 +299,14 @@ const ToggleAddEmoji = styled.div`
   box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.08);
   background-color: beige;
   position: absolute;
-  top: 13rem;
-  right: 25rem;
+  top: 0rem;
+  right: 23rem;
   @media all and (max-width: 1248px) {
     right: 20rem;
   }
   @media all and (max-width: 768px) {
     right: auto;
     left: 1rem;
-    top: 16rem;
   }
 `;
 const ButtonWrap = styled.div`
@@ -382,7 +411,8 @@ const PostCard = styled.div`
   padding: 2.8rem 2.4rem;
   cursor: pointer;
   @media all and (max-width: 1248px) {
-    width: 35.2rem;
+    width: 100%;
+    max-width: 50rem;
   }
   @media all and (max-width: 768px) {
     width: 100%;
@@ -461,8 +491,8 @@ const ShareBox = styled.div`
   width: 13.8rem;
   height: 10rem;
   position: absolute;
-  top: 13rem;
-  right: 7rem;
+  top: 0;
+  right: 4rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -476,7 +506,6 @@ const ShareBox = styled.div`
     right: 2rem;
   }
   @media all and (max-width: 768px) {
-    top: 16rem;
     right: auto;
     left: 28rem;
   }
@@ -553,6 +582,7 @@ const ShareFinish = styled.div`
   left: 50%;
   transform: translateX(-50%);
   gap: 1.6rem;
+  animation: ${fadeInTop} 4s ease-in-out forwards;
 `;
 const ShareImg = styled.img`
   background-color: green;
