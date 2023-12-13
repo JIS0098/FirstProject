@@ -311,6 +311,7 @@ const Image = styled.img`
   height: 100%;
   border-radius: 1.6rem;
   object-fit: cover;
+  pointer-events: none;
   ${({ selected }) => selected && "opacity: 0.5"}
 `;
 
