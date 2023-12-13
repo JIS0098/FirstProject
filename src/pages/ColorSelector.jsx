@@ -62,7 +62,10 @@ const CreateInput = ({ value, onChange }) => {
         type="text"
         placeholder="받는 사람 이름을 입력해 주세요."
         value={value}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(e) => {
+          onChange(e.target.value);
+          setIsName(e.target.value);
+        }}
         onBlur={() => setIsName(value)}
       />
       {!isName && <ErrorText>값을 입력해 주세요.</ErrorText>}
@@ -86,12 +89,7 @@ const SelectColor = () => {
     setSelectedColor(color);
   };
 
-  return (
-    <ColorPalette
-      onSelectColor={handleColorChange}
-      selectedColor={selectedColor}
-    />
-  );
+  return <ColorPalette onSelectColor={handleColorChange} selectedColor={selectedColor} />;
 };
 
 const SelectImage = () => {
@@ -101,12 +99,7 @@ const SelectImage = () => {
     setSelectedImage(image);
   };
 
-  return (
-    <ImagePalette
-      onSelectImage={handleImageChange}
-      selectedImage={selectedImage}
-    />
-  );
+  return <ImagePalette onSelectImage={handleImageChange} selectedImage={selectedImage} />;
 };
 
 const ColorPalette = ({ onSelectColor, selectedColor }) => {
@@ -117,14 +110,8 @@ const ColorPalette = ({ onSelectColor, selectedColor }) => {
   return (
     <PaletteWrapper>
       {Object.keys(COLOR).map((key) => (
-        <ColorButton
-          key={key}
-          onClick={() => handleColorClick(COLOR[key])}
-          style={{ background: COLOR[key] }}
-        >
-          {selectedColor === COLOR[key] && (
-            <CheckIcon src={selectedColorIcon} alt="선택된 색상" />
-          )}
+        <ColorButton key={key} onClick={() => handleColorClick(COLOR[key])} style={{ background: COLOR[key] }}>
+          {selectedColor === COLOR[key] && <CheckIcon src={selectedColorIcon} alt="선택된 색상" />}
         </ColorButton>
       ))}
     </PaletteWrapper>
@@ -140,14 +127,8 @@ const ImagePalette = ({ onSelectImage, selectedImage }) => {
     <PaletteWrapper>
       {Object.keys(IMAGE).map((key) => (
         <ImageButton key={key} onClick={() => handleImageClick(IMAGE[key])}>
-          <Image
-            src={IMAGE[key]}
-            alt={`이미지 ${key}`}
-            selected={selectedImage === IMAGE[key]}
-          />
-          {selectedImage === IMAGE[key] && (
-            <CheckIcon src={selectedColorIcon} alt="선택된 이미지" />
-          )}
+          <Image src={IMAGE[key]} alt={`이미지 ${key}`} selected={selectedImage === IMAGE[key]} />
+          {selectedImage === IMAGE[key] && <CheckIcon src={selectedColorIcon} alt="선택된 이미지" />}
         </ImageButton>
       ))}
     </PaletteWrapper>
