@@ -22,10 +22,9 @@ const CreatePost = () => {
   return (
     <Wrapper>
       <Container>
-        <Create>
-          <p>To.</p>
-          <NameInput value={isName} onChange={handleNameChange} placeholder={"받는 사람을 입력해 주세요."} />
-        </Create>
+        <NameInput value={isName} onChange={handleNameChange} placeholder={"받는 사람을 입력해 주세요."}>
+          To.
+        </NameInput>
         <SelectBackground>
           <p>배경화면을 선택해주세요.</p>
           <span>컬러를 선택하거나, 이미지를 선택할 수 있습니다.</span>
@@ -40,7 +39,6 @@ const CreatePost = () => {
   );
 };
 
-// styled-components
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -59,20 +57,6 @@ const Container = styled.div`
 
   @media screen and (max-width: 768px) {
     max-width: 320px;
-  }
-`;
-
-const Create = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1.2rem;
-
-  p {
-    font-size: 2.4rem;
-    font-weight: 700;
-    color: ${color.gray[900]};
-    line-height: 150%;
   }
 `;
 
