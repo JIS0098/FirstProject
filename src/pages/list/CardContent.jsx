@@ -9,15 +9,10 @@ export function CardContent({ name, messages, messageCount, $bgUrl }) {
         {messages.slice(0, 3).map((_, index) => (
           <ProfileImg key={index} $left={index * 1.4} />
         ))}
-        {messageCount > 3 && (
-          <AdditionalProfiles $left={4.2}>
-            {`+${messageCount - 3}`}
-          </AdditionalProfiles>
-        )}
+        {messageCount > 3 && <AdditionalProfiles $left={4.2}>{`+${messageCount - 3}`}</AdditionalProfiles>}
       </ProfileImages>
       <Author $bgUrl={$bgUrl}>
-        <AuthorCount $bgUrl={$bgUrl}>{messageCount}</AuthorCount>명이
-        작성했어요!
+        <AuthorCount $bgUrl={$bgUrl}>{messageCount}</AuthorCount>명이 작성했어요!
       </Author>
     </Container>
   );
