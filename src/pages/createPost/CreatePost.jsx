@@ -32,7 +32,7 @@ const CreatePost = () => {
         </SelectBackground>
         <ToggleButton isChecked={isChecked} onToggle={handleToggle} />
         {isChecked ? <SelectImage /> : <SelectColor />}
-        <Link to="/post/id">
+        <Link to="/list">
           <CreateButton disabled={!isName} />
         </Link>
       </Container>
