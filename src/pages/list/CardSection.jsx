@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { CARD_WIDTH, ITEMS_PER_PAGE } from "../../constants";
+import useIsTablet from "../../hooks/useIsTablet";
 import { ReactComponent as ALeft } from "../../assets/icon/arrow_left.svg";
 import { ReactComponent as ARight } from "../../assets/icon/arrow_right.svg";
-import { CARD_WIDTH, DEVICE_MAX_SIZE, DEVICE_MIN_SIZE, ITEMS_PER_PAGE } from "../../constants";
 import CardItem from "./CardItem";
 import { CardList } from "./CardList";
 
@@ -12,6 +13,7 @@ function CardSection({ title, recipients }) {
   const [startX, setStartX] = useState(0);
   const [endX, setEndX] = useState(0);
   const [isDrag, setIsDrag] = useState(false);
+  const isTablet = useIsTablet();
 
   const maxIndex = recipients.length - ITEMS_PER_PAGE;
 
@@ -19,7 +21,7 @@ function CardSection({ title, recipients }) {
     setOffset(-index * CARD_WIDTH);
   };
 
-  const handlePrevClick = () => {
+  const handlePrev = () => {
     setCurrentIndex((prevIndex) => {
       const newIndex = Math.max(prevIndex - ITEMS_PER_PAGE, 0);
       updateOffset(newIndex);
@@ -27,7 +29,7 @@ function CardSection({ title, recipients }) {
     });
   };
 
-  const handleNextClick = () => {
+  const handleNext = () => {
     setCurrentIndex((prevIndex) => {
       const newIndex = Math.min(prevIndex + ITEMS_PER_PAGE, maxIndex);
       updateOffset(newIndex);
@@ -36,21 +38,21 @@ function CardSection({ title, recipients }) {
   };
 
   const handleMouseDown = (e) => {
-    console.log("down", e.pageX);
     setStartX(e.pageX);
     setIsDrag(true);
   };
 
   const handleMouseMove = (e) => {
     if (isDrag) {
+      if (!isTablet) return;
       const currentX = e.pageX;
       const swipeX = currentX - startX;
 
       if (swipeX < -50) {
-        handleNextClick();
+        handleNext();
         setIsDrag(false);
       } else if (swipeX > 50) {
-        handlePrevClick();
+        handlePrev();
         setIsDrag(false);
       }
     }
@@ -76,9 +78,9 @@ function CardSection({ title, recipients }) {
   const handleTouchEnd = () => {
     const swipeX = endX - startX;
     if (swipeX < 0) {
-      handleNextClick();
+      handleNext();
     } else if (swipeX > 0) {
-      handlePrevClick();
+      handlePrev();
     }
     setIsDrag(false);
   };
@@ -89,7 +91,7 @@ function CardSection({ title, recipients }) {
     <Container>
       <SubTitle>{title}</SubTitle>
       <Relative>
-        <ArrowButton $left onClick={handlePrevClick} $hide={currentIndex === 0}>
+        <ArrowButton $left onClick={handlePrev} $hide={isTablet || currentIndex === 0}>
           <ALeft />
         </ArrowButton>
         <Wrapper
@@ -103,7 +105,7 @@ function CardSection({ title, recipients }) {
         >
           <CardList offset={offset}>{renderItems}</CardList>
         </Wrapper>
-        <ArrowButton onClick={handleNextClick} $hide={currentIndex >= maxIndex}>
+        <ArrowButton onClick={handleNext} $hide={isTablet || currentIndex >= maxIndex}>
           <ARight />
         </ArrowButton>
       </Relative>
@@ -119,10 +121,6 @@ const Container = styled.div`
   gap: 1.6rem;
   max-width: 116rem;
   width: 100%;
-  @media screen and (max-width: ${DEVICE_MAX_SIZE.TABLET}px) {
-    align-self: flex-start;
-    margin-left: 2rem;
-  }
 `;
 
 const Relative = styled.div`
@@ -131,9 +129,6 @@ const Relative = styled.div`
 
 const Wrapper = styled.div`
   overflow: hidden;
-  @media screen and (max-width: ${DEVICE_MIN_SIZE.TABLET}px) {
-    -webkit-overflow-scrolling: touch;
-  }
 `;
 
 const SubTitle = styled.span`
