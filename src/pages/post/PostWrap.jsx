@@ -5,10 +5,10 @@ import MoreCardImg from "../../assets/icon/plus.svg";
 import Emoji from "../../components/commons/Emoji";
 import Card from "../../components/commons/Card";
 
-function PostWrap({ showShare, emojiAdd, setShare, toggleModal }) {
+function PostWrap({ data, showShare, emojiAdd, setShare, toggleModal }) {
   const location = useLocation();
   const baseUrl = window.location.host;
-
+  console.log(data);
   const urlShare = async (text) => {
     try {
       await navigator.clipboard.writeText(text);
@@ -29,10 +29,19 @@ function PostWrap({ showShare, emojiAdd, setShare, toggleModal }) {
           <img src={MoreCardImg} />
         </ImgBox>
       </PostCard>
-
-      <div onClick={toggleModal}>
-        <Card profileImg={MoreCardImg} name={"김윤수"} description={"내용"} tag={"가족"} ago={"2023.07.08"} />
-      </div>
+      {/* 
+      <div onClick={toggleModal}> */}
+      {data.map((item) => (
+        <Card
+          key={item.id}
+          profileImg={item.profileImageURL}
+          name={item.sender}
+          description={item.content}
+          tag={item.relationship}
+          ago={item.createdAt}
+        />
+      ))}
+      {/* </div> */}
 
       {emojiAdd ? (
         <ToggleAddEmoji>
