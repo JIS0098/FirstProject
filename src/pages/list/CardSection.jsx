@@ -1,10 +1,9 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { ReactComponent as ALeft } from "../../assets/icon/arrow_left.svg";
 import { ReactComponent as ARight } from "../../assets/icon/arrow_right.svg";
-import { CARD_WIDTH, DEVICE_MAX_SIZE, ITEMS_PER_PAGE } from "../../constants";
+import { CARD_WIDTH, DEVICE_MAX_SIZE, DEVICE_MIN_SIZE, ITEMS_PER_PAGE } from "../../constants";
 import CardItem from "./CardItem";
-import { Link } from "react-router-dom";
 import { CardList } from "./CardList";
 
 function CardSection({ title, recipients }) {
@@ -12,6 +11,7 @@ function CardSection({ title, recipients }) {
   const [offset, setOffset] = useState(0);
   const [startX, setStartX] = useState(0);
   const [endX, setEndX] = useState(0);
+  const [isDrag, setIsDrag] = useState(false);
 
   const maxIndex = recipients.length - ITEMS_PER_PAGE;
 
@@ -35,28 +35,52 @@ function CardSection({ title, recipients }) {
     });
   };
 
-  //드래그 이벤트
   const handleMouseDown = (e) => {
     console.log("down", e.pageX);
     setStartX(e.pageX);
+    setIsDrag(true);
   };
 
-  const handleMouseUp = (e) => {
-    console.log("up", e.pageX);
-    setEndX(e.pageX);
+  const handleMouseMove = (e) => {
+    if (isDrag) {
+      const currentX = e.pageX;
+      const swipeX = currentX - startX;
 
-    const deltaX = endX - startX;
+      if (swipeX < -50) {
+        handleNextClick();
+        setIsDrag(false);
+      } else if (swipeX > 50) {
+        handlePrevClick();
+        setIsDrag(false);
+      }
+    }
+  };
 
-    // If deltaX is negative, it's a swipe to the left, call handlePrevClick
-    if (deltaX < 0) {
-      console.log("0");
+  const handleMouseUp = () => {
+    setIsDrag(false);
+  };
+
+  const handleTouchStart = (e) => {
+    const touchX = e.touches[0].clientX;
+    setStartX(touchX);
+    setIsDrag(true);
+  };
+
+  const handleTouchMove = (e) => {
+    if (isDrag) {
+      const touchX = e.touches[0].clientX;
+      setEndX(touchX);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    const swipeX = endX - startX;
+    if (swipeX < 0) {
+      handleNextClick();
+    } else if (swipeX > 0) {
       handlePrevClick();
     }
-    // If deltaX is positive, it's a swipe to the right, call handleNextClick
-    else if (deltaX > 0) {
-      console.log("1");
-      handleNextClick();
-    }
+    setIsDrag(false);
   };
 
   const renderItems = recipients.map((recipient, index) => <CardItem key={index} recipient={recipient} />);
@@ -68,7 +92,15 @@ function CardSection({ title, recipients }) {
         <ArrowButton $left onClick={handlePrevClick} $hide={currentIndex === 0}>
           <ALeft />
         </ArrowButton>
-        <Wrapper onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
+        <Wrapper
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
           <CardList offset={offset}>{renderItems}</CardList>
         </Wrapper>
         <ArrowButton onClick={handleNextClick} $hide={currentIndex >= maxIndex}>
@@ -99,6 +131,9 @@ const Relative = styled.div`
 
 const Wrapper = styled.div`
   overflow: hidden;
+  @media screen and (max-width: ${DEVICE_MIN_SIZE.TABLET}px) {
+    -webkit-overflow-scrolling: touch;
+  }
 `;
 
 const SubTitle = styled.span`
