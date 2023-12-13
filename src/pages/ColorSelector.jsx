@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import color from "../styles/color";
 import selectedColorIcon from "../assets/icon/color-selected.png";
-import backgroundImage1 from "../assets/img/background-image-1.png";
-import backgroundImage2 from "../assets/img/background-image-2.png";
+import backgroundImage1 from "../assets/img/background-img-1.JPG";
+import backgroundImage2 from "../assets/img/background-img-2.JPG";
+import backgroundImage3 from "../assets/img/background-img-3.JPG";
+import backgroundImage4 from "../assets/img/background-img-4.JPG";
 
 import { Link } from "react-router-dom";
 
@@ -52,6 +54,8 @@ const COLOR = {
 const IMAGE = {
   1: `${backgroundImage1}`,
   2: `${backgroundImage2}`,
+  3: `${backgroundImage3}`,
+  4: `${backgroundImage4}`,
 };
 
 const CreateInput = ({ value, onChange }) => {
@@ -306,6 +310,7 @@ const Image = styled.img`
   width: 100%;
   height: 100%;
   border-radius: 1.6rem;
+  object-fit: cover;
   ${({ selected }) => selected && "opacity: 0.5"}
 `;
 
