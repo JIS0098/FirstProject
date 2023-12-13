@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import FromInputBox from "./FromInputBox";
+import NameInput from "../../components/commons/NameInput";
+import CreateButton from "../../components/commons/CreateButton";
 import ProfileLayout from "./ProfileLayout";
 import RelationshipInputBox from "./RelationshipInputBox";
 import WriteInputBox from "./WriteInputBox";
@@ -25,15 +26,26 @@ const Message = () => {
       profileImg,
     ],
   });
+
+  const [isName, setIsName] = useState("");
+  const handleNameChange = (name) => {
+    setIsName(name);
+  };
   return (
     <MessageLayout>
       <MessageBox>
-        <FromInputBox />
+        <NameInput
+          value={isName}
+          onChange={handleNameChange}
+          placeholder="이름을 입력해 주세요."
+        >
+          From.
+        </NameInput>
         <ProfileLayout testData={testData} />
         <RelationshipInputBox testData={testData} />
         <WriteInputBox />
         <FontSelectBox testData={testData} />
-        {/* <MessageCreateButton>생성하기</MessageCreateButton> */}
+        <CreateButton disabled={!isName} />
       </MessageBox>
     </MessageLayout>
   );
