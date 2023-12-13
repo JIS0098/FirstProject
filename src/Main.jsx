@@ -4,7 +4,7 @@ import Post from "../src/pages/post";
 import ListPage from "./pages/list";
 import Landing from "./pages/Landing";
 import Header from "./components/commons/Header";
-import Message from "./pages/Message/Message";
+import CreateMessage from "./pages/createMessage/Message";
 import CreastePost from "./pages/createPost/CreatePost";
 import NotPound from "./pages/not_pound/NotPound";
 
@@ -21,7 +21,7 @@ function Main() {
           <Route index element={<CreastePost />} />
           <Route path=":id" element={<Post />} />
           <Route path=":id/edit" element={<Post />} />
-          <Route path=":id/message" element={<Message />} />
+          <Route path=":id/message" element={<CreateMessage />} />
         </Route>
         <Route path="*" element={<NotPound />} />
       </Routes>
