@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-
 export function CardList({ offset, children }) {
   return <Container offset={offset}>{children}</Container>;
 }

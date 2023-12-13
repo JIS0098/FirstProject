@@ -21,13 +21,13 @@ const Layout = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  margin: 0px auto 13.7rem;
+  padding: 0 2.4rem;
+  margin: 0px auto 10rem;
 `;
 
 const FloatingButton = styled.button`
   position: fixed;
-  bottom: 10rem;
+  bottom: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
