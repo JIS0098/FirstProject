@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import color from "../../styles/color";
-import CreateInput from "./CreateInput";
+import NameInput from "../../components/commons/NameInput";
 import ToggleButton from "./ToggleButton";
 import { SelectColor, SelectImage } from "./SelectBackground";
-import ButtonBox from "./ButtonBox";
+import CreateButton from "../../components/commons/CreateButton";
 
 const CreatePost = () => {
   const [isChecked, setIsChecked] = useState(false);
@@ -24,7 +24,7 @@ const CreatePost = () => {
       <Container>
         <Create>
           <p>To.</p>
-          <CreateInput value={isName} onChange={handleNameChange} />
+          <NameInput value={isName} onChange={handleNameChange} placeholder={"받는 사람을 입력해 주세요."} />
         </Create>
         <SelectBackground>
           <p>배경화면을 선택해주세요.</p>
@@ -32,8 +32,8 @@ const CreatePost = () => {
         </SelectBackground>
         <ToggleButton isChecked={isChecked} onToggle={handleToggle} />
         {isChecked ? <SelectImage /> : <SelectColor />}
-        <Link to="/post/id">
-          <ButtonBox disabled={!isName}>생성하기</ButtonBox>
+        <Link to="/list">
+          <CreateButton disabled={!isName} />
         </Link>
       </Container>
     </Wrapper>

@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import color from "../../styles/color";
 
-const CreateInput = ({ value, onChange }) => {
+const NameInput = ({ value, onChange, placeholder }) => {
   const [isName, setIsName] = useState(true);
   return (
     <>
       <StyledInput
         type="text"
         value={value}
-        placeholder="받는 사람 이름을 입력해 주세요."
+        placeholder={placeholder}
         onChange={(e) => {
           onChange(e.target.value);
           setIsName(e.target.value);
@@ -21,7 +21,7 @@ const CreateInput = ({ value, onChange }) => {
   );
 };
 
-export default CreateInput;
+export default NameInput;
 
 const StyledInput = styled.input`
   width: 72rem;
