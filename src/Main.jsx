@@ -5,7 +5,7 @@ import ListPage from "./pages/list";
 import Landing from "./pages/Landing";
 import Header from "./components/commons/Header";
 import Message from "./pages/Message/Message";
-import ColorSelector from "./pages/ColorSelector";
+import CreastePost from "./pages/createPost/CreatePost";
 import NotPound from "./pages/not_pound/NotPound";
 
 function Main() {
@@ -18,7 +18,7 @@ function Main() {
           <Route path="/list" element={<ListPage />} />
         </Route>
         <Route path="/post">
-          <Route index element={<ColorSelector />} />
+          <Route index element={<CreastePost />} />
           <Route path=":id" element={<Post />} />
           <Route path=":id/edit" element={<Post />} />
           <Route path=":id/message" element={<Message />} />
