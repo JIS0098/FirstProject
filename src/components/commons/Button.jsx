@@ -5,7 +5,7 @@ import styled from "styled-components";
 export const StyledButton = styled(motion.button)`
   padding: 1.4rem 2.4rem;
   border-radius: 12px;
-  background-color: #9935ff;
+  background: #9935ff;
   width: ${({ width }) => width};
   color: white;
   font-size: 1.8rem;
@@ -17,23 +17,30 @@ export const StyledButton = styled(motion.button)`
     background: #861dee;
   }
 
+  &:disabled {
+    filter: opacity(50%);
+    cursor: initial;
+    background: #9935ff;
+  }
+
   @media screen and (max-width: 1248px) {
     width: ${({ tabletWidth }) => tabletWidth};
   }
 
   @media screen and (max-width: 768px) {
-    width: ${({ MobileWidth }) => MobileWidth};
+    width: ${({ mobileWidth }) => mobileWidth};
   }
 `;
 
-export function Button({ children, width, tabletWidth, MobileWidth }) {
+export function Button({ children, width, disabled, tabletWidth, mobileWidth }) {
   return (
     <StyledButton
       width={width}
       tabletWidth={tabletWidth}
-      MobileWidth={MobileWidth}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 1 }}
+      mobileWidth={mobileWidth}
+      disabled={disabled}
+      whileHover={!disabled && { scale: 1.05 }}
+      whileTap={!disabled && { scale: 1 }}
     >
       {children}
     </StyledButton>
