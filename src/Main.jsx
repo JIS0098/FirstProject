@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Post from "../src/pages/post";
 import ListPage from "./pages/list";
@@ -9,12 +9,23 @@ import CreatePost from "./pages/createPost/CreatePost";
 import NotFound from "./pages/not_found/NotFound";
 
 function Main() {
+  const [isThema, setIsThema] = useState(false);
+  // false = whiteMode , true = blackMode
+  function handleThema() {
+    setIsThema((prev) => {
+      console.log("prev테마상태:", prev);
+      return !prev;
+    });
+  }
+
+  console.log("테마상태:", isThema);
+
   return (
     <BrowserRouter>
-      <Header />
+      <Header onThemaClick={handleThema} thema={isThema} />
       <Routes>
         <Route path="/">
-          <Route index element={<Landing />} />
+          <Route index element={<Landing thema={isThema} />} />
           <Route path="/list" element={<ListPage />} />
         </Route>
         <Route path="/post">

@@ -3,17 +3,20 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 
-export default function App() {
+function Btn({ onClick }) {
   const [isOn, setIsOn] = useState(false);
 
-  const toggleSwitch = () => setIsOn(!isOn);
+  const toggleSwitch = () => {
+    setIsOn((prev) => !prev);
+    onClick();
+  };
 
   return (
     <StyledContainer
       data-is-on={isOn}
       onClick={toggleSwitch}
       initial={false}
-      animate={{ backgroundColor: isOn ? "rgba(0, 0, 0, 0.4)" : "rgba(0, 0, 0, 0.2)" }}
+      animate={{ backgroundColor: isOn ? "rgba(255, 255, 255, 0.4)" : "rgba(0, 0, 0, 0.2)" }}
     >
       <Handle data-is-on={isOn} layout transition={spring} />
     </StyledContainer>
@@ -23,11 +26,11 @@ export default function App() {
 const StyledContainer = styled(motion.div)`
   width: 45px;
   height: 27px;
-
   display: flex;
   justify-content: flex-start;
+  align-items: center;
+  padding: 5px;
   border-radius: 50px;
-  padding: 4px;
   cursor: pointer;
 
   &[data-is-on="true"] {
@@ -47,3 +50,5 @@ const spring = {
   stiffness: 700,
   damping: 30,
 };
+
+export default Btn;

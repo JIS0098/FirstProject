@@ -3,14 +3,14 @@ import styled from "styled-components";
 import Icon from "../../assets/img/Icon.png";
 import WhiteDarkModeBtn from "./WhiteDarkModeBtn";
 import { Link, useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
 
-function Header() {
+function Header({ onThemaClick, thema }) {
   const location = useLocation();
   const isPage = location.pathname === "/";
-  console.log(isPage);
 
   return (
-    <StyledHeaderContainer>
+    <StyledHeaderContainer $thema={thema}>
       <StyledNavContainer>
         <Link to="/">
           <StyledLogoContainer>
@@ -19,25 +19,31 @@ function Header() {
           </StyledLogoContainer>
         </Link>
         <StyledBtnContainer>
-          <WhiteDarkModeBtn />
-          {isPage && (
+          <WhiteDarkModeBtn onClick={onThemaClick} />
+          {isPage ? (
             <Link to="/post">
-              <StyledAddButton>롤링 페이퍼 만들기</StyledAddButton>
+              <StyledAddButton initial={{ opacity: 1 }} exit={{ opacity: 0, x: 50 }}>
+                롤링 페이퍼 만들기
+              </StyledAddButton>
             </Link>
+          ) : (
+            ""
           )}
         </StyledBtnContainer>
       </StyledNavContainer>
     </StyledHeaderContainer>
   );
 }
+
 const StyledHeaderContainer = styled.nav`
+  background-color: ${({ $thema }) => ($thema ? "#000" : "#fff")};
   border-bottom: 1px solid #eeeeee;
 `;
 const StyledNavContainer = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.1rem 0;
+  height: 6rem;
   margin: 0 auto;
   max-width: 1200px;
 
@@ -66,7 +72,7 @@ const StyledBtnContainer = styled.div`
   gap: 2rem;
   align-items: center;
 `;
-const StyledAddButton = styled.button`
+const StyledAddButton = styled(motion.button)`
   border: 1px solid #ccc;
   border-radius: 6px;
   background: white;

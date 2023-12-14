@@ -1,16 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import AddPostPreview from "../assets/img/AddPostPreview.png";
 import PostPreview from "../assets/img/PostPreview.png";
 import EmojiPreview from "../assets/img/EmojiPreview.png";
 import { Link } from "react-router-dom";
 import { Button } from "../components/commons/Button";
 import { motion } from "framer-motion";
 
-function Landing() {
+function Landing({ thema }) {
   return (
     <>
-      <StyledMainContainer>
+      <StyledMainContainer $thema={thema}>
         <StyledLandingSectionFirst
           initial={{ x: -30, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
@@ -30,7 +29,7 @@ function Landing() {
           <StyledCardContainer>
             <StyledPostCard src={PostPreview} alt="PostPreview" />
             <StyledPostCard src={PostPreview} alt="PostPreview" />
-            <StyledPostCard src={AddPostPreview} alt="AddPostPreview" />
+            <StyledPostCard src={PostPreview} alt="PostPreview" />
           </StyledCardContainer>
         </StyledLandingSectionFirst>
 
@@ -67,7 +66,8 @@ function Landing() {
 }
 
 const StyledMainContainer = styled.main`
-  padding: 0 24px;
+  padding: 6rem 24px;
+  background-color: ${({ $thema }) => ($thema ? "#1E1F21" : "#fff")};
 `;
 const StyledLandingSection = styled(motion.section)`
   display: flex;
@@ -90,7 +90,6 @@ const StyledLandingSection = styled(motion.section)`
 `;
 const StyledLandingSectionFirst = styled(StyledLandingSection)`
   justify-content: space-around;
-  margin-top: 6rem;
 
   @media screen and (max-width: 1248px) {
     justify-content: center;
@@ -140,7 +139,7 @@ const StyledPagSideIntroText = styled.p`
   font-size: 1.8rem;
   font-weight: 400;
 `;
-const StyledCardContainer = styled.div`
+const StyledCardContainer = styled(motion.div)`
   white-space: nowrap;
   overflow: hidden;
   display: flex;
@@ -159,7 +158,6 @@ const StyledEmojiCard = styled.img`
 const StyledGoToListButtonContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-bottom: 6rem;
   min-width: 360px;
 
   & a {
