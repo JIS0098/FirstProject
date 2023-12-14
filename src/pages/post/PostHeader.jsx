@@ -1,12 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import useToggle from "../../hooks/useToggle";
 import ProfileImgs from "../../components/commons/ProfileImages";
 import downImg from "../../assets/icon/arrow_down.svg";
 import addEmojiImg from "../../assets/icon/add-24.svg";
 import shareImg from "../../assets/icon/share-24.svg";
 import Emoji from "../../components/commons/Emoji";
+import EmojiPicker from "emoji-picker-react";
+import { emojiPost } from "../../api/testFeatData";
 
 function PostHeader({ data, toggleShare, toggleEmoji, dataEmoji }) {
+  const [emojiPick, toggleEmojiPick] = useToggle(false);
+  const [selectEmoji, setSelectEmoji] = useState({});
+
+  const handleEmojiSelect = (e) => {
+    setSelectEmoji({ emoji: e.emoji, type: "increase" });
+    // console.log(e);
+  };
+  console.log(selectEmoji);
+  // useEffect(() => {
+  //   const emojiUpdate = async () => {
+  //     try {
+  //       const result = await emojiPost(selectEmoji);
+  //       console.log(result);
+  //     } catch (e) {
+  //       console.log(e);
+  //     }
+  //   };
+  //   emojiUpdate();
+  // }, [selectEmoji]);
+
   return (
     <PostHead>
       <HeaderService>
@@ -29,11 +52,18 @@ function PostHeader({ data, toggleShare, toggleEmoji, dataEmoji }) {
 
             <EmojiButton src={downImg} onClick={toggleEmoji} />
 
-            <ButtonWrap>
+            <ButtonWrap onClick={toggleEmojiPick}>
               <img src={addEmojiImg} />
               <ButtonWrapP>추가</ButtonWrapP>
             </ButtonWrap>
-            <Line></Line>
+
+            {emojiPick ? (
+              <EmojiPickerWrap>
+                <EmojiPicker onEmojiClick={handleEmojiSelect} />
+              </EmojiPickerWrap>
+            ) : null}
+
+            <Line />
             <ButtonWrap onClick={toggleShare}>
               <img src={shareImg} />
             </ButtonWrap>
@@ -43,6 +73,11 @@ function PostHeader({ data, toggleShare, toggleEmoji, dataEmoji }) {
     </PostHead>
   );
 }
+const EmojiPickerWrap = styled.div`
+  position: absolute;
+  top: 6rem;
+  z-index: 1;
+`;
 const PostHead = styled.div`
   width: 100%;
   background-color: #fff;
