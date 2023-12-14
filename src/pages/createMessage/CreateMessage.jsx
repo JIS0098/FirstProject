@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import FromInputBox from "./FromInputBox";
+import NameInput from "../../components/commons/NameInput";
+import CreateButton from "../../components/commons/CreateButton";
 import ProfileLayout from "./ProfileLayout";
 import RelationshipInputBox from "./RelationshipInputBox";
 import WriteInputBox from "./WriteInputBox";
@@ -9,7 +10,7 @@ import profileImg from "../../assets/img/profileImg.png";
 
 // import WriteInput from './WriteInput';
 
-const Message = () => {
+const createMessage = () => {
   const [testData] = useState({
     font: ["Noto Sans", "Pretendard", "나눔명조", "나눔손글씨 손편지체"],
     relationship: ["지인", "동료", "가족", "친구"],
@@ -25,15 +26,28 @@ const Message = () => {
       profileImg,
     ],
   });
+
+  const [isName, setIsName] = useState("");
+  const handleNameChange = (name) => {
+    setIsName(name);
+  };
   return (
     <MessageLayout>
       <MessageBox>
-        <FromInputBox />
+        <NameInput
+          value={isName}
+          onChange={handleNameChange}
+          placeholder="이름을 입력해 주세요."
+        >
+          From.
+        </NameInput>
         <ProfileLayout testData={testData} />
         <RelationshipInputBox testData={testData} />
         <WriteInputBox />
         <FontSelectBox testData={testData} />
-        {/* <MessageCreateButton>생성하기</MessageCreateButton> */}
+        <CreateButtonBox>
+          <CreateButton disabled={!isName} />
+        </CreateButtonBox>
       </MessageBox>
     </MessageLayout>
   );
@@ -43,7 +57,7 @@ const MessageLayout = styled.form`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 4.7rem 0rem 6rem;
+  padding-top: 4.7rem;
 
   @media (max-width: 1248px) {
     padding: 5rem 2.4rem 2.4rem;
@@ -55,11 +69,16 @@ const MessageLayout = styled.form`
 
 const MessageBox = styled.div`
   width: 72rem;
-  height: 94.4rem;
   flex-direction: column;
   gap: 5rem;
   color: var(--gray-900, #181818);
   display: flex;
+  margin-bottom: 6rem;
 `;
+export default createMessage;
 
-export default Message;
+const CreateButtonBox = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`;

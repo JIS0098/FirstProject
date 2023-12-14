@@ -33,6 +33,7 @@ export const SelectInputStyled = () => css`
     border-radius: 0.8rem;
     border: 0.1rem solid var(--gray-300, #ccc);
     overflow: hidden;
+    z-index: 5;
   }
 
   & li {
