@@ -4,7 +4,7 @@ import NameInput from '../../components/commons/NameInput';
 import CreateButton from '../../components/commons/CreateButton';
 import ProfileLayout from './ProfileLayout';
 import RelationshipInputBox from './RelationshipInputBox';
-import WriteInputBox from './WriteInputBox';
+import WriteInputBox from './WYSIWYG';
 import profileImg from '../../assets/img/profileImg.png';
 import { Link } from 'react-router-dom';
 
@@ -12,7 +12,6 @@ import { Link } from 'react-router-dom';
 
 const CreateMessage = () => {
   const [testData] = useState({
-    font: ['Noto Sans', 'Pretendard', '나눔명조', '나눔손글씨 손편지체'],
     relationship: ['지인', '동료', '가족', '친구'],
     profileImages: [profileImg, profileImg, profileImg, profileImg],
   });
