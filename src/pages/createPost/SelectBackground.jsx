@@ -6,7 +6,6 @@ import selectedColorIcon from "../../assets/icon/color-selected.png";
 import backgroundImage1 from "../../assets/img/background-img-1.JPG";
 import backgroundImage2 from "../../assets/img/background-img-2.JPG";
 import backgroundImage3 from "../../assets/img/background-img-3.JPG";
-import backgroundImage4 from "../../assets/img/background-img-4.JPG";
 
 export const SelectColor = () => {
   const [selectedColor, setSelectedColor] = useState(COLOR.orange);
@@ -39,7 +38,6 @@ const IMAGE = {
   1: `${backgroundImage1}`,
   2: `${backgroundImage2}`,
   3: `${backgroundImage3}`,
-  4: `${backgroundImage4}`,
 };
 
 const ColorPalette = ({ onSelectColor, selectedColor }) => {
