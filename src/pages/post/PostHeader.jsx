@@ -6,7 +6,7 @@ import addEmojiImg from "../../assets/icon/add-24.svg";
 import shareImg from "../../assets/icon/share-24.svg";
 import Emoji from "../../components/commons/Emoji";
 
-function PostHeader({ toggleShare, toggleEmoji }) {
+function PostHeader({ toggleShare, toggleEmoji, dataEmoji }) {
   const list = [{ img: { addEmojiImg } }, { img: { shareImg } }, { img: { shareImg } }];
   return (
     <PostHead>
@@ -22,9 +22,11 @@ function PostHeader({ toggleShare, toggleEmoji }) {
           </HeaderServicePost>
 
           <EmojiWrap>
-            <Emoji>😀 8</Emoji>
-            <Emoji>🥶 10</Emoji>
-            <Emoji>🤢 13</Emoji>
+            {dataEmoji.slice(0, 3).map((item) => (
+              <Emoji key={item.id}>
+                {item.emoji} {item.count}
+              </Emoji>
+            ))}
 
             <EmojiButton src={downImg} onClick={toggleEmoji} />
 
