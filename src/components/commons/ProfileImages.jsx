@@ -2,11 +2,12 @@ import React from "react";
 import styled from "styled-components";
 
 function ProfileImgs({ list }) {
-  const leng = list.length - 2;
+  const leng = list.length - 3;
   return (
     <ProfileImgBox>
       <ProfileImg src={list[0].img} />
       <ProfileImg src={list[1].img} />
+      <ProfileImg src={list[2].img} />
       <ProfileDiv>+ {leng}</ProfileDiv>
     </ProfileImgBox>
   );
@@ -37,9 +38,12 @@ const ProfileImg = styled.img`
   position: relative;
 
   &:nth-child(1) {
-    left: 20px;
+    left: 30px;
   }
   &:nth-child(2) {
+    left: 20px;
+  }
+  &:nth-child(3) {
     left: 10px;
   }
 `;
