@@ -17,5 +17,5 @@ export async function testDataEmoji() {
 }
 
 export async function testDataAll() {
-  return fetcher("/recipients/");
+  return fetcher(`/recipients/?limit=10`);
 }

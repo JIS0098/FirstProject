@@ -3,26 +3,46 @@ import styled from "styled-components";
 import { useNavigate } from "react-router";
 import CardSection from "./CardSection";
 import { testDataAll } from "../../api/testFeatData";
+import { Button } from "../../components/commons/Button";
+import { Link } from "react-router-dom";
 function ListPage() {
   const navigation = useNavigate();
   const LIST_TITLE = ["인기 롤링 페이퍼 🔥", "최근에 만든 롤링 페이퍼 ⭐️"];
   const [loading, setLoading] = useState(false);
-  const [state, setState] = useState([]);
+  const [sortByMost, setSortByMost] = useState([]);
+  const [sortByRecent, setSortByRecent] = useState([]);
 
   useEffect(() => {
     setLoading(true);
     testDataAll()
       .then((res) => res.results)
-      .then(setState)
+      .then((data) => {
+        //가장 메시지가 많은 순.
+        const like = [...data].sort((a, b) => b.messageCount - a.messageCount);
+        setSortByMost(like);
+        //가장 최근에 만들어진 순.
+        const recent = [...data].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        setSortByRecent(recent);
+      })
       .finally(() => setLoading(false));
   }, []);
+
+  //스켈레톤 UI 만들어지면 작업할 곳.
   if (loading) return <div>loading...</div>;
   return (
-    <Layout>
-      <CardSection title={LIST_TITLE[0]} recipients={state} />
-      <CardSection title={LIST_TITLE[1]} recipients={state} />
-      <FloatingButton onClick={() => navigation("/post")}>나도 만들어보기</FloatingButton>
-    </Layout>
+    <>
+      <Layout>
+        <CardSection title={LIST_TITLE[0]} recipients={sortByMost} />
+        <CardSection title={LIST_TITLE[1]} recipients={sortByRecent} />
+      </Layout>
+      <Link to="/post">
+        <StyledGoToListButtonContainer>
+          <Button width="28rem" tabletWidth="100%">
+            나도 만들어보기
+          </Button>
+        </StyledGoToListButtonContainer>
+      </Link>
+    </>
   );
 }
 
@@ -33,31 +53,38 @@ const Layout = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 0 2.4rem;
-  margin: 0px auto 10rem;
+  margin: 0 auto 4rem;
 `;
 
-const FloatingButton = styled.button`
-  position: fixed;
-  bottom: 2rem;
+const StyledGoToListButtonContainer = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
-  width: 28rem;
-  padding: 1.4rem 2.4rem;
-  gap: 1rem;
-
-  color: white;
-  font-size: 1.8rem;
-  font-weight: 700;
-  text-align: center;
-  border-radius: 1.2rem;
-  background-color: ${({ theme }) => theme.button.primary.enabled};
-  cursor: pointer;
-
-  &:disabled {
-    background-color: ${({ theme }) => theme.button.primary.disabled};
-  }
-  &:hover {
-    background-color: ${({ theme }) => theme.button.primary.hover};
-  }
+  margin-bottom: 6rem;
+  min-width: 360px;
 `;
+
+// const FloatingButton = styled.button`
+//   position: fixed;
+//   bottom: 2rem;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   width: 28rem;
+//   padding: 1.4rem 2.4rem;
+//   gap: 1rem;
+
+//   color: white;
+//   font-size: 1.8rem;
+//   font-weight: 700;
+//   text-align: center;
+//   border-radius: 1.2rem;
+//   background-color: ${({ theme }) => theme.button.primary.enabled};
+//   cursor: pointer;
+
+//   &:disabled {
+//     background-color: ${({ theme }) => theme.button.primary.disabled};
+//   }
+//   &:hover {
+//     background-color: ${({ theme }) => theme.button.primary.hover};
+//   }
+// `;
