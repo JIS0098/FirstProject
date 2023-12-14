@@ -15,3 +15,4 @@ export async function testData() {
 export async function testDataEmoji() {
   return fetcher("/recipients/714/reactions/");
 }
+

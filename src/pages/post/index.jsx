@@ -54,3 +54,4 @@ const PostBack = styled.div`
 `;
 
 export default Post;
+
