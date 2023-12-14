@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
+import AddImageButton from "./AddImageButton";
 import color from "../../styles/color";
 import selectedColorIcon from "../../assets/icon/color-selected.png";
 import backgroundImage1 from "../../assets/img/background-img-1.JPG";
@@ -64,6 +65,7 @@ const ImagePalette = ({ onSelectImage, selectedImage }) => {
 
   return (
     <PaletteWrapper>
+      <AddImageButton />
       {Object.keys(IMAGE).map((key) => (
         <ImageButton key={key} onClick={() => handleImageClick(IMAGE[key])}>
           <Image src={IMAGE[key]} alt={`이미지 ${key}`} selected={selectedImage === IMAGE[key]} />
@@ -76,7 +78,7 @@ const ImagePalette = ({ onSelectImage, selectedImage }) => {
 
 const PaletteWrapper = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
   flex-grow: 0;
   gap: 1rem;
