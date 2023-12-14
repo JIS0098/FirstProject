@@ -5,9 +5,9 @@ function ProfileImgs({ list }) {
   const leng = list.length - 3;
   return (
     <ProfileImgBox>
-      <ProfileImg src={list[0].img} />
-      <ProfileImg src={list[1].img} />
-      <ProfileImg src={list[2].img} />
+      {list.slice(0, 3).map((item) => (
+        <ProfileImg key={item.id} src={item.profileImageURL} />
+      ))}
       <ProfileDiv>+ {leng}</ProfileDiv>
     </ProfileImgBox>
   );

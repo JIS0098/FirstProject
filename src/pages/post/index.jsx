@@ -28,7 +28,7 @@ function Post() {
 
   return (
     <PostBack>
-      <PostHeader toggleShare={toggleShare} toggleEmoji={toggleEmoji} dataEmoji={dataEmoji} />
+      <PostHeader data={data} toggleShare={toggleShare} toggleEmoji={toggleEmoji} dataEmoji={dataEmoji} />
       <PostWrap
         data={data}
         dataEmoji={dataEmoji}

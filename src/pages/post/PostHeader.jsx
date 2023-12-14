@@ -6,8 +6,7 @@ import addEmojiImg from "../../assets/icon/add-24.svg";
 import shareImg from "../../assets/icon/share-24.svg";
 import Emoji from "../../components/commons/Emoji";
 
-function PostHeader({ toggleShare, toggleEmoji, dataEmoji }) {
-  const list = [{ img: { addEmojiImg } }, { img: { shareImg } }, { img: { shareImg } }, { img: { shareImg } }];
+function PostHeader({ data, toggleShare, toggleEmoji, dataEmoji }) {
   return (
     <PostHead>
       <HeaderService>
@@ -15,9 +14,9 @@ function PostHeader({ toggleShare, toggleEmoji, dataEmoji }) {
 
         <HeaderServiceBox>
           <HeaderServicePost>
-            <ProfileImgs list={list} />
+            <ProfileImgs list={data} />
             <ServiceP>
-              <ServiceSpan>23</ServiceSpan> 명이 작성했어요!
+              <ServiceSpan>{data.length}</ServiceSpan> 명이 작성했어요!
             </ServiceP>
           </HeaderServicePost>
 
@@ -78,7 +77,7 @@ const HeaderServicePost = styled.div`
   gap: 1.1rem;
   font-size: 1.8rem;
   color: #181818;
-  width: 21rem;
+  width: 23rem;
   @media all and (max-width: 1248px) {
     display: none;
   }
@@ -86,6 +85,7 @@ const HeaderServicePost = styled.div`
 const ServiceSpan = styled.span`
   font-size: 1.8rem;
   font-weight: 700;
+  margin-right: 0.5rem;
 `;
 const ServiceP = styled.p`
   display: flex;
