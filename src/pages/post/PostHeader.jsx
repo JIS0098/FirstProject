@@ -7,7 +7,7 @@ import shareImg from "../../assets/icon/share-24.svg";
 import Emoji from "../../components/commons/Emoji";
 
 function PostHeader({ toggleShare, toggleEmoji, dataEmoji }) {
-  const list = [{ img: { addEmojiImg } }, { img: { shareImg } }, { img: { shareImg } }];
+  const list = [{ img: { addEmojiImg } }, { img: { shareImg } }, { img: { shareImg } }, { img: { shareImg } }];
   return (
     <PostHead>
       <HeaderService>

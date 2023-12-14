@@ -8,7 +8,6 @@ import Card from "../../components/commons/Card";
 function PostWrap({ data, showShare, emojiAdd, setShare, toggleModal, dataEmoji }) {
   const location = useLocation();
   const baseUrl = window.location.host;
-  console.log(dataEmoji);
   const urlShare = async (text) => {
     try {
       await navigator.clipboard.writeText(text);
@@ -45,7 +44,7 @@ function PostWrap({ data, showShare, emojiAdd, setShare, toggleModal, dataEmoji 
 
       {emojiAdd ? (
         <ToggleAddEmoji>
-          {dataEmoji.map((item) => (
+          {dataEmoji.slice(0, 6).map((item) => (
             <Emoji key={item.id}>
               {item.emoji} {item.count}
             </Emoji>
