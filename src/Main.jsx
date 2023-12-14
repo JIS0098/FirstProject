@@ -13,12 +13,9 @@ function Main() {
   // false = whiteMode , true = blackMode
   function handleThema() {
     setIsThema((prev) => {
-      console.log("prev테마상태:", prev);
       return !prev;
     });
   }
-
-  console.log("테마상태:", isThema);
 
   return (
     <BrowserRouter>
