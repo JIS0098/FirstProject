@@ -1,19 +1,19 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import NameInput from "../../components/commons/NameInput";
-import CreateButton from "../../components/commons/CreateButton";
-import ProfileLayout from "./ProfileLayout";
-import RelationshipInputBox from "./RelationshipInputBox";
-import WriteInputBox from "./WriteInputBox";
-import FontSelectBox from "./FontSelectBox";
-import profileImg from "../../assets/img/profileImg.png";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import NameInput from '../../components/commons/NameInput';
+import CreateButton from '../../components/commons/CreateButton';
+import ProfileLayout from './ProfileLayout';
+import RelationshipInputBox from './RelationshipInputBox';
+import WriteInputBox from './WriteInputBox';
+import profileImg from '../../assets/img/profileImg.png';
+import { Link } from 'react-router-dom';
 
 // import WriteInput from './WriteInput';
 
 const createMessage = () => {
   const [testData] = useState({
-    font: ["Noto Sans", "Pretendard", "나눔명조", "나눔손글씨 손편지체"],
-    relationship: ["지인", "동료", "가족", "친구"],
+    font: ['Noto Sans', 'Pretendard', '나눔명조', '나눔손글씨 손편지체'],
+    relationship: ['지인', '동료', '가족', '친구'],
     profileImages: [
       profileImg,
       profileImg,
@@ -27,26 +27,23 @@ const createMessage = () => {
     ],
   });
 
-  const [isName, setIsName] = useState("");
-  const handleNameChange = (name) => {
+  const [isName, setIsName] = useState('');
+  const handleNameChange = name => {
     setIsName(name);
   };
   return (
     <MessageLayout>
       <MessageBox>
-        <NameInput
-          value={isName}
-          onChange={handleNameChange}
-          placeholder="이름을 입력해 주세요."
-        >
+        <NameInput value={isName} onChange={handleNameChange} placeholder="이름을 입력해 주세요.">
           From.
         </NameInput>
         <ProfileLayout testData={testData} />
         <RelationshipInputBox testData={testData} />
         <WriteInputBox />
-        <FontSelectBox testData={testData} />
         <CreateButtonBox>
-          <CreateButton disabled={!isName} />
+          <Link to="/post/2">
+            <CreateButton mobileWidth="100%" tabletWidth="100%" disabled={!isName} />
+          </Link>
         </CreateButtonBox>
       </MessageBox>
     </MessageLayout>
@@ -75,10 +72,11 @@ const MessageBox = styled.div`
   display: flex;
   margin-bottom: 6rem;
 `;
-export default createMessage;
 
 const CreateButtonBox = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
 `;
+
+export default createMessage;

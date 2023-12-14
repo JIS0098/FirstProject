@@ -1,22 +1,35 @@
-import ReactQuill from "react-quill";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import { useState } from 'react';
 
-function WriteInput() {
+const WriteInput = () => {
+  const [quillValue, setQuillValue] = useState('');
+
+  const formats = ['bold', 'italic', 'strike', 'color', 'background', 'link', 'font', 'size'];
+
   const modules = {
-    toolbar: {
-      container: [
-        ["image"],
-        [{ header: [1, 2, 3, 4, 5, false] }],
-        ["bold", "underline"],
-      ],
-    },
+    toolbar: [
+      ['bold', 'italic', 'strike', { color: [] }, { background: [] }, 'link'],
+      [{ font: [] }, { size: [] }],
+    ],
   };
+
+  const handleQuillChange = (content, delta, source, editor) => {
+    setQuillValue(editor.getText());
+  };
+
   return (
-    <>
+    <div>
       <ReactQuill
-        style={{ width: "100%", height: "13rem" }}
+        style={{ height: '25rem', marginBottom: '5rem' }}
+        theme="snow"
         modules={modules}
+        formats={formats}
+        value={quillValue || ''}
+        onChange={handleQuillChange}
       />
-    </>
+    </div>
   );
-}
+};
+
 export default WriteInput;
