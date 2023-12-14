@@ -1,15 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router";
 import CardSection from "./CardSection";
-import { dumyRecipients } from "../../utils/dummyData";
+import { testDataAll } from "../../api/testFeatData";
 function ListPage() {
   const navigation = useNavigate();
   const LIST_TITLE = ["인기 롤링 페이퍼 🔥", "최근에 만든 롤링 페이퍼 ⭐️"];
+  const [loading, setLoading] = useState(false);
+  const [state, setState] = useState([]);
+
+  useEffect(() => {
+    setLoading(true);
+    testDataAll()
+      .then((res) => res.results)
+      .then(setState)
+      .finally(() => setLoading(false));
+  }, []);
+  if (loading) return <div>loading...</div>;
   return (
     <Layout>
-      <CardSection title={LIST_TITLE[0]} recipients={dumyRecipients} />
-      <CardSection title={LIST_TITLE[1]} recipients={dumyRecipients} />
+      <CardSection title={LIST_TITLE[0]} recipients={state} />
+      <CardSection title={LIST_TITLE[1]} recipients={state} />
       <FloatingButton onClick={() => navigation("/post")}>나도 만들어보기</FloatingButton>
     </Layout>
   );
