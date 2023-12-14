@@ -5,7 +5,7 @@ import PostHeader from "./PostHeader";
 import PostWrap from "./PostWrap";
 import PostModal from "./PostModal";
 import ShareComplete from "./ShareComplete";
-import testData from "../../api/testFeatData";
+import { testData, testDataEmoji } from "../../api/testFeatData";
 
 function Post() {
   const [showShare, toggleShare] = useToggle(false);
@@ -13,17 +13,30 @@ function Post() {
   const [emojiAdd, toggleEmoji] = useToggle(false);
   const [share, setShare] = useState(false);
   const [data, setData] = useState([]);
+  const [dataEmoji, setDataEmoji] = useState([]);
 
   useEffect(() => {
     testData().then((res) => {
-      setData(res);
+      const result = res;
+      setData(result.results);
+    });
+    testDataEmoji().then((res) => {
+      const result = res;
+      setDataEmoji(result.results);
     });
   }, []);
 
   return (
     <PostBack>
-      <PostHeader toggleShare={toggleShare} toggleEmoji={toggleEmoji} />
-      <PostWrap data={data} showShare={showShare} emojiAdd={emojiAdd} setShare={setShare} toggleModal={toggleModal} />
+      <PostHeader toggleShare={toggleShare} toggleEmoji={toggleEmoji} dataEmoji={dataEmoji} />
+      <PostWrap
+        data={data}
+        dataEmoji={dataEmoji}
+        showShare={showShare}
+        emojiAdd={emojiAdd}
+        setShare={setShare}
+        toggleModal={toggleModal}
+      />
 
       {/* modal */}
       {showModal ? <PostModal toggleModal={toggleModal} /> : null}
@@ -41,3 +54,4 @@ const PostBack = styled.div`
 `;
 
 export default Post;
+

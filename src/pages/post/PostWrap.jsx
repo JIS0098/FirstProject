@@ -5,10 +5,9 @@ import MoreCardImg from "../../assets/icon/plus.svg";
 import Emoji from "../../components/commons/Emoji";
 import Card from "../../components/commons/Card";
 
-function PostWrap({ data, showShare, emojiAdd, setShare, toggleModal }) {
+function PostWrap({ data, showShare, emojiAdd, setShare, toggleModal, dataEmoji }) {
   const location = useLocation();
   const baseUrl = window.location.host;
-  console.log(data);
   const urlShare = async (text) => {
     try {
       await navigator.clipboard.writeText(text);
@@ -45,12 +44,11 @@ function PostWrap({ data, showShare, emojiAdd, setShare, toggleModal }) {
 
       {emojiAdd ? (
         <ToggleAddEmoji>
-          <Emoji>😀 8</Emoji>
-          <Emoji>🥶 10</Emoji>
-          <Emoji>🤢 13</Emoji>
-          <Emoji>😂 7</Emoji>
-          <Emoji>💩 21</Emoji>
-          <Emoji>☠️ 2</Emoji>
+          {dataEmoji.slice(0, 6).map((item) => (
+            <Emoji key={item.id}>
+              {item.emoji} {item.count}
+            </Emoji>
+          ))}
         </ToggleAddEmoji>
       ) : null}
       {showShare ? (
@@ -218,3 +216,4 @@ const ImgBox = styled.div`
 `;
 
 export default PostWrap;
+
