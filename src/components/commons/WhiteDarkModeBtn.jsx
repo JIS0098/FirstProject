@@ -10,12 +10,12 @@ export default function App() {
 
   return (
     <StyledContainer
-      data-isOn={isOn}
+      data-is-on={isOn}
       onClick={toggleSwitch}
       initial={false}
       animate={{ backgroundColor: isOn ? "rgba(0, 0, 0, 0.4)" : "rgba(0, 0, 0, 0.2)" }}
     >
-      <Handle data-isOn={isOn} layout transition={spring} />
+      <Handle data-is-on={isOn} layout transition={spring} />
     </StyledContainer>
   );
 }
@@ -30,7 +30,7 @@ const StyledContainer = styled(motion.div)`
   padding: 4px;
   cursor: pointer;
 
-  &[data-isOn="true"] {
+  &[data-is-on="true"] {
     justify-content: flex-end;
   }
 `;

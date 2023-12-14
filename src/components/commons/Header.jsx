@@ -2,9 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import Icon from "../../assets/img/Icon.png";
 import WhiteDarkModeBtn from "./WhiteDarkModeBtn";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function Header() {
+  const location = useLocation();
+  const isPage = location.pathname === "/";
+  console.log(isPage);
+
   return (
     <StyledHeaderContainer>
       <StyledNavContainer>
@@ -16,9 +20,11 @@ function Header() {
         </Link>
         <StyledBtnContainer>
           <WhiteDarkModeBtn />
-          <Link to="/post">
-            <StyledAddButton>롤링 페이퍼 만들기</StyledAddButton>
-          </Link>
+          {isPage && (
+            <Link to="/post">
+              <StyledAddButton>롤링 페이퍼 만들기</StyledAddButton>
+            </Link>
+          )}
         </StyledBtnContainer>
       </StyledNavContainer>
     </StyledHeaderContainer>
