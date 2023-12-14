@@ -10,7 +10,7 @@ const NameInput = ({ children, onChange, placeholder }) => {
       <p>{children}</p>
       <StyledInput
         type="text"
-        value={isName !== null ? isName : ""}
+        value={isName || ""}
         placeholder={placeholder}
         onChange={(e) => {
           onChange(e.target.value);
