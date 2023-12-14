@@ -1,16 +1,21 @@
 import React from "react";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import AddPostPreview from "../assets/img/AddPostPreview.png";
 import PostPreview from "../assets/img/PostPreview.png";
 import EmojiPreview from "../assets/img/EmojiPreview.png";
 import { Link } from "react-router-dom";
 import { Button } from "../components/commons/Button";
+import { motion } from "framer-motion";
 
 function Landing() {
   return (
     <>
       <StyledMainContainer>
-        <StyledLandingSectionFirst>
+        <StyledLandingSectionFirst
+          initial={{ x: -30, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 1.5 }}
+        >
           <StyledPageIntroContainer>
             <StyledPagePointContainer>
               <StyledPagePointText>Point. 01</StyledPagePointText>
@@ -29,7 +34,11 @@ function Landing() {
           </StyledCardContainer>
         </StyledLandingSectionFirst>
 
-        <StyledLandingSectionSecond>
+        <StyledLandingSectionSecond
+          initial={{ x: 30, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 1.5 }}
+        >
           <StyledCardContainer>
             <StyledEmojiCard src={EmojiPreview} alt="EmojiPreview" />
           </StyledCardContainer>
@@ -57,32 +66,10 @@ function Landing() {
   );
 }
 
-const fadeInLeft = keyframes`
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-`;
-
-const fadeInRight = keyframes`
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-`;
-
 const StyledMainContainer = styled.main`
   padding: 0 24px;
 `;
-const StyledLandingSection = styled.section`
+const StyledLandingSection = styled(motion.section)`
   display: flex;
   background-color: #f6f8ff;
   max-width: 1200px;
@@ -104,7 +91,6 @@ const StyledLandingSection = styled.section`
 const StyledLandingSectionFirst = styled(StyledLandingSection)`
   justify-content: space-around;
   margin-top: 6rem;
-  animation: ${fadeInLeft} 1s ease-in-out forwards;
 
   @media screen and (max-width: 1248px) {
     justify-content: center;
@@ -112,7 +98,6 @@ const StyledLandingSectionFirst = styled(StyledLandingSection)`
 `;
 const StyledLandingSectionSecond = styled(StyledLandingSection)`
   justify-content: space-evenly;
-  animation: ${fadeInRight} 1s ease-in-out forwards;
 
   @media screen and (max-width: 1248px) {
     justify-content: center;
