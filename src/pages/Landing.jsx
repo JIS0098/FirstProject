@@ -54,13 +54,13 @@ function Landing() {
             <StyledPagSideIntroText>롤링 페이퍼에 이모지를 추가할 수 있어요.</StyledPagSideIntroText>
           </StyledPageIntroContainer>
         </StyledLandingSectionSecond>
-        <Link to="/list">
-          <StyledGoToListButtonContainer>
+        <StyledGoToListButtonContainer>
+          <Link to="/list">
             <Button width="28rem" tabletWidth="100%">
               구경해보기
             </Button>
-          </StyledGoToListButtonContainer>
-        </Link>
+          </Link>
+        </StyledGoToListButtonContainer>
       </StyledMainContainer>
     </>
   );
@@ -156,14 +156,18 @@ const StyledPostCard = styled.img`
 const StyledEmojiCard = styled.img`
   width: 47rem;
 `;
-
 const StyledGoToListButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-bottom: 6rem;
   min-width: 360px;
-`;
 
+  & a {
+    @media screen and (max-width: 1248px) {
+      width: 100%;
+    }
+  }
+`;
 const StyledBr = styled.br`
   display: block;
 
