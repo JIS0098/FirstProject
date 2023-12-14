@@ -4,7 +4,7 @@ import Post from "../src/pages/post";
 import ListPage from "./pages/list";
 import Landing from "./pages/Landing";
 import Header from "./components/commons/Header";
-import CreateMessage from "./pages/createMessage/Message";
+import CreateMessage from "./pages/createMessage/CreateMessage";
 import CreatePost from "./pages/createPost/CreatePost";
 import NotFound from "./pages/not_found/NotFound";
 

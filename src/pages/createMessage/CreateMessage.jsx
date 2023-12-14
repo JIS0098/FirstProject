@@ -10,7 +10,7 @@ import profileImg from "../../assets/img/profileImg.png";
 
 // import WriteInput from './WriteInput';
 
-const Message = () => {
+const createMessage = () => {
   const [testData] = useState({
     font: ["Noto Sans", "Pretendard", "나눔명조", "나눔손글씨 손편지체"],
     relationship: ["지인", "동료", "가족", "친구"],
@@ -45,7 +45,9 @@ const Message = () => {
         <RelationshipInputBox testData={testData} />
         <WriteInputBox />
         <FontSelectBox testData={testData} />
-        <CreateButton disabled={!isName} />
+        <CreateButtonBox>
+          <CreateButton disabled={!isName} />
+        </CreateButtonBox>
       </MessageBox>
     </MessageLayout>
   );
@@ -73,5 +75,10 @@ const MessageBox = styled.div`
   display: flex;
   margin-bottom: 6rem;
 `;
+export default createMessage;
 
-export default Message;
+const CreateButtonBox = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`;
