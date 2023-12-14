@@ -48,3 +48,4 @@ const ProfileImg = styled.img`
   }
 `;
 export default ProfileImgs;
+
