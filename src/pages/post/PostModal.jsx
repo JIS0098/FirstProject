@@ -59,7 +59,7 @@ const ModalText = styled.div`
   height: 24rem;
   color: #5a5a5a;
   font-size: 1.8rem;
-  overflow: scroll;
+  overflow: auto;
 `;
 const ModalClose = styled.div`
   width: 12rem;

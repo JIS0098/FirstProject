@@ -10,21 +10,11 @@ import { Link } from 'react-router-dom';
 
 // import WriteInput from './WriteInput';
 
-const createMessage = () => {
+const CreateMessage = () => {
   const [testData] = useState({
     font: ['Noto Sans', 'Pretendard', '나눔명조', '나눔손글씨 손편지체'],
     relationship: ['지인', '동료', '가족', '친구'],
-    profileImages: [
-      profileImg,
-      profileImg,
-      profileImg,
-      profileImg,
-      profileImg,
-      profileImg,
-      profileImg,
-      profileImg,
-      profileImg,
-    ],
+    profileImages: [profileImg, profileImg, profileImg, profileImg],
   });
 
   const [isName, setIsName] = useState('');
@@ -55,13 +45,6 @@ const MessageLayout = styled.form`
   justify-content: center;
   align-items: center;
   padding-top: 4.7rem;
-
-  @media (max-width: 1248px) {
-    padding: 5rem 2.4rem 2.4rem;
-  }
-  @media (max-width: 768px) {
-    padding: 5rem 2rem 2rem;
-  }
 `;
 
 const MessageBox = styled.div`
@@ -71,6 +54,10 @@ const MessageBox = styled.div`
   color: var(--gray-900, #181818);
   display: flex;
   margin-bottom: 6rem;
+
+  @media screen and (max-width: 768px) {
+    max-width: 32rem;
+  }
 `;
 
 const CreateButtonBox = styled.div`
@@ -79,4 +66,4 @@ const CreateButtonBox = styled.div`
   justify-content: center;
 `;
 
-export default createMessage;
+export default CreateMessage;

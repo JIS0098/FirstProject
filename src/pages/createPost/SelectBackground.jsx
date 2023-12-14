@@ -1,11 +1,11 @@
 import { useState } from "react";
 import styled from "styled-components";
+import AddImageButton from "./AddImageButton";
 import color from "../../styles/color";
 import selectedColorIcon from "../../assets/icon/color-selected.png";
 import backgroundImage1 from "../../assets/img/background-img-1.JPG";
 import backgroundImage2 from "../../assets/img/background-img-2.JPG";
 import backgroundImage3 from "../../assets/img/background-img-3.JPG";
-import backgroundImage4 from "../../assets/img/background-img-4.JPG";
 
 export const SelectColor = () => {
   const [selectedColor, setSelectedColor] = useState(COLOR.orange);
@@ -38,7 +38,6 @@ const IMAGE = {
   1: `${backgroundImage1}`,
   2: `${backgroundImage2}`,
   3: `${backgroundImage3}`,
-  4: `${backgroundImage4}`,
 };
 
 const ColorPalette = ({ onSelectColor, selectedColor }) => {
@@ -64,6 +63,7 @@ const ImagePalette = ({ onSelectImage, selectedImage }) => {
 
   return (
     <PaletteWrapper>
+      <AddImageButton />
       {Object.keys(IMAGE).map((key) => (
         <ImageButton key={key} onClick={() => handleImageClick(IMAGE[key])}>
           <Image src={IMAGE[key]} alt={`이미지 ${key}`} selected={selectedImage === IMAGE[key]} />
@@ -76,7 +76,7 @@ const ImagePalette = ({ onSelectImage, selectedImage }) => {
 
 const PaletteWrapper = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
   flex-grow: 0;
   gap: 1rem;

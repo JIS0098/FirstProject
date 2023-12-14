@@ -2,22 +2,23 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import color from "../../styles/color";
 
-const NameInput = ({ children, value, onChange, placeholder }) => {
-  const [isName, setIsName] = useState(true);
+const NameInput = ({ children, onChange, placeholder }) => {
+  const [isName, setIsName] = useState(null);
+
   return (
     <Create>
       <p>{children}</p>
       <StyledInput
         type="text"
-        value={value}
+        value={isName || ""}
         placeholder={placeholder}
         onChange={(e) => {
           onChange(e.target.value);
           setIsName(e.target.value);
         }}
-        onBlur={() => setIsName(value)}
+        onBlur={(e) => setIsName(e.target.value)}
       />
-      {!isName && <ErrorText>값을 입력해 주세요.</ErrorText>}
+      {isName !== null && !isName && <ErrorText>값을 입력해 주세요.</ErrorText>}
     </Create>
   );
 };

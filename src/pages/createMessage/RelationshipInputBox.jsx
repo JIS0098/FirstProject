@@ -2,12 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import arrow_down from '../../assets/icon/arrow_down.svg';
 import useToggle from '../../hooks/useToggle';
+import { StyledTitle } from './CommonStyled';
 
 const RelationshipInputBox = ({ testData }) => {
   const [relationship, relationshipToggle] = useToggle();
   return (
     <StyledRelationshipInputBox>
-      <h2>상대와의 관계</h2>
+      <StyledTitle>상대와의 관계</StyledTitle>
       <div>
         지인
         <img src={arrow_down} onClick={relationshipToggle} />
@@ -24,14 +25,6 @@ const RelationshipInputBox = ({ testData }) => {
 };
 
 const StyledRelationshipInputBox = styled.div`
-  & h2 {
-    margin-bottom: 1.2rem;
-    font-size: 2.4rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 3.66rem;
-    letter-spacing: -0.024rem;
-  }
   & div {
     width: 32rem;
     position: relative;

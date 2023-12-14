@@ -21,7 +21,7 @@ const WriteInput = () => {
   return (
     <div>
       <ReactQuill
-        style={{ height: '25rem', marginBottom: '5rem' }}
+        style={{ height: '17.8rem', marginBottom: '5rem' }}
         theme="snow"
         modules={modules}
         formats={formats}

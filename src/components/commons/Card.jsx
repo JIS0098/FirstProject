@@ -1,13 +1,18 @@
 import React from "react";
 import styled from "styled-components";
+import { setDayYMD } from "../../utils/setDayYMD";
+import ReactMarkdown from "react-markdown";
 
 function Card({ name, profileImg, description, tag, ago }) {
+  const htmlContent = { __html: description };
+  const day = setDayYMD(ago);
+
   return (
     <CardBox>
       <CardWrap>
         <From>
           <ImgBox>
-            <img src={profileImg} />
+            <StyledImg src={profileImg} />
           </ImgBox>
           <FromBox>
             <FromP>
@@ -16,13 +21,21 @@ function Card({ name, profileImg, description, tag, ago }) {
             <FromTag>{tag}</FromTag>
           </FromBox>
         </From>
-        <CardDescription>{description}</CardDescription>
-        <Ago>{ago}</Ago>
+        {/* <CardDescription>
+          <ReactMarkdown>{description}</ReactMarkdown>
+        </CardDescription> */}
+        <CardDescription dangerouslySetInnerHTML={htmlContent} />
+        <Ago>{day}</Ago>
       </CardWrap>
     </CardBox>
   );
 }
 
+const StyledImg = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
 const CardBox = styled.div`
   width: 38.4rem;
   height: 28rem;
@@ -55,11 +68,11 @@ const CardDescription = styled.div`
   height: 10.6rem;
   font-size: 1.8rem;
   font-weight: 400;
-  display: -webkit-box;
+  /* display: -webkit-box; */
   -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
-  overflow: hidden;
   text-overflow: ellipsis;
+  overflow: hidden;
   white-space: normal;
 `;
 
@@ -72,7 +85,7 @@ const From = styled.div`
   border-bottom: 1px solid #eee;
 `;
 const FromBox = styled.div`
-  width: 100%;
+  width: 80%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -101,9 +114,9 @@ const FromSpan = styled.span`
 const ImgBox = styled.div`
   width: 5.6rem;
   height: 5.6rem;
-  border-radius: 100px;
+  border-radius: 50%;
   background-color: #555;
-  padding: 1.6rem;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;

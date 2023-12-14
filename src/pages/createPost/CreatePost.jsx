@@ -11,18 +11,18 @@ const CreatePost = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [isName, setIsName] = useState("");
 
-  const handleToggle = () => {
-    setIsChecked((prev) => !prev);
-  };
-
   const handleNameChange = (name) => {
     setIsName(name);
+  };
+
+  const handleToggle = () => {
+    setIsChecked((prev) => !prev);
   };
 
   return (
     <Wrapper>
       <Container>
-        <NameInput value={isName} onChange={handleNameChange} placeholder={"받는 사람을 입력해 주세요."}>
+        <NameInput onChange={handleNameChange} placeholder={"받는 사람을 입력해 주세요."}>
           To.
         </NameInput>
         <SelectBackground>
@@ -50,13 +50,10 @@ const Container = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 5rem;
-
-  @media screen and (max-width: 1248px) {
-    max-width: 720px;
-  }
+  max-width: 72rem;
 
   @media screen and (max-width: 768px) {
-    max-width: 320px;
+    max-width: 32rem;
   }
 `;
 
