@@ -1,25 +1,28 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import NameInput from '../../components/commons/NameInput';
-import CreateButton from '../../components/commons/CreateButton';
-import ProfileLayout from './ProfileLayout';
-import RelationshipInputBox from './RelationshipInputBox';
-import WriteInputBox from './WYSIWYG';
-import profileImg from '../../assets/img/profileImg.png';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import NameInput from "../../components/commons/NameInput";
+import CreateButton from "../../components/commons/CreateButton";
+import ProfileLayout from "./ProfileLayout";
+import RelationshipInputBox from "./RelationshipInputBox";
+import WriteInputBox from "./WYSIWYG";
+import profileImg1 from "../../assets/img/profileImg1.png";
+import profileImg2 from "../../assets/img/profileImg2.png";
+import { Link } from "react-router-dom";
 
 // import WriteInput from './WriteInput';
 
 const CreateMessage = () => {
-  const [testData] = useState({
-    relationship: ['지인', '동료', '가족', '친구'],
-    profileImages: [profileImg, profileImg, profileImg, profileImg],
+  const [testData, setTestData] = useState({
+    relationship: ["지인", "동료", "가족", "친구"],
+    profileImages: [profileImg1, profileImg2],
   });
 
-  const [isName, setIsName] = useState('');
-  const handleNameChange = name => {
+  const [isName, setIsName] = useState("");
+
+  const handleNameChange = (name) => {
     setIsName(name);
   };
+
   return (
     <MessageLayout>
       <MessageBox>
