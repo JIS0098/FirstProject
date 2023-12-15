@@ -6,8 +6,8 @@ export function Button({ children, width, tabletWidth, mobileWidth, disabled }) 
   return (
     <StyledButton
       width={width}
-      tabletwidth={tabletWidth}
-      mobilewidth={mobileWidth}
+      $tabletWidth={tabletWidth}
+      $mobileWidth={mobileWidth}
       disabled={disabled}
       whileHover={!disabled && { scale: 1.05 }}
       whileTap={!disabled && { scale: 1 }}
@@ -39,10 +39,10 @@ const StyledButton = styled(motion.button)`
   }
 
   @media screen and (max-width: 1248px) {
-    width: ${({ tabletWidth }) => tabletWidth};
+    width: ${({ $tabletWidth }) => $tabletWidth};
   }
 
   @media screen and (max-width: 768px) {
-    width: ${({ mobileWidth }) => mobileWidth};
+    width: ${({ $mobileWidth }) => $mobileWidth};
   }
 `;

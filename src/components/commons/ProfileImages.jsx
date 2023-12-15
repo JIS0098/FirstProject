@@ -45,3 +45,4 @@ const ProfileDiv = styled(Profile)`
 `;
 
 export default ProfileImgs;
+

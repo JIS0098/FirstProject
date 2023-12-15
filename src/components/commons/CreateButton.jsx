@@ -1,5 +1,5 @@
-import { Button } from "./Button";
-const CreateButtton = ({ disabled }) => {
+import { Button } from './Button';
+const CreateButton = ({ disabled }) => {
   return (
     <Button width="72rem" mobileWidth="32rem" disabled={disabled}>
       생성하기
@@ -7,4 +7,4 @@ const CreateButtton = ({ disabled }) => {
   );
 };
 
-export default CreateButtton;
+export default CreateButton;

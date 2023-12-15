@@ -139,3 +139,4 @@ const Line = styled.div`
 `;
 
 export default PostHeader;
+
