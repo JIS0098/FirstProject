@@ -7,7 +7,6 @@ import PostModal from "./PostModal";
 import ShareComplete from "./ShareComplete";
 import { testData, testDataEmoji, testDataAll } from "../../api/testFeatData";
 import { useParams } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
 
 function Post() {
   const [showShare, toggleShare] = useToggle(false);
@@ -57,12 +56,11 @@ function Post() {
         setShare={setShare}
         toggleModal={toggleModal}
         setModalClick={setModalClick}
+        modalClick={modalClick}
       />
 
       {/* modal */}
-      <AnimatePresence>
-        {showModal ? <PostModal toggleModal={toggleModal} modalFind={modalFind} /> : null}
-      </AnimatePresence>
+      {showModal ? <PostModal toggleModal={toggleModal} modalFind={modalFind} /> : null}
 
       {/* URL이 복사되었습니다. */}
       {share ? <ShareComplete /> : null}

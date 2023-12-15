@@ -2,19 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import MoreCardImg from "../../assets/icon/plus.svg";
 import { setDayYMD } from "../../utils/setDayYMD";
-import { motion } from "framer-motion";
 
 function PostModal({ toggleModal, modalFind }) {
   const day = setDayYMD(modalFind.createdAt);
-
   return (
     <Modal>
-      <ModalInner
-        initial={{ opacity: 0, x: 100, scale: 0.8 }}
-        animate={{ opacity: 1, x: 0, scale: 1 }}
-        transition={{ duration: 0.5 }}
-        exit={{ opacity: 0, x: -100, scale: 0.8 }}
-      >
+      <ModalInner>
         <From>
           <FromInner>
             <ImgBox>
@@ -42,9 +35,6 @@ const FromInner = styled.div`
   gap: 1.5rem;
 `;
 const Modal = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 100vw;
   height: 100%;
   position: fixed;
@@ -53,10 +43,14 @@ const Modal = styled.div`
   z-index: 5;
   margin: 0 auto;
 `;
-const ModalInner = styled(motion.div)`
+const ModalInner = styled.div`
   max-width: 60rem;
   width: calc(100% - 48px);
   height: 47.6rem;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   border-radius: 16px;
   background: #fff;
   box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.08);
