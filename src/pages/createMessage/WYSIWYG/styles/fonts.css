@@ -1,0 +1,18 @@
+@font-face {
+  font-family: 'Maplestory';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/MaplestoryOTFBold.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: '치킨체';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.0/BMHANNAPro.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: '나눔고딕';
+  src: url('https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic.css') format('woff');
+}

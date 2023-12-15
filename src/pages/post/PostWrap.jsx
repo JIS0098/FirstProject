@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import MoreCardImg from "../../assets/icon/plus.svg";
 import Emoji from "../../components/commons/Emoji";
 import Card from "../../components/commons/Card";
@@ -19,14 +19,19 @@ function PostWrap({ data, showShare, emojiAdd, setShare, toggleModal, dataEmoji 
       console.log(err);
     }
   };
+
+  const params = useParams();
+
   return (
     <PostInner>
       <PostDeleteButton>삭제하기</PostDeleteButton>
       <EditDeleteButton>편집하기</EditDeleteButton>
       <PostCard>
-        <ImgBox>
-          <img src={MoreCardImg} />
-        </ImgBox>
+        <Link to={`/post/${params.id}/message`}>
+          <ImgBox>
+            <img src={MoreCardImg} />
+          </ImgBox>
+        </Link>
       </PostCard>
       {/* 
       <div onClick={toggleModal}> */}

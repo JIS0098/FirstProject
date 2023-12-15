@@ -1,13 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import useToggle from "../../hooks/useToggle";
 import ProfileImgs from "../../components/commons/ProfileImages";
 import downImg from "../../assets/icon/arrow_down.svg";
 import addEmojiImg from "../../assets/icon/add-24.svg";
 import shareImg from "../../assets/icon/share-24.svg";
 import Emoji from "../../components/commons/Emoji";
+import EmojiPicker from "emoji-picker-react";
+import { emojiPost } from "../../api/testFeatData";
 
-function PostHeader({ toggleShare, toggleEmoji, dataEmoji }) {
-  const list = [{ img: { addEmojiImg } }, { img: { shareImg } }, { img: { shareImg } }, { img: { shareImg } }];
+function PostHeader({ data, toggleShare, toggleEmoji, dataEmoji }) {
+  const [emojiPick, toggleEmojiPick] = useToggle(false);
+  const [selectEmoji, setSelectEmoji] = useState({});
+
+  const handleEmojiSelect = (e) => {
+    setSelectEmoji({ emoji: e.emoji, type: "increase" });
+    // console.log(e);
+  };
+  // console.log(selectEmoji);
+  // console.log(data);
+  // useEffect(() => {
+  //   const emojiUpdate = async () => {
+  //     try {
+  //       const result = await emojiPost(selectEmoji);
+  //       console.log(result);
+  //     } catch (e) {
+  //       console.log(e);
+  //     }
+  //   };
+  //   emojiUpdate();
+  // }, [selectEmoji]);
+
   return (
     <PostHead>
       <HeaderService>
@@ -15,9 +38,9 @@ function PostHeader({ toggleShare, toggleEmoji, dataEmoji }) {
 
         <HeaderServiceBox>
           <HeaderServicePost>
-            <ProfileImgs list={list} />
+            <ProfileImgs list={data} count={data.length} />
             <ServiceP>
-              <ServiceSpan>23</ServiceSpan> 명이 작성했어요!
+              <ServiceSpan>{data.length}</ServiceSpan> 명이 작성했어요!
             </ServiceP>
           </HeaderServicePost>
 
@@ -30,11 +53,18 @@ function PostHeader({ toggleShare, toggleEmoji, dataEmoji }) {
 
             <EmojiButton src={downImg} onClick={toggleEmoji} />
 
-            <ButtonWrap>
+            <ButtonWrap onClick={toggleEmojiPick}>
               <img src={addEmojiImg} />
               <ButtonWrapP>추가</ButtonWrapP>
             </ButtonWrap>
-            <Line></Line>
+
+            {emojiPick ? (
+              <EmojiPickerWrap>
+                <EmojiPicker onEmojiClick={handleEmojiSelect} />
+              </EmojiPickerWrap>
+            ) : null}
+
+            <Line />
             <ButtonWrap onClick={toggleShare}>
               <img src={shareImg} />
             </ButtonWrap>
@@ -44,6 +74,11 @@ function PostHeader({ toggleShare, toggleEmoji, dataEmoji }) {
     </PostHead>
   );
 }
+const EmojiPickerWrap = styled.div`
+  position: absolute;
+  top: 6rem;
+  z-index: 1;
+`;
 const PostHead = styled.div`
   width: 100%;
   background-color: #fff;
@@ -78,7 +113,7 @@ const HeaderServicePost = styled.div`
   gap: 1.1rem;
   font-size: 1.8rem;
   color: #181818;
-  width: 21rem;
+  width: 23rem;
   @media all and (max-width: 1248px) {
     display: none;
   }
@@ -86,6 +121,7 @@ const HeaderServicePost = styled.div`
 const ServiceSpan = styled.span`
   font-size: 1.8rem;
   font-weight: 700;
+  margin-right: 0.5rem;
 `;
 const ServiceP = styled.p`
   display: flex;
@@ -139,4 +175,3 @@ const Line = styled.div`
 `;
 
 export default PostHeader;
-
