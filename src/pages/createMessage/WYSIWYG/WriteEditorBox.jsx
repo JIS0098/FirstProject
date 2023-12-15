@@ -5,7 +5,7 @@ import "./styles/fonts.css";
 import "./styles/fontSize.css";
 import WriteEditor from "../WYSIWYG/WriteEditor";
 
-const WriteEditorBox = () => {
+const WriteEditorBox = ({ data, setData }) => {
   const [value, setValue] = useState("");
   const Font = Quill.import("formats/font");
   const Size = Quill.import("formats/size");
@@ -22,9 +22,8 @@ const WriteEditorBox = () => {
       [{ font: Font.whitelist }, { size: Size.whitelist }],
     ],
   };
-  const handleChange = (content) => {
-    setValue(content);
-    console.log(value);
+  const handleContentChange = (content) => {
+    setData({ ...data, content: content });
   };
 
   return (
@@ -34,8 +33,8 @@ const WriteEditorBox = () => {
         theme="snow"
         modules={modules}
         formats={formats}
-        value={value || ""}
-        onChange={handleChange}
+        value={data.content || ""}
+        onChange={handleContentChange}
       />
     </div>
   );

@@ -1,14 +1,15 @@
-import styled from 'styled-components';
-import ReactQuill from 'react-quill';
-import color from '../../../styles/color';
-import 'react-quill/dist/quill.snow.css';
-import './styles/fonts.css';
-import './styles/fontSize.css';
+import styled from "styled-components";
+import ReactQuill from "react-quill";
+import color from "../../../styles/color";
+import "react-quill/dist/quill.snow.css";
+import "./styles/fonts.css";
+import "./styles/fontSize.css";
 
 const WriteEditor = styled(ReactQuill)`
   .ql-editor p {
     font-size: 1.6rem;
   }
+
   .ql-toolbar {
     border-top-right-radius: 0.8rem;
     border-top-left-radius: 0.8rem;
@@ -18,6 +19,7 @@ const WriteEditor = styled(ReactQuill)`
   .ql-container {
     border-bottom-right-radius: 0.8rem;
     border-bottom-left-radius: 0.8rem;
+    font-size: 1.6rem;
   }
   .ql-formats:nth-child(3) {
     width: 25rem;
@@ -54,33 +56,23 @@ const WriteEditor = styled(ReactQuill)`
     }
   }
 
-  .ql-picker.ql-font .ql-picker-label[data-value='Maplestory']::before,
-  .ql-picker.ql-font .ql-picker-item[data-value='Maplestory']::before {
-    font-family: 'Maplestory', cursive;
-    content: 'Maplestory' !important;
+  .ql-picker.ql-font .ql-picker-label[data-value="Maplestory"]::before,
+  .ql-picker.ql-font .ql-picker-item[data-value="Maplestory"]::before {
+    font-family: "Maplestory", cursive;
+    content: "Maplestory" !important;
   }
 
-  .ql-picker.ql-font .ql-picker-label[data-value='치킨체']::before,
-  .ql-picker.ql-font .ql-picker-item[data-value='치킨체']::before {
-    font-family: '치킨체', cursive;
-    content: '치킨체' !important;
-  }
-
-  .ql-picker.ql-font .ql-picker-label[data-value='나눔고딕']::before,
-  .ql-picker.ql-font .ql-picker-item[data-value='나눔고딕']::before {
-    font-family: '나눔고딕', cursive;
-    content: '나눔고딕' !important;
+  .ql-picker.ql-font .ql-picker-label[data-value="치킨체"]::before,
+  .ql-picker.ql-font .ql-picker-item[data-value="치킨체"]::before {
+    font-family: "치킨체", cursive;
+    content: "치킨체" !important;
   }
 
   .ql-font-Maplestory {
-    font-family: 'Maplestory';
+    font-family: "Maplestory";
   }
   .ql-font-치킨체 {
-    font-family: '치킨체';
-  }
-  .ql-font-나눔고딕 {
-    font-family: '나눔고딕';
+    font-family: "치킨체";
   }
 `;
-
 export default WriteEditor;

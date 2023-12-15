@@ -5,33 +5,34 @@ import CreateButton from "../../components/commons/CreateButton";
 import ProfileLayout from "./ProfileLayout";
 import RelationshipInputBox from "./RelationshipInputBox";
 import WriteInputBox from "./WYSIWYG";
-import profileImg1 from "../../assets/img/profileImg1.png";
-import profileImg2 from "../../assets/img/profileImg2.png";
 import { Link } from "react-router-dom";
 
 // import WriteInput from './WriteInput';
 
 const CreateMessage = () => {
-  const [testData, setTestData] = useState({
-    relationship: ["지인", "동료", "가족", "친구"],
-    profileImages: [profileImg1, profileImg2],
-  });
-
   const [isName, setIsName] = useState("");
-
+  const [data, setData] = useState({
+    team: "",
+    recipientId: null,
+    sender: "",
+    profileImageURL: null,
+    relationship: "",
+    content: "",
+    font: "",
+  });
   const handleNameChange = (name) => {
     setIsName(name);
   };
-
+  console.log(data);
   return (
     <MessageLayout>
       <MessageBox>
         <NameInput value={isName} onChange={handleNameChange} placeholder="이름을 입력해 주세요.">
           From.
         </NameInput>
-        <ProfileLayout testData={testData} />
-        <RelationshipInputBox testData={testData} />
-        <WriteInputBox />
+        <ProfileLayout data={data} setData={setData} />
+        <RelationshipInputBox data={data} setData={setData} />
+        <WriteInputBox data={data} setData={setData} />
         <CreateButtonBox>
           <Link to="/post/2">
             <CreateButton mobileWidth="100%" tabletWidth="100%" disabled={!isName} />

@@ -1,32 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { StyledTitle } from "./CommonStyled";
 import person from "../../assets/icon/person.svg";
 import color from "../../styles/color";
+import profileImg1 from "../../assets/img/profileImg1.png";
+import profileImg2 from "../../assets/img/profileImg2.png";
 
-const ProfileLayout = ({ testData }) => {
+const ProfileLayout = ({ data, setData }) => {
   const [profileImage, setProfileImage] = useState();
+  const profileImageList = [profileImg1, profileImg2];
+
+  const handleProfileImageChange = (item) => {
+    setProfileImage(item);
+    setData({ ...data, profileImageURL: profileImage });
+  };
+
+  console.log("이미지데이터 :", data.profileImageURL);
+  console.log("전체데이터 :", data);
 
   return (
     <StyledProfileLayout>
       <StyledTitle>프로필 이미지</StyledTitle>
       <StyledProfileImgBox>
         <StyledPreviewImgBox>
-          {profileImage ? (
-            <StyledImg>
-              <img src={profileImage} />
-            </StyledImg>
-          ) : (
-            <StyledNoImg>
-              <img src={person} />
-            </StyledNoImg>
-          )}
+          {profileImage ? <StyledImg src={profileImage} alt="프로필 이미지" /> : <StyledNoImg src={person} />}
         </StyledPreviewImgBox>
         <StyledImgSelectBox>
           <p>프로필 이미지를 선택해주세요!</p>
           <StyledImgList>
-            {testData.profileImages.map((item) => (
-              <img key={item} src={item} onClick={() => setProfileImage(item)} />
+            {profileImageList.map((item) => (
+              <img key={item} src={item} onClick={() => handleProfileImageChange(item)} />
             ))}
           </StyledImgList>
         </StyledImgSelectBox>
@@ -52,9 +55,13 @@ const StyledPreviewImgBox = styled.div`
   background-color: ${color.gray[300]};
 `;
 
-const StyledImg = styled.div``;
+const StyledImg = styled.img`
+  width: 8rem;
+  width: 8rem;
+  cursor: pointer;
+`;
 
-const StyledNoImg = styled.div``;
+const StyledNoImg = styled.img``;
 
 const StyledImgSelectBox = styled.div`
   & p {
