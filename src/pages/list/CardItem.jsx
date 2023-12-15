@@ -30,7 +30,7 @@ const Container = styled.div`
   flex: 0 0 auto;
   border-radius: 1.6rem;
   padding: 3rem 2.4rem 2rem;
-  background: ${(props) => (props.$bgUrl ? `url(${props.$bgUrl})` : props.$bgColor)};
+  background: ${(props) => (props.$bgUrl ? `url(${props.$bgUrl})` : props.theme.backgroundColor[`${props.$bgColor}`])};
   background-repeat: no-repeat;
   background-size: cover;
   border: 0.1rem solid rgba(0, 0, 0, 0.1);
@@ -43,9 +43,10 @@ const Wrapper = styled.div`
   align-items: flex-start;
   justify-content: space-between;
   height: 100%;
+  min-height: 15rem;
   width: 100%;
-  background: ${(props) => !props.$bgUrl && props.$bgColor};
-  gap: 4.3rem;
+  background: ${(props) => !props.$bgUrl && props.theme.backgroundColor[`${props.$bgColor}`]};
+  /* gap: 4.3rem; */
 `;
 
 const TopReactions = styled.div`
