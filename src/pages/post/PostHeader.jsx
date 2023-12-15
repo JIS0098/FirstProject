@@ -17,7 +17,8 @@ function PostHeader({ data, toggleShare, toggleEmoji, dataEmoji }) {
     setSelectEmoji({ emoji: e.emoji, type: "increase" });
     // console.log(e);
   };
-  console.log(selectEmoji);
+  // console.log(selectEmoji);
+  // console.log(data);
   // useEffect(() => {
   //   const emojiUpdate = async () => {
   //     try {
@@ -37,7 +38,7 @@ function PostHeader({ data, toggleShare, toggleEmoji, dataEmoji }) {
 
         <HeaderServiceBox>
           <HeaderServicePost>
-            <ProfileImgs list={data} />
+            <ProfileImgs list={data} count={data.length} />
             <ServiceP>
               <ServiceSpan>{data.length}</ServiceSpan> 명이 작성했어요!
             </ServiceP>
