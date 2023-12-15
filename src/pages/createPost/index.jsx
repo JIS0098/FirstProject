@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import color from "../../styles/color";
 import NameInput from "../../components/commons/NameInput";
@@ -7,17 +7,51 @@ import ToggleButton from "./components/ToggleButton";
 import SelectColor from "./components/SelectBackground/SelectColor";
 import SelectImage from "./components/SelectBackground/SelectImage";
 import CreateButton from "../../components/commons/CreateButton";
+import { tPostData } from "../../api/testPostData";
 
 const CreatePost = () => {
-  const [isChecked, setIsChecked] = useState(false);
   const [isName, setIsName] = useState("");
+  const [selectedImage, setSelectedImage] = useState("");
+  const [selectedColor, setSelectedColor] = useState("");
+  const [isChecked, setIsChecked] = useState(false);
+  const navigate = useNavigate();
 
   const handleNameChange = (name) => {
     setIsName(name);
   };
 
+  const handleImageSelect = (image) => {
+    setSelectedImage(image);
+  };
+
+  const handleColorSelect = (color) => {
+    setSelectedColor(color);
+  };
+
   const handleToggle = () => {
     setIsChecked((prev) => !prev);
+  };
+
+  const handleCreateButtonClick = async () => {
+    const newData = {
+      name: isName,
+      backgroundColor: selectedColor || "beige",
+      backgroundImageURL: selectedImage
+        ? `https://gjbkkhzzbcjprpxlhdlu.supabase.co/storage/v1/object/public/background_images/${selectedImage}`
+        : null,
+      createdAt: new Date().toISOString(),
+      messageCount: 0,
+      recentMessages: [],
+      reactionCount: 0,
+      topReactions: [],
+    };
+
+    try {
+      const resData = await tPostData(newData);
+      navigate(`/post/${resData?.id}`);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -31,10 +65,12 @@ const CreatePost = () => {
           <span>컬러를 선택하거나, 이미지를 선택할 수 있습니다.</span>
         </SelectBackground>
         <ToggleButton isChecked={isChecked} onToggle={handleToggle} />
-        {isChecked ? <SelectImage /> : <SelectColor />}
-        <Link to="/list">
-          <CreateButton disabled={!isName} />
-        </Link>
+        {isChecked ? (
+          <SelectImage onImageSelect={handleImageSelect} />
+        ) : (
+          <SelectColor onColorSelect={handleColorSelect} />
+        )}
+        <CreateButton disabled={!isName} onClick={handleCreateButtonClick} />
       </Container>
     </Wrapper>
   );
@@ -45,7 +81,7 @@ const Wrapper = styled.div`
   justify-content: center;
 `;
 
-const Container = styled.div`
+const Container = styled.form`
   margin: 5rem auto;
   display: flex;
   flex-direction: column;

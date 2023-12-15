@@ -2,15 +2,17 @@ import { motion } from "framer-motion";
 import React from "react";
 import styled from "styled-components";
 
-export function Button({ children, width, tabletWidth, mobileWidth, disabled }) {
+export function Button({ children, width, tabletWidth, mobileWidth, disabled, onClick }) {
   return (
     <StyledButton
+      type="button"
       width={width}
       $tabletWidth={tabletWidth}
       $mobileWidth={mobileWidth}
       disabled={disabled}
       whileHover={!disabled && { scale: 1.05 }}
       whileTap={!disabled && { scale: 1 }}
+      onClick={onClick}
     >
       {children}
     </StyledButton>
