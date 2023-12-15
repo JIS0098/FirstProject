@@ -6,7 +6,6 @@ import "./styles/fontSize.css";
 import WriteEditor from "../WYSIWYG/WriteEditor";
 
 const WriteEditorBox = ({ data, setData }) => {
-  const [value, setValue] = useState("");
   const Font = Quill.import("formats/font");
   const Size = Quill.import("formats/size");
   Quill.register(Font, true);
@@ -26,6 +25,7 @@ const WriteEditorBox = ({ data, setData }) => {
     setData({ ...data, content: content });
   };
 
+  console.log(data);
   return (
     <div>
       <WriteEditor

@@ -9,14 +9,10 @@ import profileImg2 from "../../assets/img/profileImg2.png";
 const ProfileLayout = ({ data, setData }) => {
   const [profileImage, setProfileImage] = useState();
   const profileImageList = [profileImg1, profileImg2];
-
   const handleProfileImageChange = (item) => {
     setProfileImage(item);
-    setData({ ...data, profileImageURL: profileImage });
+    setData(() => ({ ...data, profileImageURL: item }));
   };
-
-  console.log("이미지데이터 :", data.profileImageURL);
-  console.log("전체데이터 :", data);
 
   return (
     <StyledProfileLayout>

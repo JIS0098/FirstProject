@@ -22,8 +22,9 @@ const CreateMessage = () => {
   });
   const handleNameChange = (name) => {
     setIsName(name);
+    setData({ ...data, sender: name });
   };
-  console.log(data);
+
   return (
     <MessageLayout>
       <MessageBox>

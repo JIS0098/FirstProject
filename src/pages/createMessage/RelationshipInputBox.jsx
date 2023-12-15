@@ -9,6 +9,12 @@ const RelationshipInputBox = ({ data, setData }) => {
   const relationshipList = ["지인", "동료", "가족", "친구"];
   const [value, setValue] = useState("");
 
+  const handleItemClick = (item) => {
+    setValue(item);
+    relationshipToggle(false);
+    setData({ ...data, relationship: item });
+  };
+
   return (
     <StyledRelationshipInputBox>
       <StyledTitle>상대와의 관계</StyledTitle>
@@ -21,8 +27,7 @@ const RelationshipInputBox = ({ data, setData }) => {
           {relationshipList.map((item) => (
             <li
               onClick={() => {
-                setValue(item);
-                relationshipToggle(false);
+                handleItemClick(item);
               }}
               key={item}
             >
