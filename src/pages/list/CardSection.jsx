@@ -87,7 +87,7 @@ function CardSection({ title, recipients }) {
   );
 }
 
-export default React.memo(CardSection);
+export default CardSection;
 
 const Container = styled.div`
   display: flex;
