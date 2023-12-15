@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import color from "../../styles/color";
 import NameInput from "../../components/commons/NameInput";
-import ToggleButton from "./ToggleButton";
-import { SelectColor, SelectImage } from "./SelectBackground";
+import ToggleButton from "./components/ToggleButton";
+import SelectColor from "./components/SelectBackground/SelectColor";
+import SelectImage from "./components/SelectBackground/SelectImage";
 import CreateButton from "../../components/commons/CreateButton";
 
 const CreatePost = () => {
