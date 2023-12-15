@@ -31,7 +31,7 @@ const Profile = styled.div`
 `;
 
 const ProfileImg = styled(Profile)`
-  background: ${(props) => (props.url ? `url(${props.url})` : "gray")};
+  background: ${(props) => (props.$src ? `url(${props.$src})` : "gray")};
   background-size: cover;
   background-position: center;
 `;
@@ -45,4 +45,3 @@ const ProfileDiv = styled(Profile)`
 `;
 
 export default ProfileImgs;
-
