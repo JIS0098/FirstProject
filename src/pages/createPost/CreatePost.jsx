@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-
 import color from "../../styles/color";
 import NameInput from "../../components/commons/NameInput";
 import ToggleButton from "./ToggleButton";
@@ -51,13 +50,10 @@ const Container = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 5rem;
-
-  @media screen and (max-width: 1248px) {
-    max-width: 720px;
-  }
+  max-width: 72rem;
 
   @media screen and (max-width: 768px) {
-    max-width: 320px;
+    max-width: 32rem;
   }
 `;
 

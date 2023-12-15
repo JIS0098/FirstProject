@@ -1,16 +1,21 @@
 import React from "react";
-import styled, { keyframes } from "styled-components";
-import AddPostPreview from "../assets/img/AddPostPreview.png";
+import styled from "styled-components";
 import PostPreview from "../assets/img/PostPreview.png";
 import EmojiPreview from "../assets/img/EmojiPreview.png";
 import { Link } from "react-router-dom";
 import { Button } from "../components/commons/Button";
+import { motion } from "framer-motion";
+import SkCard from "../components/commons/SkCard";
 
-function Landing() {
+function Landing({ thema }) {
   return (
     <>
-      <StyledMainContainer>
-        <StyledLandingSectionFirst>
+      <StyledMainContainer $thema={thema}>
+        <StyledLandingSectionFirst
+          initial={{ x: -30, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 1.5 }}
+        >
           <StyledPageIntroContainer>
             <StyledPagePointContainer>
               <StyledPagePointText>Point. 01</StyledPagePointText>
@@ -25,11 +30,15 @@ function Landing() {
           <StyledCardContainer>
             <StyledPostCard src={PostPreview} alt="PostPreview" />
             <StyledPostCard src={PostPreview} alt="PostPreview" />
-            <StyledPostCard src={AddPostPreview} alt="AddPostPreview" />
+            <StyledPostCard src={PostPreview} alt="PostPreview" />
           </StyledCardContainer>
         </StyledLandingSectionFirst>
 
-        <StyledLandingSectionSecond>
+        <StyledLandingSectionSecond
+          initial={{ x: 30, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 1.5 }}
+        >
           <StyledCardContainer>
             <StyledEmojiCard src={EmojiPreview} alt="EmojiPreview" />
           </StyledCardContainer>
@@ -45,44 +54,24 @@ function Landing() {
             <StyledPagSideIntroText>롤링 페이퍼에 이모지를 추가할 수 있어요.</StyledPagSideIntroText>
           </StyledPageIntroContainer>
         </StyledLandingSectionSecond>
-        <Link to="/list">
-          <StyledGoToListButtonContainer>
+        <StyledGoToListButtonContainer>
+          <Link to="/list">
             <Button width="28rem" tabletWidth="100%">
               구경해보기
             </Button>
-          </StyledGoToListButtonContainer>
-        </Link>
+          </Link>
+        </StyledGoToListButtonContainer>
+        <SkCard />
       </StyledMainContainer>
     </>
   );
 }
 
-const fadeInLeft = keyframes`
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-`;
-
-const fadeInRight = keyframes`
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-`;
-
 const StyledMainContainer = styled.main`
-  padding: 0 24px;
+  padding: 6rem 24px;
+  background-color: ${({ $thema }) => ($thema ? "#1E1F21" : "#fff")};
 `;
-const StyledLandingSection = styled.section`
+const StyledLandingSection = styled(motion.section)`
   display: flex;
   background-color: #f6f8ff;
   max-width: 1200px;
@@ -103,8 +92,6 @@ const StyledLandingSection = styled.section`
 `;
 const StyledLandingSectionFirst = styled(StyledLandingSection)`
   justify-content: space-around;
-  margin-top: 6rem;
-  animation: ${fadeInLeft} 1s ease-in-out forwards;
 
   @media screen and (max-width: 1248px) {
     justify-content: center;
@@ -112,7 +99,6 @@ const StyledLandingSectionFirst = styled(StyledLandingSection)`
 `;
 const StyledLandingSectionSecond = styled(StyledLandingSection)`
   justify-content: space-evenly;
-  animation: ${fadeInRight} 1s ease-in-out forwards;
 
   @media screen and (max-width: 1248px) {
     justify-content: center;
@@ -155,7 +141,7 @@ const StyledPagSideIntroText = styled.p`
   font-size: 1.8rem;
   font-weight: 400;
 `;
-const StyledCardContainer = styled.div`
+const StyledCardContainer = styled(motion.div)`
   white-space: nowrap;
   overflow: hidden;
   display: flex;
@@ -171,14 +157,17 @@ const StyledPostCard = styled.img`
 const StyledEmojiCard = styled.img`
   width: 47rem;
 `;
-
 const StyledGoToListButtonContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-bottom: 6rem;
   min-width: 360px;
-`;
 
+  & a {
+    @media screen and (max-width: 1248px) {
+      width: 100%;
+    }
+  }
+`;
 const StyledBr = styled.br`
   display: block;
 

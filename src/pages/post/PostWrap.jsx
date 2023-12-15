@@ -221,3 +221,4 @@ const ImgBox = styled.div`
 `;
 
 export default PostWrap;
+

@@ -1,12 +1,12 @@
-import React from "react";
-import styled from "styled-components";
-import { TitleStyled } from "./CommonStyled";
-import person from "../../assets/icon/person.svg";
+import React from 'react';
+import styled from 'styled-components';
+import { StyledTitle } from './CommonStyled';
+import person from '../../assets/icon/person.svg';
 
 const ProfileLayout = ({ testData }) => {
   return (
     <StyledProfileLayout>
-      <h2>프로필 이미지</h2>
+      <StyledTitle>프로필 이미지</StyledTitle>
       <StyledProfileImgBox>
         <StyledPreviewImg>
           <div>
@@ -16,7 +16,7 @@ const ProfileLayout = ({ testData }) => {
         <StyledImgSelectBox>
           <p>프로필 이미지를 선택해주세요!</p>
           <StyledImgList>
-            {testData.profileImages.map((item) => (
+            {testData.profileImages.map(item => (
               <img key={item} src={item} />
             ))}
           </StyledImgList>
@@ -26,11 +26,7 @@ const ProfileLayout = ({ testData }) => {
   );
 };
 
-const StyledProfileLayout = styled.div`
-  & h2 {
-    ${TitleStyled};
-  }
-`;
+const StyledProfileLayout = styled.div``;
 
 const StyledProfileImgBox = styled.div`
   display: flex;
@@ -57,9 +53,6 @@ const StyledPreviewImg = styled.div`
   & img {
     width: 3.2rem;
     height: 3.2rem;
-    @media (max-width: 360px) {
-      font-size: 1.2rem;
-    }
   }
 `;
 
@@ -71,10 +64,6 @@ const StyledImgSelectBox = styled.div`
     font-weight: 400;
     line-height: 2.6rem;
     letter-spacing: -0.016rem;
-
-    @media (max-width: 360px) {
-      font-size: 1.3rem;
-    }
   }
 `;
 
@@ -88,9 +77,9 @@ const StyledImgList = styled.div`
     width: 5.6rem;
     pointer-events: none;
 
-    @media (max-width: 360px) {
-      width: 4rem;
-      height: 4rem;
+    @media (max-width: 768px) {
+      width: 4.5rem;
+      height: 4.5rem;
     }
   }
 `;

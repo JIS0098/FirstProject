@@ -22,6 +22,13 @@ export const theme = {
     nameColor: color.gray[900],
     authorColor: color.gray[700],
     cardMainColor: color.purple[200],
+
+    backgroundColor: {
+      beige: color.orange[200],
+      purple: color.purple[200],
+      blue: color.blue[200],
+      green: color.green[200],
+    },
   },
   years: {
     button: {

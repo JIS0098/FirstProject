@@ -16,6 +16,10 @@ export async function testDataEmoji() {
   return fetcher("/recipients/831/reactions/");
 }
 
+export async function testDataAll() {
+  return fetcher(`/recipients/?limit=10`);
+}
+
 // export async function emojiPost(emoji) {
 //   const api = await fetch(`${BASE_URL}/recipients/831/reactions/`);
 //   try {
