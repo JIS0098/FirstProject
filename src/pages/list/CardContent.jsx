@@ -5,7 +5,9 @@ import ProfileImgs from "../../components/commons/ProfileImages";
 export function CardContent({ name, messages, messageCount, $bgUrl }) {
   return (
     <Container>
-      <Name $bgUrl={$bgUrl}>To. {name}</Name>
+      <div>
+        <Name $bgUrl={$bgUrl}>To. {name}</Name>
+      </div>
       <ProfileImgs list={messages} count={messageCount} />
       {/* {messages.slice(0, 3).map((_, index) => (
           // <ProfileImg key={index} $left={index * 1.4} />
@@ -24,7 +26,7 @@ const Container = styled.div`
   gap: 1.2rem;
 `;
 
-const Name = styled.div`
+const Name = styled.span`
   overflow: hidden;
   text-overflow: ellipsis;
   color: ${({ $bgUrl, theme }) => ($bgUrl ? "white" : theme.nameColor)};
@@ -33,6 +35,10 @@ const Name = styled.div`
   line-height: 3.6rem;
   letter-spacing: -0.24px;
   font-style: normal;
+  /* Style */
+  background: rgba(0, 0, 0, 0.5);
+  padding: 0.2rem 1rem;
+  border-radius: 1.5rem;
 `;
 
 const Author = styled.span`
@@ -42,10 +48,15 @@ const Author = styled.span`
   line-height: 2.6rem;
   letter-spacing: -0.16px;
   font-style: normal;
+  /* Style */
+  background: rgba(0, 0, 0, 0.5);
+  padding: 0 0.5rem;
+  border-radius: 1.5rem;
 `;
 
 const AuthorCount = styled(Author)`
   font-weight: 700;
+  background: none;
 `;
 
 // const ProfileIcon = styled.div`
