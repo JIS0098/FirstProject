@@ -21,12 +21,14 @@ function Post() {
   const [modalClick, setModalClick] = useState(0);
   const params = useParams();
 
+  const pageId = params.id;
+
   useEffect(() => {
-    testData().then((res) => {
+    testData(pageId).then((res) => {
       const result = res;
       setData(result.results);
     });
-    testDataEmoji().then((res) => {
+    testDataEmoji(pageId).then((res) => {
       const result = res;
       setDataEmoji(result.results);
     });
@@ -37,7 +39,7 @@ function Post() {
   }, [emojiUp]);
 
   const modalFind = data.find((item) => item.id === modalClick);
-  const selectedPost = idSelectName.find((post) => post.id === Number(params.id));
+  const selectedPost = idSelectName.find((post) => post.id === Number(pageId));
 
   return (
     <PostBack>
@@ -48,6 +50,7 @@ function Post() {
         dataEmoji={dataEmoji}
         setEmojiUp={setEmojiUp}
         selectedPost={selectedPost}
+        pageId={pageId}
       />
       <PostWrap
         data={data}

@@ -8,21 +8,21 @@ async function fetcher(url) {
   return response.json();
 }
 
-export async function testData() {
-  return fetcher("/recipients/1106/messages/?limit=1000");
+export async function testData(pageId) {
+  return fetcher(`/recipients/${pageId}/messages/?limit=1000`);
 }
 
-export async function testDataEmoji() {
-  return fetcher("/recipients/1106/reactions/");
+export async function testDataEmoji(pageId) {
+  return fetcher(`/recipients/${pageId}/reactions/`);
 }
 
 export async function testDataAll() {
   return fetcher(`/recipients/?limit=1000`);
 }
 
-export async function emojiPost(dataEmoji) {
+export async function emojiPost(dataEmoji, pageId) {
   try {
-    const response = await fetch(`${BASE_URL}/recipients/1178/reactions/`, {
+    const response = await fetch(`${BASE_URL}/recipients/${pageId}/reactions/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -42,9 +42,9 @@ export async function emojiPost(dataEmoji) {
 }
 
 // 페이지 지우기
-export async function deletePage() {
+export async function deletePage(pageId) {
   try {
-    const response = await fetch(`${BASE_URL}/recipients/1178/`, {
+    const response = await fetch(`${BASE_URL}/recipients/${pageId}/`, {
       method: "DELETE",
     });
 
