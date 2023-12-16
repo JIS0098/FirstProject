@@ -1,36 +1,35 @@
-async function tPostData(data) {
+export async function tPostData(postData) {
   try {
     const res = await fetch("https://rolling-api.vercel.app/2-1/recipients/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(postData),
     });
 
-    if (res.ok) {
-      const resData = await res.json();
-      console.log("서버 응답:", resData);
-    } else {
-      throw new Error(res.status);
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
     }
+
+    return res.json();
   } catch (e) {
     console.error("네트워크 요청 에러:", e);
   }
 }
 
-const data = {
-  name: "28521985921592757857",
-  backgroundColor: "beige",
-  backgroundImageURL: null,
-  createdAt: "2023-11-01T08:00:09.135025Z",
-  messageCount: 0,
-  recentMessages: [],
-  reactionCount: 0,
-  topReactions: [],
-};
+// const data = {
+//   name: "28521985921592757857",
+//   backgroundColor: "beige",
+//   backgroundImageURL: null,
+//   createdAt: "2023-11-01T08:00:09.135025Z",
+//   messageCount: 0,
+//   recentMessages: [],
+//   reactionCount: 0,
+//   topReactions: [],
+// };
 
-tPostData(data);
+// tPostData(data);
 
 // {
 // 	"id": 32,
@@ -62,5 +61,3 @@ tPostData(data);
 //   content: "바보",
 //   font: "Pretendard",
 //   createdAt: "2023-11-01T08:05:25.399056Z",
-
-export default tPostData;

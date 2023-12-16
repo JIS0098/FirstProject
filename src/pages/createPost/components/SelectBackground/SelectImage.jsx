@@ -5,7 +5,7 @@ import AddImage from "./AddImageButton.jsx";
 import selectedIcon from "../../../../assets/icon/background-selected.png";
 import { supabase } from "../../../../api/supabase/supabaseClient.jsx";
 
-const SelectImage = () => {
+const SelectImage = ({ onImageSelect }) => {
   const [imageList, setImageList] = useState([]);
   const [selectedImage, setSelectedImage] = useState("");
   const [loading, setLoading] = useState(true);
@@ -21,6 +21,7 @@ const SelectImage = () => {
         const imagePaths = data.map((item) => item.name);
         setImageList(imagePaths);
         setSelectedImage(imagePaths[0]);
+        onImageSelect(imagePaths[0]);
       }
     } catch (error) {
       console.error("Unexpected error:", error.message);
@@ -31,6 +32,7 @@ const SelectImage = () => {
 
   const handleImageChange = (image) => {
     setSelectedImage(image);
+    onImageSelect(image);
   };
 
   useEffect(() => {
@@ -52,7 +54,7 @@ const ImageList = ({ imageList, selectedImage, handleImageChange }) => {
   return (
     <>
       {imageList.map((itemPath) => (
-        <ImageButton key={itemPath} onClick={() => handleImageChange(itemPath)}>
+        <ImageButton type="button" key={itemPath} onClick={() => handleImageChange(itemPath)}>
           <Image
             key={itemPath}
             src={`https://gjbkkhzzbcjprpxlhdlu.supabase.co/storage/v1/object/public/background_images/${itemPath}`}

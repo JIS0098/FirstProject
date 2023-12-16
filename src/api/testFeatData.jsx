@@ -1,4 +1,4 @@
-const BASE_URL = "https://rolling-api.vercel.app/1-7";
+const BASE_URL = "https://rolling-api.vercel.app/2-1";
 
 async function fetcher(url) {
   const response = await fetch(`${BASE_URL}${url}`);
@@ -9,12 +9,13 @@ async function fetcher(url) {
 }
 
 export async function testData() {
-  return fetcher("/recipients/1178/messages/?limit=1000");
+
+  return fetcher("/recipients/1106/messages/?limit=1000");
 }
 
 export async function testDataEmoji() {
-  return fetcher("/recipients/1178/reactions/");
-}
+  return fetcher("/recipients/1106/reactions/");
+
 
 export async function testDataAll() {
   return fetcher(`/recipients/?limit=1000`);
