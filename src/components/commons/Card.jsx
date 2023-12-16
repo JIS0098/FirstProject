@@ -1,29 +1,41 @@
 import React from "react";
 import styled from "styled-components";
 import { setDayYMD } from "../../utils/setDayYMD";
+import Delete from "../../assets/icon/deleted.svg";
 import ReactMarkdown from "react-markdown";
+import _ from "lodash";
 
-function Card({ name, profileImg, description, tag, ago }) {
+function Card({ onClick, name, profileImg, description, tag, ago, deleteCard = true, DeleteCardClick }) {
   const htmlContent = { __html: description };
   const day = setDayYMD(ago);
 
   return (
-    <CardBox>
+    <CardBox
+      onClick={() => {
+        onClick();
+      }}
+    >
       <CardWrap>
         <From>
-          <ImgBox>
-            <StyledImg src={profileImg} />
-          </ImgBox>
-          <FromBox>
-            <FromP>
-              From. <FromSpan>{name}</FromSpan>
-            </FromP>
-            <FromTag>{tag}</FromTag>
-          </FromBox>
+          <FromInner>
+            <ImgBox>
+              <StyledImg src={profileImg} />
+            </ImgBox>
+            <FromBox>
+              <FromP>
+                From. <FromSpan>{name}</FromSpan>
+              </FromP>
+              <FromTag>{tag}</FromTag>
+            </FromBox>
+          </FromInner>
+
+          {deleteCard ? null : (
+            <DeleteWrap onClick={() => DeleteCardClick()}>
+              <img src={Delete} />
+            </DeleteWrap>
+          )}
         </From>
-        {/* <CardDescription>
-          <ReactMarkdown>{description}</ReactMarkdown>
-        </CardDescription> */}
+
         <CardDescription dangerouslySetInnerHTML={htmlContent} />
         <Ago>{day}</Ago>
       </CardWrap>
@@ -31,6 +43,19 @@ function Card({ name, profileImg, description, tag, ago }) {
   );
 }
 
+const DeleteWrap = styled.div`
+  width: 4rem;
+  height: 4rem;
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+`;
+const FromInner = styled.div`
+  width: 80%;
+  display: flex;
+  gap: 1.5rem;
+`;
 const StyledImg = styled.img`
   width: 100%;
   height: 100%;
@@ -81,11 +106,12 @@ const From = styled.div`
   width: 100%;
   padding-bottom: 1.5rem;
   align-items: center;
+  justify-content: space-between;
   gap: 1rem;
   border-bottom: 1px solid #eee;
 `;
 const FromBox = styled.div`
-  width: 80%;
+  width: 50%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

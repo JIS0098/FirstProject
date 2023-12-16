@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Link, useLocation, useParams } from "react-router-dom";
-import MoreCardImg from "../../assets/icon/plus.svg";
 import Emoji from "../../components/commons/Emoji";
 import Card from "../../components/commons/Card";
+import { deleteCard, deletePage } from "../../api/testFeatData";
 
-function PostWrap({ data, showShare, emojiAdd, setShare, toggleModal, dataEmoji, setModalClick }) {
+function PostWrap({ data, showShare, emojiAdd, setShare, toggleModal, dataEmoji, setModalClick, modalClick }) {
+  const [deleteList, setDeleteList] = useState([]);
   const location = useLocation();
   const baseUrl = window.location.host;
   const urlShare = async (text) => {
@@ -19,29 +20,34 @@ function PostWrap({ data, showShare, emojiAdd, setShare, toggleModal, dataEmoji,
       console.log(err);
     }
   };
+
   const clickCard = (i) => {
     setModalClick(i);
   };
-  const params = useParams();
+
+  const Delete = async () => {
+    try {
+      await deleteCard(deleteList);
+      setDeleteList([]);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const DeleteCardClick = () => {
+    setDeleteList((prev) => Array.from(new Set([...prev, modalClick])));
+  };
+
+  console.log(deleteList);
 
   return (
     <PostInner>
-      <StyledLink to={`/post/${params.id}/edit`}>
-        <EditDeleteButton>편집하기</EditDeleteButton>
-      </StyledLink>
-
-      <PostCard>
-        <Link to={`/post/${params.id}/message`}>
-          <ImgBox>
-            <img src={MoreCardImg} />
-          </ImgBox>
-        </Link>
-      </PostCard>
+      <PageDeleteButton onClick={deletePage}>페이지 삭제</PageDeleteButton>
+      <PostDeleteButton onClick={Delete}>삭제하기</PostDeleteButton>
       {data.map((item) => (
         <Card
           onClick={() => {
             clickCard(item.id);
-            toggleModal();
           }}
           key={item.id}
           profileImg={item.profileImageURL}
@@ -49,6 +55,8 @@ function PostWrap({ data, showShare, emojiAdd, setShare, toggleModal, dataEmoji,
           description={item.content}
           tag={item.relationship}
           ago={item.createdAt}
+          deleteCard={false}
+          DeleteCardClick={DeleteCardClick}
         />
       ))}
 
@@ -70,12 +78,6 @@ function PostWrap({ data, showShare, emojiAdd, setShare, toggleModal, dataEmoji,
     </PostInner>
   );
 }
-const StyledLink = styled(Link)`
-  position: absolute;
-  top: 8rem;
-  right: 2.5rem;
-  font-size: 1.6rem;
-`;
 
 const PostCard = styled.div`
   width: 38.4rem;
@@ -136,11 +138,41 @@ const DeleteButton = styled.div`
   cursor: pointer;
 `;
 const EditDeleteButton = styled(DeleteButton)`
-  display: flex;
+  display: none;
   border-radius: 6px;
   border: 1px solid #ccc;
   background: #fff;
   color: black;
+  @media all and (max-width: 1248px) {
+    display: flex;
+    position: absolute;
+    top: 8rem;
+    right: 2.5rem;
+  }
+`;
+const PostDeleteButton = styled(DeleteButton)`
+  position: absolute;
+  top: 8rem;
+  right: 2.5rem;
+  @media all and (max-width: 1248px) {
+    max-width: 72rem;
+    width: calc(100% - 48px);
+    height: 5.6rem;
+    position: fixed;
+    padding: 0 2.4rem;
+    top: auto;
+    bottom: 6rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+`;
+const PageDeleteButton = styled(DeleteButton)`
+  position: absolute;
+  top: 8rem;
+  right: 12.5rem;
+  @media all and (max-width: 1248px) {
+    right: 2.5rem;
+  }
 `;
 const PostInner = styled.div`
   max-width: 124.8rem;
