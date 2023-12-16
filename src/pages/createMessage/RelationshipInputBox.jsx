@@ -18,9 +18,9 @@ const RelationshipInputBox = ({ data, setData }) => {
   return (
     <StyledRelationshipInputBox>
       <StyledTitle>상대와의 관계</StyledTitle>
-      <div>
+      <div onClick={relationshipToggle}>
         {value === "" ? "지인" : value}
-        <img src={arrow_down} onClick={relationshipToggle} />
+        <img src={arrow_down} />
       </div>
       {relationship ? (
         <ul>
@@ -56,6 +56,7 @@ const StyledRelationshipInputBox = styled.div`
     font-weight: 400;
     line-height: 2.6rem;
     letter-spacing: -0.016rem;
+    cursor: pointer;
   }
 
   & ul {
@@ -76,12 +77,10 @@ const StyledRelationshipInputBox = styled.div`
     letter-spacing: -0.016rem;
     list-style-type: none;
     background-color: white;
+    cursor: pointer;
     &:hover {
       background-color: var(--gray-300, #f0f0f0);
     }
-  }
-  & img {
-    cursor: pointer;
   }
 `;
 
