@@ -1,6 +1,5 @@
 import { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { useState } from "react";
 import "./styles/fonts.css";
 import "./styles/fontSize.css";
 import WriteEditor from "../WYSIWYG/WriteEditor";

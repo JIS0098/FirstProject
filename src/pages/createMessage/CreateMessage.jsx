@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import NameInput from "../../components/commons/NameInput";
 import CreateButton from "../../components/commons/CreateButton";

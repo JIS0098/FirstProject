@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import MoreCardImg from "../../assets/icon/plus.svg";
 import { setDayYMD } from "../../utils/setDayYMD";
 import { motion } from "framer-motion";
 

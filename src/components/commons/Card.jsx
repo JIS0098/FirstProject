@@ -2,8 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { setDayYMD } from "../../utils/setDayYMD";
 import Delete from "../../assets/icon/deleted.svg";
-import ReactMarkdown from "react-markdown";
-import _ from "lodash";
 
 function Card({ onClick, name, profileImg, description, tag, ago, deleteCard = true, DeleteCardClick }) {
   const htmlContent = { __html: description };
