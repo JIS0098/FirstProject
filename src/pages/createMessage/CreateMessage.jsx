@@ -1,26 +1,24 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import NameInput from "../../components/commons/NameInput";
-import CreateButton from "../../components/commons/CreateButton";
-import ProfileLayout from "./ProfileLayout";
-import RelationshipInputBox from "./RelationshipInputBox";
-import WriteInputBox from "./WYSIWYG";
-import { Link } from "react-router-dom";
-
-// import WriteInput from './WriteInput';
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import NameInput from '../../components/commons/NameInput';
+import CreateButton from '../../components/commons/CreateButton';
+import ProfileLayout from './ProfileLayout';
+import RelationshipInputBox from './RelationshipInputBox';
+import WriteInputBox from './WYSIWYG';
+import { Link } from 'react-router-dom';
 
 const CreateMessage = () => {
-  const [isName, setIsName] = useState("");
+  const [isName, setIsName] = useState('');
   const [data, setData] = useState({
-    team: "",
+    team: '',
     recipientId: null,
-    sender: "",
+    sender: '',
     profileImageURL: null,
-    relationship: "",
-    content: "",
-    font: "",
+    relationship: '',
+    content: '',
+    font: '',
   });
-  const handleNameChange = (name) => {
+  const handleNameChange = name => {
     setIsName(name);
     setData({ ...data, sender: name });
   };
