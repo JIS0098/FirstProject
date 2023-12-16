@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { CardContent } from "./CardContent";
 import { Reactions } from "./Reactions";
 import styled from "styled-components";
@@ -6,11 +6,22 @@ import { Link } from "react-router-dom";
 
 function CardItem({ recipient }) {
   const { name, recentMessages, messageCount, topReactions, backgroundColor, backgroundImageURL } = recipient;
+  const [imageLoaded, setImageLoaded] = useState(true);
+
+  const bgImageUrl = imageLoaded ? backgroundImageURL : null;
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = backgroundImageURL;
+    img.onload = () => setImageLoaded(true);
+    img.onerror = () => setImageLoaded(false);
+  }, [backgroundImageURL]);
+
   return (
-    <Container $bgUrl={backgroundImageURL} $bgColor={backgroundColor}>
-      <Wrapper $bgUrl={backgroundImageURL} $bgColor={backgroundColor}>
+    <Container $bgUrl={bgImageUrl} $bgColor={backgroundColor}>
+      <Wrapper $bgUrl={bgImageUrl} $bgColor={backgroundColor}>
         <Link to={`/post/${recipient.id}`}>
-          <CardContent name={name} messages={recentMessages} messageCount={messageCount} $bgUrl={backgroundImageURL} />
+          <CardContent name={name} messages={recentMessages} messageCount={messageCount} $bgUrl={bgImageUrl} />
         </Link>
         <TopReactions>
           {topReactions.map((data) => (
@@ -46,7 +57,6 @@ const Wrapper = styled.div`
   min-height: 15rem;
   width: 100%;
   background: ${(props) => !props.$bgUrl && props.theme.backgroundColor[`${props.$bgColor}`]};
-  /* gap: 4.3rem; */
 `;
 
 const TopReactions = styled.div`
