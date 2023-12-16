@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router";
 import CardSection from "./CardSection";
 import { testDataAll } from "../../api/testFeatData";
 import { Button } from "../../components/commons/Button";
 import { Link } from "react-router-dom";
 function ListPage() {
-  const navigation = useNavigate();
   const LIST_TITLE = ["인기 롤링 페이퍼 🔥", "최근에 만든 롤링 페이퍼 ⭐️"];
   const [loading, setLoading] = useState(false);
   const [sortByMost, setSortByMost] = useState([]);

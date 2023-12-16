@@ -9,13 +9,12 @@ async function fetcher(url) {
 }
 
 export async function testData() {
-
   return fetcher("/recipients/1106/messages/?limit=1000");
 }
 
 export async function testDataEmoji() {
   return fetcher("/recipients/1106/reactions/");
-
+}
 
 export async function testDataAll() {
   return fetcher(`/recipients/?limit=1000`);
@@ -60,7 +59,7 @@ export async function deletePage() {
   }
 }
 
-export async function deleteCard(deleteData) {
+export async function deleteCard() {
   try {
     const response = await fetch(`${BASE_URL}/messages/1178/`, {
       method: "DELETE",
