@@ -9,7 +9,7 @@ const WriteEditorBox = ({ data, setData }) => {
   const Font = Quill.import("formats/font");
   const Size = Quill.import("formats/size");
   Quill.register(Font, true);
-  Font.whitelist = ["Maplestory", "치킨체"];
+  Font.whitelist = ["나눔고딕", "Maplestory", "치킨체"];
   Size.whitelist = ["8", "10", "12", "14", "16", "20", "24", "32", "40"];
 
   const formats = ["bold", "italic", "strike", "color", "background", "link", "font", "size", "align"];

@@ -68,11 +68,20 @@ const WriteEditor = styled(ReactQuill)`
     content: "치킨체" !important;
   }
 
+  .ql-picker.ql-font .ql-picker-label[data-value="나눔고딕"]::before,
+  .ql-picker.ql-font .ql-picker-item[data-value="나눔고딕"]::before {
+    font-family: "나눔고딕", cursive;
+    content: "나눔고딕" !important;
+  }
+
   .ql-font-Maplestory {
     font-family: "Maplestory";
   }
   .ql-font-치킨체 {
     font-family: "치킨체";
+  }
+  .ql-font-나눔고딕 {
+    font-family: "나눔고딕";
   }
 `;
 export default WriteEditor;
