@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Post from "../src/pages/post";
+import PostEdit from "../src/pages/postEdit";
 import ListPage from "./pages/list";
 import Landing from "./pages/Landing";
 import Header from "./components/commons/Header";
@@ -28,7 +29,7 @@ function Main() {
         <Route path="/post">
           <Route index element={<CreatePost />} />
           <Route path=":id" element={<Post />} />
-          <Route path=":id/edit" element={<Post />} />
+          <Route path=":id/edit" element={<PostEdit />} />
           <Route path=":id/message" element={<CreateMessage />} />
         </Route>
         <Route path="*" element={<NotFound />} />
