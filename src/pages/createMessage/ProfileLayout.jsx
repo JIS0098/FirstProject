@@ -1,23 +1,31 @@
-import React from 'react';
-import styled from 'styled-components';
-import { StyledTitle } from './CommonStyled';
-import person from '../../assets/icon/person.svg';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { StyledTitle } from "./CommonStyled";
+import person from "../../assets/icon/person.svg";
+import color from "../../styles/color";
+import profileImg1 from "../../assets/img/profileImg1.png";
+import profileImg2 from "../../assets/img/profileImg2.png";
 
-const ProfileLayout = ({ testData }) => {
+const ProfileLayout = ({ data, setData }) => {
+  const [profileImage, setProfileImage] = useState();
+  const profileImageList = [profileImg1, profileImg2];
+  const handleProfileImageChange = (item) => {
+    setProfileImage(item);
+    setData(() => ({ ...data, profileImageURL: item }));
+  };
+
   return (
     <StyledProfileLayout>
       <StyledTitle>프로필 이미지</StyledTitle>
       <StyledProfileImgBox>
-        <StyledPreviewImg>
-          <div>
-            <img src={person} />
-          </div>
-        </StyledPreviewImg>
+        <StyledPreviewImgBox>
+          {profileImage ? <StyledImg src={profileImage} alt="프로필 이미지" /> : <StyledNoImg src={person} />}
+        </StyledPreviewImgBox>
         <StyledImgSelectBox>
           <p>프로필 이미지를 선택해주세요!</p>
           <StyledImgList>
-            {testData.profileImages.map(item => (
-              <img key={item} src={item} />
+            {profileImageList.map((item) => (
+              <img key={item} src={item} onClick={() => handleProfileImageChange(item)} />
             ))}
           </StyledImgList>
         </StyledImgSelectBox>
@@ -33,28 +41,23 @@ const StyledProfileImgBox = styled.div`
   align-items: center;
   gap: 3.2rem;
 `;
-
-const StyledPreviewImg = styled.div`
+const StyledPreviewImgBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-
-  & div {
-    width: 8rem;
-    height: 8rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--gray-300, #ccc);
-    border-radius: 50%;
-  }
-
-  & img {
-    width: 3.2rem;
-    height: 3.2rem;
-  }
+  width: 8rem;
+  height: 8rem;
+  background-color: ${color.gray[300]};
 `;
+
+const StyledImg = styled.img`
+  width: 8rem;
+  width: 8rem;
+  cursor: pointer;
+`;
+
+const StyledNoImg = styled.img``;
 
 const StyledImgSelectBox = styled.div`
   & p {
@@ -75,7 +78,6 @@ const StyledImgList = styled.div`
   & img {
     margin-top: 1.2rem;
     width: 5.6rem;
-    pointer-events: none;
 
     @media (max-width: 768px) {
       width: 4.5rem;

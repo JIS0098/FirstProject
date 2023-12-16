@@ -1,34 +1,39 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import NameInput from '../../components/commons/NameInput';
-import CreateButton from '../../components/commons/CreateButton';
-import ProfileLayout from './ProfileLayout';
-import RelationshipInputBox from './RelationshipInputBox';
-import WriteInputBox from './WYSIWYG';
-import profileImg from '../../assets/img/profileImg.png';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import NameInput from "../../components/commons/NameInput";
+import CreateButton from "../../components/commons/CreateButton";
+import ProfileLayout from "./ProfileLayout";
+import RelationshipInputBox from "./RelationshipInputBox";
+import WriteInputBox from "./WYSIWYG";
+import { Link } from "react-router-dom";
 
 // import WriteInput from './WriteInput';
 
 const CreateMessage = () => {
-  const [testData] = useState({
-    relationship: ['지인', '동료', '가족', '친구'],
-    profileImages: [profileImg, profileImg, profileImg, profileImg],
+  const [isName, setIsName] = useState("");
+  const [data, setData] = useState({
+    team: "",
+    recipientId: null,
+    sender: "",
+    profileImageURL: null,
+    relationship: "",
+    content: "",
+    font: "",
   });
-
-  const [isName, setIsName] = useState('');
-  const handleNameChange = name => {
+  const handleNameChange = (name) => {
     setIsName(name);
+    setData({ ...data, sender: name });
   };
+
   return (
     <MessageLayout>
       <MessageBox>
         <NameInput value={isName} onChange={handleNameChange} placeholder="이름을 입력해 주세요.">
           From.
         </NameInput>
-        <ProfileLayout testData={testData} />
-        <RelationshipInputBox testData={testData} />
-        <WriteInputBox />
+        <ProfileLayout data={data} setData={setData} />
+        <RelationshipInputBox data={data} setData={setData} />
+        <WriteInputBox data={data} setData={setData} />
         <CreateButtonBox>
           <Link to="/post/2">
             <CreateButton mobileWidth="100%" tabletWidth="100%" disabled={!isName} />

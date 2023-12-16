@@ -1,22 +1,38 @@
-import React from 'react';
-import styled from 'styled-components';
-import arrow_down from '../../assets/icon/arrow_down.svg';
-import useToggle from '../../hooks/useToggle';
-import { StyledTitle } from './CommonStyled';
+import React, { useState } from "react";
+import styled from "styled-components";
+import arrow_down from "../../assets/icon/arrow_down.svg";
+import useToggle from "../../hooks/useToggle";
+import { StyledTitle } from "./CommonStyled";
 
-const RelationshipInputBox = ({ testData }) => {
+const RelationshipInputBox = ({ data, setData }) => {
   const [relationship, relationshipToggle] = useToggle();
+  const relationshipList = ["지인", "동료", "가족", "친구"];
+  const [value, setValue] = useState("");
+
+  const handleItemClick = (item) => {
+    setValue(item);
+    relationshipToggle(false);
+    setData({ ...data, relationship: item });
+  };
+
   return (
     <StyledRelationshipInputBox>
       <StyledTitle>상대와의 관계</StyledTitle>
       <div>
-        지인
+        {value === "" ? "지인" : value}
         <img src={arrow_down} onClick={relationshipToggle} />
       </div>
       {relationship ? (
         <ul>
-          {testData.relationship.map(item => (
-            <li key={item}>{item}</li>
+          {relationshipList.map((item) => (
+            <li
+              onClick={() => {
+                handleItemClick(item);
+              }}
+              key={item}
+            >
+              {item}
+            </li>
           ))}
         </ul>
       ) : null}
@@ -63,6 +79,9 @@ const StyledRelationshipInputBox = styled.div`
     &:hover {
       background-color: var(--gray-300, #f0f0f0);
     }
+  }
+  & img {
+    cursor: pointer;
   }
 `;
 
