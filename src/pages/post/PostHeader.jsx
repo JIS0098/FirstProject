@@ -9,7 +9,7 @@ import Emoji from "../../components/commons/Emoji";
 import EmojiPicker from "emoji-picker-react";
 import { emojiPost } from "../../api/testFeatData";
 
-function PostHeader({ data, toggleShare, toggleEmoji, dataEmoji, setEmojiUp, selectedPost }) {
+function PostHeader({ data, toggleShare, toggleEmoji, dataEmoji, setEmojiUp, selectedPost, pageId }) {
   const [emojiPick, toggleEmojiPick] = useToggle(false);
   const [selectEmoji, setSelectEmoji] = useState(null);
 
@@ -21,7 +21,7 @@ function PostHeader({ data, toggleShare, toggleEmoji, dataEmoji, setEmojiUp, sel
     if (selectEmoji !== null) {
       const emojiUpdate = async () => {
         try {
-          const result = await emojiPost(selectEmoji);
+          const result = await emojiPost(selectEmoji, pageId);
           console.log(result);
           setEmojiUp(selectEmoji);
         } catch (e) {
