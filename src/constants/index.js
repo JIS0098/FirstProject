@@ -1,4 +1,4 @@
-export const BASE_URL = "https://rolling-api.vercel.app/2-1";
+export const BASE_URL = "https://rolling-api.vercel.app/1-7";
 
 export const DEVICE_MAX_SIZE = {
   MOBILE: 425,

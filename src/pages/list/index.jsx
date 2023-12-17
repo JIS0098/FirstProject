@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import CardSection from "./CardSection";
 import { getRollingPaperAll } from "../../api";
 import { Button } from "../../components/commons/Button";
 import { Link } from "react-router-dom";
+import CardSection from "../../components/domains/list/CardSection";
 function ListPage() {
   const LIST_TITLE = ["인기 롤링 페이퍼 🔥", "최근에 만든 롤링 페이퍼 ⭐️"];
   const [loading, setLoading] = useState(false);

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import ProfileImgs from "../../components/commons/ProfileImages";
+import ProfileImgs from "../../commons/ProfileImages";
 
 export function CardContent({ name, messages, messageCount, $bgUrl }) {
   return (

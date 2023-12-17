@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { DEVICE_MAX_SIZE } from "../../constants";
+import { DEVICE_MAX_SIZE } from "../../../constants";
 
 export function Reactions({ emoji, count }) {
   return (
