@@ -1,6 +1,6 @@
 import { Quill } from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import './fonts.css';
+import '../../../styles/fonts.css';
 import WriteEditor from '../WYSIWYG/WriteEditor';
 import { FontList, FontSizeList } from './constantsFont';
 
