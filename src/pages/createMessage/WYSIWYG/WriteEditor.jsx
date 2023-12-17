@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
 import ReactQuill from 'react-quill';
 import color from '../../../styles/color';
+import '../../../styles/fonts.css';
 import 'react-quill/dist/quill.snow.css';
-import './fonts.css';
 
 const StyledFont = ({ font, content }) => css`
   .ql-picker.ql-font .ql-picker-label::before,

@@ -16,7 +16,7 @@ const CreateMessage = () => {
     team: '2-1',
     recipientId: +id,
     sender: '',
-    profileImageURL: null,
+    profileImageURL: 'https://ibb.co/CBLszQC',
     relationship: '',
     content: '',
     font: 'Pretendard',
@@ -46,7 +46,7 @@ const CreateMessage = () => {
   const handleCreateMessage = async () => {
     try {
       const resData = await PostMessageData(data);
-      // navigate(`/post/${resData?.recipientId}`);
+      navigate(`/post/${resData?.recipientId}`);
       console.log('응답', resData);
     } catch (error) {
       console.error(error);
