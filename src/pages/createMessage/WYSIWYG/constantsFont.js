@@ -1,4 +1,5 @@
 
+
 export const FontSizeList = [
     { size: '40', content: '40' },
     { size: '32', content: '32' },
@@ -16,4 +17,8 @@ export const FontList = [
     { font: 'Maplestory', content: 'Maplestory' },
           { font: '치킨체', content: '치킨체' },
           { font: '나눔고딕', content: '나눔고딕' }
+  ]
+
+  export const FontColorList =[
+    
   ]

@@ -21,6 +21,7 @@ const WriteEditorBox = ({ data, setData }) => {
     ],
   };
 
+  console.log();
   const handleContentChange = content => {
     setData({ ...data, content: content });
   };

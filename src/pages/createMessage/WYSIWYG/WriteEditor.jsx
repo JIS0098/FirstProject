@@ -74,6 +74,9 @@ const WriteEditor = styled(ReactQuill)`
     margin-right: 0.5rem;
   }
 
+  .ql-picker-label .ql-active {
+    font-size: 1.6rem;
+  }
   ${props => props.fontList && props.fontList.map(({ font, content }) => StyledFont({ font, content }))}
 
   ${props => props.sizeList && props.sizeList.map(({ size, content }) => StyledFontSize({ size, content }))}
