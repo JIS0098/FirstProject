@@ -39,9 +39,11 @@ function Post() {
 
   const modalFind = data.find((item) => item.id === modalClick);
   const selectedPost = idSelectName.find((post) => post.id === Number(pageId));
+  const backgroundColor = selectedPost?.backgroundColor;
+  const backgroundURL = selectedPost?.backgroundImageURL;
 
   return (
-    <PostBack>
+    <PostBack backgroundColor={backgroundColor} backgroundURL={backgroundURL}>
       <PostHeader
         data={data}
         toggleShare={toggleShare}
@@ -49,17 +51,11 @@ function Post() {
         dataEmoji={dataEmoji}
         setEmojiUp={setEmojiUp}
         selectedPost={selectedPost}
-      />
-      <PostWrap
-        data={data}
-        dataEmoji={dataEmoji}
-        showShare={showShare}
         emojiAdd={emojiAdd}
+        showShare={showShare}
         setShare={setShare}
-        toggleModal={toggleModal}
-        setModalClick={setModalClick}
-        modalClick={modalClick}
       />
+      <PostWrap data={data} toggleModal={toggleModal} setModalClick={setModalClick} pageId={pageId} />
 
       {/* modal */}
       {showModal ? <PostModal toggleModal={toggleModal} modalFind={modalFind} /> : null}
@@ -71,7 +67,8 @@ function Post() {
 }
 
 const PostBack = styled.div`
-  background-color: #ffe2ad;
+  background: ${(props) => (props.backgroundURL ? `url(${props.backgroundURL})` : props.backgroundColor)};
+  background-size: cover;
   width: 100vw;
   min-height: 100vh;
 `;

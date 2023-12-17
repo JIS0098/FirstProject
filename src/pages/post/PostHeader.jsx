@@ -8,14 +8,39 @@ import shareImg from "../../assets/icon/share-24.svg";
 import Emoji from "../../components/commons/Emoji";
 import EmojiPicker from "emoji-picker-react";
 import { emojiPost } from "../../api/testFeatData";
+import { useLocation } from "react-router-dom";
 
-function PostHeader({ data, toggleShare, toggleEmoji, dataEmoji, setEmojiUp, selectedPost, pageId }) {
+function PostHeader({
+  data,
+  toggleShare,
+  toggleEmoji,
+  dataEmoji,
+  emojiAdd,
+  setEmojiUp,
+  selectedPost,
+  pageId,
+  showShare,
+  setShare,
+}) {
   const [emojiPick, toggleEmojiPick] = useToggle(false);
   const [selectEmoji, setSelectEmoji] = useState(null);
 
   const handleEmojiSelect = (e) => {
     setSelectEmoji({ emoji: e.emoji, type: "increase" });
-    // console.log(e.emoji);
+  };
+  const location = useLocation();
+  const baseUrl = window.location.host;
+
+  const urlShare = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setShare(true);
+      setTimeout(() => {
+        setShare(false);
+      }, 4000);
+    } catch (err) {
+      console.log(err);
+    }
   };
   useEffect(() => {
     if (selectEmoji !== null) {
@@ -54,6 +79,16 @@ function PostHeader({ data, toggleShare, toggleEmoji, dataEmoji, setEmojiUp, sel
 
             <EmojiButton src={downImg} onClick={toggleEmoji} />
 
+            {emojiAdd ? (
+              <ToggleAddEmoji>
+                {dataEmoji.slice(0, 6).map((item) => (
+                  <Emoji key={item.id}>
+                    {item.emoji} {item.count}
+                  </Emoji>
+                ))}
+              </ToggleAddEmoji>
+            ) : null}
+
             <ButtonWrap onClick={toggleEmojiPick}>
               <img src={addEmojiImg} />
               <ButtonWrapP>추가</ButtonWrapP>
@@ -69,14 +104,48 @@ function PostHeader({ data, toggleShare, toggleEmoji, dataEmoji, setEmojiUp, sel
             <ButtonWrap onClick={toggleShare}>
               <img src={shareImg} />
             </ButtonWrap>
+
+            {showShare ? (
+              <ShareBox>
+                <Share>카카오톡 공유</Share>
+                <Share onClick={() => urlShare(`${baseUrl}${location.pathname}`)}>URL 공유</Share>
+              </ShareBox>
+            ) : null}
           </EmojiWrap>
         </HeaderServiceBox>
       </HeaderService>
     </PostHead>
   );
 }
+
+const ToggleAddEmoji = styled.div`
+  min-width: 26.4rem;
+  display: flex;
+  padding: 24px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-around;
+  gap: 10px;
+  border-radius: 8px;
+  border: 1px solid #b6b6b6;
+  background: #fff;
+  box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.08);
+  background-color: beige;
+  position: absolute;
+  right: 19rem;
+  top: 6rem;
+  z-index: 1;
+  /* @media all and (max-width: 1248px) {
+    right: 20rem;
+  } */
+  @media all and (max-width: 768px) {
+    right: 8rem;
+  }
+`;
+
 const EmojiPickerWrap = styled.div`
   position: absolute;
+  right: 0;
   top: 6rem;
   z-index: 1;
 `;
@@ -104,6 +173,7 @@ const ToName = styled.h2`
   font-size: 2.8rem;
 `;
 const HeaderServiceBox = styled.div`
+  /* min-width: 41.8rem; */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -173,6 +243,36 @@ const Line = styled.div`
   width: 1px;
   height: 2.8rem;
   background-color: #eee;
+`;
+const ShareBox = styled.div`
+  width: 13.8rem;
+  height: 10rem;
+  position: absolute;
+  top: 6rem;
+  right: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: #fff;
+  box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.08);
+  z-index: 1;
+  @media all and (max-width: 1248px) {
+    right: 0rem;
+  }
+`;
+const Share = styled.div`
+  width: 100%;
+  text-align: center;
+  padding: 12px 16px;
+  color: #181818;
+  font-size: 1.6rem;
+  cursor: pointer;
+  &:hover {
+    background-color: #f6f6f6;
+  }
 `;
 
 export default PostHeader;
