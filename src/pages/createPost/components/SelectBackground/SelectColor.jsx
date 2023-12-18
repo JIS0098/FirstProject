@@ -28,14 +28,9 @@ const ColorPalette = ({ onSelectColor, selectedColor }) => {
 
   return (
     <PaletteWrapper>
-      {Object.keys(COLOR).map((key) => (
-        <ColorButton
-          type="button"
-          key={key}
-          onClick={() => handleColorClick(COLOR[key])}
-          style={{ background: COLOR[key] }}
-        >
-          {selectedColor === COLOR[key] && <CheckIcon src={selectedIcon} alt="선택된 색상" />}
+      {Object.entries(COLOR).map(([key, value]) => (
+        <ColorButton type="button" key={key} onClick={() => handleColorClick(value)} $bgColor={value}>
+          {selectedColor === value && <CheckIcon src={selectedIcon} alt="선택된 색상" />}
         </ColorButton>
       ))}
     </PaletteWrapper>
@@ -48,6 +43,7 @@ const ColorButton = styled.button`
   height: 16.8rem;
   border-radius: 1.6rem;
   cursor: pointer;
+  background-color: ${({ theme, $bgColor }) => theme.backgroundColor[$bgColor]};
 
   &:hover {
     box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
