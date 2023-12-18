@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import arrow_down from '../../../assets/icon/arrow_down.svg';
-import useToggle from '../../../hooks/useToggle';
-import { StyledTitle } from '../commonStyled';
+import React, { useState } from "react";
+import styled from "styled-components";
+import arrow_down from "../../../assets/icon/arrow_down.svg";
+import useToggle from "../../../hooks/useToggle";
+import { StyledTitle } from "../CommonStyled";
 
 const RelationshipInputBox = ({ data, setData }) => {
   const [relationship, relationshipToggle] = useToggle();
-  const relationshipList = ['지인', '동료', '가족', '친구'];
-  const [value, setValue] = useState('');
+  const relationshipList = ["지인", "동료", "가족", "친구"];
+  const [value, setValue] = useState("");
 
-  const handleItemClick = item => {
+  const handleItemClick = (item) => {
     setValue(item);
     relationshipToggle(false);
     setData({ ...data, relationship: item });
@@ -19,17 +19,18 @@ const RelationshipInputBox = ({ data, setData }) => {
     <StyledRelationshipInputBox>
       <StyledTitle>상대와의 관계</StyledTitle>
       <div onClick={relationshipToggle}>
-        {value === '' ? '지인' : value}
+        {value === "" ? "지인" : value}
         <img src={arrow_down} />
       </div>
       {relationship ? (
         <ul>
-          {relationshipList.map(item => (
+          {relationshipList.map((item) => (
             <li
               onClick={() => {
                 handleItemClick(item);
               }}
-              key={item}>
+              key={item}
+            >
               {item}
             </li>
           ))}
