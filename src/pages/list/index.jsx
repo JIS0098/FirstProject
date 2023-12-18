@@ -2,13 +2,28 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { getRollingPaperAll } from "../../api";
 import { Button } from "../../components/commons/Button";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import CardSection from "../../components/domains/list/CardSection";
+import SearchBar from "components/commons/SearchBar";
+
 function ListPage() {
-  const LIST_TITLE = ["인기 롤링 페이퍼 🔥", "최근에 만든 롤링 페이퍼 ⭐️"];
+  const LIST_TITLE = ["인기 롤링 페이퍼 🔥", "최근에 만든 롤링 페이퍼 ⭐️", "검색 결과 🔍"];
   const [loading, setLoading] = useState(false);
   const [sortByMost, setSortByMost] = useState([]);
   const [sortByRecent, setSortByRecent] = useState([]);
+  const [searchDatas, setSearchDatas] = useState([]); // 검색한 값
+  const [searchParams, setSearchParams] = useSearchParams();
+  const qureyValue = searchParams.get("name");
+  const [searchValue, setSearchValue] = useState(qureyValue || ""); // 입력한 값
+
+  const getSerchValue = (e) => {
+    setSearchValue(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSearchParams(searchValue ? { name: searchValue } : {});
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -21,6 +36,9 @@ function ListPage() {
         //가장 최근에 만들어진 순.
         const recent = [...data].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 10);
         setSortByRecent(recent);
+        //검색 필터
+        const searchResults = data.filter(({ name }) => name.toLowerCase().includes(qureyValue.toLowerCase()));
+        setSearchDatas(searchResults);
       })
       .finally(() => setLoading(false));
   }, []);
@@ -29,7 +47,9 @@ function ListPage() {
   if (loading) return <div>loading...</div>;
   return (
     <>
+      <SearchBar onChange={getSerchValue} value={searchValue} onSubmit={handleSubmit} />
       <Layout>
+        <CardSection title={LIST_TITLE[2]} recipients={searchDatas} />
         <CardSection title={LIST_TITLE[0]} recipients={sortByMost} />
         <CardSection title={LIST_TITLE[1]} recipients={sortByRecent} />
       </Layout>
