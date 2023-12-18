@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Link, useNavigate, useLocation, useParams } from "react-router-dom";
-import Emoji from "../../components/commons/Emoji";
+import { Link, useNavigate } from "react-router-dom";
 import Card from "../../components/commons/Card";
 import { deleteCard, deletePage } from "../../api/testFeatData";
 
@@ -81,26 +80,6 @@ const BackList = styled.div`
   background: #fff;
   color: black;
 `;
-const PostCard = styled.div`
-  width: 38.4rem;
-  height: 28rem;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 16px;
-  background-color: #fff;
-  box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.08);
-  padding: 2.8rem 2.4rem;
-  cursor: pointer;
-  @media all and (max-width: 1248px) {
-    width: 100%;
-    max-width: 50rem;
-  }
-  @media all and (max-width: 768px) {
-    width: 100%;
-  }
-`;
 
 const DeleteButton = styled.div`
   width: 9.2rem;
@@ -115,19 +94,7 @@ const DeleteButton = styled.div`
   background: #9935ff;
   cursor: pointer;
 `;
-const EditDeleteButton = styled(DeleteButton)`
-  display: none;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  background: #fff;
-  color: black;
-  @media all and (max-width: 1248px) {
-    display: flex;
-    position: absolute;
-    top: 8rem;
-    right: 2.5rem;
-  }
-`;
+
 const PostDeleteButton = styled(DeleteButton)`
   position: absolute;
   top: 8rem;
@@ -170,20 +137,6 @@ const PostInner = styled.div`
     max-width: 50rem;
     grid-template-columns: repeat(1, 1fr);
   }
-`;
-
-// 공통된거
-
-const ImgBox = styled.div`
-  width: 5.6rem;
-  height: 5.6rem;
-  border-radius: 100px;
-  background-color: #555;
-  padding: 1.6rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
 `;
 
 export default PostWrap;

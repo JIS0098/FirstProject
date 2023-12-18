@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
 import MoreCardImg from "../../assets/icon/plus.svg";
-import Emoji from "../../components/commons/Emoji";
 import Card from "../../components/commons/Card";
 
 function PostWrap({ data, toggleModal, setModalClick }) {
