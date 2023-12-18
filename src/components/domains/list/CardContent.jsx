@@ -25,16 +25,21 @@ const Container = styled.div`
 const Name = styled.span`
   overflow: hidden;
   text-overflow: ellipsis;
-  color: ${({ $bgUrl, theme }) => ($bgUrl ? "white" : theme.nameColor)};
+  color: ${({ theme }) => theme.nameColor};
   font-size: 2.4rem;
   font-weight: 700;
   line-height: 3.6rem;
   letter-spacing: -0.24px;
   font-style: normal;
-  /* Style */
-  background: rgba(0, 0, 0, 0.5);
-  padding: 0.2rem 1rem;
-  border-radius: 1.5rem;
+
+  ${({ $bgUrl }) =>
+    $bgUrl &&
+    `
+    background: rgba(0, 0, 0, 0.5);
+    padding: 0.2rem 1rem;
+    border-radius: 1.5rem;
+    color: white;
+  `}
 `;
 
 const Author = styled.span`
@@ -45,40 +50,16 @@ const Author = styled.span`
   letter-spacing: -0.16px;
   font-style: normal;
   /* Style */
+  ${({ $bgUrl }) =>
+    $bgUrl &&
+    `
   background: rgba(0, 0, 0, 0.5);
   padding: 0 0.5rem;
   border-radius: 1.5rem;
+  `}
 `;
 
 const AuthorCount = styled(Author)`
   font-weight: 700;
   background: none;
 `;
-
-// const ProfileIcon = styled.div`
-//   position: absolute;
-//   left: ${({ $left }) => $left}rem;
-//   width: 2.8rem;
-//   height: 2.8rem;
-//   border-radius: 50%;
-//   border: 2px solid white;
-// `;
-
-// const ProfileImg = styled(ProfileIcon)`
-//   background-color: gray;
-// `;
-
-// const AdditionalProfiles = styled(ProfileIcon)`
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   background-color: white;
-// `;
-
-// const ProfileImages = styled.div`
-//   position: relative;
-//   display: flex;
-//   align-items: center;
-//   width: 10rem;
-//   height: 3rem;
-// `;

@@ -10,6 +10,7 @@ function CardItem({ recipient }) {
 
   const bgImageUrl = imageLoaded ? backgroundImageURL : null;
 
+  //url을 불러오지 못하면 null처리
   useEffect(() => {
     const img = new Image();
     img.src = backgroundImageURL;
@@ -19,16 +20,16 @@ function CardItem({ recipient }) {
 
   return (
     <Container $bgUrl={bgImageUrl} $bgColor={backgroundColor}>
-      <Wrapper $bgUrl={bgImageUrl} $bgColor={backgroundColor}>
-        <Link to={`/post/${recipient.id}`}>
+      <Link to={`/post/${recipient.id}`}>
+        <Wrapper $bgUrl={bgImageUrl} $bgColor={backgroundColor}>
           <CardContent name={name} messages={recentMessages} messageCount={messageCount} $bgUrl={bgImageUrl} />
-        </Link>
-        <TopReactions>
-          {topReactions.map((data) => (
-            <Reactions key={data.id} emoji={data.emoji} count={data.count} />
-          ))}
-        </TopReactions>
-      </Wrapper>
+          <TopReactions>
+            {topReactions.map((data) => (
+              <Reactions key={data.id} emoji={data.emoji} count={data.count} />
+            ))}
+          </TopReactions>
+        </Wrapper>
+      </Link>
     </Container>
   );
 }
@@ -62,6 +63,7 @@ const Wrapper = styled.div`
 const TopReactions = styled.div`
   display: flex;
   width: 100%;
+  height: 5.3rem;
   gap: 0.8rem;
   padding-top: 1.6rem;
   border-top: 0.1rem solid rgba(0, 0, 0, 0.12);
