@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import arrow_down from "../../assets/icon/arrow_down.svg";
-import useToggle from "../../hooks/useToggle";
-import { StyledTitle } from "./CommonStyled";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import arrow_down from '../../../assets/icon/arrow_down.svg';
+import useToggle from '../../../hooks/useToggle';
+import { StyledTitle } from '../commonStyled';
 
 const RelationshipInputBox = ({ data, setData }) => {
   const [relationship, relationshipToggle] = useToggle();
-  const relationshipList = ["지인", "동료", "가족", "친구"];
-  const [value, setValue] = useState("");
+  const relationshipList = ['지인', '동료', '가족', '친구'];
+  const [value, setValue] = useState('');
 
-  const handleItemClick = (item) => {
+  const handleItemClick = item => {
     setValue(item);
     relationshipToggle(false);
     setData({ ...data, relationship: item });
@@ -18,19 +18,18 @@ const RelationshipInputBox = ({ data, setData }) => {
   return (
     <StyledRelationshipInputBox>
       <StyledTitle>상대와의 관계</StyledTitle>
-      <div>
-        {value === "" ? "지인" : value}
-        <img src={arrow_down} onClick={relationshipToggle} />
+      <div onClick={relationshipToggle}>
+        {value === '' ? '지인' : value}
+        <img src={arrow_down} />
       </div>
       {relationship ? (
         <ul>
-          {relationshipList.map((item) => (
+          {relationshipList.map(item => (
             <li
               onClick={() => {
                 handleItemClick(item);
               }}
-              key={item}
-            >
+              key={item}>
               {item}
             </li>
           ))}
@@ -56,6 +55,7 @@ const StyledRelationshipInputBox = styled.div`
     font-weight: 400;
     line-height: 2.6rem;
     letter-spacing: -0.016rem;
+    cursor: pointer;
   }
 
   & ul {
@@ -76,12 +76,10 @@ const StyledRelationshipInputBox = styled.div`
     letter-spacing: -0.016rem;
     list-style-type: none;
     background-color: white;
+    cursor: pointer;
     &:hover {
       background-color: var(--gray-300, #f0f0f0);
     }
-  }
-  & img {
-    cursor: pointer;
   }
 `;
 

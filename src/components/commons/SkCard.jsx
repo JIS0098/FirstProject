@@ -112,7 +112,7 @@ const CardMsg = styled.div`
   justify-content: space-between;
 `;
 
-const Msg1 = styled.h2`
+const Msg1 = styled.div`
   background: #ccc;
   height: 2rem;
   width: 100%;
@@ -122,7 +122,7 @@ const Msg1 = styled.h2`
   overflow: hidden;
 `;
 
-const Msg2 = styled.p`
+const Msg2 = styled.div`
   background: #ccc;
   height: 2rem;
   border-radius: 8px;
@@ -130,7 +130,7 @@ const Msg2 = styled.p`
   overflow: hidden;
 `;
 
-const Date = styled.p`
+const Date = styled.div`
   background: #ccc;
   height: 1.5rem;
   border-radius: 8px;
