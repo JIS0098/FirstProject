@@ -1,3 +1,4 @@
+
 import React from "react";
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
@@ -145,3 +146,4 @@ const ImgBox = styled.div`
 `;
 
 export default PostWrap;
+

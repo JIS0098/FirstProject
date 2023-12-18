@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router";
-import CardSection from "./CardSection";
-import { testDataAll } from "../../api/testFeatData";
+import { getRollingPaperAll } from "../../api";
 import { Button } from "../../components/commons/Button";
 import { Link } from "react-router-dom";
+import CardSection from "../../components/domains/list/CardSection";
 function ListPage() {
-  const navigation = useNavigate();
   const LIST_TITLE = ["인기 롤링 페이퍼 🔥", "최근에 만든 롤링 페이퍼 ⭐️"];
   const [loading, setLoading] = useState(false);
   const [sortByMost, setSortByMost] = useState([]);
@@ -14,14 +12,14 @@ function ListPage() {
 
   useEffect(() => {
     setLoading(true);
-    testDataAll()
+    getRollingPaperAll()
       .then((res) => res.results)
       .then((data) => {
         //가장 메시지가 많은 순.
-        const like = [...data].sort((a, b) => b.messageCount - a.messageCount);
+        const like = [...data].sort((a, b) => b.messageCount - a.messageCount).slice(0, 10);
         setSortByMost(like);
         //가장 최근에 만들어진 순.
-        const recent = [...data].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        const recent = [...data].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 10);
         setSortByRecent(recent);
       })
       .finally(() => setLoading(false));

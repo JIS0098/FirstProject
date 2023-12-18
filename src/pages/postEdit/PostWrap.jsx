@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Link, useNavigate, useLocation, useParams } from "react-router-dom";
@@ -187,3 +188,4 @@ const ImgBox = styled.div`
 `;
 
 export default PostWrap;
+

@@ -1,13 +1,13 @@
-import React from "react";
-import styled from "styled-components";
-import { StyledTitle } from "../CommonStyled";
-import WriteEditorBox from "./WriteEditorBox";
+import React from 'react';
+import styled from 'styled-components';
+import { StyledTitle } from '../commonStyled';
+import CustomWriteEditor from './WriteEditorBox';
 
 const WriteInputBox = ({ data, setData }) => {
   return (
     <StyledWriteInputBox>
       <StyledTitle>내용 작성하기</StyledTitle>
-      <WriteEditorBox data={data} setData={setData} />
+      <CustomWriteEditor data={data} setData={setData} />
     </StyledWriteInputBox>
   );
 };

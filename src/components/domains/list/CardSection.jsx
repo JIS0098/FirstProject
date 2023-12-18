@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { ReactComponent as ALeft } from "../../assets/icon/arrow_left.svg";
-import { ReactComponent as ARight } from "../../assets/icon/arrow_right.svg";
+import { ReactComponent as ALeft } from "assets/icon/arrow_left.svg";
+import { ReactComponent as ARight } from "assets/icon/arrow_right.svg";
 import CardItem from "./CardItem";
+import { useDeviceSize, useSwipe } from "hooks";
+import { ITEMS_PER_PAGE } from "constants";
 import { CardList } from "./CardList";
-import useSwipe from "../../hooks/useSwipe";
-import { CARD_WIDTH, DEVICE_MAX_SIZE, ITEMS_PER_PAGE } from "../../constants";
-import useDeviceSize from "../../hooks/useDeviceSize";
+import { DEVICE_MAX_SIZE } from "constants";
+import { CARD_WIDTH } from "constants";
 
 function CardSection({ title, recipients }) {
   const { isMobile, isTablet, isNotebook, isPC } = useDeviceSize();
