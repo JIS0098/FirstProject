@@ -29,7 +29,7 @@ const WriteEditorBox = ({ data, setData }) => {
   const formats = ['bold', 'italic', 'strike', 'color', 'background', 'font', 'size', 'align'];
   const modules = {
     toolbar: [
-      ['bold', 'italic', 'strike', { color: [] }, 'link'],
+      ['bold', 'italic', 'strike', { color: [] }],
       [{ align: '' }, { align: 'center' }, { align: 'right' }],
       [{ font: Font.whitelist }, { size: Size.whitelist }],
     ],
