@@ -1,5 +1,4 @@
 
-
 export const FontSizeList = [
     { size: '40', content: '40' },
     { size: '32', content: '32' },

@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { StyledTitle } from '../commonStyled';
+import { StyledTitle } from '../CommonStyled';
 import person from '../../../assets/icon/person.svg';
 import color from '../../../styles/color';
 import profileImg1 from '../../../assets/img/profileImg1.png';
 import profileImg2 from '../../../assets/img/profileImg2.png';
 
 const ProfileLayout = ({ data, setData }) => {
-  const [profileImage, setProfileImage] = useState();
+  const [profileImage, setProfileImage] = useState(profileImg1);
   const profileImageList = [profileImg1, profileImg2];
   const handleProfileImageChange = item => {
     setProfileImage(item);

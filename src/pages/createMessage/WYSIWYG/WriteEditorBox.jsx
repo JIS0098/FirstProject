@@ -2,7 +2,7 @@ import { Quill } from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import '../../../styles/fonts.css';
 import WriteEditor from '../WYSIWYG/WriteEditor';
-import { FontList, FontSizeList } from './constantsFont';
+import { FontList, FontSizeList } from './ConstantsFont';
 
 const WriteEditorBox = ({ data, setData }) => {
   const Font = Quill.import('formats/font');

@@ -20,10 +20,11 @@ module.exports = {
     ecmaVersion: "latest",
     sourceType: "module",
   },
-  plugins: ["react"],
+  plugins: ["react", "react-hooks"],
   rules: {
     "react/react-in-jsx-scope": 0,
     "no-unused-vars": "warn",
     "react/prop-types": "off",
+    "react-hooks/exhaustive-deps": "warn",
   },
 };

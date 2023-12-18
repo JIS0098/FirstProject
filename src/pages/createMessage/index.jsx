@@ -16,13 +16,14 @@ const CreateMessage = () => {
     team: '2-1',
     recipientId: +id,
     sender: '',
-    profileImageURL: 'https://ibb.co/CBLszQC',
-    relationship: '',
+    profileImageURL: null, //임시로 이미지 url 넣어둠
+    relationship: '지인',
     content: '',
     font: 'Pretendard',
   });
 
-  async function PostMessageData(postData) {
+  //포스트 요청
+  async function postMessageData(postData) {
     console.log('포스트', postData);
     try {
       const res = await fetch(`https://rolling-api.vercel.app/2-1/recipients/${postData?.recipientId}/messages/`, {
@@ -43,9 +44,10 @@ const CreateMessage = () => {
     }
   }
 
+  //포스트 응답 및 페이지 이동
   const handleCreateMessage = async () => {
     try {
-      const resData = await PostMessageData(data);
+      const resData = await postMessageData(data);
       navigate(`/post/${resData?.recipientId}`);
       console.log('응답', resData);
     } catch (error) {
