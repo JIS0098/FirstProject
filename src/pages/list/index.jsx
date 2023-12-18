@@ -11,6 +11,7 @@ function ListPage() {
   const [sortByRecent, setSortByRecent] = useState([]);
   const [allData, setAllData] = useState([]);
   const [filtering, setFiltering] = useState("");
+  const [onInput, setOnInput] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -34,18 +35,28 @@ function ListPage() {
     [allData, filtering]
   );
 
-  console.log(filteringData);
-
   const handleFiltering = (e) => {
     setFiltering(e.target.value);
+    setOnInput(e.target.value.length > 0);
   };
 
   return (
     <>
-      <input onChange={handleFiltering} />
       <Layout>
-        <CardSection loading={loading} title={LIST_TITLE[0]} recipients={sortByMost} />
-        <CardSection loading={loading} title={LIST_TITLE[1]} recipients={sortByRecent} />
+        <input onChange={handleFiltering} />
+        {onInput ? (
+          //To Do. 필터링 디자인 구현
+          filteringData.length > 0 ? (
+            filteringData.map((item, index) => <div key={index}>{item.name}</div>)
+          ) : (
+            <div>검색 결과가 없습니다.</div>
+          )
+        ) : (
+          <>
+            <CardSection loading={loading} title={LIST_TITLE[0]} recipients={sortByMost} />
+            <CardSection loading={loading} title={LIST_TITLE[1]} recipients={sortByRecent} />
+          </>
+        )}
       </Layout>
       <Link to="/post">
         <StyledGoToListButtonContainer>

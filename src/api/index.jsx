@@ -57,13 +57,13 @@ export async function getRollingPaperAll() {
 
 /**
  * 새로운 롤링 페이퍼를 생성.
- * @param {Object} postData - 저장될 옵션 
+ * @param {Object} postData - 저장될 옵션
  * {
-    "team": "string",
-    "name": "string",
-    "backgroundColor": "beige",
-    "backgroundImageURL": "string"
-  }
+ *   "team": "string",
+ *   "name": "string",
+ *   "backgroundColor": "beige",
+ *   "backgroundImageURL": "string"
+ * }
  * @returns - 생성된 페이퍼에 대한 데이터.
  */
 export async function createRollingPaper(postData) {
@@ -74,6 +74,10 @@ export async function createRollingPaper(postData) {
 /**
  *
  * @param {Object} dataEmoji
+ * {
+ *   "emoji": "string",
+ *   "type": "increase" <-- default
+ * }
  * @param {String} pageId - 가지고 올 페이지 아이디
  * @returns
  */
