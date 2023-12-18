@@ -1,3 +1,4 @@
+
 const BASE_URL = "https://rolling-api.vercel.app/2-1";
 
 async function fetcher(url) {
@@ -59,7 +60,7 @@ export async function deletePage(pageId) {
   }
 }
 
-export async function deleteCard() {
+export async function deleteCard(deleteData) {
   try {
     const response = await fetch(`${BASE_URL}/messages/1178/`, {
       method: "DELETE",

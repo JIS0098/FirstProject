@@ -3,6 +3,7 @@ import 'react-quill/dist/quill.snow.css';
 import '../../../styles/fonts.css';
 import WriteEditor from '../WYSIWYG/WriteEditor';
 import { FontList, FontSizeList } from './ConstantsFont';
+import styled from 'styled-components';
 
 const WriteEditorBox = ({ data, setData }) => {
   const Font = Quill.import('formats/font');
@@ -21,7 +22,6 @@ const WriteEditorBox = ({ data, setData }) => {
     ],
   };
 
-  console.log();
   const handleContentChange = content => {
     setData({ ...data, content: content });
   };
@@ -29,6 +29,7 @@ const WriteEditorBox = ({ data, setData }) => {
   return (
     <div>
       <WriteEditor
+        onBlur={() => {}}
         style={{ height: '22.5rem', marginBottom: '5rem' }}
         theme="snow"
         modules={modules}
@@ -39,8 +40,16 @@ const WriteEditorBox = ({ data, setData }) => {
         fontList={FontList}
         placeholder="내용을 입력해주세요."
       />
+      {/* {data.content === '' && <StyledAlertText>값을 입력해 주세요.</StyledAlertText>} */}
     </div>
   );
 };
+
+const StyledAlertText = styled.div`
+  padding-top: 1rem;
+  font-size: 1.6rem;
+  font-weight: 300;
+  color: #dc3a3a;
+`;
 
 export default WriteEditorBox;

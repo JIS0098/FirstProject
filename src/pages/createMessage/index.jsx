@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-
 import styled from 'styled-components';
 import NameInput from '../../components/commons/NameInput';
 import CreateButton from '../../components/commons/CreateButton';
 import ProfileLayout from './components/ProfileLayout';
 import RelationshipInputBox from './components/RelationshipInputBox';
-import profileImg1 from '../../assets/img/profileImg1.png';
 import WriteInputBox from './WYSIWYG';
+import { defaultProfileImg } from '../../assets/ProfileImgUrls';
 
 const CreateMessage = () => {
   const navigate = useNavigate();
@@ -16,8 +15,8 @@ const CreateMessage = () => {
   const [data, setData] = useState({
     team: '2-1',
     recipientId: +id,
-    sender: '',
-    profileImageURL: profileImg1, //임시로 이미지 url 넣어둠
+    sender: null,
+    profileImageURL: defaultProfileImg,
     relationship: '지인',
     content: '',
     font: 'Pretendard',
@@ -61,6 +60,7 @@ const CreateMessage = () => {
     setData({ ...data, sender: name });
   };
 
+  console.log(data);
   return (
     <MessageLayout>
       <MessageBox>
@@ -71,7 +71,12 @@ const CreateMessage = () => {
         <RelationshipInputBox data={data} setData={setData} />
         <WriteInputBox data={data} setData={setData} />
         <CreateButtonBox>
-          <CreateButton onClick={handleCreateMessage} mobileWidth="100%" tabletWidth="100%" disabled={!isName} />
+          <CreateButton
+            onClick={data.content !== '' ? handleCreateMessage : null}
+            mobileWidth="100%"
+            tabletWidth="100%"
+            disabled={!isName}
+          />
         </CreateButtonBox>
       </MessageBox>
     </MessageLayout>
