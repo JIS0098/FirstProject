@@ -37,11 +37,12 @@ function ListPage() {
         const recent = [...data].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 10);
         setSortByRecent(recent);
         //검색 필터
-        const searchResults = data.filter(({ name }) => name.toLowerCase().includes(qureyValue.toLowerCase()));
+        const searchResults = qureyValue ? data.filter(({ name }) => name.includes(qureyValue.toLowerCase())) : [];
+        console.log("이거는", searchResults);
         setSearchDatas(searchResults);
       })
       .finally(() => setLoading(false));
-  }, []);
+  }, [qureyValue, searchParams]);
 
   //스켈레톤 UI 만들어지면 작업할 곳.
   if (loading) return <div>loading...</div>;
@@ -49,7 +50,11 @@ function ListPage() {
     <>
       <SearchBar onChange={getSerchValue} value={searchValue} onSubmit={handleSubmit} />
       <Layout>
-        <CardSection title={LIST_TITLE[2]} recipients={searchDatas} />
+        {searchDatas.length === 0 ? (
+          <StyledTest>테스트 입니다. (값 없을시 표시화면)</StyledTest>
+        ) : (
+          <CardSection title={LIST_TITLE[2]} recipients={searchDatas} />
+        )}
         <CardSection title={LIST_TITLE[0]} recipients={sortByMost} />
         <CardSection title={LIST_TITLE[1]} recipients={sortByRecent} />
       </Layout>
@@ -79,6 +84,14 @@ const StyledGoToListButtonContainer = styled.div`
   justify-content: center;
   margin-bottom: 6rem;
   min-width: 360px;
+`;
+
+const StyledTest = styled.p`
+  margin-top: 5rem;
+  font-size: 3rem;
+  font-weight: 700;
+  color: white;
+  background-color: violet;
 `;
 
 // const FloatingButton = styled.button`

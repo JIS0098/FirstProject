@@ -8,6 +8,7 @@ function SearchBar({ onChange, value, onSubmit }) {
           placeholder="찾고싶은 롤링페이퍼를 검색해보세요!"
           type="text"
           name="name"
+          autocomplete="off"
           value={value}
           onChange={onChange}
         />
