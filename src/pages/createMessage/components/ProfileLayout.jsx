@@ -37,6 +37,7 @@ const StyledProfileImgBox = styled.div`
   align-items: center;
   gap: 3.2rem;
 `;
+
 const StyledPreviewImgBox = styled.div`
   display: flex;
   justify-content: center;

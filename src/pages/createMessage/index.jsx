@@ -23,7 +23,7 @@ const CreateMessage = () => {
   });
 
   //포스트 요청
-  async function postMessageData(postData) {
+  const postMessageData = async postData => {
     console.log('포스트', postData);
     try {
       const res = await fetch(`https://rolling-api.vercel.app/2-1/recipients/${postData?.recipientId}/messages/`, {
@@ -33,16 +33,14 @@ const CreateMessage = () => {
         },
         body: JSON.stringify(postData),
       });
-
       if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}`);
       }
-
       return res.json();
     } catch (e) {
       console.error('네트워크 요청 에러:', e);
     }
-  }
+  };
 
   //포스트 응답 및 페이지 이동
   const handleCreateMessage = async () => {
@@ -60,7 +58,6 @@ const CreateMessage = () => {
     setData({ ...data, sender: name });
   };
 
-  console.log(data);
   return (
     <MessageLayout>
       <MessageBox>
@@ -72,10 +69,10 @@ const CreateMessage = () => {
         <WriteInputBox data={data} setData={setData} />
         <CreateButtonBox>
           <CreateButton
-            onClick={data.content !== '' ? handleCreateMessage : null}
             mobileWidth="100%"
             tabletWidth="100%"
-            disabled={!isName}
+            disabled={!isName || data.content === ''}
+            onClick={handleCreateMessage}
           />
         </CreateButtonBox>
       </MessageBox>
