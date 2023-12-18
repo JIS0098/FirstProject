@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { StyledTitle } from "../CommonStyled";
+import { StyledTitle } from "../commonStyled";
 import person from "../../../assets/icon/person.svg";
 import color from "../../../styles/color";
 import profileImg1 from "../../../assets/img/profileImg1.png";
