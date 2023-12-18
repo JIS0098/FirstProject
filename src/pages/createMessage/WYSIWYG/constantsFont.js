@@ -19,5 +19,9 @@ export const FontList = [
   ]
 
   export const FontColorList =[
-    
+    {color:'#000000',content:'#000000'},
+    {color:'#e60000',content:'#e60000' },
+    {color:'#ff9900' ,content:'#ff9900'}
   ]
+
+  

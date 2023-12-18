@@ -47,6 +47,12 @@ const StyledFontSize = ({ size, content }) => css`
   }
 `;
 
+const StyledFontColor = ({ color }) => css`
+  .ql-editor p > span[data-value='${color}'] {
+    font-size: 1.6rem;
+  }
+`;
+
 const WriteEditor = styled(ReactQuill)`
   .ql-editor p {
     font-size: 1.6rem;
@@ -84,6 +90,7 @@ const WriteEditor = styled(ReactQuill)`
   ${props => props.fontList && props.fontList.map(({ font, content }) => StyledFont({ font, content }))}
 
   ${props => props.sizeList && props.sizeList.map(({ size, content }) => StyledFontSize({ size, content }))}
+  ${props => props.colorList && props.colorList.map(color => StyledFontColor(color))}
 `;
 
 export default WriteEditor;
