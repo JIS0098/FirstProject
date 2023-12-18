@@ -1,11 +1,10 @@
-
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import Card from "../../components/commons/Card";
-import { deleteCard, deletePage } from "../../api/testFeatData";
+import { deletePage, deleteCardFromPage } from "api";
 
-function PostWrap({ data, setModalClick, modalClick, pageId }) {
+function PostWrap({ data, setModalClick, pageId }) {
   const [deleteList, setDeleteList] = useState([]);
   const navigate = useNavigate();
 
@@ -13,9 +12,13 @@ function PostWrap({ data, setModalClick, modalClick, pageId }) {
     setModalClick(i);
   };
 
-  const Delete = async (deleteList) => {
+  const Delete = async () => {
     try {
-      await deleteCard(deleteList);
+      await Promise.all(
+        deleteList.map(async (data) => {
+          await deleteCardFromPage(data.id);
+        })
+      );
       setDeleteList([]);
     } catch (e) {
       console.error(e);
@@ -24,8 +27,13 @@ function PostWrap({ data, setModalClick, modalClick, pageId }) {
     }
   };
 
-  const DeleteCardClick = () => {
-    setDeleteList((prev) => Array.from(new Set([...prev, modalClick])));
+  const DeleteCardClick = (id) => {
+    setDeleteList((prev) => [
+      ...prev,
+      {
+        id: id,
+      },
+    ]);
   };
 
   const clickdeletePage = async () => {
@@ -51,6 +59,7 @@ function PostWrap({ data, setModalClick, modalClick, pageId }) {
             clickCard(item.id);
           }}
           key={item.id}
+          id={item.id}
           profileImg={item.profileImageURL}
           name={item.sender}
           description={item.content}
@@ -141,4 +150,3 @@ const PostInner = styled.div`
 `;
 
 export default PostWrap;
-

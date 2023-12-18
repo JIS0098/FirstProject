@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import useToggle from "../../hooks/useToggle";
@@ -8,7 +7,7 @@ import addEmojiImg from "../../assets/icon/add-24.svg";
 import shareImg from "../../assets/icon/share-24.svg";
 import Emoji from "../../components/commons/Emoji";
 import EmojiPicker from "emoji-picker-react";
-import { emojiPost } from "../../api/testFeatData";
+import { addEmojiToPage } from "api";
 import { useLocation } from "react-router-dom";
 
 function PostHeader({
@@ -48,7 +47,7 @@ function PostHeader({
     if (selectEmoji !== null) {
       const emojiUpdate = async () => {
         try {
-          const result = await emojiPost(selectEmoji, pageId);
+          const result = await addEmojiToPage(selectEmoji, pageId);
           console.log(result);
           setEmojiUp(selectEmoji);
         } catch (e) {
@@ -79,7 +78,7 @@ function PostHeader({
               </Emoji>
             ))}
 
-            <EmojiButton src={downImg} onClick={toggleEmoji} />
+            <EmojiButton src={downImg} onClick={toggleEmoji} alt="downImg" />
             {emojiAdd ? (
               <ToggleAddEmoji>
                 {dataEmoji.slice(0, 6).map((item) => (
@@ -90,7 +89,7 @@ function PostHeader({
               </ToggleAddEmoji>
             ) : null}
             <ButtonWrap onClick={toggleEmojiPick}>
-              <img src={addEmojiImg} />
+              <img src={addEmojiImg} alt="addEmojiImg" />
               <ButtonWrapP>추가</ButtonWrapP>
             </ButtonWrap>
 
@@ -102,7 +101,7 @@ function PostHeader({
 
             <Line />
             <ButtonWrap onClick={toggleShare}>
-              <img src={shareImg} />
+              <img src={shareImg} alt="shareImg" />
             </ButtonWrap>
 
             {showShare ? (
@@ -273,4 +272,3 @@ const Share = styled.div`
 `;
 
 export default PostHeader;
-

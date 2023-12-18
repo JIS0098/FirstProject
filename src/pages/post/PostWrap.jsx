@@ -1,4 +1,3 @@
-
 import React from "react";
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
@@ -23,7 +22,7 @@ function PostWrap({ data, toggleModal, setModalClick }) {
       <PostCard>
         <Link to={`/post/${params.id}/message`}>
           <ImgBox>
-            <img src={MoreCardImg} />
+            <img src={MoreCardImg} alt="MoreCardImg" />
           </ImgBox>
         </Link>
       </PostCard>
@@ -145,4 +144,3 @@ const ImgBox = styled.div`
 `;
 
 export default PostWrap;
-

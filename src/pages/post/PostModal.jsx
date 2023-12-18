@@ -2,9 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import { setDayYMD } from "../../utils/setDayYMD";
 import { motion } from "framer-motion";
+import nullImg from "../../assets/icon/person.svg";
 
 function PostModal({ toggleModal, modalFind }) {
   const day = setDayYMD(modalFind.createdAt);
+  const progileImg = modalFind.profileImageURL ? modalFind.profileImageURL : nullImg;
 
   return (
     <Modal>
@@ -17,7 +19,7 @@ function PostModal({ toggleModal, modalFind }) {
         <From>
           <FromInner>
             <ImgBox>
-              <ModalImg src={modalFind.profileImageURL} />
+              <ModalImg src={progileImg} alt="profileImage" />
             </ImgBox>
             <FromBox>
               <FromP>

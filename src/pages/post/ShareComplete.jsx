@@ -5,7 +5,7 @@ import shareFin from "../../assets/icon/check.svg";
 function ShareComplete() {
   return (
     <ShareFinish>
-      <ShareImg src={shareFin} />
+      <ShareImg src={shareFin} alt="shareFin" />
       <ShareP>URL이 복사 되었습니다.</ShareP>
       <ShareClose>X</ShareClose>
     </ShareFinish>
