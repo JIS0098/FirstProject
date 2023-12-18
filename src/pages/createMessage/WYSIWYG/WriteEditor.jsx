@@ -29,6 +29,10 @@ const StyledFont = ({ font, content }) => css`
     font-family: '${font}';
     font-size: 1.6rem;
   }
+
+  .ql-font-나눔고딕 {
+    font-family: '나눔고딕', sans-serif;
+  }
 `;
 
 const StyledFontSize = ({ size, content }) => css`
