@@ -25,6 +25,7 @@ const AddImage = ({ onUpload }) => {
       <AddInput type="file" id="image" onChange={handleImageChange} />
       <Label htmlFor="image">
         <ButtonIcon src={addButtonIcon} alt="사진 추가 버튼" />
+        <p>파일 크기: 2MB 이하</p>
       </Label>
     </AddButton>
   );
@@ -40,6 +41,12 @@ const AddButton = styled.div`
   border-radius: 1.6rem;
   cursor: pointer;
   margin: 0;
+
+  p {
+    position: absolute;
+    left: 26%;
+    bottom: 3rem;
+  }
 
   @media screen and (max-width: 768px) {
     width: 15.4rem;

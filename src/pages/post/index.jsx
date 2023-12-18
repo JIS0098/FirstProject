@@ -71,7 +71,7 @@ function Post() {
 }
 
 const PostBack = styled.div`
-  background: ${(props) => (props.$backgroundURL ? `url(${props.backgroundURL})` : props.$backgroundColor)};
+  background: ${(props) => (props.$backgroundURL ? `url(${props.$backgroundURL})` : props.$backgroundColor)};
   background-size: cover;
   width: 100vw;
   min-height: 100vh;
