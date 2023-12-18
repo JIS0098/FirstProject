@@ -2,7 +2,6 @@ import React from "react";
 import addButtonIcon from "../../../../assets/icon/add-button.png";
 import styled from "styled-components";
 import color from "../../../../styles/color.js";
-import { supabase } from "../../../../api/supabase/supabaseClient.jsx";
 
 const AddImage = ({ onUpload }) => {
   const handleImageChange = async (e) => {
@@ -10,14 +9,8 @@ const AddImage = ({ onUpload }) => {
 
     if (file) {
       const filePath = `${file.name}`;
-      const { data, error } = await supabase.storage.from("background_images").upload(filePath, file);
 
-      if (error) {
-        console.error("Error uploading image:", error.message);
-      } else {
-        console.log("Image uploaded successfully:", data);
-        onUpload(filePath);
-      }
+      onUpload(filePath);
     }
   };
   return (

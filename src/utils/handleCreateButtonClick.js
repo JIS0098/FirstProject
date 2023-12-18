@@ -17,9 +17,6 @@ const handleCreateButtonClick = async ({ name, backgroundColor, backgroundImageU
     navigate(`/post/${resData?.id}`);
   } catch (error) {
     console.error(error);
-  } finally {
-    const resData = await createRollingPaper(newData);
-    navigate(`/post/${resData?.id}`);
   }
 };
 
