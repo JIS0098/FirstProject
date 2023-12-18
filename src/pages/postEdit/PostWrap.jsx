@@ -1,36 +1,27 @@
+
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation, useParams } from "react-router-dom";
 import Emoji from "../../components/commons/Emoji";
 import Card from "../../components/commons/Card";
 import { deleteCard, deletePage } from "../../api/testFeatData";
 
-function PostWrap({ data, showShare, emojiAdd, setShare, dataEmoji, setModalClick, modalClick }) {
+function PostWrap({ data, setModalClick, modalClick, pageId }) {
   const [deleteList, setDeleteList] = useState([]);
-  const location = useLocation();
-  const baseUrl = window.location.host;
-  const urlShare = async (text) => {
-    try {
-      await navigator.clipboard.writeText(text);
-      setShare(true);
-      setTimeout(() => {
-        setShare(false);
-      }, 4000);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  const navigate = useNavigate();
 
   const clickCard = (i) => {
     setModalClick(i);
   };
 
-  const Delete = async () => {
+  const Delete = async (deleteList) => {
     try {
       await deleteCard(deleteList);
       setDeleteList([]);
     } catch (e) {
       console.error(e);
+    } finally {
+      navigate(`/post/${pageId}`);
     }
   };
 
@@ -38,12 +29,23 @@ function PostWrap({ data, showShare, emojiAdd, setShare, dataEmoji, setModalClic
     setDeleteList((prev) => Array.from(new Set([...prev, modalClick])));
   };
 
-  console.log(deleteList);
+  const clickdeletePage = async () => {
+    try {
+      await deletePage(pageId);
+    } catch (e) {
+      console.log(e);
+    } finally {
+      navigate("/list");
+    }
+  };
 
   return (
     <PostInner>
-      <PageDeleteButton onClick={deletePage}>페이지 삭제</PageDeleteButton>
-      <PostDeleteButton onClick={Delete}>삭제하기</PostDeleteButton>
+      <BackListLink to={"/list"}>
+        <BackList>리스트로 이동</BackList>
+      </BackListLink>
+      <PageDeleteButton onClick={clickdeletePage}>페이지 삭제</PageDeleteButton>
+      <PostDeleteButton onClick={Delete}>삭제 & 나가기</PostDeleteButton>
       {data.map((item) => (
         <Card
           onClick={() => {
@@ -59,68 +61,45 @@ function PostWrap({ data, showShare, emojiAdd, setShare, dataEmoji, setModalClic
           DeleteCardClick={DeleteCardClick}
         />
       ))}
-
-      {emojiAdd ? (
-        <ToggleAddEmoji>
-          {dataEmoji.slice(0, 6).map((item) => (
-            <Emoji key={item.id}>
-              {item.emoji} {item.count}
-            </Emoji>
-          ))}
-        </ToggleAddEmoji>
-      ) : null}
-      {showShare ? (
-        <ShareBox>
-          <Share>카카오톡 공유</Share>
-          <Share onClick={() => urlShare(`${baseUrl}${location.pathname}`)}>URL 공유</Share>
-        </ShareBox>
-      ) : null}
     </PostInner>
   );
 }
-
-// const PostCard = styled.div`
-//   width: 38.4rem;
-//   height: 28rem;
-//   margin: 0 auto;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   border-radius: 16px;
-//   background-color: #fff;
-//   box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.08);
-//   padding: 2.8rem 2.4rem;
-//   cursor: pointer;
-//   @media all and (max-width: 1248px) {
-//     width: 100%;
-//     max-width: 50rem;
-//   }
-//   @media all and (max-width: 768px) {
-//     width: 100%;
-//   }
-// `;
-const ToggleAddEmoji = styled.div`
-  max-width: 26.4rem;
-  display: flex;
-  padding: 24px;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  justify-content: space-around;
-  gap: 10px;
-  border-radius: 8px;
-  border: 1px solid #b6b6b6;
-  background: #fff;
-  box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.08);
-  background-color: beige;
+const BackListLink = styled(Link)`
   position: absolute;
-  top: 0rem;
-  right: 23rem;
+  top: 8rem;
+  left: 2.5rem;
+  cursor: pointer;
+`;
+const BackList = styled.div`
+  width: 11.2rem;
+  height: 3.9rem;
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+  color: black;
+`;
+const PostCard = styled.div`
+  width: 38.4rem;
+  height: 28rem;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 16px;
+  background-color: #fff;
+  box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.08);
+  padding: 2.8rem 2.4rem;
+  cursor: pointer;
   @media all and (max-width: 1248px) {
-    right: 20rem;
+    width: 100%;
+    max-width: 50rem;
   }
   @media all and (max-width: 768px) {
-    right: auto;
-    left: 1rem;
+    width: 100%;
   }
 `;
 
@@ -137,19 +116,19 @@ const DeleteButton = styled.div`
   background: #9935ff;
   cursor: pointer;
 `;
-// const EditDeleteButton = styled(DeleteButton)`
-//   display: none;
-//   border-radius: 6px;
-//   border: 1px solid #ccc;
-//   background: #fff;
-//   color: black;
-//   @media all and (max-width: 1248px) {
-//     display: flex;
-//     position: absolute;
-//     top: 8rem;
-//     right: 2.5rem;
-//   }
-// `;
+const EditDeleteButton = styled(DeleteButton)`
+  display: none;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+  color: black;
+  @media all and (max-width: 1248px) {
+    display: flex;
+    position: absolute;
+    top: 8rem;
+    right: 2.5rem;
+  }
+`;
 const PostDeleteButton = styled(DeleteButton)`
   position: absolute;
   top: 8rem;
@@ -194,53 +173,19 @@ const PostInner = styled.div`
   }
 `;
 
-const ShareBox = styled.div`
-  width: 13.8rem;
-  height: 10rem;
-  position: absolute;
-  top: 0;
-  right: 4rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  background: #fff;
-  box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.08);
-
-  @media all and (max-width: 1248px) {
-    right: 2rem;
-  }
-  @media all and (max-width: 768px) {
-    right: auto;
-    left: 22rem;
-  }
-`;
-const Share = styled.div`
-  width: 100%;
-  text-align: center;
-  padding: 12px 16px;
-  color: #181818;
-  font-size: 1.6rem;
-  cursor: pointer;
-  &:hover {
-    background-color: #f6f6f6;
-  }
-`;
-
 // 공통된거
 
-// const ImgBox = styled.div`
-//   width: 5.6rem;
-//   height: 5.6rem;
-//   border-radius: 100px;
-//   background-color: #555;
-//   padding: 1.6rem;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   cursor: pointer;
-// `;
+const ImgBox = styled.div`
+  width: 5.6rem;
+  height: 5.6rem;
+  border-radius: 100px;
+  background-color: #555;
+  padding: 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+`;
 
 export default PostWrap;
+
