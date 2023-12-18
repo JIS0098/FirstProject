@@ -18,6 +18,7 @@ const SelectImage = ({ onImageSelect }) => {
       if (error) {
         console.error("Error fetching image list:", error.message);
       } else if (data) {
+        data.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
         const imagePaths = data.map((item) => item.name);
         setImageList(imagePaths);
         setSelectedImage(imagePaths[0]);
@@ -50,7 +51,7 @@ const SelectImage = ({ onImageSelect }) => {
   );
 };
 
-const ImageList = ({ imageList, selectedImage, handleImageChange }) => {
+const ImageList = ({ imageList, selectedImage, handleImageChange, sort }) => {
   return (
     <>
       {imageList.map((itemPath) => (
@@ -60,6 +61,7 @@ const ImageList = ({ imageList, selectedImage, handleImageChange }) => {
             src={`https://gjbkkhzzbcjprpxlhdlu.supabase.co/storage/v1/object/public/background_images/${itemPath}`}
             alt={`Image ${itemPath}`}
             onClick={() => handleImageChange(itemPath)}
+            $sort={sort}
             style={{ opacity: selectedImage === itemPath && 0.5 }}
           />
           {selectedImage === itemPath && <CheckIcon src={selectedIcon} alt="선택된 이미지" />}
