@@ -5,7 +5,8 @@ import EmojiPreview from "../assets/img/EmojiPreview.png";
 import { Link } from "react-router-dom";
 import { Button } from "../components/commons/Button";
 import { motion } from "framer-motion";
-import SkCard from "../components/commons/SkCard";
+import SkPostCard from "../components/commons/SkPostCard";
+import SkListCard from "components/commons/SkListCard";
 
 function Landing({ thema }) {
   return (
@@ -61,7 +62,8 @@ function Landing({ thema }) {
             </Button>
           </Link>
         </StyledGoToListButtonContainer>
-        <SkCard />
+        <SkPostCard />
+        <SkListCard />
       </StyledMainContainer>
     </>
   );
