@@ -7,7 +7,7 @@ import profileImg1 from '../../../assets/img/profileImg1.png';
 import profileImg2 from '../../../assets/img/profileImg2.png';
 
 const ProfileLayout = ({ data, setData }) => {
-  const [profileImage, setProfileImage] = useState(profileImg1);
+  const [profileImage, setProfileImage] = useState();
   const profileImageList = [profileImg1, profileImg2];
   const handleProfileImageChange = item => {
     setProfileImage(item);

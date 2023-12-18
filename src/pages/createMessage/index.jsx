@@ -6,6 +6,7 @@ import NameInput from '../../components/commons/NameInput';
 import CreateButton from '../../components/commons/CreateButton';
 import ProfileLayout from './components/ProfileLayout';
 import RelationshipInputBox from './components/RelationshipInputBox';
+import profileImg1 from '../../assets/img/profileImg1.png';
 import WriteInputBox from './WYSIWYG';
 
 const CreateMessage = () => {
@@ -16,7 +17,7 @@ const CreateMessage = () => {
     team: '2-1',
     recipientId: +id,
     sender: '',
-    profileImageURL: null, //임시로 이미지 url 넣어둠
+    profileImageURL: profileImg1, //임시로 이미지 url 넣어둠
     relationship: '지인',
     content: '',
     font: 'Pretendard',
