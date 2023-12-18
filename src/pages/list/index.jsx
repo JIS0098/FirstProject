@@ -26,12 +26,11 @@ function ListPage() {
   }, []);
 
   //스켈레톤 UI 만들어지면 작업할 곳.
-  if (loading) return <div>loading...</div>;
   return (
     <>
       <Layout>
-        <CardSection title={LIST_TITLE[0]} recipients={sortByMost} />
-        <CardSection title={LIST_TITLE[1]} recipients={sortByRecent} />
+        <CardSection loading={loading} title={LIST_TITLE[0]} recipients={sortByMost} />
+        <CardSection loading={loading} title={LIST_TITLE[1]} recipients={sortByRecent} />
       </Layout>
       <Link to="/post">
         <StyledGoToListButtonContainer>
@@ -60,29 +59,3 @@ const StyledGoToListButtonContainer = styled.div`
   margin-bottom: 6rem;
   min-width: 360px;
 `;
-
-// const FloatingButton = styled.button`
-//   position: fixed;
-//   bottom: 2rem;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   width: 28rem;
-//   padding: 1.4rem 2.4rem;
-//   gap: 1rem;
-
-//   color: white;
-//   font-size: 1.8rem;
-//   font-weight: 700;
-//   text-align: center;
-//   border-radius: 1.2rem;
-//   background-color: ${({ theme }) => theme.button.primary.enabled};
-//   cursor: pointer;
-
-//   &:disabled {
-//     background-color: ${({ theme }) => theme.button.primary.disabled};
-//   }
-//   &:hover {
-//     background-color: ${({ theme }) => theme.button.primary.hover};
-//   }
-// `;
