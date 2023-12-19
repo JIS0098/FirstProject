@@ -10,13 +10,11 @@ const Font = Quill.import("formats/font");
 const Size = Quill.import("formats/size");
 Quill.register(Font, true);
 
-const WriteEditorBox = ({ data, setData }) => {
-  const [isAlert, setIsAlert] = useState(false);
-
+const WriteEditorBox = ({ data, setData, setIsAlert, isAlert }) => {
   Font.whitelist = [
     "프리텐다드",
     "나눔고딕",
-    "나눔명조",
+    "본명조",
     "D2코딩체",
     "교보손글씨체",
     "어비지슉체",
@@ -38,9 +36,11 @@ const WriteEditorBox = ({ data, setData }) => {
   const handleContentChange = (content) => {
     setData({ ...data, content: content });
     if (
+      content.index === 0 ||
       content === "<p><br></p>" ||
       content === '<p class="ql-align-center"><br></p>' ||
-      content === '<p class="ql-align-right"><br></p>'
+      content === '<p class="ql-align-right"><br></p>' ||
+      content === undefined
     ) {
       setIsAlert(true);
     } else {
@@ -48,9 +48,17 @@ const WriteEditorBox = ({ data, setData }) => {
     }
   };
 
-  const handleEditorBlur = () => {
-    if (data.content === "") {
+  const handleEditorFocus = (content) => {
+    if (
+      content.index === 0 ||
+      content === "<p><br></p>" ||
+      content === '<p class="ql-align-center"><br></p>' ||
+      content === '<p class="ql-align-right"><br></p>' ||
+      content === undefined
+    ) {
       setIsAlert(true);
+    } else {
+      setIsAlert(false);
     }
   };
 
@@ -63,12 +71,12 @@ const WriteEditorBox = ({ data, setData }) => {
         formats={formats}
         value={data.content}
         onChange={handleContentChange}
-        onBlur={handleEditorBlur}
+        onFocus={handleEditorFocus}
         sizeList={FontSizeList}
         fontList={FontList}
         placeholder="내용을 입력해주세요."
       />
-      {isAlert && <StyledAlertText>값을 입력해 주세요.</StyledAlertText>}
+      {isAlert === true ? <StyledAlertText>값을 입력해 주세요.</StyledAlertText> : ""}
     </div>
   );
 };
