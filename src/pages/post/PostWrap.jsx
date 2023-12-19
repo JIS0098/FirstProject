@@ -139,7 +139,7 @@ const PostInner = styled.div`
 `;
 
 const SettingIcon = styled.img`
-  height: 100%;
+  height: 3rem;
 `;
 
 // 공통된거
