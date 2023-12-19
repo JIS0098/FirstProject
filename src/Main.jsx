@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Post from '../src/pages/post';
-import PostEdit from '../src/pages/postEdit';
-import ListPage from './pages/list';
-import Landing from './pages/Landing';
-import Header from './components/commons/Header';
-import CreateMessage from './pages/createMessage';
-import CreatePost from './pages/createPost';
-import NotFound from './pages/not_found/NotFound';
+import React, { useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Post from "../src/pages/post";
+import PostEdit from "../src/pages/postEdit";
+import ListPage from "./pages/list";
+import Landing from "./pages/Landing";
+import Header from "./components/commons/Header";
+import CreateMessage from "./pages/createMessage";
+import CreatePost from "./pages/createPost";
+import NotFound from "./pages/not_found/NotFound";
 
 function Main() {
   const [isThema, setIsThema] = useState(false);
   // false = whiteMode , true = blackMode
   function handleThema() {
-    setIsThema(prev => {
+    setIsThema((prev) => {
       return !prev;
     });
   }

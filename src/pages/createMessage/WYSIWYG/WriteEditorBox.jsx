@@ -1,44 +1,44 @@
-import { Quill } from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
-import '../../../styles/fonts.css';
-import WriteEditor from '../WYSIWYG/WriteEditor';
-import { FontList, FontSizeList } from './ConstantsFont';
-import styled from 'styled-components';
-import { useState } from 'react';
+import { Quill } from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import "../../../styles/fonts.css";
+import WriteEditor from "../WYSIWYG/WriteEditor";
+import { FontList, FontSizeList } from "./constantsFont";
+import styled from "styled-components";
+import { useState } from "react";
 
-const Font = Quill.import('formats/font');
-const Size = Quill.import('formats/size');
+const Font = Quill.import("formats/font");
+const Size = Quill.import("formats/size");
 Quill.register(Font, true);
 
 const WriteEditorBox = ({ data, setData }) => {
   const [isAlert, setIsAlert] = useState(false);
 
   Font.whitelist = [
-    '프리텐다드',
-    '나눔고딕',
-    '나눔명조',
-    'D2코딩체',
-    '교보손글씨체',
-    '어비지슉체',
-    '치킨체',
-    '메이플스토리',
-    '조선궁서체',
+    "프리텐다드",
+    "나눔고딕",
+    "나눔명조",
+    "D2코딩체",
+    "교보손글씨체",
+    "어비지슉체",
+    "치킨체",
+    "메이플스토리",
+    "조선궁서체",
   ];
-  Size.whitelist = ['10', '12', '14', '16', '20', '24', '32', '40'];
+  Size.whitelist = ["10", "12", "14", "16", "20", "24", "32", "40"];
 
-  const formats = ['bold', 'italic', 'strike', 'color', 'background', 'font', 'size', 'align'];
+  const formats = ["bold", "italic", "strike", "color", "background", "font", "size", "align"];
   const modules = {
     toolbar: [
-      ['bold', 'italic', 'strike', { color: [] }],
-      [{ align: '' }, { align: 'center' }, { align: 'right' }],
+      ["bold", "italic", "strike", { color: [] }],
+      [{ align: "" }, { align: "center" }, { align: "right" }],
       [{ font: Font.whitelist }, { size: Size.whitelist }],
     ],
   };
 
-  const handleContentChange = content => {
+  const handleContentChange = (content) => {
     setData({ ...data, content: content });
     if (
-      content === '<p><br></p>' ||
+      content === "<p><br></p>" ||
       content === '<p class="ql-align-center"><br></p>' ||
       content === '<p class="ql-align-right"><br></p>'
     ) {
@@ -49,7 +49,7 @@ const WriteEditorBox = ({ data, setData }) => {
   };
 
   const handleEditorBlur = () => {
-    if (data.content === '') {
+    if (data.content === "") {
       setIsAlert(true);
     }
   };
@@ -57,7 +57,7 @@ const WriteEditorBox = ({ data, setData }) => {
   return (
     <div>
       <WriteEditor
-        style={{ height: '22.5rem', marginBottom: '5rem' }}
+        style={{ height: "22.5rem", marginBottom: "5rem" }}
         theme="snow"
         modules={modules}
         formats={formats}

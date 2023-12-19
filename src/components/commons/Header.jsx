@@ -5,12 +5,12 @@ import WhiteDarkModeBtn from "./WhiteDarkModeBtn";
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 
-function Header({ onThemaClick, thema }) {
+function Header({ onThemaClick }) {
   const location = useLocation();
   const isPage = location.pathname === "/";
 
   return (
-    <StyledHeaderContainer $thema={thema}>
+    <StyledHeaderContainer>
       <StyledNavContainer>
         <Link to="/">
           <StyledLogoContainer>
@@ -36,7 +36,7 @@ function Header({ onThemaClick, thema }) {
 }
 
 const StyledHeaderContainer = styled.nav`
-  background-color: ${({ $thema }) => ($thema ? "#000" : "#fff")};
+  background-color: white;
   border-bottom: 1px solid #eeeeee;
 `;
 const StyledNavContainer = styled.nav`

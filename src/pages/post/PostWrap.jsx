@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
 import MoreCardImg from "../../assets/icon/plus.svg";
 import Card from "../../components/commons/Card";
+import { motion } from "framer-motion";
 
 function PostWrap({ data, toggleModal, setModalClick }) {
   const clickCard = (i) => {
@@ -13,7 +14,9 @@ function PostWrap({ data, toggleModal, setModalClick }) {
   return (
     <PostInner>
       <BackListLink to={"/list"}>
-        <BackList>리스트로 이동</BackList>
+        <BackList animate={{ x: [0, 10, 0] }} transition={{ ease: "easeInOut", repeat: Infinity, duration: 1.5 }}>
+          ← 뒤로가기
+        </BackList>
       </BackListLink>
       <StyledLink to={`/post/${params.id}/edit`}>
         <EditDeleteButton>편집하기</EditDeleteButton>
@@ -50,17 +53,17 @@ const BackListLink = styled(Link)`
   left: 2.5rem;
   cursor: pointer;
 `;
-const BackList = styled.button`
+const BackList = styled(motion.button)`
   width: 11.2rem;
   height: 3.9rem;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
+  font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  background: #fff;
-  color: black;
+  background: none;
+  color: white;
+  cursor: pointer;
 `;
 const StyledLink = styled(Link)`
   position: absolute;

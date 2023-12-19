@@ -8,10 +8,10 @@ import { motion } from "framer-motion";
 import SkPostCard from "../components/commons/SkPostCard";
 import SkListCard from "components/commons/SkListCard";
 
-function Landing({ thema }) {
+function Landing() {
   return (
     <>
-      <StyledMainContainer $thema={thema}>
+      <StyledMainContainer>
         <StyledLandingSectionFirst
           initial={{ x: -30, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
@@ -71,7 +71,7 @@ function Landing({ thema }) {
 
 const StyledMainContainer = styled.main`
   padding: 6rem 24px;
-  background-color: ${({ $thema }) => ($thema ? "#1E1F21" : "#fff")};
+  background-color: white;
 `;
 const StyledLandingSection = styled(motion.section)`
   display: flex;
