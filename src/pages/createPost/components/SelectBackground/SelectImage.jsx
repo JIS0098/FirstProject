@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import { PaletteWrapper, CheckIcon } from "./common-styled.js";
 import AddImage from "./AddImageButton.jsx";
@@ -10,25 +10,23 @@ const SelectImage = ({ onImageSelect }) => {
   const [selectedImage, setSelectedImage] = useState("");
   const [loading, setLoading] = useState(true);
 
-  const fetchImageList = async () => {
+  const fetchImageList = useCallback(async () => {
     try {
       setLoading(true);
-      const { data, error } = await supabase.storage.from("background_images").list("");
+      const { data } = await supabase.storage.from("background_images").list("");
 
-      if (error) {
-        console.error("Error fetching image list:", error.message);
-      } else if (data) {
-        const imagePaths = data.map((item) => item.name);
-        setImageList(imagePaths);
-        setSelectedImage(imagePaths[0]);
-        onImageSelect(imagePaths[0]);
-      }
+      data.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+
+      const imagePaths = data.map((item) => item.name);
+
+      setImageList(imagePaths);
+      setSelectedImage(imagePaths[0]);
     } catch (error) {
-      console.error("Unexpected error:", error.message);
+      throw new error();
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   const handleImageChange = (image) => {
     setSelectedImage(image);
@@ -37,7 +35,7 @@ const SelectImage = ({ onImageSelect }) => {
 
   useEffect(() => {
     fetchImageList();
-  }, []);
+  }, [fetchImageList]);
 
   return (
     <PaletteWrapper>
@@ -50,7 +48,7 @@ const SelectImage = ({ onImageSelect }) => {
   );
 };
 
-const ImageList = ({ imageList, selectedImage, handleImageChange }) => {
+const ImageList = ({ imageList, selectedImage, handleImageChange, sort }) => {
   return (
     <>
       {imageList.map((itemPath) => (
@@ -60,6 +58,7 @@ const ImageList = ({ imageList, selectedImage, handleImageChange }) => {
             src={`https://gjbkkhzzbcjprpxlhdlu.supabase.co/storage/v1/object/public/background_images/${itemPath}`}
             alt={`Image ${itemPath}`}
             onClick={() => handleImageChange(itemPath)}
+            $sort={sort}
             style={{ opacity: selectedImage === itemPath && 0.5 }}
           />
           {selectedImage === itemPath && <CheckIcon src={selectedIcon} alt="선택된 이미지" />}

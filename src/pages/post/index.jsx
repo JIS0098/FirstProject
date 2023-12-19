@@ -60,8 +60,10 @@ function Post() {
   const backgroundColor = selectedPost?.backgroundColor;
   const backgroundUrl = selectedPost?.backgroundImageURL;
 
+
   return !loading ? (
     <PostBack backgroundColor={backgroundColor} backgroundUrl={backgroundUrl}>
+
       <PostHeader
         data={data}
         toggleShare={toggleShare}
@@ -89,10 +91,13 @@ function Post() {
   );
 }
 
+
 const PostBack = styled.div.withConfig({
   shouldForwardProp: (prop) => prop !== "backgroundUrl" && prop !== "backgroundColor",
 })`
   background: ${({ backgroundUrl, backgroundColor }) => (backgroundUrl ? `url(${backgroundUrl})` : backgroundColor)};
+
+
   background-size: cover;
   width: 100vw;
   min-height: 100vh;

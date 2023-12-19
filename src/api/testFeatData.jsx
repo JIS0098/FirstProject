@@ -1,4 +1,3 @@
-
 const BASE_URL = "https://rolling-api.vercel.app/2-1";
 
 async function fetcher(url) {
