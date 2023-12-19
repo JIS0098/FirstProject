@@ -9,7 +9,7 @@ import { getMessageByPaperId, getEmojiByPaperId, getRollingPaper } from "api";
 import { useParams } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 
-function Post() {
+function Post({ thema }) {
   const [showShare, toggleShare, setShowShare] = useToggle(false);
   const [showModal, toggleModal, setShowModal] = useToggle(false);
   const [emojiAdd, toggleEmoji, setEmojiAdd] = useToggle(false);
@@ -93,9 +93,10 @@ function Post() {
   const backgroundColor = selectedPost?.backgroundColor;
   const backgroundUrl = selectedPost?.backgroundImageURL;
 
-  return !loading ? (
-    <PostBack ref={pageRef} backgroundColor={backgroundColor} backgroundUrl={backgroundUrl}>
+  return (
+    <PostBack ref={pageRef} backgroundColor={backgroundColor} backgroundUrl={backgroundUrl} thema={thema}>
       <PostHeader
+        thema={thema}
         data={data}
         toggleShare={toggleShare}
         toggleEmoji={toggleEmoji}
@@ -111,7 +112,7 @@ function Post() {
         toggleEmojiPick={toggleEmojiPick}
       />
       <PostWrapBack onClick={() => toggleFalse()}>
-        <PostWrap data={data} toggleModal={toggleModal} setModalClick={setModalClick} />
+        <PostWrap thema={thema} data={data} toggleModal={toggleModal} setModalClick={setModalClick} loading={loading} />
       </PostWrapBack>
 
       {/* modal */}
@@ -122,8 +123,6 @@ function Post() {
       {/* URL이 복사되었습니다. */}
       {share ? <ShareComplete /> : null}
     </PostBack>
-  ) : (
-    <div>..loading</div>
   );
 }
 

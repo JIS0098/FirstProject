@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import styled from "styled-components";
 import useToggle from "../../hooks/useToggle";
 import PostHeader from "./PostHeader";
@@ -7,9 +7,10 @@ import ShareComplete from "./ShareComplete";
 import { getMessageByPaperId, getEmojiByPaperId, getRollingPaper } from "api";
 import { useParams } from "react-router-dom";
 
-function Post() {
-  const [showShare, toggleShare] = useToggle(false);
-  const [emojiAdd, toggleEmoji] = useToggle(false);
+function Post({ thema }) {
+  const [showShare, toggleShare, setShowShare] = useToggle(false);
+  const [emojiAdd, toggleEmoji, setEmojiAdd] = useToggle(false);
+  const [emojiPick, toggleEmojiPick, setEmojiPick] = useToggle(false);
   const [share, setShare] = useState(false);
   const [data, setData] = useState([]);
   const [dataEmoji, setDataEmoji] = useState([]);
@@ -19,6 +20,33 @@ function Post() {
   const params = useParams();
 
   const pageId = useMemo(() => params.id, [params.id]);
+  const pageRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (pageRef.current && !pageRef.current.contains(event.target)) {
+        setShowShare(false);
+        setEmojiPick(false);
+        setEmojiAdd(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside, true);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside, true);
+    };
+  }, [setEmojiAdd, setEmojiPick, setShowShare]);
+
+  const toggleFalse = () => {
+    if (showShare) {
+      setShowShare(false);
+    }
+    if (emojiPick) {
+      setEmojiPick(false);
+    }
+    if (emojiAdd) {
+      setEmojiAdd(false);
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -55,9 +83,10 @@ function Post() {
   const backgroundColor = selectedPost?.backgroundColor;
   const backgroundURL = selectedPost?.backgroundImageURL;
 
-  return !loading ? (
-    <PostBack backgroundColor={backgroundColor} backgroundURL={backgroundURL}>
+  return (
+    <PostBack ref={pageRef} backgroundColor={backgroundColor} backgroundURL={backgroundURL}>
       <PostHeader
+        thema={thema}
         data={data}
         toggleShare={toggleShare}
         toggleEmoji={toggleEmoji}
@@ -68,15 +97,16 @@ function Post() {
         showShare={showShare}
         setShare={setShare}
         pageId={pageId}
+        toggleFalse={toggleFalse}
+        emojiPick={emojiPick}
+        toggleEmojiPick={toggleEmojiPick}
       />
-      <PostWrapBack>
-        <PostWrap data={data} pageId={pageId} />
+      <PostWrapBack onClick={() => toggleFalse()}>
+        <PostWrap data={data} pageId={pageId} loading={loading} thema={thema} />
       </PostWrapBack>
       {/* URL이 복사되었습니다. */}
       {share ? <ShareComplete /> : null}
     </PostBack>
-  ) : (
-    <div>..loading</div>
   );
 }
 

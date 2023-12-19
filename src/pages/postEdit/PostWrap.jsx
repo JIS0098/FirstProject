@@ -3,8 +3,14 @@ import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import Card from "../../components/commons/Card";
 import { deletePage, deleteCardFromPage } from "api";
+import SkPostCard from "components/commons/SkPostCard";
 
-function PostWrap({ data, pageId }) {
+function Loading() {
+  const renderItems = Array.from({ length: 6 }).map((_, index) => <SkPostCard key={index} />);
+  return <>{renderItems}</>;
+}
+
+function PostWrap({ data, pageId, loading, thema }) {
   const [deleteList, setDeleteList] = useState([]);
   const navigate = useNavigate();
 
@@ -19,7 +25,7 @@ function PostWrap({ data, pageId }) {
     } catch (e) {
       console.error(e);
     } finally {
-      navigate(`/post/${pageId}`);
+      window.location.reload();
     }
   };
 
@@ -50,25 +56,33 @@ function PostWrap({ data, pageId }) {
 
   return (
     <PostInner>
-      <BackListLink to={"/list"}>
-        <BackList>리스트로 이동</BackList>
+      <BackListLink to={`/post/${pageId}`}>
+        <BackList $thema={thema}>뒤로가기</BackList>
       </BackListLink>
       <PageDeleteButton onClick={clickdeletePage}>페이지 삭제</PageDeleteButton>
-      <PostDeleteButton onClick={Delete}>삭제 & 나가기</PostDeleteButton>
-      {data.map((item) => (
-        <Card
-          onClick={() => {}}
-          key={item.id}
-          id={item.id}
-          profileImg={item.profileImageURL}
-          name={item.sender}
-          description={item.content}
-          tag={item.relationship}
-          ago={item.createdAt}
-          deleteCard={false}
-          deleteCardClick={deleteCardClick}
-        />
-      ))}
+      <PostDeleteButton onClick={Delete}>삭제</PostDeleteButton>
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          {" "}
+          {data.map((item) => (
+            <Card
+              onClick={() => {}}
+              thema={thema}
+              key={item.id}
+              id={item.id}
+              profileImg={item.profileImageURL}
+              name={item.sender}
+              description={item.content}
+              tag={item.relationship}
+              ago={item.createdAt}
+              deleteCard={false}
+              deleteCardClick={deleteCardClick}
+            />
+          ))}
+        </>
+      )}
     </PostInner>
   );
 }
@@ -87,8 +101,8 @@ const BackList = styled.button`
   justify-content: center;
   border-radius: 6px;
   border: 1px solid #ccc;
-  background: #fff;
-  color: black;
+  background: ${({ $thema }) => ($thema ? "#000" : "#fff")};
+  color: ${({ $thema }) => (!$thema ? "#000" : "#fff")};
 `;
 
 const DeleteButton = styled.button`
