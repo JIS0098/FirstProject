@@ -123,7 +123,8 @@ const PostWrapBack = styled.div`
   width: 100vw;
   min-height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(5px);
+  /* backdrop-filter: blur(5px); */
+  /* filter: blur(5px); */
 `;
 
 export default Post;

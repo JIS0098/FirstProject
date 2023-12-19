@@ -122,7 +122,6 @@ const CardWrap = styled.div`
 const CardDescription = styled.div`
   width: 100%;
   height: 10.6rem;
-  font-size: 1.8rem;
   font-weight: 400;
   color: ${({ $thema }) => (!$thema ? "#000" : "#fff")};
   /* display: -webkit-box; */
@@ -131,6 +130,9 @@ const CardDescription = styled.div`
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: normal;
+  & > p {
+    font-size: 1.8rem;
+  }
 `;
 
 const From = styled.div`

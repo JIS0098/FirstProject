@@ -68,7 +68,6 @@ function PostWrap({ data, pageId, loading, thema }) {
         <Loading />
       ) : (
         <>
-          {" "}
           {data.map((item) => (
             <Card
               onClick={() => {}}
@@ -126,10 +125,9 @@ const PostDeleteButton = styled(DeleteButton)`
   max-width: 72rem;
   width: calc(100% - 48px);
   height: 5.6rem;
-  position: absolute;
+  position: fixed;
   padding: 0 2.4rem;
-  top: auto;
-  bottom: 0;
+  bottom: 3rem;
   left: 50%;
   transform: translateX(-50%);
 `;
