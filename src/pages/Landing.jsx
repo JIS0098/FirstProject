@@ -7,6 +7,7 @@ import { Button } from "../components/commons/Button";
 import { motion } from "framer-motion";
 import SkPostCard from "../components/commons/SkPostCard";
 import SkListCard from "components/commons/SkListCard";
+import SkImageCard from "components/commons/SkImageCard";
 
 function Landing() {
   return (
@@ -62,8 +63,11 @@ function Landing() {
             </Button>
           </Link>
         </StyledGoToListButtonContainer>
-        <SkPostCard />
-        <SkListCard />
+        <div style={{ display: "flex", gap: "20px", marginTop: "5rem" }}>
+          <SkPostCard />
+          <SkListCard />
+          <SkImageCard />
+        </div>
       </StyledMainContainer>
     </>
   );
