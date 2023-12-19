@@ -7,7 +7,7 @@ import ToggleButton from "./components/ToggleButton";
 import SelectColor from "./components/SelectBackground/SelectColor";
 import SelectImage from "./components/SelectBackground/SelectImage";
 import CreateButton from "../../components/commons/CreateButton";
-import { tPostData } from "../../api/testPostData";
+import handleCreateButtonClick from "../../utils/handleCreateButtonClick";
 
 const CreatePost = () => {
   const [isName, setIsName] = useState("");
@@ -32,32 +32,10 @@ const CreatePost = () => {
     setIsChecked((prev) => !prev);
   };
 
-  const handleCreateButtonClick = async () => {
-    const newData = {
-      name: isName,
-      backgroundColor: selectedColor || "beige",
-      backgroundImageURL: selectedImage
-        ? `https://gjbkkhzzbcjprpxlhdlu.supabase.co/storage/v1/object/public/background_images/${selectedImage}`
-        : null,
-      createdAt: new Date().toISOString(),
-      messageCount: 0,
-      recentMessages: [],
-      reactionCount: 0,
-      topReactions: [],
-    };
-
-    try {
-      const resData = await tPostData(newData);
-      navigate(`/post/${resData?.id}`);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   return (
     <Wrapper>
       <Container>
-        <NameInput onChange={handleNameChange} placeholder={"받는 사람을 입력해 주세요."}>
+        <NameInput onChange={handleNameChange} placeholder={"받는 사람을 입력해 주세요."} name={isName}>
           To.
         </NameInput>
         <SelectBackground>
@@ -70,7 +48,19 @@ const CreatePost = () => {
         ) : (
           <SelectColor onColorSelect={handleColorSelect} />
         )}
-        <CreateButton disabled={!isName} onClick={handleCreateButtonClick} />
+        <CreateButton
+          disabled={!isName}
+          onClick={() =>
+            handleCreateButtonClick({
+              name: isName,
+              backgroundColor: selectedColor || "beige",
+              backgroundImageURL: selectedImage
+                ? `https://gjbkkhzzbcjprpxlhdlu.supabase.co/storage/v1/object/public/background_images/${selectedImage}`
+                : null,
+              navigate,
+            })
+          }
+        />
       </Container>
     </Wrapper>
   );

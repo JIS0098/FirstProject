@@ -7,7 +7,7 @@ import { defaultProfileImg, profileImg1, profileImg2 } from '../../../assets/Pro
 const ProfileLayout = ({ data, setData }) => {
   const [profileImage, setProfileImage] = useState(defaultProfileImg);
   const profileImageList = [profileImg1, profileImg2];
-  const handleProfileImageChange = item => {
+  const handleProfileImageChange = (item) => {
     setProfileImage(item);
     setData(() => ({ ...data, profileImageURL: item }));
   };
@@ -22,7 +22,7 @@ const ProfileLayout = ({ data, setData }) => {
         <StyledImgSelectBox>
           <p>프로필 이미지를 선택해주세요!</p>
           <StyledImgList>
-            {profileImageList.map(item => (
+            {profileImageList.map((item) => (
               <img key={item} src={item} onClick={() => handleProfileImageChange(item)} />
             ))}
           </StyledImgList>
