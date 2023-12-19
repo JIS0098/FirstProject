@@ -100,7 +100,7 @@ const CardBox = styled.div.withConfig({
   background-color: ${({ $thema }) => ($thema ? "#000" : "#fff")};
   box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.08);
   padding: 2.8rem 2.4rem;
-  opacity: ${(props) => (props.deleteChoice ? 0.8 : 1)};
+  opacity: ${(props) => (props.deleteChoice ? 0.5 : 1)};
   cursor: ${(props) => (!props.deleteCard ? "auto" : "pointer")};
 
   @media all and (max-width: 1248px) {

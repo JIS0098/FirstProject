@@ -45,12 +45,15 @@ function PostWrap({ data, pageId, loading, thema }) {
   };
 
   const clickdeletePage = async () => {
-    try {
-      await deletePage(pageId);
-    } catch (e) {
-      console.log(e);
-    } finally {
-      navigate("/list");
+    const deleteconfirm = confirm("페이지를 삭제하시겠습니까?");
+    if (deleteconfirm) {
+      try {
+        await deletePage(pageId);
+      } catch (e) {
+        console.log(e);
+      } finally {
+        navigate("/list");
+      }
     }
   };
 
@@ -60,7 +63,7 @@ function PostWrap({ data, pageId, loading, thema }) {
         <BackList $thema={thema}>뒤로가기</BackList>
       </BackListLink>
       <PageDeleteButton onClick={clickdeletePage}>페이지 삭제</PageDeleteButton>
-      <PostDeleteButton onClick={Delete}>삭제</PostDeleteButton>
+      {deleteList.length > 0 ? <PostDeleteButton onClick={Delete}>삭제</PostDeleteButton> : null}
       {loading ? (
         <Loading />
       ) : (
@@ -120,29 +123,21 @@ const DeleteButton = styled.button`
 `;
 
 const PostDeleteButton = styled(DeleteButton)`
+  max-width: 72rem;
+  width: calc(100% - 48px);
+  height: 5.6rem;
   position: absolute;
-  top: 8rem;
-  right: 2.5rem;
-  z-index: 1;
-  @media all and (max-width: 1248px) {
-    max-width: 72rem;
-    width: calc(100% - 48px);
-    height: 5.6rem;
-    position: fixed;
-    padding: 0 2.4rem;
-    top: auto;
-    bottom: 6rem;
-    left: 50%;
-    transform: translateX(-50%);
-  }
+  padding: 0 2.4rem;
+  top: auto;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
 `;
 const PageDeleteButton = styled(DeleteButton)`
   position: absolute;
   top: 8rem;
-  right: 12.5rem;
-  @media all and (max-width: 1248px) {
-    right: 2.5rem;
-  }
+  right: 2.5rem;
+  z-index: 1;
 `;
 const PostInner = styled.div`
   max-width: 124.8rem;
