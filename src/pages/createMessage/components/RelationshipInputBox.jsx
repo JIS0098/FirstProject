@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import arrow_down from '../../../assets/icon/arrow_down.svg';
-import useToggle from '../../../hooks/useToggle';
-import { StyledTitle } from '../CommonStyled';
-
+import React, { useState } from "react";
+import styled from "styled-components";
+import arrow_down from "../../../assets/icon/arrow_down.svg";
+import useToggle from "../../../hooks/useToggle";
+import { StyledTitle } from "../commonStyled";
 
 const RelationshipInputBox = ({ data, setData }) => {
   const [relationship, relationshipToggle] = useToggle();
