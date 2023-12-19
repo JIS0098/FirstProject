@@ -20,6 +20,7 @@ function Post() {
   const [emojiUp, setEmojiUp] = useState(null);
   const [modalClick, setModalClick] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
   const params = useParams();
 
   const pageId = useMemo(() => params.id, [params.id]);
@@ -60,10 +61,19 @@ function Post() {
   const backgroundColor = selectedPost?.backgroundColor;
   const backgroundUrl = selectedPost?.backgroundImageURL;
 
+  //url을 불러오지 못하면 null처리
+  useEffect(() => {
+    const img = new Image();
+    img.src = backgroundUrl;
+    img.onload = () => setImageLoaded(true);
+    img.onerror = () => setImageLoaded(false);
+  }, [backgroundUrl]);
+
+  //이미지가 서버에 없는 경우 null.
+  const loadedBackgroundImg = imageLoaded ? backgroundUrl : null;
 
   return !loading ? (
-    <PostBack backgroundColor={backgroundColor} backgroundUrl={backgroundUrl}>
-
+    <PostBack backgroundColor={backgroundColor} backgroundUrl={loadedBackgroundImg}>
       <PostHeader
         data={data}
         toggleShare={toggleShare}
@@ -91,12 +101,11 @@ function Post() {
   );
 }
 
-
 const PostBack = styled.div.withConfig({
   shouldForwardProp: (prop) => prop !== "backgroundUrl" && prop !== "backgroundColor",
 })`
-  background: ${({ backgroundUrl, backgroundColor }) => (backgroundUrl ? `url(${backgroundUrl})` : backgroundColor)};
-
+  background: ${({ backgroundUrl, backgroundColor, theme }) =>
+    backgroundUrl ? `url(${backgroundUrl})` : theme.backgroundColor[`${backgroundColor}`]};
 
   background-size: cover;
   width: 100vw;

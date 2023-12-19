@@ -71,7 +71,7 @@ function Landing({ thema }) {
 
 const StyledMainContainer = styled.main`
   padding: 6rem 24px;
-  background-color: ${({ $thema }) => ($thema ? "#1E1F21" : "#fff")};
+  /* background-color: ${({ $thema }) => ($thema ? "#1E1F21" : "#fff")}; */
 `;
 const StyledLandingSection = styled(motion.section)`
   display: flex;

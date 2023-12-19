@@ -19,7 +19,6 @@ function CardSection({ loading, title, recipients }) {
   const { isMobile, isTablet, isNotebook, isPC } = useDeviceSize();
   const [maxIndex, setMaxIndex] = useState(4);
 
-  //To Do. 마지막 요소에서 브라우저 크기 변경 시, offset 조절 해야됨.
   const { currentIndex, offset, handleSwipe, startDrag, endDrag, moveItem } = useSwipe(maxIndex, !isPC);
 
   const handleMouseDown = (e) => {
@@ -47,6 +46,7 @@ function CardSection({ loading, title, recipients }) {
   };
 
   const renderItems = recipients.map((recipient, index) => <CardItem key={index} recipient={recipient} />);
+
   useEffect(() => {
     const updateMaxIndex = () => {
       if (isPC) {
@@ -125,7 +125,7 @@ const Wrapper = styled.div`
 const SubTitle = styled.span`
   margin-top: 5rem;
   display: block;
-  color: ${({ theme }) => theme.subtitle};
+  color: ${({ theme }) => theme.fontColor};
   font-family: Pretendard;
   font-size: 2.4rem;
   font-weight: 700;
@@ -149,8 +149,9 @@ const ArrowButton = styled.button`
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: 1px solid #ccc;
+  border: 2px solid #dadcdf;
   background-color: white;
+  opacity: 0.9;
 
   cursor: pointer;
 `;

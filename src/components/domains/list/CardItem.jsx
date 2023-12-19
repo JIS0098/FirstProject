@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 function CardItem({ recipient }) {
   const { name, recentMessages, messageCount, topReactions, backgroundColor, backgroundImageURL } = recipient;
-  const [imageLoaded, setImageLoaded] = useState(true);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   const bgImageUrl = imageLoaded ? backgroundImageURL : null;
 

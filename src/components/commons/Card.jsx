@@ -72,7 +72,7 @@ const DeleteWrap = styled.button`
   width: 4rem;
   height: 4rem;
   padding: 0.8rem;
-  border: 1px solid #ccc;
+  border: 1px solid ${({ theme }) => theme.border};
   border-radius: 6px;
   cursor: pointer;
 `;
