@@ -8,8 +8,14 @@ import { ITEMS_PER_PAGE } from "constants";
 import { CardList } from "./CardList";
 import { DEVICE_MAX_SIZE } from "constants";
 import { CARD_WIDTH } from "constants";
+import SkListCard from "components/commons/SkListCard";
 
-function CardSection({ title, recipients }) {
+function Loading() {
+  const renderItems = Array.from({ length: 4 }).map((_, index) => <SkListCard key={index} />);
+  return <CardList>{renderItems}</CardList>;
+}
+
+function CardSection({ loading, title, recipients }) {
   const { isMobile, isTablet, isNotebook, isPC } = useDeviceSize();
   const [maxIndex, setMaxIndex] = useState(4);
 
@@ -41,7 +47,6 @@ function CardSection({ title, recipients }) {
   };
 
   const renderItems = recipients.map((recipient, index) => <CardItem key={index} recipient={recipient} />);
-
   useEffect(() => {
     const updateMaxIndex = () => {
       if (isPC) {
@@ -60,13 +65,13 @@ function CardSection({ title, recipients }) {
     return () => {
       window.removeEventListener("resize", updateMaxIndex);
     };
-  }, [isPC, isNotebook, isTablet, isMobile]);
+  }, [isPC, isNotebook, isTablet, isMobile, recipients.length]);
 
   return (
     <Container>
       <SubTitle>{title}</SubTitle>
       <Relative>
-        <ArrowButton $left onClick={() => handleSwipe("prev")} $hide={!isPC || currentIndex === 0}>
+        <ArrowButton $left onClick={() => handleSwipe("prev")} $hide={(loading && !isPC) || currentIndex === 0}>
           <ALeft />
         </ArrowButton>
         <Wrapper
@@ -78,9 +83,9 @@ function CardSection({ title, recipients }) {
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
         >
-          <CardList offset={offset}>{renderItems}</CardList>
+          {loading ? <Loading /> : <CardList offset={offset}>{renderItems}</CardList>}
         </Wrapper>
-        <ArrowButton onClick={() => handleSwipe("next")} $hide={!isPC || currentIndex >= maxIndex}>
+        <ArrowButton onClick={() => handleSwipe("next")} $hide={(loading && !isPC) || currentIndex >= maxIndex}>
           <ARight />
         </ArrowButton>
       </Relative>

@@ -1,7 +1,7 @@
-import React from 'react';
-import styled from 'styled-components';
-import { StyledTitle } from '../commonStyled';
-import CustomWriteEditor from './WriteEditorBox';
+import React from "react";
+import styled from "styled-components";
+import { StyledTitle } from "../commonStyled";
+import CustomWriteEditor from "./WriteEditorBox";
 
 const WriteInputBox = ({ data, setData }) => {
   return (

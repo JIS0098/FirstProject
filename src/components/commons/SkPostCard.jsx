@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-function SkCard() {
+function SkPostCard() {
   return (
     <Container>
       <CardHeader>
@@ -138,4 +138,4 @@ const Date = styled.div`
   overflow: hidden;
 `;
 
-export default SkCard;
+export default SkPostCard;
