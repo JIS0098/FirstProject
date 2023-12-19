@@ -9,12 +9,17 @@ function ListPage() {
   const [loading, setLoading] = useState(false);
   const [sortByMost, setSortByMost] = useState([]);
   const [sortByRecent, setSortByRecent] = useState([]);
+  const [allData, setAllData] = useState([]);
+  const [filtering, setFiltering] = useState("");
+  const [onInput, setOnInput] = useState(false);
 
   useEffect(() => {
     setLoading(true);
     getRollingPaperAll()
       .then((res) => res.results)
       .then((data) => {
+        //모든 데이터 저장(To Do. 검색 기능 만들게 되면 필터링 걸 예정)
+        setAllData(data);
         //가장 메시지가 많은 순.
         const like = [...data].sort((a, b) => b.messageCount - a.messageCount).slice(0, 10);
         setSortByMost(like);
@@ -25,13 +30,33 @@ function ListPage() {
       .finally(() => setLoading(false));
   }, []);
 
-  //스켈레톤 UI 만들어지면 작업할 곳.
-  if (loading) return <div>loading...</div>;
+  const filteringData = React.useMemo(
+    () => allData.filter((data) => data.name.includes(filtering)),
+    [allData, filtering]
+  );
+
+  const handleFiltering = (e) => {
+    setFiltering(e.target.value);
+    setOnInput(e.target.value.length > 0);
+  };
+
   return (
     <>
       <Layout>
-        <CardSection title={LIST_TITLE[0]} recipients={sortByMost} />
-        <CardSection title={LIST_TITLE[1]} recipients={sortByRecent} />
+        <input onChange={handleFiltering} />
+        {onInput ? (
+          //To Do. 필터링 디자인 구현
+          filteringData.length > 0 ? (
+            filteringData.map((item, index) => <div key={index}>{item.name}</div>)
+          ) : (
+            <div>검색 결과가 없습니다.</div>
+          )
+        ) : (
+          <>
+            <CardSection loading={loading} title={LIST_TITLE[0]} recipients={sortByMost} />
+            <CardSection loading={loading} title={LIST_TITLE[1]} recipients={sortByRecent} />
+          </>
+        )}
       </Layout>
       <Link to="/post">
         <StyledGoToListButtonContainer>
@@ -60,29 +85,3 @@ const StyledGoToListButtonContainer = styled.div`
   margin-bottom: 6rem;
   min-width: 360px;
 `;
-
-// const FloatingButton = styled.button`
-//   position: fixed;
-//   bottom: 2rem;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   width: 28rem;
-//   padding: 1.4rem 2.4rem;
-//   gap: 1rem;
-
-//   color: white;
-//   font-size: 1.8rem;
-//   font-weight: 700;
-//   text-align: center;
-//   border-radius: 1.2rem;
-//   background-color: ${({ theme }) => theme.button.primary.enabled};
-//   cursor: pointer;
-
-//   &:disabled {
-//     background-color: ${({ theme }) => theme.button.primary.disabled};
-//   }
-//   &:hover {
-//     background-color: ${({ theme }) => theme.button.primary.hover};
-//   }
-// `;
