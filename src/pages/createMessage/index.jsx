@@ -1,35 +1,35 @@
-import React, { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-import NameInput from '../../components/commons/NameInput';
-import CreateButton from '../../components/commons/CreateButton';
-import ProfileLayout from './components/ProfileLayout';
-import RelationshipInputBox from './components/RelationshipInputBox';
-import WriteInputBox from './WYSIWYG';
-import { defaultProfileImg } from '../../assets/ProfileImgUrls';
+import React, { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import NameInput from "../../components/commons/NameInput";
+import CreateButton from "../../components/commons/CreateButton";
+import ProfileLayout from "./components/ProfileLayout";
+import RelationshipInputBox from "./components/RelationshipInputBox";
+import WriteInputBox from "./WYSIWYG";
+import { defaultProfileImg } from "../../assets/ProfileImgUrls";
 
 const CreateMessage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [isName, setIsName] = useState('');
+  const [isName, setIsName] = useState("");
   const [data, setData] = useState({
-    team: '2-1',
+    team: "2-1",
     recipientId: +id,
     sender: null,
     profileImageURL: defaultProfileImg,
-    relationship: '지인',
-    content: '',
-    font: 'Pretendard',
+    relationship: "지인",
+    content: "",
+    font: "Pretendard",
   });
 
   //포스트 요청
-  const postMessageData = async postData => {
-    console.log('포스트', postData);
+  const postMessageData = async (postData) => {
+    console.log("포스트", postData);
     try {
       const res = await fetch(`https://rolling-api.vercel.app/2-1/recipients/${postData?.recipientId}/messages/`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(postData),
       });
@@ -38,7 +38,7 @@ const CreateMessage = () => {
       }
       return res.json();
     } catch (e) {
-      console.error('네트워크 요청 에러:', e);
+      console.error("네트워크 요청 에러:", e);
     }
   };
 
@@ -47,13 +47,13 @@ const CreateMessage = () => {
     try {
       const resData = await postMessageData(data);
       navigate(`/post/${resData?.recipientId}`);
-      console.log('응답', resData);
+      console.log("응답", resData);
     } catch (error) {
       console.error(error);
     }
   };
 
-  const handleNameChange = name => {
+  const handleNameChange = (name) => {
     setIsName(name);
     setData({ ...data, sender: name });
   };
@@ -71,7 +71,7 @@ const CreateMessage = () => {
           <CreateButton
             mobileWidth="100%"
             tabletWidth="100%"
-            disabled={!isName || data.content === ''}
+            disabled={!isName || data.content === ""}
             onClick={handleCreateMessage}
           />
         </CreateButtonBox>

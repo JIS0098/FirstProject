@@ -14,7 +14,7 @@ function ListPage() {
   const [searchDatas, setSearchDatas] = useState([]); // 검색한 값
   const [searchParams, setSearchParams] = useSearchParams();
   const queryValue = searchParams.get("name");
-  const [searchValue, setSearchValue] = useState(queryValue); // 입력한 값
+  const [searchValue, setSearchValue] = useState(queryValue || ""); // 입력한 값
   const [onInput, setOnInput] = useState(false);
 
   const handleSearchValue = (e) => {
@@ -65,13 +65,13 @@ function ListPage() {
           </>
         )}
       </Layout>
-      <Link to="/post">
-        <StyledButtonContainer>
+      <StyledButtonContainer>
+        <Link to="/post">
           <Button width="28rem" tabletWidth="100%">
             나도 만들어보기
           </Button>
-        </StyledButtonContainer>
-      </Link>
+        </Link>
+      </StyledButtonContainer>
     </>
   );
 }

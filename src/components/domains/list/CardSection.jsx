@@ -125,7 +125,7 @@ const Wrapper = styled.div`
 const SubTitle = styled.span`
   margin-top: 5rem;
   display: block;
-  color: ${({ theme }) => theme.subtitle};
+  color: ${({ theme }) => theme.fontColor};
   font-family: Pretendard;
   font-size: 2.4rem;
   font-weight: 700;
@@ -149,8 +149,9 @@ const ArrowButton = styled.button`
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: 1px solid #ccc;
+  border: 2px solid #dadcdf;
   background-color: white;
+  opacity: 0.9;
 
   cursor: pointer;
 `;

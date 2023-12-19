@@ -9,7 +9,7 @@ function SearchBar({ onChange, value, onSubmit }) {
           type="text"
           name="name"
           autoComplete="off"
-          value={value || ""}
+          defaultValue={value}
           onChange={onChange}
         />
         <StyledSubmitBtn>검색</StyledSubmitBtn>
@@ -52,15 +52,14 @@ const StyledSubmitBtn = styled.button`
   padding: 0 30px;
   position: absolute;
   right: 0;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.button.enabled};
+  color: white;
   border: #ccc 1px solid;
   border-radius: 0 15px 15px 0;
   cursor: pointer;
 
   &:hover {
-    background-color: #a64eff;
-    color: white;
-    border: none;
+    background-color: ${({ theme }) => theme.button.hover};
   }
 `;
 
