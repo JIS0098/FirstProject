@@ -8,8 +8,8 @@ function SearchBar({ onChange, value, onSubmit }) {
           placeholder="찾고싶은 롤링페이퍼를 검색해보세요!"
           type="text"
           name="name"
-          autocomplete="off"
-          value={value}
+          autoComplete="off"
+          value={value || ""}
           onChange={onChange}
         />
         <StyledSubmitBtn>검색</StyledSubmitBtn>
@@ -34,6 +34,7 @@ const StyledSearchBar = styled.input`
   padding: 20px 10px;
   border: 1px solid #ccc;
   border-radius: 15px;
+  text-indent: 25px;
 
   &:focus {
     outline: 2px solid #a64eff;
@@ -44,7 +45,6 @@ const StyledSearchBar = styled.input`
     background-size: contain;
     background-position: 1px center;
     background-repeat: no-repeat;
-    padding-left: 25px;
   }
 `;
 const StyledSubmitBtn = styled.button`

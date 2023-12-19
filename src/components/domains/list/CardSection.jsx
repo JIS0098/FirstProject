@@ -106,7 +106,7 @@ const Container = styled.div`
 const Relative = styled.div`
   position: relative;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
 `;
 
 const Wrapper = styled.div`
