@@ -24,12 +24,18 @@ function PostWrap({ data, pageId }) {
   };
 
   const deleteCardClick = (id) => {
-    setDeleteList((prev) => [
-      ...prev,
-      {
-        id: id,
-      },
-    ]);
+    const isNotDelete = deleteList.some((item) => item.id === id);
+
+    if (isNotDelete) {
+      setDeleteList((prev) => prev.filter((item) => item.id !== id));
+    } else {
+      setDeleteList((prev) => [
+        ...prev,
+        {
+          id: id,
+        },
+      ]);
+    }
   };
 
   const clickdeletePage = async () => {
