@@ -54,6 +54,10 @@ export async function getEmojiByPaperId(pageId) {
 export async function getRollingPaperAll() {
   return fetcher(`/recipients/?limit=1000`);
 }
+//선택한 롤링 페이퍼를 가져옴.
+export async function getRollingPaper(pageId) {
+  return fetcher(`/recipients/${pageId}/`);
+}
 
 /**
  * 새로운 롤링 페이퍼를 생성.
