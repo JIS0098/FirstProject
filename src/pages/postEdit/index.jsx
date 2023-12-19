@@ -69,8 +69,9 @@ function Post() {
         setShare={setShare}
         pageId={pageId}
       />
-      <PostWrap data={data} pageId={pageId} />
-
+      <PostWrapBack>
+        <PostWrap data={data} pageId={pageId} />
+      </PostWrapBack>
       {/* URL이 복사되었습니다. */}
       {share ? <ShareComplete /> : null}
     </PostBack>
@@ -86,6 +87,13 @@ const PostBack = styled.div.withConfig({
   background-size: cover;
   width: 100vw;
   min-height: 100vh;
+`;
+
+const PostWrapBack = styled.div`
+  width: 100vw;
+  min-height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
 `;
 
 export default Post;

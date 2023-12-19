@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import useToggle from "../../hooks/useToggle";
 import ProfileImgs from "../../components/commons/ProfileImages";
 import downImg from "../../assets/icon/arrow_down.svg";
 import addEmojiImg from "../../assets/icon/add-24.svg";
@@ -22,8 +21,10 @@ function PostHeader({
   pageId,
   showShare,
   setShare,
+  toggleFalse,
+  emojiPick,
+  toggleEmojiPick,
 }) {
-  const [emojiPick, toggleEmojiPick] = useToggle(false);
   const [selectEmoji, setSelectEmoji] = useState(null);
 
   const handleEmojiSelect = (e) => {
@@ -59,7 +60,7 @@ function PostHeader({
   }, [pageId, selectEmoji, setEmojiUp]);
 
   return (
-    <PostHead>
+    <PostHead onClick={() => toggleFalse()}>
       <HeaderService>
         <ToName>To. {selectedPost?.name || "Loding..."}</ToName>
 
@@ -126,7 +127,7 @@ function PostHeader({
 }
 
 const ToggleAddEmoji = styled.div`
-  min-width: 26.4rem;
+  min-width: 27.4rem;
   display: flex;
   padding: 24px;
   flex-wrap: wrap;

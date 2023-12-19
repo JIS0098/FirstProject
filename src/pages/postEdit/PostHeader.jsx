@@ -117,7 +117,7 @@ function PostHeader({
   );
 }
 const ToggleAddEmoji = styled.div`
-  min-width: 26.4rem;
+  min-width: 27.4rem;
   display: flex;
   padding: 24px;
   flex-wrap: wrap;
