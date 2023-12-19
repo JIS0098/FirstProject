@@ -4,13 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 import Card from "../../components/commons/Card";
 import { deletePage, deleteCardFromPage } from "api";
 
-function PostWrap({ data, setModalClick, pageId }) {
+function PostWrap({ data, pageId }) {
   const [deleteList, setDeleteList] = useState([]);
   const navigate = useNavigate();
-
-  const clickCard = (i) => {
-    setModalClick(i);
-  };
 
   const Delete = async () => {
     try {
@@ -27,7 +23,7 @@ function PostWrap({ data, setModalClick, pageId }) {
     }
   };
 
-  const DeleteCardClick = (id) => {
+  const deleteCardClick = (id) => {
     setDeleteList((prev) => [
       ...prev,
       {
@@ -55,9 +51,7 @@ function PostWrap({ data, setModalClick, pageId }) {
       <PostDeleteButton onClick={Delete}>삭제 & 나가기</PostDeleteButton>
       {data.map((item) => (
         <Card
-          onClick={() => {
-            clickCard(item.id);
-          }}
+          onClick={() => {}}
           key={item.id}
           id={item.id}
           profileImg={item.profileImageURL}
@@ -66,7 +60,7 @@ function PostWrap({ data, setModalClick, pageId }) {
           tag={item.relationship}
           ago={item.createdAt}
           deleteCard={false}
-          DeleteCardClick={DeleteCardClick}
+          deleteCardClick={deleteCardClick}
         />
       ))}
     </PostInner>
@@ -78,7 +72,7 @@ const BackListLink = styled(Link)`
   left: 2.5rem;
   cursor: pointer;
 `;
-const BackList = styled.div`
+const BackList = styled.button`
   width: 11.2rem;
   height: 3.9rem;
   font-size: 1.6rem;
@@ -91,7 +85,7 @@ const BackList = styled.div`
   color: black;
 `;
 
-const DeleteButton = styled.div`
+const DeleteButton = styled.button`
   width: 9.2rem;
   height: 3.9rem;
   display: flex;
@@ -109,6 +103,7 @@ const PostDeleteButton = styled(DeleteButton)`
   position: absolute;
   top: 8rem;
   right: 2.5rem;
+  z-index: 1;
   @media all and (max-width: 1248px) {
     max-width: 72rem;
     width: calc(100% - 48px);

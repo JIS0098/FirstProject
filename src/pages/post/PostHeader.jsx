@@ -9,6 +9,7 @@ import Emoji from "../../components/commons/Emoji";
 import EmojiPicker from "emoji-picker-react";
 import { addEmojiToPage } from "api";
 import { useLocation } from "react-router-dom";
+import kakaoShare from "utils/kakaoShare";
 
 function PostHeader({
   data,
@@ -55,7 +56,7 @@ function PostHeader({
       };
       emojiUpdate();
     }
-  }, [selectEmoji]);
+  }, [pageId, selectEmoji, setEmojiUp]);
 
   return (
     <PostHead>
@@ -107,7 +108,13 @@ function PostHeader({
 
             {showShare ? (
               <ShareBox>
-                <Share>카카오톡 공유</Share>
+                <Share
+                  onClick={() => {
+                    kakaoShare();
+                  }}
+                >
+                  카카오톡 공유
+                </Share>
                 <Share onClick={() => urlShare(`${baseUrl}${location.pathname}`)}>URL 공유</Share>
               </ShareBox>
             ) : null}
@@ -219,7 +226,7 @@ const EmojiButton = styled.img`
   }
 `;
 
-const ButtonWrap = styled.div`
+const ButtonWrap = styled.button`
   display: flex;
   padding: 6px 16px;
   justify-content: center;

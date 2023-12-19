@@ -5,7 +5,7 @@ import Delete from "../../assets/icon/deleted.svg";
 import nullImg from "../../assets/icon/person.svg";
 import useToggle from "../../hooks/useToggle";
 
-function Card({ id, onClick, name, profileImg, description, tag, ago, deleteCard = true, DeleteCardClick }) {
+function Card({ id, onClick, name, profileImg, description, tag, ago, deleteCard = true, deleteCardClick }) {
   const [deleteChoice, deleteChoiceToggle] = useToggle(false);
   const htmlContent = { __html: description };
   const day = setDayYMD(ago);
@@ -24,7 +24,6 @@ function Card({ id, onClick, name, profileImg, description, tag, ago, deleteCard
       return { back: "#E2F5FF", font: "#00A2FE" };
     }
   };
-  const color = tagColor(tag);
 
   return (
     <CardBox
@@ -32,6 +31,7 @@ function Card({ id, onClick, name, profileImg, description, tag, ago, deleteCard
         onClick();
       }}
       deleteChoice={deleteChoice}
+      deleteCard={deleteCard}
     >
       <CardWrap>
         <From>
@@ -43,7 +43,7 @@ function Card({ id, onClick, name, profileImg, description, tag, ago, deleteCard
               <FromP>
                 From. <FromSpan>{name}</FromSpan>
               </FromP>
-              <FromTag back={color.back} font={color.font}>
+              <FromTag back={tagColor(tag).back} font={tagColor(tag).font}>
                 {tag}
               </FromTag>
             </FromBox>
@@ -52,7 +52,7 @@ function Card({ id, onClick, name, profileImg, description, tag, ago, deleteCard
           {deleteCard ? null : (
             <DeleteWrap
               onClick={() => {
-                DeleteCardClick(id);
+                deleteCardClick(id);
                 deleteChoiceToggle();
               }}
             >
@@ -68,7 +68,7 @@ function Card({ id, onClick, name, profileImg, description, tag, ago, deleteCard
   );
 }
 
-const DeleteWrap = styled.div`
+const DeleteWrap = styled.button`
   width: 4rem;
   height: 4rem;
   padding: 0.8rem;
@@ -86,7 +86,9 @@ const StyledImg = styled.img`
   height: 100%;
   object-fit: cover;
 `;
-const CardBox = styled.div`
+const CardBox = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== "deleteChoice" && prop !== "deleteCard",
+})`
   width: 38.4rem;
   height: 28rem;
   margin: 0 auto;
@@ -98,11 +100,13 @@ const CardBox = styled.div`
   box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.08);
   padding: 2.8rem 2.4rem;
   opacity: ${(props) => (props.deleteChoice ? 0.8 : 1)};
-  cursor: pointer;
+  cursor: ${(props) => (!props.deleteCard ? "auto" : "pointer")};
+
   @media all and (max-width: 1248px) {
     width: 100%;
     max-width: 50rem;
   }
+
   @media all and (max-width: 768px) {
     width: 100%;
   }
@@ -143,7 +147,9 @@ const FromBox = styled.div`
   justify-content: space-between;
   gap: 1rem;
 `;
-const FromTag = styled.div`
+const FromTag = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== "back" && prop !== "font",
+})`
   width: 4.1rem;
   height: 2rem;
   display: flex;

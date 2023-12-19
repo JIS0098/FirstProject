@@ -56,7 +56,7 @@ function PostHeader({
       };
       emojiUpdate();
     }
-  }, [selectEmoji]);
+  }, [pageId, selectEmoji, setEmojiUp]);
 
   return (
     <PostHead>
@@ -215,7 +215,7 @@ const EmojiButton = styled.img`
   }
 `;
 
-const ButtonWrap = styled.div`
+const ButtonWrap = styled.button`
   display: flex;
   padding: 6px 16px;
   justify-content: center;

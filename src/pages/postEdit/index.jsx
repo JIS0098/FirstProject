@@ -1,27 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import useToggle from "../../hooks/useToggle";
 import PostHeader from "./PostHeader";
 import PostWrap from "./PostWrap";
-import PostModal from "./PostModal";
 import ShareComplete from "./ShareComplete";
 import { getMessageByPaperId, getEmojiByPaperId, getRollingPaper } from "api";
 import { useParams } from "react-router-dom";
 
 function Post() {
   const [showShare, toggleShare] = useToggle(false);
-  const [showModal, toggleModal] = useToggle(false);
   const [emojiAdd, toggleEmoji] = useToggle(false);
   const [share, setShare] = useState(false);
   const [data, setData] = useState([]);
   const [dataEmoji, setDataEmoji] = useState([]);
   const [idSelectName, setIdSelectName] = useState([]);
   const [emojiUp, setEmojiUp] = useState(null);
-  const [modalClick, setModalClick] = useState(0);
   const [loading, setLoading] = useState(false);
   const params = useParams();
 
-  const pageId = params.id;
+  const pageId = useMemo(() => params.id, [params.id]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,9 +49,8 @@ function Post() {
       }
     };
     fetchEmoji();
-  }, [emojiUp]);
+  }, [emojiUp, pageId]);
 
-  const modalFind = data.find((item) => item.id === modalClick);
   const selectedPost = idSelectName;
   const backgroundColor = selectedPost?.backgroundColor;
   const backgroundURL = selectedPost?.backgroundImageURL;
@@ -73,10 +69,7 @@ function Post() {
         setShare={setShare}
         pageId={pageId}
       />
-      <PostWrap data={data} toggleModal={toggleModal} setModalClick={setModalClick} pageId={pageId} />
-
-      {/* modal */}
-      {showModal ? <PostModal toggleModal={toggleModal} modalFind={modalFind} /> : null}
+      <PostWrap data={data} pageId={pageId} />
 
       {/* URL이 복사되었습니다. */}
       {share ? <ShareComplete /> : null}
@@ -86,7 +79,9 @@ function Post() {
   );
 }
 
-const PostBack = styled.div`
+const PostBack = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== "backgroundURL" && prop !== "backgroundColor",
+})`
   background: ${(props) => (props.backgroundURL ? `url(${props.backgroundURL})` : props.backgroundColor)};
   background-size: cover;
   width: 100vw;

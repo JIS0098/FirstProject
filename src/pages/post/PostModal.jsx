@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import nullImg from "../../assets/icon/person.svg";
 
 function PostModal({ toggleModal, modalFind }) {
+  const htmlContent = { __html: modalFind.content };
   const day = setDayYMD(modalFind.createdAt);
   const progileImg = modalFind.profileImageURL ? modalFind.profileImageURL : nullImg;
 
@@ -30,7 +31,7 @@ function PostModal({ toggleModal, modalFind }) {
           </FromInner>
           <Ago>{day}</Ago>
         </From>
-        <ModalText>{modalFind.content}</ModalText>
+        <ModalText dangerouslySetInnerHTML={htmlContent}></ModalText>
         <ModalClose onClick={toggleModal}>확인</ModalClose>
       </ModalInner>
     </Modal>

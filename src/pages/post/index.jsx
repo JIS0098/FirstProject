@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import useToggle from "../../hooks/useToggle";
 import PostHeader from "./PostHeader";
@@ -22,7 +22,7 @@ function Post() {
   const [loading, setLoading] = useState(false);
   const params = useParams();
 
-  const pageId = params.id;
+  const pageId = useMemo(() => params.id, [params.id]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,7 +53,7 @@ function Post() {
       }
     };
     fetchEmoji();
-  }, [emojiUp]);
+  }, [emojiUp, pageId]);
 
   const modalFind = data.find((item) => item.id === modalClick);
   const selectedPost = idSelectName;
@@ -89,8 +89,10 @@ function Post() {
   );
 }
 
-const PostBack = styled.div`
-  background: ${(props) => (props.backgroundUrl ? `url(${props.backgroundUrl})` : props.backgroundColor)};
+const PostBack = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== "backgroundUrl" && prop !== "backgroundColor",
+})`
+  background: ${({ backgroundUrl, backgroundColor }) => (backgroundUrl ? `url(${backgroundUrl})` : backgroundColor)};
   background-size: cover;
   width: 100vw;
   min-height: 100vh;

@@ -38,6 +38,7 @@ function PostWrap({ data, toggleModal, setModalClick }) {
           description={item.content}
           tag={item.relationship}
           ago={item.createdAt}
+          deleteCard={true}
         />
       ))}
     </PostInner>
@@ -49,7 +50,7 @@ const BackListLink = styled(Link)`
   left: 2.5rem;
   cursor: pointer;
 `;
-const BackList = styled.div`
+const BackList = styled.button`
   width: 11.2rem;
   height: 3.9rem;
   font-size: 1.6rem;
@@ -79,7 +80,6 @@ const PostCard = styled.div`
   background-color: #fff;
   box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.08);
   padding: 2.8rem 2.4rem;
-  cursor: pointer;
   @media all and (max-width: 1248px) {
     width: 100%;
     max-width: 50rem;
@@ -89,7 +89,7 @@ const PostCard = styled.div`
   }
 `;
 
-const DeleteButton = styled.div`
+const DeleteButton = styled.button`
   width: 9.2rem;
   height: 3.9rem;
   display: flex;
@@ -131,7 +131,7 @@ const PostInner = styled.div`
 
 // 공통된거
 
-const ImgBox = styled.div`
+const ImgBox = styled.button`
   width: 5.6rem;
   height: 5.6rem;
   border-radius: 100px;
