@@ -1,13 +1,11 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import { StyledTitle } from "../commonStyled";
-import person from "../../../assets/icon/person.svg";
-import color from "../../../styles/color";
-import profileImg1 from "../../../assets/img/profileImg1.png";
-import profileImg2 from "../../../assets/img/profileImg2.png";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { StyledTitle } from '../CommonStyled';
+import color from '../../../styles/color';
+import { defaultProfileImg, profileImg1, profileImg2 } from '../../../assets/ProfileImgUrls';
 
 const ProfileLayout = ({ data, setData }) => {
-  const [profileImage, setProfileImage] = useState();
+  const [profileImage, setProfileImage] = useState(defaultProfileImg);
   const profileImageList = [profileImg1, profileImg2];
   const handleProfileImageChange = (item) => {
     setProfileImage(item);
@@ -19,7 +17,7 @@ const ProfileLayout = ({ data, setData }) => {
       <StyledTitle>프로필 이미지</StyledTitle>
       <StyledProfileImgBox>
         <StyledPreviewImgBox>
-          {profileImage ? <StyledImg src={profileImage} alt="프로필 이미지" /> : <StyledNoImg src={person} />}
+          <StyledImg src={profileImage || defaultProfileImg} alt="프로필 이미지" />
         </StyledPreviewImgBox>
         <StyledImgSelectBox>
           <p>프로필 이미지를 선택해주세요!</p>
@@ -39,6 +37,7 @@ const StyledProfileImgBox = styled.div`
   align-items: center;
   gap: 3.2rem;
 `;
+
 const StyledPreviewImgBox = styled.div`
   display: flex;
   justify-content: center;
@@ -52,10 +51,9 @@ const StyledPreviewImgBox = styled.div`
 const StyledImg = styled.img`
   width: 8rem;
   width: 8rem;
+  border-radius: 50%;
   cursor: pointer;
 `;
-
-const StyledNoImg = styled.img``;
 
 const StyledImgSelectBox = styled.div`
   & p {
