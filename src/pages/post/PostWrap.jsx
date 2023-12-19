@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import MoreCardImg from "../../assets/icon/plus.svg";
 import Card from "../../components/commons/Card";
 import { motion } from "framer-motion";
+import setting from "../../assets/icon/setting.svg";
 
 function PostWrap({ data, toggleModal, setModalClick }) {
   const clickCard = (i) => {
@@ -19,7 +20,9 @@ function PostWrap({ data, toggleModal, setModalClick }) {
         </BackList>
       </BackListLink>
       <StyledLink to={`/post/${params.id}/edit`}>
-        <EditDeleteButton>편집하기</EditDeleteButton>
+        <EditDeleteButton>
+          <SettingIcon src={setting} alt="setting" />
+        </EditDeleteButton>
       </StyledLink>
 
       <PostCard>
@@ -93,7 +96,6 @@ const PostCard = styled.div`
 `;
 
 const DeleteButton = styled.button`
-  width: 9.2rem;
   height: 3.9rem;
   display: flex;
   align-items: center;
@@ -111,6 +113,10 @@ const EditDeleteButton = styled(DeleteButton)`
   border: 1px solid #ccc;
   background: #fff;
   color: black;
+
+  &:hover {
+    background: #ccc;
+  }
 `;
 const PostInner = styled.div`
   max-width: 124.8rem;
@@ -130,6 +136,10 @@ const PostInner = styled.div`
     max-width: 50rem;
     grid-template-columns: repeat(1, 1fr);
   }
+`;
+
+const SettingIcon = styled.img`
+  height: 100%;
 `;
 
 // 공통된거
