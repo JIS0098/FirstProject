@@ -19,7 +19,7 @@
 ## 🔎 사용기술  
 <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=white">
 <img src="https://img.shields.io/badge/reactRouter-CA4245?style=for-the-badge&logo=reactrouter&logoColor=white">
-<img src="https://img.shields.io/badge/styledComponents-DB7093?style=for-the-badge&logo=styledcomponents-DB7093&logoColor=white">
+<img src="https://img.shields.io/badge/styledComponents-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white">
 <img src="https://img.shields.io/badge/framerMotion-0055FF?style=for-the-badge&logo=framer&logoColor=white">
 <img src="https://img.shields.io/badge/reactQuill-A6A9AA?style=for-the-badge&logo=react&logoColor=white">
 <img src="https://img.shields.io/badge/emojiPickerReact-ECD53F?style=for-the-badge&logo=react&logoColor=white">
