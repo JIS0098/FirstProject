@@ -4,7 +4,6 @@ import "../../../styles/fonts.css";
 import WriteEditor from "../WYSIWYG/WriteEditor";
 import { FontList, FontSizeList } from "./constantsFont";
 import styled from "styled-components";
-import { useState } from "react";
 
 const Font = Quill.import("formats/font");
 const Size = Quill.import("formats/size");

@@ -29,7 +29,6 @@ const CreateMessage = () => {
     try {
       const resData = await testPostMessage(data);
       navigate(`/post/${resData?.recipientId}`);
-      console.log("응답", resData);
     } catch (error) {
       console.error(error);
     }
