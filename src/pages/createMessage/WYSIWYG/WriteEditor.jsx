@@ -22,12 +22,12 @@ const StyledFont = ({ font, content }) => css`
   .ql-picker.ql-font .ql-picker-item[data-value='${font}']::before {
     font-family: '${font}', cursive;
     content: '${content}' !important;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
   }
 
   .ql-font-${font} {
     font-family: '${font}';
-    font-size: 1.6rem;
+    font-size: 1.8rem;
   }
 `;
 
@@ -45,8 +45,9 @@ const StyledFontSize = ({ size, content }) => css`
 
 const WriteEditor = styled(ReactQuill)`
   .ql-editor p {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
   }
+
   .ql-editor::before {
     font-style: normal;
     font-size: 1.5rem;
@@ -69,6 +70,7 @@ const WriteEditor = styled(ReactQuill)`
   .ql-formats:nth-child(3) {
     width: 25rem;
   }
+
   .ql-formats:nth-child(3) > span:nth-child(1),
   .ql-formats:nth-child(3) > select:nth-child(1) {
     margin-right: 0.5rem;
@@ -77,6 +79,7 @@ const WriteEditor = styled(ReactQuill)`
   .ql-picker-label .ql-active {
     font-size: 1.6rem;
   }
+
   ${props => props.fontList && props.fontList.map(({ font, content }) => StyledFont({ font, content }))}
 
   ${props => props.sizeList && props.sizeList.map(({ size, content }) => StyledFontSize({ size, content }))}

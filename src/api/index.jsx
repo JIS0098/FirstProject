@@ -54,16 +54,20 @@ export async function getEmojiByPaperId(pageId) {
 export async function getRollingPaperAll() {
   return fetcher(`/recipients/?limit=1000`);
 }
+//선택한 롤링 페이퍼를 가져옴.
+export async function getRollingPaper(pageId) {
+  return fetcher(`/recipients/${pageId}/`);
+}
 
 /**
  * 새로운 롤링 페이퍼를 생성.
- * @param {Object} postData - 저장될 옵션 
+ * @param {Object} postData - 저장될 옵션
  * {
-    "team": "string",
-    "name": "string",
-    "backgroundColor": "beige",
-    "backgroundImageURL": "string"
-  }
+ *   "team": "string",
+ *   "name": "string",
+ *   "backgroundColor": "beige",
+ *   "backgroundImageURL": "string"
+ * }
  * @returns - 생성된 페이퍼에 대한 데이터.
  */
 export async function createRollingPaper(postData) {
@@ -74,6 +78,10 @@ export async function createRollingPaper(postData) {
 /**
  *
  * @param {Object} dataEmoji
+ * {
+ *   "emoji": "string",
+ *   "type": "increase" <-- default
+ * }
  * @param {String} pageId - 가지고 올 페이지 아이디
  * @returns
  */

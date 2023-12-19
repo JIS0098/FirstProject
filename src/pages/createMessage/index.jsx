@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-
 import styled from 'styled-components';
 import NameInput from '../../components/commons/NameInput';
 import CreateButton from '../../components/commons/CreateButton';
 import ProfileLayout from './components/ProfileLayout';
 import RelationshipInputBox from './components/RelationshipInputBox';
 import WriteInputBox from './WYSIWYG';
+import { defaultProfileImg } from '../../assets/ProfileImgUrls';
 
 const CreateMessage = () => {
   const navigate = useNavigate();
@@ -15,14 +15,15 @@ const CreateMessage = () => {
   const [data, setData] = useState({
     team: '2-1',
     recipientId: +id,
-    sender: '',
-    profileImageURL: 'https://ibb.co/CBLszQC',
-    relationship: '',
+    sender: null,
+    profileImageURL: defaultProfileImg,
+    relationship: '지인',
     content: '',
     font: 'Pretendard',
   });
 
-  async function PostMessageData(postData) {
+  //포스트 요청
+  const postMessageData = async postData => {
     console.log('포스트', postData);
     try {
       const res = await fetch(`https://rolling-api.vercel.app/2-1/recipients/${postData?.recipientId}/messages/`, {
@@ -32,20 +33,19 @@ const CreateMessage = () => {
         },
         body: JSON.stringify(postData),
       });
-
       if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}`);
       }
-
       return res.json();
     } catch (e) {
       console.error('네트워크 요청 에러:', e);
     }
-  }
+  };
 
+  //포스트 응답 및 페이지 이동
   const handleCreateMessage = async () => {
     try {
-      const resData = await PostMessageData(data);
+      const resData = await postMessageData(data);
       navigate(`/post/${resData?.recipientId}`);
       console.log('응답', resData);
     } catch (error) {
@@ -68,7 +68,12 @@ const CreateMessage = () => {
         <RelationshipInputBox data={data} setData={setData} />
         <WriteInputBox data={data} setData={setData} />
         <CreateButtonBox>
-          <CreateButton onClick={handleCreateMessage} mobileWidth="100%" tabletWidth="100%" disabled={!isName} />
+          <CreateButton
+            mobileWidth="100%"
+            tabletWidth="100%"
+            disabled={!isName || data.content === ''}
+            onClick={handleCreateMessage}
+          />
         </CreateButtonBox>
       </MessageBox>
     </MessageLayout>

@@ -2,33 +2,60 @@ import React from "react";
 import styled from "styled-components";
 import { setDayYMD } from "../../utils/setDayYMD";
 import Delete from "../../assets/icon/deleted.svg";
+import nullImg from "../../assets/icon/person.svg";
+import useToggle from "../../hooks/useToggle";
 
-function Card({ onClick, name, profileImg, description, tag, ago, deleteCard = true, DeleteCardClick }) {
+function Card({ id, onClick, name, profileImg, description, tag, ago, deleteCard = true, deleteCardClick }) {
+  const [deleteChoice, deleteChoiceToggle] = useToggle(false);
   const htmlContent = { __html: description };
   const day = setDayYMD(ago);
+  const profile = profileImg ? profileImg : nullImg;
+  const tagColor = (tag) => {
+    if (tag === "지인") {
+      return { back: "#FFF0D6", font: "#FF8832" };
+    }
+    if (tag === "동료") {
+      return { back: "#F8F0FF", font: "#9935FF" };
+    }
+    if (tag === "가족") {
+      return { back: "#E4FBDC", font: "#2BA600" };
+    }
+    if (tag === "친구") {
+      return { back: "#E2F5FF", font: "#00A2FE" };
+    }
+  };
 
   return (
     <CardBox
       onClick={() => {
         onClick();
       }}
+      deleteChoice={deleteChoice}
+      deleteCard={deleteCard}
     >
       <CardWrap>
         <From>
           <FromInner>
             <ImgBox>
-              <StyledImg src={profileImg} />
+              <StyledImg src={profile} alt="profileImg" />
             </ImgBox>
             <FromBox>
               <FromP>
                 From. <FromSpan>{name}</FromSpan>
               </FromP>
-              <FromTag>{tag}</FromTag>
+              <FromTag back={tagColor(tag).back} font={tagColor(tag).font}>
+                {tag}
+              </FromTag>
             </FromBox>
           </FromInner>
 
           {deleteCard ? null : (
-            <DeleteWrap onClick={() => DeleteCardClick()}>
+            <DeleteWrap
+              onClick={() => {
+                deleteCardClick(id);
+                deleteChoiceToggle();
+              }}
+            >
               <img src={Delete} />
             </DeleteWrap>
           )}
@@ -41,7 +68,7 @@ function Card({ onClick, name, profileImg, description, tag, ago, deleteCard = t
   );
 }
 
-const DeleteWrap = styled.div`
+const DeleteWrap = styled.button`
   width: 4rem;
   height: 4rem;
   padding: 0.8rem;
@@ -59,7 +86,9 @@ const StyledImg = styled.img`
   height: 100%;
   object-fit: cover;
 `;
-const CardBox = styled.div`
+const CardBox = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== "deleteChoice" && prop !== "deleteCard",
+})`
   width: 38.4rem;
   height: 28rem;
   margin: 0 auto;
@@ -70,11 +99,14 @@ const CardBox = styled.div`
   background-color: #fff;
   box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.08);
   padding: 2.8rem 2.4rem;
-  cursor: pointer;
+  opacity: ${(props) => (props.deleteChoice ? 0.8 : 1)};
+  cursor: ${(props) => (!props.deleteCard ? "auto" : "pointer")};
+
   @media all and (max-width: 1248px) {
     width: 100%;
     max-width: 50rem;
   }
+
   @media all and (max-width: 768px) {
     width: 100%;
   }
@@ -115,7 +147,9 @@ const FromBox = styled.div`
   justify-content: space-between;
   gap: 1rem;
 `;
-const FromTag = styled.div`
+const FromTag = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== "back" && prop !== "font",
+})`
   width: 4.1rem;
   height: 2rem;
   display: flex;
@@ -124,8 +158,8 @@ const FromTag = styled.div`
   align-items: center;
   gap: 10px;
   border-radius: 4px;
-  background: var(--green-100, #e4fbdc);
-  color: var(--green-500, #2ba600);
+  background: ${(props) => props.back};
+  color: ${(props) => props.font};
   font-size: 1.4rem;
 `;
 const FromP = styled.p`
