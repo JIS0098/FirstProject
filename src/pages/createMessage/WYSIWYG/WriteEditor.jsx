@@ -1,8 +1,8 @@
-import styled, { css } from 'styled-components';
-import ReactQuill from 'react-quill';
-import color from '../../../styles/color';
-import '../../../styles/fonts.css';
-import 'react-quill/dist/quill.snow.css';
+import styled, { css } from "styled-components";
+import ReactQuill from "react-quill";
+import color from "../../../styles/color";
+import "../../../styles/fonts.css";
+import "react-quill/dist/quill.snow.css";
 
 const StyledFont = ({ font, content }) => css`
   .ql-picker.ql-font .ql-picker-label::before,
@@ -18,15 +18,15 @@ const StyledFont = ({ font, content }) => css`
     }
   }
 
-  .ql-picker.ql-font .ql-picker-label[data-value='${font}']::before,
-  .ql-picker.ql-font .ql-picker-item[data-value='${font}']::before {
-    font-family: '${font}', cursive;
-    content: '${content}' !important;
+  .ql-picker.ql-font .ql-picker-label[data-value="${font}"]::before,
+  .ql-picker.ql-font .ql-picker-item[data-value="${font}"]::before {
+    font-family: "${font}", cursive;
+    content: "${content}" !important;
     font-size: 1.6rem;
   }
 
   .ql-font-${font} {
-    font-family: '${font}';
+    font-family: "${font}";
     font-size: 1.8rem;
   }
 `;
@@ -36,9 +36,9 @@ const StyledFontSize = ({ size, content }) => css`
     font-size: ${size}px;
   }
 
-  .ql-picker.ql-size .ql-picker-label[data-value='${size}']::before,
-  .ql-picker.ql-size .ql-picker-item[data-value='${size}']::before {
-    content: '${content}' !important;
+  .ql-picker.ql-size .ql-picker-label[data-value="${size}"]::before,
+  .ql-picker.ql-size .ql-picker-item[data-value="${size}"]::before {
+    content: "${content}" !important;
     font-size: 1.5rem;
   }
 `;
@@ -80,9 +80,9 @@ const WriteEditor = styled(ReactQuill)`
     font-size: 1.6rem;
   }
 
-  ${props => props.fontList && props.fontList.map(({ font, content }) => StyledFont({ font, content }))}
+  ${(props) => props.fontList && props.fontList.map(({ font, content }) => StyledFont({ font, content }))}
 
-  ${props => props.sizeList && props.sizeList.map(({ size, content }) => StyledFontSize({ size, content }))}
+  ${(props) => props.sizeList && props.sizeList.map(({ size, content }) => StyledFontSize({ size, content }))}
 `;
 
 export default WriteEditor;
