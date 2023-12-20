@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import React from "react";
 import styled from "styled-components";
-
 export function Button({ children, width, tabletWidth, mobileWidth, disabled, onClick }) {
   return (
     <StyledButton
@@ -22,7 +21,7 @@ export function Button({ children, width, tabletWidth, mobileWidth, disabled, on
 const StyledButton = styled(motion.button)`
   padding: 1.4rem 2.4rem;
   border-radius: 12px;
-  background: #9935ff;
+  background: ${({ theme }) => theme.button.enabled};
   width: ${({ width }) => width};
   color: white;
   font-size: 1.8rem;
@@ -31,13 +30,13 @@ const StyledButton = styled(motion.button)`
   cursor: pointer;
 
   &:hover {
-    background: #861dee;
+    background: ${({ theme }) => theme.button.hover};
   }
 
   &:disabled {
     filter: opacity(50%);
     cursor: initial;
-    background: #9935ff;
+    background: ${({ theme }) => theme.button.disabled};
   }
 
   @media screen and (max-width: 1248px) {

@@ -7,93 +7,71 @@ import CardSection from "../../components/domains/list/CardSection";
 import SearchBar from "components/commons/SearchBar";
 
 function ListPage() {
-  const LIST_TITLE = ["인기 롤링 페이퍼 🔥", "최근에 만든 롤링 페이퍼 ⭐️", "검색 결과 🔍"];
+  const LIST_TITLE = ["검색 결과 🔍", "인기 롤링 페이퍼 🔥", "최근에 만든 롤링 페이퍼 ⭐️"];
   const [loading, setLoading] = useState(false);
   const [sortByMost, setSortByMost] = useState([]);
   const [sortByRecent, setSortByRecent] = useState([]);
   const [searchDatas, setSearchDatas] = useState([]); // 검색한 값
   const [searchParams, setSearchParams] = useSearchParams();
-  const qureyValue = searchParams.get("name");
-  const [searchValue, setSearchValue] = useState(qureyValue || ""); // 입력한 값
+  const queryValue = searchParams.get("name");
+  const [searchValue, setSearchValue] = useState(queryValue || ""); // 입력한 값
+  const [onInput, setOnInput] = useState(false);
 
-  const getSerchValue = (e) => {
+  const handleSearchValue = (e) => {
     setSearchValue(e.target.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setOnInput(searchValue.length > 0);
     setSearchParams(searchValue ? { name: searchValue } : {});
   };
-
-  //   const [allData, setAllData] = useState([]);
-  //   const [filtering, setFiltering] = useState("");
-  //   const [onInput, setOnInput] = useState(false);
 
   useEffect(() => {
     setLoading(true);
     getRollingPaperAll()
       .then((res) => res.results)
       .then((data) => {
-        //모든 데이터 저장(To Do. 검색 기능 만들게 되면 필터링 걸 예정)
-        // setAllData(data);
         //가장 메시지가 많은 순.
         const like = [...data].sort((a, b) => b.messageCount - a.messageCount).slice(0, 10);
-        setSortByMost(like);
         //가장 최근에 만들어진 순.
         const recent = [...data].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 10);
-        setSortByRecent(recent);
         //검색 필터
-        const searchResults = qureyValue ? data.filter(({ name }) => name.includes(qureyValue.toLowerCase())) : [];
-        console.log("이거는", searchResults);
+        const searchResults = queryValue ? data.filter(({ name }) => name.includes(queryValue.toLowerCase())) : [];
+
+        setSortByMost(like);
+        setSortByRecent(recent);
         setSearchDatas(searchResults);
       })
       .finally(() => setLoading(false));
-  }, [qureyValue, searchParams]);
-
-  // const filteringData = React.useMemo(
-  //   () => allData.filter((data) => data.name.includes(filtering)),
-  //   [allData, filtering]
-  // );
-
-  // const handleFiltering = (e) => {
-  //   setFiltering(e.target.value);
-  //   setOnInput(e.target.value.length > 0);
-  // };
+  }, [queryValue]);
 
   return (
     <>
-      <SearchBar onChange={getSerchValue} value={searchValue} onSubmit={handleSubmit} />
+      <SearchBar onChange={handleSearchValue} value={searchValue} onSubmit={handleSubmit} />
       <Layout>
-        {searchDatas.length === 0 ? (
-          <StyledTest>테스트 입니다. (값 없을시 표시화면)</StyledTest>
-        ) : (
-          <CardSection title={LIST_TITLE[2]} recipients={searchDatas} />
-        )}
-        <CardSection loading={loading} title={LIST_TITLE[0]} recipients={sortByMost} />
-        <CardSection loading={loading} title={LIST_TITLE[1]} recipients={sortByRecent} />
-
-        {/* <input onChange={handleFiltering} />
         {onInput ? (
-           //To Do. 필터링 디자인 구현
-          filteringData.length > 0 ? (
-            filteringData.map((item, index) => <div key={index}>{item.name}</div>)
+          loading ? (
+            <StyledSearchResult>검색 중...</StyledSearchResult>
+          ) : searchDatas.length > 0 ? (
+            <CardSection title={LIST_TITLE[0]} recipients={searchDatas} />
           ) : (
-            <div>검색 결과가 없습니다.</div>
+            <StyledSearchResult>검색 결과가 없습니다</StyledSearchResult>
           )
-          ) : (
+        ) : (
           <>
-            <CardSection loading={loading} title={LIST_TITLE[0]} recipients={sortByMost} />
-            <CardSection loading={loading} title={LIST_TITLE[1]} recipients={sortByRecent} />
+            <CardSection loading={loading} title={LIST_TITLE[1]} recipients={sortByMost} />
+            <CardSection loading={loading} title={LIST_TITLE[2]} recipients={sortByRecent} />
           </>
-         )} */}
+        )}
       </Layout>
-      <Link to="/post">
-        <StyledGoToListButtonContainer>
+      <StyledButtonContainer>
+        <Link to="/post">
           <Button width="28rem" tabletWidth="100%">
             나도 만들어보기
           </Button>
-        </StyledGoToListButtonContainer>
-      </Link>
+        </Link>
+      </StyledButtonContainer>
     </>
   );
 }
@@ -108,14 +86,14 @@ const Layout = styled.div`
   margin: 0 auto 4rem;
 `;
 
-const StyledGoToListButtonContainer = styled.div`
+const StyledButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-bottom: 6rem;
   min-width: 360px;
 `;
 
-const StyledTest = styled.p`
+const StyledSearchResult = styled.p`
   margin-top: 5rem;
   font-size: 3rem;
   font-weight: 700;

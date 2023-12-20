@@ -1,14 +1,16 @@
-import reset from './reset';
-import { createGlobalStyle } from 'styled-components';
+import reset from "./reset";
+import { createGlobalStyle } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
 
 /* reset */
 ${reset}
-
 /* Custom-Global-Styled */
 *{
     box-sizing: border-box;
+}
+body{
+    background-color: ${({ theme }) => theme.display};
 }
 a{
     text-decoration: none;

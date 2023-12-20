@@ -7,11 +7,13 @@ import { Button } from "../components/commons/Button";
 import { motion } from "framer-motion";
 import SkPostCard from "../components/commons/SkPostCard";
 import SkListCard from "components/commons/SkListCard";
+import SkImageCard from "components/commons/SkImageCard";
+import LodingSpinner from "components/commons/LodingSpinner";
 
-function Landing({ thema }) {
+function Landing() {
   return (
     <>
-      <StyledMainContainer $thema={thema}>
+      <StyledMainContainer>
         <StyledLandingSectionFirst
           initial={{ x: -30, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
@@ -62,8 +64,12 @@ function Landing({ thema }) {
             </Button>
           </Link>
         </StyledGoToListButtonContainer>
-        <SkPostCard />
-        <SkListCard />
+        <div style={{ display: "flex", gap: "20px", marginTop: "5rem" }}>
+          <SkPostCard />
+          <SkListCard />
+          <SkImageCard />
+          <LodingSpinner />
+        </div>
       </StyledMainContainer>
     </>
   );
@@ -71,7 +77,6 @@ function Landing({ thema }) {
 
 const StyledMainContainer = styled.main`
   padding: 6rem 24px;
-  background-color: ${({ $thema }) => ($thema ? "#1E1F21" : "#fff")};
 `;
 const StyledLandingSection = styled(motion.section)`
   display: flex;

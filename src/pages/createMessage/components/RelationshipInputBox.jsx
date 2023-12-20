@@ -5,7 +5,7 @@ import useToggle from "../../../hooks/useToggle";
 import { StyledTitle } from "../commonStyled";
 
 const RelationshipInputBox = ({ data, setData }) => {
-  const [relationship, relationshipToggle] = useToggle();
+  const [relationship, relationshipToggle, setRelationship] = useToggle();
   const relationshipList = ["지인", "동료", "가족", "친구"];
   const [value, setValue] = useState("");
 
@@ -15,8 +15,14 @@ const RelationshipInputBox = ({ data, setData }) => {
     setData({ ...data, relationship: item });
   };
 
+  const handleRelationship = () => {
+    if (relationship) {
+      setRelationship(false);
+    }
+  };
+
   return (
-    <StyledRelationshipInputBox>
+    <StyledRelationshipInputBox onClick={handleRelationship}>
       <StyledTitle>상대와의 관계</StyledTitle>
       <div onClick={relationshipToggle}>
         {value === "" ? "지인" : value}
@@ -50,7 +56,8 @@ const StyledRelationshipInputBox = styled.div`
     margin-bottom: 1.2rem;
     padding: 1.2rem 1.6rem;
     border-radius: 0.8rem;
-    border: 0.1rem solid var(--gray-300, #ccc);
+    border: 0.1rem solid ${({ theme }) => theme.border};
+    background-color: white;
     font-size: 1.6rem;
     font-style: normal;
     font-weight: 400;
