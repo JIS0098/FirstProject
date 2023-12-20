@@ -4,18 +4,24 @@ import { setDayYMD } from "../../utils/setDayYMD";
 import { motion } from "framer-motion";
 import nullImg from "../../assets/icon/person.svg";
 
-function PostModal({ toggleModal, modalFind }) {
+function PostModal({ toggleModal, modalFind, modalFalse }) {
   const htmlContent = { __html: modalFind.content };
   const day = setDayYMD(modalFind.createdAt);
   const progileImg = modalFind.profileImageURL ? modalFind.profileImageURL : nullImg;
 
   return (
-    <Modal>
+    <Modal
+      onClick={(event) => {
+        event.stopPropagation();
+        modalFalse();
+      }}
+    >
       <ModalInner
         initial={{ opacity: 0, x: 100, scale: 0.8 }}
         animate={{ opacity: 1, x: 0, scale: 1 }}
         transition={{ duration: 0.5 }}
         exit={{ opacity: 0, x: -100, scale: 0.8 }}
+        onClick={(event) => event.stopPropagation()}
       >
         <From>
           <FromInner>

@@ -3,8 +3,14 @@ import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import Card from "../../components/commons/Card";
 import { deletePage, deleteCardFromPage } from "api";
+import SkPostCard from "components/commons/SkPostCard";
 
-function PostWrap({ data, pageId }) {
+function Loading() {
+  const renderItems = Array.from({ length: 6 }).map((_, index) => <SkPostCard key={index} />);
+  return <>{renderItems}</>;
+}
+
+function PostWrap({ data, pageId, loading, thema }) {
   const [deleteList, setDeleteList] = useState([]);
   const navigate = useNavigate();
 
@@ -19,50 +25,66 @@ function PostWrap({ data, pageId }) {
     } catch (e) {
       console.error(e);
     } finally {
-      navigate(`/post/${pageId}`);
+      window.location.reload();
     }
   };
 
   const deleteCardClick = (id) => {
-    setDeleteList((prev) => [
-      ...prev,
-      {
-        id: id,
-      },
-    ]);
+    const isNotDelete = deleteList.some((item) => item.id === id);
+
+    if (isNotDelete) {
+      setDeleteList((prev) => prev.filter((item) => item.id !== id));
+    } else {
+      setDeleteList((prev) => [
+        ...prev,
+        {
+          id: id,
+        },
+      ]);
+    }
   };
 
   const clickdeletePage = async () => {
-    try {
-      await deletePage(pageId);
-    } catch (e) {
-      console.log(e);
-    } finally {
-      navigate("/list");
+    const deleteconfirm = confirm("페이지를 삭제하시겠습니까?");
+    if (deleteconfirm) {
+      try {
+        await deletePage(pageId);
+      } catch (e) {
+        console.log(e);
+      } finally {
+        navigate("/list");
+      }
     }
   };
 
   return (
     <PostInner>
-      <BackListLink to={"/list"}>
-        <BackList>리스트로 이동</BackList>
+      <BackListLink to={`/post/${pageId}`}>
+        <BackList $thema={thema}>뒤로가기</BackList>
       </BackListLink>
       <PageDeleteButton onClick={clickdeletePage}>페이지 삭제</PageDeleteButton>
-      <PostDeleteButton onClick={Delete}>삭제 & 나가기</PostDeleteButton>
-      {data.map((item) => (
-        <Card
-          onClick={() => {}}
-          key={item.id}
-          id={item.id}
-          profileImg={item.profileImageURL}
-          name={item.sender}
-          description={item.content}
-          tag={item.relationship}
-          ago={item.createdAt}
-          deleteCard={false}
-          deleteCardClick={deleteCardClick}
-        />
-      ))}
+      {deleteList.length > 0 ? <PostDeleteButton onClick={Delete}>삭제</PostDeleteButton> : null}
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          {data.map((item) => (
+            <Card
+              onClick={() => {}}
+              thema={thema}
+              key={item.id}
+              id={item.id}
+              profileImg={item.profileImageURL}
+              name={item.sender}
+              description={item.content}
+              tag={item.relationship}
+              ago={item.createdAt}
+              deleteCard={false}
+              deleteCardClick={deleteCardClick}
+            />
+          ))}
+        </>
+      )}
     </PostInner>
   );
 }
@@ -81,8 +103,8 @@ const BackList = styled.button`
   justify-content: center;
   border-radius: 6px;
   border: 1px solid #ccc;
-  background: #fff;
-  color: black;
+  background: ${({ $thema }) => ($thema ? "#000" : "#fff")};
+  color: ${({ $thema }) => (!$thema ? "#000" : "#fff")};
 `;
 
 const DeleteButton = styled.button`
@@ -100,29 +122,20 @@ const DeleteButton = styled.button`
 `;
 
 const PostDeleteButton = styled(DeleteButton)`
-  position: absolute;
-  top: 8rem;
-  right: 2.5rem;
-  z-index: 1;
-  @media all and (max-width: 1248px) {
-    max-width: 72rem;
-    width: calc(100% - 48px);
-    height: 5.6rem;
-    position: fixed;
-    padding: 0 2.4rem;
-    top: auto;
-    bottom: 6rem;
-    left: 50%;
-    transform: translateX(-50%);
-  }
+  max-width: 72rem;
+  width: calc(100% - 48px);
+  height: 5.6rem;
+  position: fixed;
+  padding: 0 2.4rem;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
 `;
 const PageDeleteButton = styled(DeleteButton)`
   position: absolute;
   top: 8rem;
-  right: 12.5rem;
-  @media all and (max-width: 1248px) {
-    right: 2.5rem;
-  }
+  right: 2.5rem;
+  z-index: 1;
 `;
 const PostInner = styled.div`
   max-width: 124.8rem;
