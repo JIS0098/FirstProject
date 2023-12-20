@@ -13,6 +13,9 @@ function SkImageCard() {
       <Container>
         <Shimmer />
       </Container>
+      <Container>
+        <Shimmer />
+      </Container>
     </Ccontainer>
   );
 }
@@ -38,6 +41,7 @@ const Shimmer = styled.div`
 
 const Ccontainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
   overflow: hidden;
 `;
@@ -49,6 +53,11 @@ const Container = styled.div`
   background: #ccc;
   overflow: hidden;
   position: relative;
+
+  @media screen and (max-width: 768px) {
+    width: 15.4rem;
+    height: 15.4rem;
+  }
 `;
 
 export default SkImageCard;
