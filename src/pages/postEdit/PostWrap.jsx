@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Card from "../../components/commons/Card";
 import { deletePage, deleteCardFromPage } from "api";
 import SkPostCard from "components/commons/SkPostCard";
+import { AnimatePresence, motion } from "framer-motion";
 
 function Loading() {
   const renderItems = Array.from({ length: 6 }).map((_, index) => <SkPostCard key={index} />);
@@ -62,8 +63,21 @@ function PostWrap({ data, pageId, loading, thema }) {
       <BackListLink to={`/post/${pageId}`}>
         <BackList $thema={thema}>뒤로가기</BackList>
       </BackListLink>
-      <PageDeleteButton onClick={clickdeletePage}>페이지 삭제</PageDeleteButton>
-      {deleteList.length > 0 ? <PostDeleteButton onClick={Delete}>삭제</PostDeleteButton> : null}
+      <PageDeleteButton onClick={clickdeletePage}>포스트 삭제</PageDeleteButton>
+      <AnimatePresence>
+        {deleteList.length > 0 ? (
+          <PostDeleteButton
+            onClick={Delete}
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 50, opacity: 0 }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 1 }}
+          >
+            선택한 항목 삭제
+          </PostDeleteButton>
+        ) : null}
+      </AnimatePresence>
       {loading ? (
         <Loading />
       ) : (
@@ -108,7 +122,6 @@ const BackList = styled.button`
 `;
 
 const DeleteButton = styled.button`
-  width: 9.2rem;
   height: 3.9rem;
   display: flex;
   align-items: center;
@@ -117,19 +130,30 @@ const DeleteButton = styled.button`
   font-size: 1.6rem;
   text-align: center;
   border-radius: 6px;
-  background: #9935ff;
+  background: #fa0f0e;
   cursor: pointer;
+
+  &:hover {
+    background-color: #861dee;
+  }
 `;
 
-const PostDeleteButton = styled(DeleteButton)`
-  max-width: 72rem;
-  width: calc(100% - 48px);
-  height: 5.6rem;
+const PostDeleteButton = styled(motion.button)`
   position: fixed;
-  padding: 0 2.4rem;
   bottom: 3rem;
   left: 50%;
   transform: translateX(-50%);
+  padding: 2rem;
+  border-radius: 1.2rem;
+  font-size: 1.6rem;
+  color: white;
+  background-color: #9935ff;
+  cursor: pointer;
+  z-index: 99;
+
+  &:hover {
+    background-color: #861dee;
+  }
 `;
 const PageDeleteButton = styled(DeleteButton)`
   position: absolute;

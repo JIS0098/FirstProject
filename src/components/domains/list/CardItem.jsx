@@ -3,6 +3,7 @@ import { CardContent } from "./CardContent";
 import { Reactions } from "./Reactions";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 function CardItem({ recipient }) {
   const { name, recentMessages, messageCount, topReactions, backgroundColor, backgroundImageURL } = recipient;
@@ -19,7 +20,7 @@ function CardItem({ recipient }) {
   }, [backgroundImageURL]);
 
   return (
-    <Container $bgUrl={bgImageUrl} $bgColor={backgroundColor}>
+    <Container $bgUrl={bgImageUrl} $bgColor={backgroundColor} whileHover={{ scale: 0.95 }} whileTap={{ scale: 0.9 }}>
       <Link to={`/post/${recipient.id}`}>
         <Wrapper $bgUrl={bgImageUrl} $bgColor={backgroundColor}>
           <CardContent name={name} messages={recentMessages} messageCount={messageCount} $bgUrl={bgImageUrl} />
@@ -36,7 +37,7 @@ function CardItem({ recipient }) {
 
 export default CardItem;
 
-const Container = styled.div`
+const Container = styled(motion.div)`
   width: 27.5rem;
   height: 26rem;
   flex: 0 0 auto;
