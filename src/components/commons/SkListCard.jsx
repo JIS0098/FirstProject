@@ -33,19 +33,20 @@ function SkListCard() {
 }
 
 const Shimmer = styled.div`
-  width: 20px;
   height: 100%;
   background-color: #e0e0e0;
   box-shadow: 0 0 30px 30px #e0e0e0;
-  animation: loading 1.5s infinite linear;
+  animation: loading 3s infinite ease-in-out;
+  position: relative;
+  overflow: hidden;
 
   @keyframes loading {
     0% {
-      transform: translateX(0px);
+      transform: translateX(-150%);
     }
 
     100% {
-      transform: translateX(300px);
+      transform: translateX(150%);
     }
   }
 `;

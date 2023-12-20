@@ -5,7 +5,7 @@ import Delete from "../../assets/icon/deleted.svg";
 import nullImg from "../../assets/icon/person.svg";
 import useToggle from "../../hooks/useToggle";
 
-function Card({ id, onClick, name, profileImg, description, tag, ago, deleteCard = true, deleteCardClick }) {
+function Card({ id, onClick, name, profileImg, description, tag, ago, deleteCard = true, deleteCardClick, thema }) {
   const [deleteChoice, deleteChoiceToggle] = useToggle(false);
   const htmlContent = { __html: description };
   const day = setDayYMD(ago);
@@ -32,15 +32,16 @@ function Card({ id, onClick, name, profileImg, description, tag, ago, deleteCard
       }}
       deleteChoice={deleteChoice}
       deleteCard={deleteCard}
+      $thema={thema}
     >
       <CardWrap>
-        <From>
+        <From $thema={thema}>
           <FromInner>
             <ImgBox>
               <StyledImg src={profile} alt="profileImg" />
             </ImgBox>
             <FromBox>
-              <FromP>
+              <FromP $thema={thema}>
                 From. <FromSpan>{name}</FromSpan>
               </FromP>
               <FromTag back={tagColor(tag).back} font={tagColor(tag).font}>
@@ -61,7 +62,7 @@ function Card({ id, onClick, name, profileImg, description, tag, ago, deleteCard
           )}
         </From>
 
-        <CardDescription dangerouslySetInnerHTML={htmlContent} />
+        <CardDescription $thema={thema} dangerouslySetInnerHTML={htmlContent} />
         <Ago>{day}</Ago>
       </CardWrap>
     </CardBox>
@@ -96,10 +97,10 @@ const CardBox = styled.div.withConfig({
   justify-content: center;
   align-items: center;
   border-radius: 16px;
-  background-color: #fff;
+  background-color: ${({ $thema }) => ($thema ? "#000" : "#fff")};
   box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.08);
   padding: 2.8rem 2.4rem;
-  opacity: ${(props) => (props.deleteChoice ? 0.8 : 1)};
+  opacity: ${(props) => (props.deleteChoice ? 0.5 : 1)};
   cursor: ${(props) => (!props.deleteCard ? "auto" : "pointer")};
 
   @media all and (max-width: 1248px) {
@@ -121,14 +122,17 @@ const CardWrap = styled.div`
 const CardDescription = styled.div`
   width: 100%;
   height: 10.6rem;
-  font-size: 1.8rem;
   font-weight: 400;
+  color: ${({ $thema }) => (!$thema ? "#000" : "#fff")};
   /* display: -webkit-box; */
   -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: normal;
+  & > p {
+    font-size: 1.8rem;
+  }
 `;
 
 const From = styled.div`
@@ -138,7 +142,7 @@ const From = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid ${({ $thema }) => (!$thema ? "#eee" : "#4f5256")};
 `;
 const FromBox = styled.div`
   width: 50%;
@@ -164,6 +168,7 @@ const FromTag = styled.div.withConfig({
 `;
 const FromP = styled.p`
   font-size: 2rem;
+  color: ${({ $thema }) => (!$thema ? "#000" : "#fff")};
 `;
 const FromSpan = styled.span`
   font-size: 2rem;
