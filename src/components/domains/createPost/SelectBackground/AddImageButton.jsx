@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import addButtonIcon from "../../../../assets/icon/add-button.png";
-import styled from "styled-components";
-import { CheckIcon, Image } from "./styled";
-import selectedIcon from "../../../../assets/icon/background-selected.png";
-import color from "../../../../styles/color.js";
 import { supabase } from "api/supabase/supabaseClient";
+import styled from "styled-components";
+import color from "../../../../styles/color.js";
+import { CheckIcon, Image } from "./styled";
+import addButtonIcon from "../../../../assets/icon/add-button.png";
+import selectedIcon from "../../../../assets/icon/background-selected.png";
 
 const AddImage = ({ onUpload, onPreviewSelect, isPreviewSelected }) => {
   const [previewImage, setPreviewImage] = useState(false);

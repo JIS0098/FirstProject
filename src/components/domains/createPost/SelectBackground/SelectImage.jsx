@@ -1,10 +1,10 @@
 import { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import { PaletteWrapper, CheckIcon, Image } from "./styled.js";
-import selectedIcon from "../../../../assets/icon/background-selected.png";
 import { supabase } from "../../../../api/supabase/supabaseClient.jsx";
 import AddImage from "./AddImageButton.jsx";
 import SkImageCard from "components/commons/SkImageCard.jsx";
+import selectedIcon from "../../../../assets/icon/background-selected.png";
 
 const SelectImage = ({ onImageSelect }) => {
   const [imageList, setImageList] = useState([]);
