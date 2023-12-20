@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { PaletteWrapper, CheckIcon } from "./common-styled";
+import { PaletteWrapper, CheckIcon } from "./styled";
 import selectedIcon from "../../../../assets/icon/background-selected.png";
 
 const COLOR = {
