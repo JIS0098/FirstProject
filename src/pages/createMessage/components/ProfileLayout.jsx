@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import { StyledTitle } from "../commonStyled";
-import color from "../../../styles/color";
-import { defaultProfileImg, profileImg1, profileImg2 } from "../../../assets/ProfileImgUrls";
-
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { StyledTitle } from '../commonStyled';
+import color from '../../../styles/color';
+import { defaultProfileImg, profileImg1, profileImg2 } from '../../../assets/ProfileImgUrls';
+import ProfileImgUpload from './ProfileImgUpload';
 const ProfileLayout = ({ data, setData }) => {
   const [profileImage, setProfileImage] = useState(defaultProfileImg);
   const profileImageList = [profileImg1, profileImg2];
 
-  const handleProfileImageChange = (item) => {
+  const handleProfileImageChange = item => {
     setProfileImage(item);
     setData(() => ({ ...data, profileImageURL: item }));
   };
@@ -18,12 +18,13 @@ const ProfileLayout = ({ data, setData }) => {
       <StyledTitle>프로필 이미지</StyledTitle>
       <StyledProfileImgBox>
         <StyledPreviewImgBox>
-          <StyledImg src={profileImage || defaultProfileImg} alt="프로필 이미지" />
+          {/* <StyledImg src={profileImage || defaultProfileImg} alt="프로필 이미지" /> */}
+          <ProfileImgUpload />
         </StyledPreviewImgBox>
         <StyledImgSelectBox>
           <p>프로필 이미지를 선택해주세요!</p>
           <StyledImgList>
-            {profileImageList.map((item) => (
+            {profileImageList.map(item => (
               <img key={item} src={item} onClick={() => handleProfileImageChange(item)} />
             ))}
           </StyledImgList>
