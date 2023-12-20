@@ -5,7 +5,7 @@ const handleCreateButtonClick = async ({ name, backgroundColor, backgroundImageU
     name,
     backgroundColor,
     backgroundImageURL,
-    createdAt: new Date().toISOString(),
+    createdAt: new Date().toString(),
     messageCount: 0,
     recentMessages: [],
     reactionCount: 0,

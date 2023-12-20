@@ -47,6 +47,7 @@ const WriteEditorBox = ({ data, setData, setIsAlert, isAlert }) => {
     }
   };
 
+
   const handleEditorFocus = (content) => {
     if (
       content.index === 0 ||
