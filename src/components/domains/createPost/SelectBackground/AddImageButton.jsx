@@ -14,6 +14,10 @@ const AddImage = ({ onUpload, onPreviewSelect, isPreviewSelected }) => {
     const file = e.target.files[0];
 
     if (file) {
+      if (file.size > 2 * 1024 * 1024) {
+        alert("파일 크기는 2MB 이하여야 합니다.");
+        return;
+      }
       const filePath = `${Date.now()}`;
       setFilePath(filePath);
       await supabase.storage.from("new_background_images").upload(filePath, file);
