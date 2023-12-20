@@ -49,6 +49,8 @@ const CreateMessage = () => {
     }
   };
 
+  console.log(data.profileImageURL);
+
   return (
     <MessageLayout>
       <MessageBox>
