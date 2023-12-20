@@ -11,14 +11,6 @@ import NotFound from "./pages/not_found/NotFound";
 import { LocationProvider } from "contexts/LocationContext";
 
 function Main({ onToggleTheme }) {
-  // const [isThema, setIsThema] = useState(false);
-  // false = whiteMode , true = blackMode
-  // function handleThema() {
-  //   setIsThema((prev) => {
-  //     return !prev;
-  //   });
-  // }
-
   return (
     <BrowserRouter>
       <LocationProvider>

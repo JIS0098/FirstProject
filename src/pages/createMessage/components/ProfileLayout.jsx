@@ -7,6 +7,7 @@ import { defaultProfileImg, profileImg1, profileImg2 } from "../../../assets/Pro
 const ProfileLayout = ({ data, setData }) => {
   const [profileImage, setProfileImage] = useState(defaultProfileImg);
   const profileImageList = [profileImg1, profileImg2];
+
   const handleProfileImageChange = (item) => {
     setProfileImage(item);
     setData(() => ({ ...data, profileImageURL: item }));

@@ -7,6 +7,8 @@ import ProfileLayout from "./components/ProfileLayout";
 import RelationshipInputBox from "./components/RelationshipInputBox";
 import WriteInputBox from "./WYSIWYG";
 import { defaultProfileImg } from "../../assets/ProfileImgUrls";
+import { testPostMessage } from "../../api/testPostMessage";
+
 
 const CreateMessage = () => {
   const navigate = useNavigate();
@@ -22,32 +24,11 @@ const CreateMessage = () => {
     font: "Pretendard",
   });
 
-  //포스트 요청
-  const postMessageData = async (postData) => {
-    console.log("포스트", postData);
-    try {
-      const res = await fetch(`https://rolling-api.vercel.app/2-1/recipients/${postData?.recipientId}/messages/`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(postData),
-      });
-      if (!res.ok) {
-        throw new Error(`HTTP error! status: ${res.status}`);
-      }
-      return res.json();
-    } catch (e) {
-      console.error("네트워크 요청 에러:", e);
-    }
-  };
-
   //포스트 응답 및 페이지 이동
   const handleCreateMessage = async () => {
     try {
-      const resData = await postMessageData(data);
+      const resData = await testPostMessage(data);
       navigate(`/post/${resData?.recipientId}`);
-      console.log("응답", resData);
     } catch (error) {
       console.error(error);
     }
@@ -66,12 +47,12 @@ const CreateMessage = () => {
         </NameInput>
         <ProfileLayout data={data} setData={setData} />
         <RelationshipInputBox data={data} setData={setData} />
-        <WriteInputBox data={data} setData={setData} />
+        <WriteInputBox isAlert={isAlert} setIsAlert={setIsAlert} data={data} setData={setData} />
         <CreateButtonBox>
           <CreateButton
             mobileWidth="100%"
             tabletWidth="100%"
-            disabled={!isName || data.content === ""}
+            disabled={!isName || isAlert}
             onClick={handleCreateMessage}
           />
         </CreateButtonBox>

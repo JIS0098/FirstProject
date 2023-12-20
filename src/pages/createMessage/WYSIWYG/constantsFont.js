@@ -12,7 +12,7 @@ export const FontSizeList = [
 export const FontList = [
   { font: '프리텐다드', content: '프리텐다드' },
   { font: '나눔고딕', content: '나눔고딕' },
-  { font: '나눔명조', content: '나눔명조' },
+  { font: '본명조', content: '본명조' },
   { font: 'D2코딩체', content: 'D2코딩체' },
   { font: '교보손글씨체', content: '교보손글씨체' },
   { font: '어비지슉체', content: '어비지슉체' },

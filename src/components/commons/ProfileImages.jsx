@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 
-function ProfileImgs({ list, count }) {
+function ProfileImgs({ list, count, thema }) {
   const leng = count - 3;
   const isVisible = count > 3;
   return (
     <ProfileBox>
       {list.slice(0, 3).map((item, index) => (
-        <ProfileImg key={index} $src={item?.profileImageURL} style={{ left: `${index * 20}px` }} />
+        <ProfileImg $thema={thema} key={index} $src={item?.profileImageURL} style={{ left: `${index * 20}px` }} />
       ))}
       {isVisible && <ProfileDiv>+ {leng}</ProfileDiv>}
     </ProfileBox>
@@ -26,7 +26,7 @@ const Profile = styled.div`
   height: 2.8rem;
   background-color: #fff;
   border-radius: 100px;
-  border: 1px solid white;
+  border: 1px solid ${({ $thema }) => (!$thema ? "#FFF" : "#4F5256")};
   position: absolute;
 `;
 
