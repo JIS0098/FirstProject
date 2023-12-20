@@ -56,7 +56,8 @@ const StyledRelationshipInputBox = styled.div`
     margin-bottom: 1.2rem;
     padding: 1.2rem 1.6rem;
     border-radius: 0.8rem;
-    border: 0.1rem solid var(--gray-300, #ccc);
+    border: 0.1rem solid ${({ theme }) => theme.border};
+    background-color: white;
     font-size: 1.6rem;
     font-style: normal;
     font-weight: 400;

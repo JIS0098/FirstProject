@@ -92,14 +92,14 @@ const SelectBackground = styled.div`
   p {
     font-size: 2.4rem;
     font-weight: 700;
-    color: ${color.gray[900]};
+    color: ${({ theme }) => theme.fontColor};
     line-height: 150%;
   }
 
   span {
     font-size: 1.6rem;
     font-weight: 400;
-    color: ${color.gray[500]};
+    color: ${({ theme }) => theme.subFontColor};
   }
 `;
 

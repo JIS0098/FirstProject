@@ -58,7 +58,7 @@ const StyledImg = styled.img`
 
 const StyledImgSelectBox = styled.div`
   & p {
-    color: ${color.gray[500]};
+    color: ${({ theme }) => theme.subFontColor};
     font-size: 1.6rem;
     font-style: normal;
     font-weight: 400;

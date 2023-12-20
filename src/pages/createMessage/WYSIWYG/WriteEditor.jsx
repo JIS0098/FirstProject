@@ -44,6 +44,9 @@ const StyledFontSize = ({ size, content }) => css`
 `;
 
 const WriteEditor = styled(ReactQuill)`
+  .ql-container {
+    background-color: white;
+  }
   .ql-editor p {
     font-size: 1.8rem;
   }

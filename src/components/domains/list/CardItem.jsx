@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 function CardItem({ recipient }) {
   const { name, recentMessages, messageCount, topReactions, backgroundColor, backgroundImageURL } = recipient;
-  const [imageLoaded, setImageLoaded] = useState(true);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   const bgImageUrl = imageLoaded ? backgroundImageURL : null;
 
@@ -42,7 +42,9 @@ const Container = styled.div`
   flex: 0 0 auto;
   border-radius: 1.6rem;
   padding: 3rem 2.4rem 2rem;
-  background: ${(props) => (props.$bgUrl ? `url(${props.$bgUrl})` : props.theme.backgroundColor[`${props.$bgColor}`])};
+  background: ${(props) =>
+    props.$bgUrl ? `url(${props.$bgUrl}), rgba(0, 0, 0, 0.54);` : props.theme.backgroundColor[`${props.$bgColor}`]};
+  background-blend-mode: overlay;
   background-repeat: no-repeat;
   background-size: cover;
   border: 0.1rem solid rgba(0, 0, 0, 0.1);

@@ -4,7 +4,8 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 
 function Btn({ onClick }) {
-  const [isOn, setIsOn] = useState(false);
+  const isDark = localStorage.getItem("theme") === "dark";
+  const [isOn, setIsOn] = useState(isDark);
 
   const toggleSwitch = () => {
     setIsOn((prev) => !prev);

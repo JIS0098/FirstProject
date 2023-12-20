@@ -35,9 +35,7 @@ const Name = styled.span`
   ${({ $bgUrl }) =>
     $bgUrl &&
     `
-    background: rgba(0, 0, 0, 0.5);
     padding: 0.2rem 1rem;
-    border-radius: 1.5rem;
     color: white;
   `}
 `;
@@ -53,9 +51,7 @@ const Author = styled.span`
   ${({ $bgUrl }) =>
     $bgUrl &&
     `
-  background: rgba(0, 0, 0, 0.5);
   padding: 0 0.5rem;
-  border-radius: 1.5rem;
   `}
 `;
 

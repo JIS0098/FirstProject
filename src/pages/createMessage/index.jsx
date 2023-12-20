@@ -9,11 +9,11 @@ import WriteInputBox from "./WYSIWYG";
 import { defaultProfileImg } from "../../assets/ProfileImgUrls";
 import { testPostMessage } from "../../api/testPostMessage";
 
+
 const CreateMessage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [isName, setIsName] = useState("");
-  const [isAlert, setIsAlert] = useState(false);
   const [data, setData] = useState({
     team: "2-1",
     recipientId: +id,

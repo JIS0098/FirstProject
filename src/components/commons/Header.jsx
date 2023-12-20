@@ -2,12 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import Icon from "../../assets/img/Icon.png";
 import WhiteDarkModeBtn from "./WhiteDarkModeBtn";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useLocationContext } from "contexts/LocationContext";
 
 function Header({ onThemaClick }) {
-  const location = useLocation();
-  const isPage = location.pathname === "/";
+  const currentLocation = useLocationContext();
 
   return (
     <StyledHeaderContainer>
@@ -20,14 +20,12 @@ function Header({ onThemaClick }) {
         </Link>
         <StyledBtnContainer>
           <WhiteDarkModeBtn onClick={onThemaClick} />
-          {isPage ? (
+          {currentLocation && (
             <Link to="/post">
               <StyledAddButton initial={{ opacity: 1 }} exit={{ opacity: 0, x: 50 }}>
                 롤링 페이퍼 만들기
               </StyledAddButton>
             </Link>
-          ) : (
-            ""
           )}
         </StyledBtnContainer>
       </StyledNavContainer>
@@ -36,8 +34,8 @@ function Header({ onThemaClick }) {
 }
 
 const StyledHeaderContainer = styled.nav`
-  background-color: white;
-  border-bottom: 1px solid #eeeeee;
+  background-color: ${({ theme }) => theme.header};
+  border-bottom: 1px solid ${({ theme }) => theme.border};
 `;
 const StyledNavContainer = styled.nav`
   display: flex;
@@ -62,7 +60,7 @@ const StyledLogoImg = styled.img`
   height: 2.7rem;
 `;
 const StyledLogoTitle = styled.p`
-  color: #4a494f;
+  color: ${({ theme }) => theme.logo};
   font-family: Poppins;
   font-size: 2rem;
   font-weight: 700;

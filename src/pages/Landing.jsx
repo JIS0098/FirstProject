@@ -75,7 +75,6 @@ function Landing() {
 
 const StyledMainContainer = styled.main`
   padding: 6rem 24px;
-  background-color: white;
 `;
 const StyledLandingSection = styled(motion.section)`
   display: flex;
