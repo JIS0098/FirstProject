@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 function SkImageCard() {
   return (
-    <Ccontainer>
+    <>
       <Container>
         <Shimmer />
       </Container>
@@ -13,10 +13,7 @@ function SkImageCard() {
       <Container>
         <Shimmer />
       </Container>
-      <Container>
-        <Shimmer />
-      </Container>
-    </Ccontainer>
+    </>
   );
 }
 
@@ -24,7 +21,7 @@ const Shimmer = styled.div`
   height: 100%;
   background-color: #e0e0e0;
   box-shadow: 0 0 30px 30px #e0e0e0;
-  animation: loading 3s infinite ease-in-out;
+  animation: loading 2s infinite ease-in-out;
   position: relative;
   overflow: hidden;
 
@@ -37,13 +34,6 @@ const Shimmer = styled.div`
       transform: translateX(150%);
     }
   }
-`;
-
-const Ccontainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  overflow: hidden;
 `;
 
 const Container = styled.div`

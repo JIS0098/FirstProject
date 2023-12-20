@@ -48,17 +48,16 @@ const SelectImage = ({ onImageSelect }) => {
 
   return (
     <PaletteWrapper>
-      {loading && <SkImageCard />}
-      {!loading && (
-        <>
-          <AddImage
-            onUpload={fetchImageList}
-            onPreviewSelect={handlePreviewImageChange}
-            selectedPreviewImage={selectedPreviewImage}
-            isPreviewSelected={selectedPreviewImage}
-          />
-          <ImageList imageList={imageList} selectedImage={selectedImage} handleImageChange={handleImageChange} />
-        </>
+      <AddImage
+        onUpload={fetchImageList}
+        onPreviewSelect={handlePreviewImageChange}
+        selectedPreviewImage={selectedPreviewImage}
+        isPreviewSelected={selectedPreviewImage}
+      />
+      {loading ? (
+        <SkImageCard />
+      ) : (
+        <ImageList imageList={imageList} selectedImage={selectedImage} handleImageChange={handleImageChange} />
       )}
     </PaletteWrapper>
   );
