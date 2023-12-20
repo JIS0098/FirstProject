@@ -54,7 +54,6 @@ const StyledSubmitBtn = styled.button`
   right: 0;
   background-color: ${({ theme }) => theme.button.enabled};
   color: white;
-  border: #ccc 1px solid;
   border-radius: 0 15px 15px 0;
   cursor: pointer;
 

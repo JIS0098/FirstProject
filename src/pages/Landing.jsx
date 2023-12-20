@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import SkPostCard from "../components/commons/SkPostCard";
 import SkListCard from "components/commons/SkListCard";
 import SkImageCard from "components/commons/SkImageCard";
+import LodingSpinner from "components/commons/LodingSpinner";
 
 function Landing() {
   return (
@@ -67,6 +68,7 @@ function Landing() {
           <SkPostCard />
           <SkListCard />
           <SkImageCard />
+          <LodingSpinner />
         </div>
       </StyledMainContainer>
     </>
