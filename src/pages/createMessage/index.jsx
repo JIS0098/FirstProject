@@ -9,7 +9,6 @@ import WriteInputBox from "./WYSIWYG";
 import { defaultProfileImg } from "../../assets/ProfileImgUrls";
 import { testPostMessage } from "../../api/testPostMessage";
 
-
 const CreateMessage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -23,6 +22,7 @@ const CreateMessage = () => {
     content: "",
     font: "Pretendard",
   });
+  const [isAlert, setIsAlert] = useState(false)
 
   //포스트 응답 및 페이지 이동
   const handleCreateMessage = async () => {
