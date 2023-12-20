@@ -146,8 +146,7 @@ const PageDeleteButton = styled(DeleteButton)`
   z-index: 1;
 `;
 const PostInner = styled.div`
-  max-width: 124.8rem;
-  width: 100%;
+  width: 124.8rem;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   margin: 0 auto;
@@ -156,7 +155,8 @@ const PostInner = styled.div`
   position: relative;
   /* justify-content: space-evenly; */
   @media all and (max-width: 1248px) {
-    max-width: 76.8rem;
+    max-width: 108rem;
+    width: 100%;
     grid-template-columns: repeat(2, 1fr);
   }
   @media all and (max-width: 768px) {
