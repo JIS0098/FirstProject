@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { StyledTitle } from '../CommonStyled';
-import color from '../../../styles/color';
-import { defaultProfileImg, profileImg1, profileImg2 } from '../../../assets/ProfileImgUrls';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { StyledTitle } from "../commonStyled";
+import color from "../../../styles/color";
+import { defaultProfileImg, profileImg1, profileImg2 } from "../../../assets/ProfileImgUrls";
 
 const ProfileLayout = ({ data, setData }) => {
   const [profileImage, setProfileImage] = useState(defaultProfileImg);

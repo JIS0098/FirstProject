@@ -3,7 +3,10 @@ import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
 import MoreCardImg from "../../assets/icon/plus.svg";
 import Card from "../../components/commons/Card";
+import { motion } from "framer-motion";
+import setting from "../../assets/icon/setting.svg";
 import SkPostCard from "components/commons/SkPostCard";
+
 
 function Loading() {
   const renderItems = Array.from({ length: 5 }).map((_, index) => <SkPostCard key={index} />);
@@ -19,10 +22,14 @@ function PostWrap({ data, toggleModal, setModalClick, loading, thema }) {
   return (
     <PostInner>
       <BackListLink to={"/list"}>
-        <BackList $thema={thema}>리스트로 이동</BackList>
+        <BackList animate={{ x: [0, 10, 0] }} transition={{ ease: "easeInOut", repeat: Infinity, duration: 1.5 }}>
+          ← 뒤로가기
+        </BackList>
       </BackListLink>
       <StyledLink to={`/post/${params.id}/edit`}>
-        <EditDeleteButton $thema={thema}>편집하기</EditDeleteButton>
+        <EditDeleteButton>
+          <SettingIcon src={setting} alt="setting" />
+        </EditDeleteButton>
       </StyledLink>
       <PostCard $thema={thema}>
         <Link to={`/post/${params.id}/message`}>
@@ -62,17 +69,21 @@ const BackListLink = styled(Link)`
   left: 2.5rem;
   cursor: pointer;
 `;
-const BackList = styled.button`
+const BackList = styled(motion.button)`
   width: 11.2rem;
   height: 3.9rem;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
+  font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  background: ${({ $thema }) => ($thema ? "#000" : "#fff")};
-  color: ${({ $thema }) => (!$thema ? "#000" : "#fff")};
+  background: none;
+  color: white;
+  cursor: pointer;
+//   border-radius: 6px;
+//   border: 1px solid #ccc;
+//   background: ${({ $thema }) => ($thema ? "#000" : "#fff")};
+//   color: ${({ $thema }) => (!$thema ? "#000" : "#fff")};
 `;
 const StyledLink = styled(Link)`
   position: absolute;
@@ -102,7 +113,6 @@ const PostCard = styled.div`
 `;
 
 const DeleteButton = styled.button`
-  width: 9.2rem;
   height: 3.9rem;
   display: flex;
   align-items: center;
@@ -118,8 +128,14 @@ const EditDeleteButton = styled(DeleteButton)`
   display: flex;
   border-radius: 6px;
   border: 1px solid #ccc;
-  background: ${({ $thema }) => ($thema ? "#000" : "#fff")};
-  color: ${({ $thema }) => (!$thema ? "#000" : "#fff")};
+  background: #fff;
+  color: black;
+
+  &:hover {
+    background: #ccc;
+  }
+//   background: ${({ $thema }) => ($thema ? "#000" : "#fff")};
+//   color: ${({ $thema }) => (!$thema ? "#000" : "#fff")};
 `;
 const PostInner = styled.div`
   max-width: 124.8rem;
@@ -139,6 +155,10 @@ const PostInner = styled.div`
     max-width: 50rem;
     grid-template-columns: repeat(1, 1fr);
   }
+`;
+
+const SettingIcon = styled.img`
+  height: 3rem;
 `;
 
 // 공통된거
