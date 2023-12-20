@@ -61,14 +61,14 @@ function PostHeader({
   }, [pageId, selectEmoji, setEmojiUp]);
 
   return (
-    <PostHead onClick={() => toggleFalse()} $thema={thema}>
+    <PostHead onClick={() => toggleFalse()}>
       <HeaderService>
-        <ToName $thema={thema}>To. {selectedPost?.name || "Loding..."}</ToName>
+        <ToName>To. {selectedPost?.name || "Loding..."}</ToName>
 
         <HeaderServiceBox>
           <HeaderServicePost>
-            <ProfileImgs thema={thema} list={data} count={data.length} />
-            <ServiceP $thema={thema}>
+            <ProfileImgs list={data} count={data.length} />
+            <ServiceP>
               <ServiceSpan>{data.length}</ServiceSpan> 명이 작성했어요!
             </ServiceP>
           </HeaderServicePost>
@@ -151,7 +151,7 @@ const EmojiPickerWrap = styled.div`
 `;
 const PostHead = styled.div`
   width: 100%;
-  background-color: ${({ $thema }) => ($thema ? "#000" : "#fff")};
+  background-color: ${({ theme }) => theme.header};
 `;
 
 const HeaderService = styled.div`
@@ -169,7 +169,7 @@ const HeaderService = styled.div`
   }
 `;
 const ToName = styled.h2`
-  color: ${({ $thema }) => (!$thema ? "#2b2b2b" : "#fff")};
+  color: ${({ theme }) => theme.fontColor};
   font-size: 2.8rem;
 `;
 const HeaderServiceBox = styled.div`
@@ -198,7 +198,7 @@ const ServiceP = styled.p`
   display: flex;
   align-items: center;
   margin-left: 5px;
-  color: ${({ $thema }) => (!$thema ? "#2b2b2b" : "#fff")};
+  color: ${({ theme }) => theme.fontColor};
 `;
 
 const EmojiWrap = styled.div`
@@ -246,7 +246,7 @@ const ButtonWrapP = styled.p`
 const Line = styled.div`
   width: 1px;
   height: 2.8rem;
-  background-color: ${({ $thema }) => (!$thema ? "#eee" : "#4F5256")};
+  background-color: ${({ theme }) => theme.border};
 `;
 const ShareBox = styled.div`
   width: 13.8rem;

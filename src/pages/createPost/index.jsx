@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import color from "../../styles/color";
 import NameInput from "../../components/commons/NameInput";
 import ToggleButton from "./components/ToggleButton";
 import SelectColor from "./components/SelectBackground/SelectColor";

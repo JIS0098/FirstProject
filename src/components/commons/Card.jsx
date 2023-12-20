@@ -5,7 +5,7 @@ import Delete from "../../assets/icon/deleted.svg";
 import nullImg from "../../assets/icon/person.svg";
 import useToggle from "../../hooks/useToggle";
 
-function Card({ id, onClick, name, profileImg, description, tag, ago, deleteCard = true, deleteCardClick, thema }) {
+function Card({ id, onClick, name, profileImg, description, tag, ago, deleteCard = true, deleteCardClick }) {
   const [deleteChoice, deleteChoiceToggle] = useToggle(false);
   const htmlContent = { __html: description };
   const day = setDayYMD(ago);
@@ -32,16 +32,15 @@ function Card({ id, onClick, name, profileImg, description, tag, ago, deleteCard
       }}
       deleteChoice={deleteChoice}
       deleteCard={deleteCard}
-      $thema={thema}
     >
       <CardWrap>
-        <From $thema={thema}>
+        <From>
           <FromInner>
             <ImgBox>
               <StyledImg src={profile} alt="profileImg" />
             </ImgBox>
             <FromBox>
-              <FromP $thema={thema}>
+              <FromP>
                 From. <FromSpan>{name}</FromSpan>
               </FromP>
               <FromTag back={tagColor(tag).back} font={tagColor(tag).font}>
@@ -62,7 +61,7 @@ function Card({ id, onClick, name, profileImg, description, tag, ago, deleteCard
           )}
         </From>
 
-        <CardDescription $thema={thema} dangerouslySetInnerHTML={htmlContent} />
+        <CardDescription dangerouslySetInnerHTML={htmlContent} />
         <Ago>{day}</Ago>
       </CardWrap>
     </CardBox>
@@ -97,7 +96,7 @@ const CardBox = styled.div.withConfig({
   justify-content: center;
   align-items: center;
   border-radius: 16px;
-  background-color: ${({ $thema }) => ($thema ? "#000" : "#fff")};
+  background-color: ${({ theme }) => theme.card.backgroundColor};
   box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.08);
   padding: 2.8rem 2.4rem;
   opacity: ${(props) => (props.deleteChoice ? 0.5 : 1)};
@@ -123,7 +122,7 @@ const CardDescription = styled.div`
   width: 100%;
   height: 10.6rem;
   font-weight: 400;
-  color: ${({ $thema }) => (!$thema ? "#000" : "#fff")};
+  color: ${({ theme }) => theme.card.color};
   /* display: -webkit-box; */
   -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
@@ -142,7 +141,7 @@ const From = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  border-bottom: 1px solid ${({ $thema }) => (!$thema ? "#eee" : "#4f5256")};
+  border-bottom: 1px solid ${({ theme }) => theme.card.border};
 `;
 const FromBox = styled.div`
   width: 50%;
@@ -168,7 +167,7 @@ const FromTag = styled.div.withConfig({
 `;
 const FromP = styled.p`
   font-size: 2rem;
-  color: ${({ $thema }) => (!$thema ? "#000" : "#fff")};
+  color: ${({ theme }) => theme.card.color};
 `;
 const FromSpan = styled.span`
   font-size: 2rem;
