@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { StyledTitle } from '../commonStyled';
 import color from '../../../styles/color';
-
 import { supabase } from '../../../api/supabase/supabaseClient';
 import { defaultProfileImg } from '../../../assets/ProfileImgUrls';
 
