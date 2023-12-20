@@ -28,8 +28,8 @@ function Main() {
         </Route>
         <Route path="/post">
           <Route index element={<CreatePost />} />
-          <Route path=":id" element={<Post />} />
-          <Route path=":id/edit" element={<PostEdit />} />
+          <Route path=":id" element={<Post thema={isThema} />} />
+          <Route path=":id/edit" element={<PostEdit thema={isThema} />} />
           <Route path=":id/message" element={<CreateMessage />} />
         </Route>
         <Route path="*" element={<NotFound />} />

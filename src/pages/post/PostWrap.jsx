@@ -5,8 +5,15 @@ import MoreCardImg from "../../assets/icon/plus.svg";
 import Card from "../../components/commons/Card";
 import { motion } from "framer-motion";
 import setting from "../../assets/icon/setting.svg";
+import SkPostCard from "components/commons/SkPostCard";
 
-function PostWrap({ data, toggleModal, setModalClick }) {
+
+function Loading() {
+  const renderItems = Array.from({ length: 5 }).map((_, index) => <SkPostCard key={index} />);
+  return <>{renderItems}</>;
+}
+
+function PostWrap({ data, toggleModal, setModalClick, loading, thema }) {
   const clickCard = (i) => {
     setModalClick(i);
   };
@@ -24,29 +31,35 @@ function PostWrap({ data, toggleModal, setModalClick }) {
           <SettingIcon src={setting} alt="setting" />
         </EditDeleteButton>
       </StyledLink>
-
-      <PostCard>
+      <PostCard $thema={thema}>
         <Link to={`/post/${params.id}/message`}>
           <ImgBox>
             <img src={MoreCardImg} alt="MoreCardImg" />
           </ImgBox>
         </Link>
       </PostCard>
-      {data.map((item) => (
-        <Card
-          onClick={() => {
-            clickCard(item.id);
-            toggleModal();
-          }}
-          key={item.id}
-          profileImg={item.profileImageURL}
-          name={item.sender}
-          description={item.content}
-          tag={item.relationship}
-          ago={item.createdAt}
-          deleteCard={true}
-        />
-      ))}
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          {data.map((item) => (
+            <Card
+              onClick={() => {
+                clickCard(item.id);
+                toggleModal();
+              }}
+              thema={thema}
+              key={item.id}
+              profileImg={item.profileImageURL}
+              name={item.sender}
+              description={item.content}
+              tag={item.relationship}
+              ago={item.createdAt}
+              deleteCard={true}
+            />
+          ))}
+        </>
+      )}
     </PostInner>
   );
 }
@@ -67,6 +80,10 @@ const BackList = styled(motion.button)`
   background: none;
   color: white;
   cursor: pointer;
+//   border-radius: 6px;
+//   border: 1px solid #ccc;
+//   background: ${({ $thema }) => ($thema ? "#000" : "#fff")};
+//   color: ${({ $thema }) => (!$thema ? "#000" : "#fff")};
 `;
 const StyledLink = styled(Link)`
   position: absolute;
@@ -83,7 +100,7 @@ const PostCard = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 16px;
-  background-color: #fff;
+  background-color: ${({ $thema }) => ($thema ? "#000" : "#fff")};
   box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.08);
   padding: 2.8rem 2.4rem;
   @media all and (max-width: 1248px) {
@@ -117,6 +134,8 @@ const EditDeleteButton = styled(DeleteButton)`
   &:hover {
     background: #ccc;
   }
+//   background: ${({ $thema }) => ($thema ? "#000" : "#fff")};
+//   color: ${({ $thema }) => (!$thema ? "#000" : "#fff")};
 `;
 const PostInner = styled.div`
   max-width: 124.8rem;
