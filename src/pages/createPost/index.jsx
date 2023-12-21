@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import color from "../../styles/color";
 import NameInput from "../../components/commons/NameInput";
 import ToggleButton from "../../components/domains/createPost/ToggleButton";
 import SelectColor from "../../components/domains/createPost/SelectBackground/SelectColor";
@@ -31,8 +30,6 @@ const CreatePost = () => {
   const handleToggle = () => {
     setIsChecked((prev) => !prev);
   };
-
-  console.log("selectedImage:", selectedImage);
 
   return (
     <Wrapper>
