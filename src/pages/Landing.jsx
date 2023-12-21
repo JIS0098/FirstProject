@@ -5,9 +5,6 @@ import EmojiPreview from "../assets/img/EmojiPreview.png";
 import { Link } from "react-router-dom";
 import { Button } from "../components/commons/Button";
 import { motion } from "framer-motion";
-import SkPostCard from "../components/commons/SkPostCard";
-import SkListCard from "components/commons/SkListCard";
-import SkImageCard from "components/commons/SkImageCard";
 
 function Landing() {
   return (
@@ -63,11 +60,6 @@ function Landing() {
             </Button>
           </Link>
         </StyledGoToListButtonContainer>
-        <div style={{ display: "flex", gap: "20px", marginTop: "5rem" }}>
-          <SkPostCard />
-          <SkListCard />
-          <SkImageCard />
-        </div>
       </StyledMainContainer>
     </>
   );
