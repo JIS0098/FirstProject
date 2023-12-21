@@ -47,6 +47,12 @@ export const theme = {
       backgroundColor: color.white,
       textColor: color.black,
     },
+    headerBtn: {
+      backgroundColor: color.white,
+      color: color.gray[900],
+      border: color.gray[300],
+      hover: color.gray[100],
+    },
   },
   dark: {
     ...common,
@@ -69,6 +75,12 @@ export const theme = {
       border: "#4f5256",
       backgroundColor: color.shark[100],
       textColor: color.white,
+    },
+    headerBtn: {
+      backgroundColor: color.shark[100],
+      color: color.gray[300],
+      border: "#4F5256",
+      hover: color.shark[200],
     },
   },
 };
