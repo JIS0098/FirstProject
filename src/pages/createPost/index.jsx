@@ -13,10 +13,22 @@ const CreatePost = () => {
   const [selectedImage, setSelectedImage] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
   const [isChecked, setIsChecked] = useState(false);
+  const [isAlert, setIsAlert] = useState({
+    from: false,
+    text: false,
+  });
   const navigate = useNavigate();
 
   const handleNameChange = (name) => {
-    setIsName(name);
+    if (name.length < 9) {
+      setIsName(name);
+      setIsAlert({ ...isAlert, from: false });
+    } else if (name.length === 9) {
+      alert("8글자 이하로 입력해 주세요.");
+      setIsAlert({ ...isAlert, from: true });
+    } else {
+      setIsAlert({ ...isAlert, from: true });
+    }
   };
 
   const handleImageSelect = (image) => {
@@ -52,7 +64,7 @@ const CreatePost = () => {
           <SelectColor onColorSelect={handleColorSelect} />
         )}
         <CreateButton
-          disabled={!isName}
+          disabled={!isName || isAlert.from || isAlert.text}
           onClick={() =>
             handleCreateButtonClick({
               name: isName,
