@@ -35,9 +35,9 @@
    
 **🧑 김윤수** : Post/{id}Page 레이아웃 제작 , GetApi구현 , GetApi를 통한 Post/{id}Page 배열 렌더링 , Emoji-picker 라이브러리 사용 , Page & Card Delete api 구현 , 공유하기 및 KaKaoApi공유 구현   
    
-**👨 김우현** : LandingPage 레이아웃 제작 , Framer-Motion을 통한 전체페이지 사용 Animation 구현 , PostApi 구현 , 스켈레톤Ui 제작 ,   
+**👨 김우현** : LandingPage 레이아웃 제작 , Nav-bar 제작 , Framer-Motion을 통한 전체페이지 Animation 구현 , PostApi 구현 , 스켈레톤Ui 제작 , 404NotFoundPage 레이아웃 제작
    
-**👧 이윤경** : PostPage 레이아웃 제작 , SupaBase를 통한 각 사용자 로컬이미지 선택 구현 , PostApi를 통한 서버통신 ,   
+**👧 이윤경** : PostPage 레이아웃 제작 , SupaBase를 통한 각 사용자 로컬이미지 선택 구현 , PostApi를 통한 서버통신 
    
 **👩‍🦰 한지수** : post/{id}/message 레이아웃 제작 , React-Quill 라이브러리 커스텀을 통한 폰트 및 폰트사이즈 등 각종기능 구현 , PostApi를 통한 서버통신 , 프로필사진 업로드 기능 구현   
    
