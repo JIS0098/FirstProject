@@ -84,7 +84,7 @@ function Post({ thema }) {
   const backgroundURL = selectedPost?.backgroundImageURL;
 
   return (
-    <PostBack ref={pageRef} backgroundColor={backgroundColor} $backgroundURL={backgroundURL}>
+    <PostBack ref={pageRef} backgroundColor={backgroundColor} backgroundUrl={backgroundURL}>
       <PostHeader
         thema={thema}
         data={data}
