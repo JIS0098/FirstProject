@@ -30,7 +30,7 @@ function PostModal({ toggleModal, modalFind, modalFalse }) {
             </ImgBox>
             <FromBox>
               <FromP>
-                From. <FromSpan>{modalFind.sender}</FromSpan>
+                From. <FromSpan>{modalFind.sender.slice(0, 25)}</FromSpan>
               </FromP>
               <FromTag>{modalFind.relationship}</FromTag>
             </FromBox>
@@ -77,6 +77,11 @@ const ModalText = styled.div`
   color: #5a5a5a;
   font-size: 1.8rem;
   overflow: auto;
+  word-wrap: break-word;
+  white-space: pre-line;
+  & > p {
+    font-size: 100%;
+  }
 `;
 const ModalClose = styled.div`
   width: 12rem;

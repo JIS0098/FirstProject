@@ -91,7 +91,9 @@ const StyledLink = styled(Link)`
 `;
 
 const PostCard = styled.div`
-  width: 38.4rem;
+  max-width: 38.4rem;
+  min-width: 30rem;
+  width: 100%;
   height: 28rem;
   margin: 0 auto;
   display: flex;
@@ -102,11 +104,7 @@ const PostCard = styled.div`
   box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.08);
   padding: 2.8rem 2.4rem;
   @media all and (max-width: 1248px) {
-    width: 100%;
     max-width: 50rem;
-  }
-  @media all and (max-width: 768px) {
-    width: 100%;
   }
 `;
 
@@ -136,8 +134,7 @@ const EditDeleteButton = styled(DeleteButton)`
   //   color: ${({ $thema }) => (!$thema ? "#000" : "#fff")};
 `;
 const PostInner = styled.div`
-  max-width: 124.8rem;
-  width: 100%;
+  width: 124.8rem;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   margin: 0 auto;
@@ -146,7 +143,8 @@ const PostInner = styled.div`
   position: relative;
   /* justify-content: space-evenly; */
   @media all and (max-width: 1248px) {
-    max-width: 76.8rem;
+    max-width: 108rem;
+    width: 100%;
     grid-template-columns: repeat(2, 1fr);
   }
   @media all and (max-width: 768px) {

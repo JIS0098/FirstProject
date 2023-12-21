@@ -1,10 +1,9 @@
-export const testPostMessage = async (postData) => {
-  console.log("포스트", postData);
+export const testPostMessage = async postData => {
   try {
     const res = await fetch(`https://rolling-api.vercel.app/2-1/recipients/${postData?.recipientId}/messages/`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(postData),
     });
@@ -13,6 +12,6 @@ export const testPostMessage = async (postData) => {
     }
     return res.json();
   } catch (e) {
-    console.error("네트워크 요청 에러:", e);
+    console.error('네트워크 요청 에러:', e);
   }
 };
