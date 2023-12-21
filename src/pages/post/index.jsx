@@ -146,6 +146,8 @@ const PostWrapBack = styled.div`
   width: 100vw;
   min-height: 100vh;
   background-color: rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1;
   /* backdrop-filter: blur(5px); */
   /* filter: blur(5px); */
 `;

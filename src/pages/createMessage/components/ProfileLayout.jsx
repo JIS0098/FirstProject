@@ -53,9 +53,9 @@ const ProfileLayout = ({ data, setData }) => {
       <StyledProfileImgBox>
         <StyledPreviewLabel>
           <StyledUploadImgBox type="file" onChange={handleImageChange} />
-          <div>
+          <StyledUploadImgDiv>
             <img src={data && data.profileImageURL ? data.profileImageURL : defaultProfileImg} alt="프로필 이미지" />
-          </div>
+          </StyledUploadImgDiv>
         </StyledPreviewLabel>
         <StyledImgSelectBox>
           <p>프로필 이미지를 선택해주세요!</p>
@@ -80,6 +80,10 @@ const StyledProfileImgBox = styled.div`
   display: flex;
   align-items: center;
   gap: 3rem;
+`;
+const StyledUploadImgDiv = styled.div`
+  width: 100%;
+  height: 100%;
 `;
 
 const StyledPreviewLabel = styled.label`
