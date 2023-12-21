@@ -21,6 +21,7 @@ const common = {
     enabled: color.gray[300],
     focus: color.gray[500],
   },
+  loading: color.purple[600],
 };
 
 export const theme = {

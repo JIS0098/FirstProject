@@ -15,3 +15,5 @@ export const ITEMS_PER_PAGE = {
 };
 export const CARD_WIDTH = 29.5;
 export const SWIPE_X = 50;
+
+export const LIST_TITLE = ["검색 결과 🔍", "인기 롤링 페이퍼 🔥", "최근에 만든 롤링 페이퍼 ⭐️"];

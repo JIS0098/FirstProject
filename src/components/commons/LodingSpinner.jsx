@@ -26,6 +26,7 @@ const StyledLoadingSpinner = styled.div`
   position: relative;
   width: 80px;
   height: 80px;
+  margin: 3rem;
 
   div {
     box-sizing: border-box;
@@ -34,10 +35,10 @@ const StyledLoadingSpinner = styled.div`
     width: 64px;
     height: 64px;
     margin: 8px;
-    border: 8px solid #fff;
+    border: 8px solid #eee;
     border-radius: 50%;
     animation: ${spin} 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    border-color: #fff transparent transparent transparent;
+    border-color: ${({ theme }) => theme.loading} transparent transparent transparent;
   }
 
   div:nth-child(1) {

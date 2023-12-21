@@ -6,9 +6,30 @@ import { Link, useSearchParams } from "react-router-dom";
 import CardSection from "../../components/domains/list/CardSection";
 import SearchBar from "components/commons/SearchBar";
 import LoadingSpinner from "components/commons/LodingSpinner";
+import { LIST_TITLE } from "constants";
+
+function SearchResult({ loading, searchDatas }) {
+  if (loading) {
+    return <LoadingSpinner />;
+  }
+
+  if (searchDatas.length > 0) {
+    return <CardSection title={LIST_TITLE[0]} recipients={searchDatas} $resultSection={true} />;
+  }
+
+  return <StyledSearchResult>검색 결과가 없습니다</StyledSearchResult>;
+}
+
+function DefaultView({ loading, sortByMost, sortByRecent }) {
+  return (
+    <>
+      <CardSection loading={loading} title={LIST_TITLE[1]} recipients={sortByMost} $resultSection={false} />
+      <CardSection loading={loading} title={LIST_TITLE[2]} recipients={sortByRecent} $resultSection={false} />
+    </>
+  );
+}
 
 function ListPage() {
-  const LIST_TITLE = ["검색 결과 🔍", "인기 롤링 페이퍼 🔥", "최근에 만든 롤링 페이퍼 ⭐️"];
   const [loading, setLoading] = useState(false);
   const [sortByMost, setSortByMost] = useState([]);
   const [sortByRecent, setSortByRecent] = useState([]);
@@ -52,18 +73,9 @@ function ListPage() {
       <SearchBar onChange={handleSearchValue} value={searchValue} onSubmit={handleSubmit} />
       <Layout>
         {onInput ? (
-          loading ? (
-            <LoadingSpinner />
-          ) : searchDatas.length > 0 ? (
-            <CardSection title={LIST_TITLE[0]} recipients={searchDatas} $resultSection={true} />
-          ) : (
-            <StyledSearchResult>검색 결과가 없습니다</StyledSearchResult>
-          )
+          <SearchResult loading={loading} searchDatas={searchDatas} onInput={onInput} />
         ) : (
-          <>
-            <CardSection loading={loading} title={LIST_TITLE[1]} recipients={sortByMost} $resultSection={false} />
-            <CardSection loading={loading} title={LIST_TITLE[2]} recipients={sortByRecent} $resultSection={false} />
-          </>
+          <DefaultView loading={loading} sortByMost={sortByMost} sortByRecent={sortByRecent} />
         )}
       </Layout>
       {!loading && (

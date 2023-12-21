@@ -45,6 +45,7 @@ const StyledSearchBar = styled.input`
 
   &:focus {
     outline: 2px solid #a64eff;
+    border: 1px solid transparent;
   }
 
   &::placeholder {
