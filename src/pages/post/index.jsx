@@ -115,6 +115,7 @@ function Post({ thema }) {
         toggleFalse={toggleFalse}
         emojiPick={emojiPick}
         toggleEmojiPick={toggleEmojiPick}
+        params={params}
       />
       <PostWrapBack onClick={() => toggleFalse()}>
         <PostWrap thema={thema} data={data} toggleModal={toggleModal} setModalClick={setModalClick} loading={loading} />
