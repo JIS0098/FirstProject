@@ -189,7 +189,7 @@ const FromSpan = styled.span`
   font-size: 2rem;
 `;
 const ImgBox = styled.div`
-  min-width: 5.6rem;
+  width: 5.6rem;
   height: 5.6rem;
   border-radius: 50%;
   background-color: #555;
