@@ -140,7 +140,7 @@ const DeleteButton = styled.button`
   cursor: pointer;
 
   &:hover {
-    background-color: #861dee;
+    background-color: #c61010;
   }
 `;
 
