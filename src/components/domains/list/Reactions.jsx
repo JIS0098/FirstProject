@@ -19,12 +19,10 @@ const Badge = styled.div`
   padding: 0.8rem 1.2rem;
   border-radius: 3.2rem;
   background: rgba(0, 0, 0, 0.54);
+  justify-content: space-around;
 
   @media screen and (max-width: ${DEVICE_MAX_SIZE.MOBILE}px) {
-    width: 3.9rem;
-    height: 2rem;
     padding: 0.6rem 0.8rem;
-    justify-content: space-around;
     font-size: 1.4rem;
   }
 `;
