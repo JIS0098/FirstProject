@@ -24,8 +24,11 @@ function PostHeader({
   toggleFalse,
   emojiPick,
   toggleEmojiPick,
+  params,
 }) {
   const [selectEmoji, setSelectEmoji] = useState(null);
+
+  const kakao = "post/" + params.id;
 
   const handleEmojiSelect = (e) => {
     setSelectEmoji({ emoji: e.emoji, type: "increase" });
@@ -115,7 +118,7 @@ function PostHeader({
               <ShareBox>
                 <Share
                   onClick={() => {
-                    kakaoShare();
+                    kakaoShare(kakao);
                   }}
                 >
                   카카오톡 공유
