@@ -116,13 +116,13 @@ const CardWrap = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 15px;
+  justify-content: flex-start;
+  gap: 1.5rem;
   position: relative;
 `;
 const CardDescription = styled.div`
   width: 100%;
-  height: 60%;
+  height: 45%;
   font-weight: 400;
   color: ${({ theme }) => theme.card.color};
   /* display: -webkit-box; */
@@ -134,12 +134,12 @@ const CardDescription = styled.div`
   white-space: pre-line;
 
   & > p {
-    display: -webkit-box;
+    /* display: -webkit-box;
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
     overflow: hidden;
-    white-space: normal;
+    white-space: normal; */
     font-size: 1.8rem;
   }
 `;

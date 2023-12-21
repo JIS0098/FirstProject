@@ -1,10 +1,10 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import styled from "styled-components";
-import useToggle from "../../hooks/useToggle";
-import PostHeader from "./PostHeader";
-import PostWrap from "./PostWrap";
-import PostModal from "./PostModal";
-import ShareComplete from "./ShareComplete";
+import useToggle from "hooks/useToggle";
+import PostHeader from "components/domains/post/PostHeader";
+import PostWrap from "components/domains/post/PostWrap";
+import PostModal from "components/domains/post/PostModal";
+import ShareComplete from "components/domains/post/ShareComplete";
 import { getMessageByPaperId, getEmojiByPaperId, getRollingPaper } from "api";
 import { useParams } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
@@ -141,6 +141,7 @@ const PostBack = styled.div.withConfig({
   background-size: cover;
   width: 100vw;
   min-height: 100vh;
+  background-position-x: center;
 `;
 
 const PostWrapBack = styled.div`

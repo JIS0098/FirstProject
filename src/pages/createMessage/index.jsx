@@ -1,26 +1,26 @@
-import React, { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-import NameInput from '../../components/commons/NameInput';
-import CreateButton from '../../components/commons/CreateButton';
-import ProfileLayout from './components/ProfileLayout';
-import RelationshipInputBox from './components/RelationshipInputBox';
-import WriteInputBox from './WYSIWYG';
-import { defaultProfileImg } from '../../assets/ProfileImgUrls';
-import { testPostMessage } from '../../api/testPostMessage';
+import React, { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import NameInput from "../../components/commons/NameInput";
+import CreateButton from "../../components/commons/CreateButton";
+import ProfileLayout from "./components/ProfileLayout";
+import RelationshipInputBox from "./components/RelationshipInputBox";
+import WriteInputBox from "./WYSIWYG";
+import { defaultProfileImg } from "../../assets/ProfileImgUrls";
+import { postMessage } from "api";
 
 const CreateMessage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [isName, setIsName] = useState('');
+  const [isName, setIsName] = useState("");
   const [data, setData] = useState({
-    team: '2-1',
+    team: "2-1",
     recipientId: +id,
     sender: null,
     profileImageURL: defaultProfileImg,
-    relationship: '지인',
-    content: '',
-    font: 'Pretendard',
+    relationship: "지인",
+    content: "",
+    font: "Pretendard",
   });
   const [isAlert, setIsAlert] = useState({
     from: false,
@@ -29,20 +29,20 @@ const CreateMessage = () => {
 
   const handleCreateMessage = async () => {
     try {
-      const resData = await testPostMessage(data);
+      const resData = await postMessage(data);
       navigate(`/post/${resData?.recipientId}`);
     } catch (error) {
       console.error(error);
     }
   };
 
-  const handleNameChange = name => {
+  const handleNameChange = (name) => {
     if (name.length < 9) {
       setIsName(name);
       setIsAlert({ ...isAlert, from: false });
       setData({ ...data, sender: name });
     } else if (name.length === 9) {
-      alert('8글자 이하로 입력해 주세요.');
+      alert("8글자 이하로 입력해 주세요.");
       setIsAlert({ ...isAlert, from: true });
     } else {
       setIsAlert({ ...isAlert, from: true });

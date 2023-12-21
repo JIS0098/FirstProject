@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import ProfileImgs from "../../components/commons/ProfileImages";
-import downImg from "../../assets/icon/arrow_down.svg";
-import addEmojiImg from "../../assets/icon/add-24.svg";
-import shareImg from "../../assets/icon/share-24.svg";
-import Emoji from "../../components/commons/Emoji";
+import ProfileImgs from "components/commons/ProfileImages";
+import downImg from "assets/icon/arrow_down.svg";
+import addEmojiImg from "assets/icon/add-24.svg";
+import shareImg from "assets/icon/share-24.svg";
+import Emoji from "components/commons/Emoji";
 import EmojiPicker from "emoji-picker-react";
 import { addEmojiToPage } from "api";
 import { useLocation } from "react-router-dom";
@@ -151,7 +151,7 @@ const ToggleAddEmoji = styled.div`
     right: 20rem;
   } */
   @media all and (max-width: 768px) {
-    right: 8rem;
+    left: 0;
   }
 `;
 
@@ -160,6 +160,9 @@ const EmojiPickerWrap = styled.div`
   right: 0;
   top: 6rem;
   z-index: 2;
+  @media all and (max-width: 768px) {
+    left: 0;
+  }
 `;
 const PostHead = styled.div`
   width: 100%;

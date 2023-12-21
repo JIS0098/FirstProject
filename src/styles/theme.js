@@ -35,7 +35,7 @@ export const theme = {
     card: {
       backgroundColor: color.white,
       color: color.black,
-      border: "#4F5256",
+      border: "#eeeeee",
     },
     emoji: {
       backgroundColor: "rgba(0, 0, 0, 0.54)", // 왜 안됨..
