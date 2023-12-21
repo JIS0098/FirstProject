@@ -139,13 +139,13 @@ const PostBack = styled.div.withConfig({
     backgroundUrl ? `url(${backgroundUrl})` : theme.backgroundColor[`${backgroundColor}`]};
 
   background-size: cover;
-  width: 100vw;
+  width: 100%;
   min-height: 100vh;
   background-position-x: center;
 `;
 
 const PostWrapBack = styled.div`
-  width: 100vw;
+  width: 100%;
   min-height: 100vh;
   background-color: rgba(0, 0, 0, 0.1);
   position: relative;

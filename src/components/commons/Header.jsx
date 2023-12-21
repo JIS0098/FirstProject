@@ -81,6 +81,7 @@ const StyledAddButton = styled(motion.button)`
   color: #181818;
   font-size: 1.6rem;
   font-weight: 500;
+  text-wrap: nowrap;
 
   &:hover {
     background: #f6f6f6;

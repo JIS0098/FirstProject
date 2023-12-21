@@ -4,6 +4,7 @@ import { setDayYMD } from "../../utils/setDayYMD";
 import Delete from "../../assets/icon/deleted.svg";
 import nullImg from "../../assets/icon/person.svg";
 import useToggle from "../../hooks/useToggle";
+import { motion } from "framer-motion";
 
 function Card({ id, onClick, name, profileImg, description, tag, ago, deleteCard = true, deleteCardClick }) {
   const [deleteChoice, deleteChoiceToggle] = useToggle(false);
@@ -32,6 +33,8 @@ function Card({ id, onClick, name, profileImg, description, tag, ago, deleteCard
       }}
       deleteChoice={deleteChoice}
       deleteCard={deleteCard}
+      whileHover={{ scale: 0.95 }}
+      whileTap={{ scale: 0.9 }}
     >
       <CardWrap>
         <From>
@@ -89,7 +92,8 @@ const StyledImg = styled.img`
   height: 100%;
   object-fit: cover;
 `;
-const CardBox = styled.div.withConfig({
+
+const CardBox = styled(motion.div).withConfig({
   shouldForwardProp: (prop) => prop !== "deleteChoice" && prop !== "deleteCard",
 })`
   max-width: 38.4rem;
@@ -155,7 +159,7 @@ const From = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.card.border};
 `;
 const FromBox = styled.div`
-  width: 80%;
+  width: 70%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

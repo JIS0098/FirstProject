@@ -56,6 +56,8 @@ const StyledSearchBar = styled.input`
   }
 
   @media screen and (max-width: 768px) {
+    padding: 15px 10px;
+
     &::placeholder {
       background-image: url(https://cdn1.iconfinder.com/data/icons/hawcons/32/698627-icon-111-search-256.png);
       background-size: contain;

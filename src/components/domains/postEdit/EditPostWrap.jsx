@@ -14,19 +14,23 @@ function Loading() {
 function PostWrap({ data, pageId, loading, thema }) {
   const [deleteList, setDeleteList] = useState([]);
   const navigate = useNavigate();
+  const password = process.env.REACT_APP_DELETE_KEY;
 
   const Delete = async () => {
-    try {
-      await Promise.all(
-        deleteList.map(async (data) => {
-          await deleteCardFromPage(data.id);
-        })
-      );
-      setDeleteList([]);
-    } catch (e) {
-      console.error(e);
-    } finally {
-      window.location.reload();
+    const deletePassword = prompt("비밀번호 입력해주세요.");
+    if (deletePassword == password) {
+      try {
+        await Promise.all(
+          deleteList.map(async (data) => {
+            await deleteCardFromPage(data.id);
+          })
+        );
+        setDeleteList([]);
+      } catch (e) {
+        console.error(e);
+      } finally {
+        window.location.reload();
+      }
     }
   };
 
@@ -48,12 +52,15 @@ function PostWrap({ data, pageId, loading, thema }) {
   const clickdeletePage = async () => {
     const deleteconfirm = confirm("페이지를 삭제하시겠습니까?");
     if (deleteconfirm) {
-      try {
-        await deletePage(pageId);
-      } catch (e) {
-        console.log(e);
-      } finally {
-        navigate("/list");
+      const deletePassword = prompt("비밀번호 입력해주세요.");
+      if (deleteconfirm && deletePassword == password) {
+        try {
+          await deletePage(pageId);
+        } catch (e) {
+          console.log(e);
+        } finally {
+          navigate("/list");
+        }
       }
     }
   };
