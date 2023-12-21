@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { StyledTitle } from "../commonStyled";
 import { supabase } from "../../../api/supabase/supabaseClient";
 import { defaultProfileImg } from "../../../assets/ProfileImgUrls";
+import addButtonIcon from "../../../assets/icon/add-button.png";
 
 const ProfileLayout = ({ data, setData }) => {
   const [defaultProfileList, setDefaultProfileList] = useState();
@@ -54,7 +55,13 @@ const ProfileLayout = ({ data, setData }) => {
         <StyledPreviewLabel>
           <StyledUploadImgBox type="file" onChange={handleImageChange} />
           <StyledUploadImgDiv>
-            <img src={data && data.profileImageURL ? data.profileImageURL : defaultProfileImg} alt="프로필 이미지" />
+            <Button>
+              <ButtonIcon src={addButtonIcon} alt="사진 추가 버튼" />
+            </Button>
+            <ProfileImg
+              src={data && data.profileImageURL ? data.profileImageURL : defaultProfileImg}
+              alt="프로필 이미지"
+            />
           </StyledUploadImgDiv>
         </StyledPreviewLabel>
         <StyledImgSelectBox>
@@ -75,7 +82,9 @@ const ProfileLayout = ({ data, setData }) => {
     </div>
   );
 };
-
+const ProfileImg = styled.img`
+  pointer-events: none;
+`;
 const StyledProfileImgBox = styled.div`
   display: flex;
   align-items: center;
@@ -84,6 +93,16 @@ const StyledProfileImgBox = styled.div`
 const StyledUploadImgDiv = styled.div`
   width: 100%;
   height: 100%;
+  position: relative;
+
+  & div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 4.4rem;
+    height: 4.4rem;
+  }
 `;
 
 const StyledPreviewLabel = styled.label`
@@ -123,6 +142,12 @@ const StyledImgList = styled.div`
     width: 5.5rem;
     border-radius: 50%;
     border: 0.1rem solid #5b5e66;
+    cursor: pointer;
+    outline: none;
+
+    &:hover {
+      opacity: 0.5;
+    }
 
     @media (max-width: 768px) {
       width: 4.6rem;
@@ -140,18 +165,18 @@ const StyledUploadImgBox = styled.input`
     border-radius: 50%;
     cursor: pointer;
     position: relative;
-
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      background: linear-gradient(rgba(169, 169, 169, 0.5), rgba(169, 169, 169, 0.5));
-      z-index: 1;
-    }
   }
 `;
+
+const Button = styled.div`
+  width: 9rem;
+  height: 9rem;
+  opacity: 0;
+  &:hover {
+    opacity: 1;
+  }
+`;
+
+const ButtonIcon = styled.img``;
+
 export default ProfileLayout;
