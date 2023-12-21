@@ -26,6 +26,7 @@ const StyledLoadingSpinner = styled.div`
   position: relative;
   width: 80px;
   height: 80px;
+  margin: 3rem;
 
   div {
     box-sizing: border-box;
