@@ -132,7 +132,6 @@ const CardDescription = styled.div`
   overflow: hidden;
   word-wrap: break-word;
   white-space: pre-line;
-  color: ${({ $thema }) => (!$thema ? "#000" : "#fff")};
 
   & > p {
     display: -webkit-box;

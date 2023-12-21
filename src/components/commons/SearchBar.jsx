@@ -32,7 +32,7 @@ const StyledSearchBar = styled.input`
   width: 100%;
   background: #fff;
   padding: 20px 10px;
-  border: 1px solid #4f5256;
+  border: 1px solid #ccc;
   border-radius: 15px;
   text-indent: 25px;
   font-size: 1.6rem;
