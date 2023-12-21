@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
-import MoreCardImg from "../../assets/icon/plus.svg";
-import Card from "../../components/commons/Card";
+import MoreCardImg from "assets/icon/plus.svg";
+import Card from "components/commons/Card";
 import { motion } from "framer-motion";
-import setting from "../../assets/icon/setting.svg";
+import setting from "assets/icon/setting.svg";
 import SkPostCard from "components/commons/SkPostCard";
 
 function Loading() {

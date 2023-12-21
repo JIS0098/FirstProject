@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
-import shareFin from "../../assets/icon/check.svg";
+import shareFin from "assets/icon/check.svg";
 
 function ShareComplete() {
   return (

@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import PostPreview from "../assets/img/PostPreview.png";
-import EmojiPreview from "../assets/img/EmojiPreview.png";
+import PostPreview from "assets/img/PostPreview.png";
+import EmojiPreview from "assets/img/EmojiPreview.png";
 import { Link } from "react-router-dom";
-import { Button } from "../components/commons/Button";
+import { Button } from "../../components/commons/Button";
 import { motion } from "framer-motion";
 
 function Landing() {

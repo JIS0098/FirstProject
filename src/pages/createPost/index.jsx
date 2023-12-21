@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import NameInput from "../../components/commons/NameInput";
-import ToggleButton from "../../components/domains/createPost/ToggleButton";
-import SelectColor from "../../components/domains/createPost/SelectBackground/SelectColor";
-import SelectImage from "../../components/domains/createPost/SelectBackground/SelectImage";
-import CreateButton from "../../components/commons/CreateButton";
-import handleCreateButtonClick from "../../utils/handleCreateButtonClick";
+import NameInput from "components/commons/NameInput";
+import ToggleButton from "components/domains/createPost/ToggleButton";
+import SelectColor from "components/domains/createPost/SelectBackground/SelectColor";
+import SelectImage from "components/domains/createPost/SelectBackground/SelectImage";
+import CreateButton from "components/commons/CreateButton";
+import handleCreateButtonClick from "utils/handleCreateButtonClick";
 
 const CreatePost = () => {
   const [isName, setIsName] = useState("");

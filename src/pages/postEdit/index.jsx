@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import styled from "styled-components";
-import useToggle from "../../hooks/useToggle";
-import PostHeader from "./PostHeader";
-import PostWrap from "./PostWrap";
-import ShareComplete from "./ShareComplete";
+import useToggle from "hooks/useToggle";
+import PostHeader from "components/domains/postEdit/EditPostHeader";
+import PostWrap from "components/domains/postEdit/EditPostWrap";
+import ShareComplete from "components/domains/postEdit/EditShareComplete";
 import { getMessageByPaperId, getEmojiByPaperId, getRollingPaper } from "api";
 import { useParams } from "react-router-dom";
 
@@ -117,6 +117,7 @@ const PostBack = styled.div.withConfig({
   background-size: cover;
   width: 100vw;
   min-height: 100vh;
+  background-position: center;
 `;
 
 const PostWrapBack = styled.div`

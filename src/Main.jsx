@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Post from "../src/pages/post";
 import PostEdit from "../src/pages/postEdit";
 import ListPage from "./pages/list";
-import Landing from "./pages/Landing";
+import Landing from "pages/landing";
 import Header from "./components/commons/Header";
 import CreateMessage from "./pages/createMessage";
 import CreatePost from "./pages/createPost";

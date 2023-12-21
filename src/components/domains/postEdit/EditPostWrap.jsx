@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
-import Card from "../../components/commons/Card";
+import Card from "../../commons/Card";
 import { deletePage, deleteCardFromPage } from "api";
 import SkPostCard from "components/commons/SkPostCard";
 import { AnimatePresence, motion } from "framer-motion";
