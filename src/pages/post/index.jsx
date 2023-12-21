@@ -140,13 +140,13 @@ const PostBack = styled.div.withConfig({
 
   background-size: cover;
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
   background-position-x: center;
 `;
 
 const PostWrapBack = styled.div`
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   background-color: rgba(0, 0, 0, 0.1);
   position: relative;
   z-index: 1;
