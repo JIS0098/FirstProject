@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import NameInput from "../../components/commons/NameInput";
-import CreateButton from "../../components/commons/CreateButton";
-import ProfileLayout from "./components/ProfileLayout";
-import RelationshipInputBox from "./components/RelationshipInputBox";
-import WriteInputBox from "./WYSIWYG";
-import { defaultProfileImg } from "../../assets/ProfileImgUrls";
+import NameInput from "components/commons/NameInput";
+import CreateButton from "components/commons/CreateButton";
+import ProfileLayout from "components/domains/createMessage/components/ProfileLayout";
+import RelationshipInputBox from "components/domains/createMessage/components/RelationshipInputBox";
+import WriteInputBox from "components/domains/createMessage/WYSIWYG";
+import { defaultProfileImg } from "assets/ProfileImgUrls";
 import { postMessage } from "api";
 
 const CreateMessage = () => {
@@ -48,8 +48,6 @@ const CreateMessage = () => {
       setIsAlert({ ...isAlert, from: true });
     }
   };
-
-  console.log(data.profileImageURL);
 
   return (
     <MessageLayout>

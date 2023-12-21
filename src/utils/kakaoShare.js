@@ -9,7 +9,6 @@ function shareKakao(kakao) {
   // 자신의 js 키를 넣어준다.
   Kakao.init("b46c2aec1f0938765d1a14de7d7fe8e8");
   // 잘 적용되면 true 를 뱉는다.
-  // console.log(Kakao.isInitialized());
 
   Kakao.Share.sendDefault({
     objectType: "feed",

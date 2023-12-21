@@ -30,7 +30,6 @@ function PostHeader({
 
   const handleEmojiSelect = (e) => {
     setSelectEmoji({ emoji: e.emoji, type: "increase" });
-    // console.log(e.emoji);
   };
   const location = useLocation();
   const baseUrl = window.location.host;
@@ -55,8 +54,7 @@ function PostHeader({
     if (selectEmoji !== null) {
       const emojiUpdate = async () => {
         try {
-          const result = await addEmojiToPage(selectEmoji, pageId);
-          console.log(result);
+          await addEmojiToPage(selectEmoji, pageId);
           setEmojiUp(selectEmoji);
         } catch (e) {
           console.log(e);
