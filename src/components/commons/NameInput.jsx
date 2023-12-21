@@ -5,6 +5,17 @@ import color from "../../styles/color";
 const NameInput = ({ children, onChange, placeholder }) => {
   const [isName, setIsName] = useState(null);
 
+  const maxLength = 8;
+
+  const handleInputChange = (e) => {
+    const inputValue = e.target.value;
+
+    if (inputValue.length <= maxLength) {
+      onChange(inputValue);
+      setIsName(inputValue);
+    }
+  };
+
   return (
     <Create>
       <p>{children}</p>
@@ -12,10 +23,7 @@ const NameInput = ({ children, onChange, placeholder }) => {
         type="text"
         value={isName || ""}
         placeholder={placeholder}
-        onChange={(e) => {
-          onChange(e.target.value);
-          setIsName(e.target.value);
-        }}
+        onChange={handleInputChange}
         onBlur={(e) => setIsName(e.target.value)}
       />
       {isName !== null && !isName && <ErrorText>값을 입력해 주세요.</ErrorText>}

@@ -7,6 +7,7 @@ import SelectColor from "components/domains/createPost/SelectBackground/SelectCo
 import SelectImage from "components/domains/createPost/SelectBackground/SelectImage";
 import CreateButton from "components/commons/CreateButton";
 import handleCreateButtonClick from "utils/handleCreateButtonClick";
+import { WARNING_MESSAGE } from "constants";
 
 const CreatePost = () => {
   const [isName, setIsName] = useState("");
@@ -50,7 +51,7 @@ const CreatePost = () => {
   return (
     <Wrapper>
       <Container>
-        <NameInput onChange={handleNameChange} placeholder={"받는 사람을 입력해 주세요."} name={isName}>
+        <NameInput onChange={handleNameChange} placeholder={WARNING_MESSAGE.POST_CARD}>
           To.
         </NameInput>
         <SelectBackground>
