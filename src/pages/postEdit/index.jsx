@@ -84,7 +84,7 @@ function Post({ thema }) {
   const backgroundURL = selectedPost?.backgroundImageURL;
 
   return (
-    <PostBack ref={pageRef} backgroundColor={backgroundColor} backgroundURL={backgroundURL}>
+    <PostBack ref={pageRef} backgroundColor={backgroundColor} $backgroundURL={backgroundURL}>
       <PostHeader
         thema={thema}
         data={data}
@@ -111,13 +111,15 @@ function Post({ thema }) {
 }
 
 const PostBack = styled.div.withConfig({
-  shouldForwardProp: (prop) => prop !== "backgroundURL" && prop !== "backgroundColor",
+  shouldForwardProp: (prop) => prop !== "backgroundUrl" && prop !== "backgroundColor",
 })`
-  background: ${(props) => (props.backgroundURL ? `url(${props.backgroundURL})` : props.backgroundColor)};
+  background: ${({ backgroundUrl, backgroundColor, theme }) =>
+    backgroundUrl ? `url(${backgroundUrl})` : theme.backgroundColor[`${backgroundColor}`]};
+
   background-size: cover;
   width: 100vw;
   min-height: 100vh;
-  background-position: center;
+  background-position-x: center;
 `;
 
 const PostWrapBack = styled.div`
