@@ -16,11 +16,7 @@ const SelectImage = ({ onImageSelect }) => {
     try {
       setLoading(true);
       const { data } = await supabase.storage.from("background_images").list("");
-
-      data.sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
-
       const imagePaths = data.map((item) => item.name);
-
       setImageList(imagePaths);
       setSelectedImage(imagePaths[0]);
     } catch (error) {
@@ -63,7 +59,7 @@ const SelectImage = ({ onImageSelect }) => {
   );
 };
 
-const ImageList = ({ imageList, selectedImage, handleImageChange, sort }) => {
+const ImageList = ({ imageList, selectedImage, handleImageChange }) => {
   return (
     <>
       {imageList.map((itemPath) => (
@@ -78,7 +74,6 @@ const ImageList = ({ imageList, selectedImage, handleImageChange, sort }) => {
             src={`https://gjbkkhzzbcjprpxlhdlu.supabase.co/storage/v1/object/public/background_images/${itemPath}`}
             alt={`Image ${itemPath}`}
             onClick={() => handleImageChange(itemPath)}
-            $sort={sort}
           />
           {selectedImage === itemPath && <CheckIcon src={selectedIcon} alt="선택된 이미지" />}
         </ImageButton>
