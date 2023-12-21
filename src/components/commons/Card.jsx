@@ -93,7 +93,7 @@ const StyledImg = styled.img`
   object-fit: cover;
 `;
 
-const CardBox = styled(motion.div.withConfig)({
+const CardBox = styled(motion.div).withConfig({
   shouldForwardProp: (prop) => prop !== "deleteChoice" && prop !== "deleteCard",
 })`
   max-width: 38.4rem;
