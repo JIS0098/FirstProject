@@ -164,6 +164,8 @@ const EmojiPickerWrap = styled.div`
 const PostHead = styled.div`
   width: 100%;
   background-color: ${({ theme }) => theme.header};
+  position: relative;
+  z-index: 1;
 `;
 
 const HeaderService = styled.div`

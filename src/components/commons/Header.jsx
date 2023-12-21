@@ -36,6 +36,8 @@ function Header({ onThemaClick }) {
 const StyledHeaderContainer = styled.nav`
   background-color: ${({ theme }) => theme.header};
   border-bottom: 1px solid ${({ theme }) => theme.border};
+  position: relative;
+  z-index: 1;
 `;
 const StyledNavContainer = styled.nav`
   display: flex;
