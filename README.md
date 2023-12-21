@@ -50,5 +50,8 @@ npm i
 npm start run
 ```
 
+## 🔗 배포링크
+[🔗Link](https://2-2-1-rolling.netlify.app/)
+
 
 
