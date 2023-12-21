@@ -94,7 +94,6 @@ function Post({ thema }) {
   const backgroundColor = selectedPost?.backgroundColor;
   const backgroundUrl = selectedPost?.backgroundImageURL;
 
-
   //url을 불러오지 못하면 null처리
   useEffect(() => {
     const img = new Image();
@@ -107,8 +106,7 @@ function Post({ thema }) {
   const loadedBackgroundImg = imageLoaded ? backgroundUrl : null;
 
   return (
-    <PostBack ref={pageRef} backgroundColor={backgroundColor} backgroundUrl={backgroundUrl} thema={thema}>
-
+    <PostBack ref={pageRef} backgroundColor={backgroundColor} backgroundUrl={loadedBackgroundImg} thema={thema}>
       <PostHeader
         thema={thema}
         data={data}
@@ -143,10 +141,8 @@ function Post({ thema }) {
 const PostBack = styled.div.withConfig({
   shouldForwardProp: (prop) => prop !== "backgroundUrl" && prop !== "backgroundColor",
 })`
-
   background: ${({ backgroundUrl, backgroundColor, theme }) =>
     backgroundUrl ? `url(${backgroundUrl})` : theme.backgroundColor[`${backgroundColor}`]};
-
 
   background-size: cover;
   width: 100vw;

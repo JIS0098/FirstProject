@@ -45,6 +45,11 @@ function PostHeader({
       console.log(err);
     }
   };
+
+  const stopPropagation = (event) => {
+    event.stopPropagation();
+  };
+
   useEffect(() => {
     if (selectEmoji !== null) {
       const emojiUpdate = async () => {
@@ -96,7 +101,7 @@ function PostHeader({
             </ButtonWrap>
 
             {emojiPick ? (
-              <EmojiPickerWrap>
+              <EmojiPickerWrap onClick={stopPropagation}>
                 <EmojiPicker onEmojiClick={handleEmojiSelect} />
               </EmojiPickerWrap>
             ) : null}
@@ -147,7 +152,7 @@ const EmojiPickerWrap = styled.div`
   position: absolute;
   right: 0;
   top: 6rem;
-  z-index: 1;
+  z-index: 2;
 `;
 const PostHead = styled.div`
   width: 100%;

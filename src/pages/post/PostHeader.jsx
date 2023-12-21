@@ -34,6 +34,10 @@ function PostHeader({
   const location = useLocation();
   const baseUrl = window.location.host;
 
+  const stopPropagation = (event) => {
+    event.stopPropagation();
+  };
+
   const urlShare = async (text) => {
     try {
       await navigator.clipboard.writeText(text);
@@ -98,7 +102,7 @@ function PostHeader({
             </ButtonWrap>
 
             {emojiPick ? (
-              <EmojiPickerWrap>
+              <EmojiPickerWrap onClick={stopPropagation}>
                 <EmojiPicker onEmojiClick={handleEmojiSelect} />
               </EmojiPickerWrap>
             ) : null}
