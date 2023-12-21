@@ -53,14 +53,14 @@ function Landing() {
             <StyledPagSideIntroText>롤링 페이퍼에 이모지를 추가할 수 있어요.</StyledPagSideIntroText>
           </StyledPageIntroContainer>
         </StyledLandingSectionSecond>
-        <StyledGoToListButtonContainer>
-          <StyledLink to="/list">
-            <Button width="28rem" tabletWidth="100%">
-              구경해보기
-            </Button>
-          </StyledLink>
-        </StyledGoToListButtonContainer>
       </StyledMainContainer>
+      <StyledGoToListButtonContainer>
+        <StyledLink to="/list">
+          <Button width="28rem" tabletWidth="100%">
+            구경해보기
+          </Button>
+        </StyledLink>
+      </StyledGoToListButtonContainer>
     </>
   );
 }
@@ -157,6 +157,7 @@ const StyledGoToListButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   min-width: 360px;
+  margin-bottom: 6rem;
 `;
 const StyledBr = styled.br`
   display: block;
@@ -167,11 +168,12 @@ const StyledBr = styled.br`
 `;
 
 const StyledLink = styled(Link)`
-  @media screen and (max-width: 1248px) {
-    width: 100%;
-  }
+  width: 28rem;
   @media screen and (max-width: 768px) {
-    width: 60%;
+    width: calc(100% - 64px);
+  }
+  @media screen and (max-width: 425px) {
+    width: calc(100% - 48px);
   }
 `;
 
