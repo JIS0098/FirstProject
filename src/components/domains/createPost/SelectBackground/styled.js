@@ -18,4 +18,12 @@ const CheckIcon = styled.img`
   pointer-events: none;
 `;
 
-export { PaletteWrapper, CheckIcon };
+const Image = styled.img`
+  width: 100%;
+  height: 100%;
+  border-radius: 1.6rem;
+  object-fit: cover;
+  pointer-events: none;
+`;
+
+export { PaletteWrapper, CheckIcon, Image };

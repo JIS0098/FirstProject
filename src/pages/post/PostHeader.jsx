@@ -11,7 +11,6 @@ import { useLocation } from "react-router-dom";
 import kakaoShare from "utils/kakaoShare";
 
 function PostHeader({
-  thema,
   data,
   toggleShare,
   toggleEmoji,
@@ -34,6 +33,10 @@ function PostHeader({
   const location = useLocation();
   const baseUrl = window.location.host;
 
+  const stopPropagation = (event) => {
+    event.stopPropagation();
+  };
+
   const urlShare = async (text) => {
     try {
       await navigator.clipboard.writeText(text);
@@ -49,8 +52,8 @@ function PostHeader({
     if (selectEmoji !== null) {
       const emojiUpdate = async () => {
         try {
-          const result = await addEmojiToPage(selectEmoji, pageId);
-          console.log(result);
+          await addEmojiToPage(selectEmoji, pageId);
+          // console.log(result);
           setEmojiUp(selectEmoji);
         } catch (e) {
           console.log(e);
@@ -61,26 +64,26 @@ function PostHeader({
   }, [pageId, selectEmoji, setEmojiUp]);
 
   return (
-    <PostHead onClick={() => toggleFalse()} $thema={thema}>
+    <PostHead onClick={() => toggleFalse()}>
       <HeaderService>
-        <ToName $thema={thema}>To. {selectedPost?.name || "Loding..."}</ToName>
+        <ToName>To. {selectedPost?.name || "Loding..."}</ToName>
 
         <HeaderServiceBox>
           <HeaderServicePost>
-            <ProfileImgs thema={thema} list={data} count={data.length} />
-            <ServiceP $thema={thema}>
+            <ProfileImgs list={data} count={data.length} />
+            <ServiceP>
               <ServiceSpan>{data.length}</ServiceSpan> 명이 작성했어요!
             </ServiceP>
           </HeaderServicePost>
 
           <EmojiWrap>
             {dataEmoji.slice(0, 3).map((item) => (
-              <Emoji thema={thema} key={item.id}>
+              <Emoji key={item.id}>
                 {item.emoji} {item.count}
               </Emoji>
             ))}
 
-            <EmojiButton $thema={thema} src={downImg} onClick={toggleEmoji} alt="downImg" />
+            <EmojiButton src={downImg} onClick={toggleEmoji} alt="downImg" />
 
             {emojiAdd ? (
               <ToggleAddEmoji>
@@ -92,18 +95,18 @@ function PostHeader({
               </ToggleAddEmoji>
             ) : null}
 
-            <ButtonWrap $thema={thema} onClick={toggleEmojiPick}>
+            <ButtonWrap onClick={toggleEmojiPick}>
               <img src={addEmojiImg} alt="addEmojiImg" />
               <ButtonWrapP>추가</ButtonWrapP>
             </ButtonWrap>
 
             {emojiPick ? (
-              <EmojiPickerWrap>
+              <EmojiPickerWrap onClick={stopPropagation}>
                 <EmojiPicker onEmojiClick={handleEmojiSelect} />
               </EmojiPickerWrap>
             ) : null}
 
-            <Line $thema={thema} />
+            <Line />
             <ButtonWrap onClick={toggleShare}>
               <img src={shareImg} alt="shareImg" />
             </ButtonWrap>
@@ -160,7 +163,7 @@ const EmojiPickerWrap = styled.div`
 `;
 const PostHead = styled.div`
   width: 100%;
-  background-color: ${({ $thema }) => ($thema ? "#000" : "#fff")};
+  background-color: ${({ theme }) => theme.header};
 `;
 
 const HeaderService = styled.div`
@@ -178,7 +181,7 @@ const HeaderService = styled.div`
   }
 `;
 const ToName = styled.h2`
-  color: ${({ $thema }) => (!$thema ? "#2b2b2b" : "#fff")};
+  color: ${({ theme }) => theme.fontColor};
   font-size: 2.8rem;
 `;
 const HeaderServiceBox = styled.div`
@@ -207,7 +210,7 @@ const ServiceP = styled.p`
   display: flex;
   align-items: center;
   margin-left: 5px;
-  color: ${({ $thema }) => (!$thema ? "#2b2b2b" : "#fff")};
+  color: ${({ theme }) => theme.fontColor};
 `;
 
 const EmojiWrap = styled.div`
@@ -255,7 +258,7 @@ const ButtonWrapP = styled.p`
 const Line = styled.div`
   width: 1px;
   height: 2.8rem;
-  background-color: ${({ $thema }) => (!$thema ? "#eee" : "#4F5256")};
+  background-color: ${({ theme }) => theme.border};
 `;
 const ShareBox = styled.div`
   width: 13.8rem;

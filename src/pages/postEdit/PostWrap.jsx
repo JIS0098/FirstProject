@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import Card from "../../components/commons/Card";
+import { motion } from "framer-motion";
 import { deletePage, deleteCardFromPage } from "api";
 import SkPostCard from "components/commons/SkPostCard";
 import { AnimatePresence, motion } from "framer-motion";
@@ -61,7 +62,9 @@ function PostWrap({ data, pageId, loading, thema }) {
   return (
     <PostInner>
       <BackListLink to={`/post/${pageId}`}>
-        <BackList $thema={thema}>뒤로가기</BackList>
+        <BackList animate={{ x: [0, 10, 0] }} transition={{ ease: "easeInOut", repeat: Infinity, duration: 1.5 }}>
+          ← 뒤로가기
+        </BackList>
       </BackListLink>
       <PageDeleteButton onClick={clickdeletePage}>포스트 삭제</PageDeleteButton>
       <AnimatePresence>
@@ -108,17 +111,21 @@ const BackListLink = styled(Link)`
   left: 2.5rem;
   cursor: pointer;
 `;
-const BackList = styled.button`
+const BackList = styled(motion.button)`
   width: 11.2rem;
   height: 3.9rem;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
+  font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  background: ${({ $thema }) => ($thema ? "#000" : "#fff")};
-  color: ${({ $thema }) => (!$thema ? "#000" : "#fff")};
+  background: none;
+  color: white;
+  cursor: pointer;
+  //   border-radius: 6px;
+  //   border: 1px solid #ccc;
+  //   background: ${({ $thema }) => ($thema ? "#000" : "#fff")};
+  //   color: ${({ $thema }) => (!$thema ? "#000" : "#fff")};
 `;
 
 const DeleteButton = styled.button`
@@ -162,8 +169,7 @@ const PageDeleteButton = styled(DeleteButton)`
   z-index: 1;
 `;
 const PostInner = styled.div`
-  max-width: 124.8rem;
-  width: 100%;
+  width: 124.8rem;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   margin: 0 auto;
@@ -172,7 +178,8 @@ const PostInner = styled.div`
   position: relative;
   /* justify-content: space-evenly; */
   @media all and (max-width: 1248px) {
-    max-width: 76.8rem;
+    max-width: 108rem;
+    width: 100%;
     grid-template-columns: repeat(2, 1fr);
   }
   @media all and (max-width: 768px) {

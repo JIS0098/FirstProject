@@ -5,7 +5,7 @@ import Delete from "../../assets/icon/deleted.svg";
 import nullImg from "../../assets/icon/person.svg";
 import useToggle from "../../hooks/useToggle";
 
-function Card({ id, onClick, name, profileImg, description, tag, ago, deleteCard = true, deleteCardClick, thema }) {
+function Card({ id, onClick, name, profileImg, description, tag, ago, deleteCard = true, deleteCardClick }) {
   const [deleteChoice, deleteChoiceToggle] = useToggle(false);
   const htmlContent = { __html: description };
   const day = setDayYMD(ago);
@@ -32,17 +32,17 @@ function Card({ id, onClick, name, profileImg, description, tag, ago, deleteCard
       }}
       deleteChoice={deleteChoice}
       deleteCard={deleteCard}
-      $thema={thema}
     >
       <CardWrap>
-        <From $thema={thema}>
+        <From>
           <FromInner>
             <ImgBox>
               <StyledImg src={profile} alt="profileImg" />
             </ImgBox>
             <FromBox>
-              <FromP $thema={thema}>
-                From. <FromSpan>{name}</FromSpan>
+              <FromP>
+                <FromSpan>From. </FromSpan>
+                {name}
               </FromP>
               <FromTag back={tagColor(tag).back} font={tagColor(tag).font}>
                 {tag}
@@ -62,7 +62,7 @@ function Card({ id, onClick, name, profileImg, description, tag, ago, deleteCard
           )}
         </From>
 
-        <CardDescription $thema={thema} dangerouslySetInnerHTML={htmlContent} />
+        <CardDescription dangerouslySetInnerHTML={htmlContent} />
         <Ago>{day}</Ago>
       </CardWrap>
     </CardBox>
@@ -79,7 +79,9 @@ const DeleteWrap = styled.button`
 `;
 const FromInner = styled.div`
   width: 80%;
+  height: 100%;
   display: flex;
+  align-items: center;
   gap: 1.5rem;
 `;
 const StyledImg = styled.img`
@@ -90,47 +92,55 @@ const StyledImg = styled.img`
 const CardBox = styled.div.withConfig({
   shouldForwardProp: (prop) => prop !== "deleteChoice" && prop !== "deleteCard",
 })`
-  width: 38.4rem;
+  max-width: 38.4rem;
+  min-width: 30rem;
+  width: 100%;
   height: 28rem;
   margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 16px;
-  background-color: ${({ $thema }) => ($thema ? "#000" : "#fff")};
+  background-color: ${({ theme }) => theme.card.backgroundColor};
   box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.08);
   padding: 2.8rem 2.4rem;
   opacity: ${(props) => (props.deleteChoice ? 0.5 : 1)};
   cursor: ${(props) => (!props.deleteCard ? "auto" : "pointer")};
 
   @media all and (max-width: 1248px) {
-    width: 100%;
     max-width: 50rem;
-  }
-
-  @media all and (max-width: 768px) {
-    width: 100%;
   }
 `;
 const CardWrap = styled.div`
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 15px;
+  position: relative;
 `;
 const CardDescription = styled.div`
   width: 100%;
-  height: 10.6rem;
+  height: 60%;
   font-weight: 400;
-  color: ${({ $thema }) => (!$thema ? "#000" : "#fff")};
+  color: ${({ theme }) => theme.card.color};
   /* display: -webkit-box; */
   -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
   text-overflow: ellipsis;
   overflow: hidden;
-  white-space: normal;
+  word-wrap: break-word;
+  white-space: pre-line;
+  color: ${({ $thema }) => (!$thema ? "#000" : "#fff")};
+
   & > p {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: normal;
     font-size: 1.8rem;
   }
 `;
@@ -138,14 +148,15 @@ const CardDescription = styled.div`
 const From = styled.div`
   display: flex;
   width: 100%;
+  height: 40%;
   padding-bottom: 1.5rem;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  border-bottom: 1px solid ${({ $thema }) => (!$thema ? "#eee" : "#4f5256")};
+  border-bottom: 1px solid ${({ theme }) => theme.card.border};
 `;
 const FromBox = styled.div`
-  width: 50%;
+  width: 80%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -168,11 +179,18 @@ const FromTag = styled.div.withConfig({
 `;
 const FromP = styled.p`
   font-size: 2rem;
-  color: ${({ $thema }) => (!$thema ? "#000" : "#fff")};
+  color: ${({ theme }) => theme.card.color};
+  font-weight: 700;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: normal;
 `;
 const FromSpan = styled.span`
+  font-weight: 400;
   font-size: 2rem;
-  font-weight: 700;
 `;
 const ImgBox = styled.div`
   width: 5.6rem;
@@ -188,6 +206,8 @@ const ImgBox = styled.div`
 const Ago = styled.div`
   color: #999;
   font-size: 1.2rem;
+  position: absolute;
+  bottom: 0;
 `;
 
 export default Card;

@@ -1,5 +1,5 @@
-import reset from "./reset";
-import { createGlobalStyle } from "styled-components";
+import reset from './reset';
+import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
 
@@ -46,8 +46,8 @@ button{
 .ql-font-나눔고딕{
     font-family:'나눔고딕';
 }
-.ql-font-나눔명조{
-    font-family:'나눔명조';
+.ql-font-본명조{
+    font-family:'본명조';
 }
 .ql-font-D2코딩체{
     font-family:'D2코딩체';

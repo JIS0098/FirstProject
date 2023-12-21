@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import color from "../../styles/color";
 import NameInput from "../../components/commons/NameInput";
-import ToggleButton from "./components/ToggleButton";
-import SelectColor from "./components/SelectBackground/SelectColor";
-import SelectImage from "./components/SelectBackground/SelectImage";
+import ToggleButton from "../../components/domains/createPost/ToggleButton";
+import SelectColor from "../../components/domains/createPost/SelectBackground/SelectColor";
+import SelectImage from "../../components/domains/createPost/SelectBackground/SelectImage";
 import CreateButton from "../../components/commons/CreateButton";
 import handleCreateButtonClick from "../../utils/handleCreateButtonClick";
 
@@ -54,8 +53,10 @@ const CreatePost = () => {
             handleCreateButtonClick({
               name: isName,
               backgroundColor: selectedColor || "beige",
-              backgroundImageURL: selectedImage
+              backgroundImageURL: selectedImage.includes("background")
                 ? `https://gjbkkhzzbcjprpxlhdlu.supabase.co/storage/v1/object/public/background_images/${selectedImage}`
+                : selectedImage
+                ? `https://gjbkkhzzbcjprpxlhdlu.supabase.co/storage/v1/object/public/new_background_images/${selectedImage}`
                 : null,
               navigate,
             })

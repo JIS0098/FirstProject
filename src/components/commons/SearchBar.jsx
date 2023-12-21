@@ -32,9 +32,12 @@ const StyledSearchBar = styled.input`
   width: 100%;
   background: #fff;
   padding: 20px 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #4f5256;
   border-radius: 15px;
   text-indent: 25px;
+  font-size: 1.6rem;
+  background-color: ${({ theme }) => theme.input.backgroundColor};
+  color: ${({ theme }) => theme.input.textColor};
 
   &:focus {
     outline: 2px solid #a64eff;
@@ -56,6 +59,9 @@ const StyledSubmitBtn = styled.button`
   color: white;
   border-radius: 0 15px 15px 0;
   cursor: pointer;
+
+  font-size: 1.5rem;
+  font-weight: 700;
 
   &:hover {
     background-color: ${({ theme }) => theme.button.hover};

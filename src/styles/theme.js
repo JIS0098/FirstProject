@@ -26,20 +26,48 @@ const common = {
 export const theme = {
   light: {
     ...common,
-    display: "white",
     header: color.white,
+    display: "white",
     logo: "#4a494f",
     fontColor: color.gray[900],
     subFontColor: color.gray[500],
     border: color.gray[200],
+    card: {
+      backgroundColor: color.white,
+      color: color.black,
+      border: "#4F5256",
+    },
+    emoji: {
+      backgroundColor: "rgba(0, 0, 0, 0.54)", // 왜 안됨..
+      color: "#2b2b2b",
+    },
+    input: {
+      border: color.gray[200],
+      backgroundColor: color.white,
+      textColor: color.black,
+    },
   },
   dark: {
     ...common,
-    header: "#303134",
+    header: color.shark[100],
     display: "#202124",
     logo: color.white,
     fontColor: color.white,
     subFontColor: color.blue[500],
     border: "#4F5256",
+    card: {
+      backgroundColor: color.shark[100],
+      color: color.white,
+      border: "#4F5256",
+    },
+    emoji: {
+      backgroundColor: "rgba(255, 255, 255, 0.54)",
+      color: color.white,
+    },
+    input: {
+      border: "#4f5256",
+      backgroundColor: color.shark[100],
+      textColor: color.white,
+    },
   },
 };

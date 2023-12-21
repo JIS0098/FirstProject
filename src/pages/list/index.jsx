@@ -5,6 +5,7 @@ import { Button } from "../../components/commons/Button";
 import { Link, useSearchParams } from "react-router-dom";
 import CardSection from "../../components/domains/list/CardSection";
 import SearchBar from "components/commons/SearchBar";
+import LoadingSpinner from "components/commons/LodingSpinner";
 
 function ListPage() {
   const LIST_TITLE = ["검색 결과 🔍", "인기 롤링 페이퍼 🔥", "최근에 만든 롤링 페이퍼 ⭐️"];
@@ -52,26 +53,28 @@ function ListPage() {
       <Layout>
         {onInput ? (
           loading ? (
-            <StyledSearchResult>검색 중...</StyledSearchResult>
+            <LoadingSpinner />
           ) : searchDatas.length > 0 ? (
-            <CardSection title={LIST_TITLE[0]} recipients={searchDatas} />
+            <CardSection title={LIST_TITLE[0]} recipients={searchDatas} $resultSection={true} />
           ) : (
             <StyledSearchResult>검색 결과가 없습니다</StyledSearchResult>
           )
         ) : (
           <>
-            <CardSection loading={loading} title={LIST_TITLE[1]} recipients={sortByMost} />
-            <CardSection loading={loading} title={LIST_TITLE[2]} recipients={sortByRecent} />
+            <CardSection loading={loading} title={LIST_TITLE[1]} recipients={sortByMost} $resultSection={false} />
+            <CardSection loading={loading} title={LIST_TITLE[2]} recipients={sortByRecent} $resultSection={false} />
           </>
         )}
       </Layout>
-      <StyledButtonContainer>
-        <Link to="/post">
-          <Button width="28rem" tabletWidth="100%">
-            나도 만들어보기
-          </Button>
-        </Link>
-      </StyledButtonContainer>
+      {!loading && (
+        <StyledButtonContainer>
+          <Link to="/post">
+            <Button width="28rem" tabletWidth="100%">
+              나도 만들어보기
+            </Button>
+          </Link>
+        </StyledButtonContainer>
+      )}
     </>
   );
 }
@@ -89,14 +92,18 @@ const Layout = styled.div`
 const StyledButtonContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-bottom: 6rem;
   min-width: 360px;
-`;
+  margin-bottom: 6rem;
 
+  & a {
+    @media screen and (max-width: 1248px) {
+      width: calc(100% - 64px);
+    }
+  }
+`;
 const StyledSearchResult = styled.p`
   margin-top: 5rem;
   font-size: 3rem;
   font-weight: 700;
-  color: white;
-  background-color: violet;
+  color: ${({ theme }) => theme.fontColor};
 `;

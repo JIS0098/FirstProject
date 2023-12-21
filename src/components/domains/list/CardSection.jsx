@@ -15,17 +15,19 @@ function Loading() {
   return <CardList>{renderItems}</CardList>;
 }
 
-function CardSection({ loading, title, recipients }) {
+function CardSection({ loading, title, recipients, $resultSection }) {
   const { isMobile, isTablet, isNotebook, isPC } = useDeviceSize();
   const [maxIndex, setMaxIndex] = useState(4);
 
   const { currentIndex, offset, handleSwipe, startDrag, endDrag, moveItem } = useSwipe(maxIndex, !isPC);
 
   const handleMouseDown = (e) => {
+    e.preventDefault();
     startDrag(e.pageX);
   };
 
   const handleMouseMove = (e) => {
+    e.preventDefault();
     if (!isPC) moveItem(e.pageX);
   };
 
@@ -66,12 +68,11 @@ function CardSection({ loading, title, recipients }) {
       window.removeEventListener("resize", updateMaxIndex);
     };
   }, [isPC, isNotebook, isTablet, isMobile, recipients.length]);
-
   return (
     <Container>
       <SubTitle>{title}</SubTitle>
-      <Relative>
-        <ArrowButton $left onClick={() => handleSwipe("prev")} $hide={(loading && !isPC) || currentIndex === 0}>
+      <Relative $resultSection={$resultSection}>
+        <ArrowButton $left onClick={() => handleSwipe("prev")} $hide={loading || !isPC || currentIndex === 0}>
           <ALeft />
         </ArrowButton>
         <Wrapper
@@ -85,7 +86,7 @@ function CardSection({ loading, title, recipients }) {
         >
           {loading ? <Loading /> : <CardList offset={offset}>{renderItems}</CardList>}
         </Wrapper>
-        <ArrowButton onClick={() => handleSwipe("next")} $hide={(loading && !isPC) || currentIndex >= maxIndex}>
+        <ArrowButton onClick={() => handleSwipe("next")} $hide={loading || !isPC || currentIndex >= maxIndex}>
           <ARight />
         </ArrowButton>
       </Relative>
@@ -106,7 +107,7 @@ const Container = styled.div`
 const Relative = styled.div`
   position: relative;
   display: flex;
-  justify-content: flex-start;
+  justify-content: ${({ $resultSection }) => ($resultSection ? "flex-start" : "center")};
 `;
 
 const Wrapper = styled.div`

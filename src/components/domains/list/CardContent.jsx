@@ -8,7 +8,7 @@ export function CardContent({ name, messages, messageCount, $bgUrl }) {
       <div>
         <Name $bgUrl={$bgUrl}>To. {name}</Name>
       </div>
-      <ProfileImgs list={messages} count={messageCount} />
+      <ProfileImgs list={messages} count={messageCount} $ignore />
       <Author $bgUrl={$bgUrl}>
         <AuthorCount $bgUrl={$bgUrl}>{messageCount}</AuthorCount>명이 작성했어요!
       </Author>

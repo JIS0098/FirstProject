@@ -7,13 +7,12 @@ import { motion } from "framer-motion";
 import setting from "../../assets/icon/setting.svg";
 import SkPostCard from "components/commons/SkPostCard";
 
-
 function Loading() {
   const renderItems = Array.from({ length: 5 }).map((_, index) => <SkPostCard key={index} />);
   return <>{renderItems}</>;
 }
 
-function PostWrap({ data, toggleModal, setModalClick, loading, thema }) {
+function PostWrap({ data, toggleModal, setModalClick, loading }) {
   const clickCard = (i) => {
     setModalClick(i);
   };
@@ -31,7 +30,7 @@ function PostWrap({ data, toggleModal, setModalClick, loading, thema }) {
           <SettingIcon src={setting} alt="setting" />
         </EditDeleteButton>
       </StyledLink>
-      <PostCard $thema={thema}>
+      <PostCard>
         <Link to={`/post/${params.id}/message`}>
           <ImgBox>
             <img src={MoreCardImg} alt="MoreCardImg" />
@@ -48,7 +47,6 @@ function PostWrap({ data, toggleModal, setModalClick, loading, thema }) {
                 clickCard(item.id);
                 toggleModal();
               }}
-              thema={thema}
               key={item.id}
               profileImg={item.profileImageURL}
               name={item.sender}
@@ -80,10 +78,10 @@ const BackList = styled(motion.button)`
   background: none;
   color: white;
   cursor: pointer;
-//   border-radius: 6px;
-//   border: 1px solid #ccc;
-//   background: ${({ $thema }) => ($thema ? "#000" : "#fff")};
-//   color: ${({ $thema }) => (!$thema ? "#000" : "#fff")};
+  //   border-radius: 6px;
+  //   border: 1px solid #ccc;
+  //   background: ${({ $thema }) => ($thema ? "#000" : "#fff")};
+  //   color: ${({ $thema }) => (!$thema ? "#000" : "#fff")};
 `;
 const StyledLink = styled(Link)`
   position: absolute;
@@ -93,22 +91,20 @@ const StyledLink = styled(Link)`
 `;
 
 const PostCard = styled.div`
-  width: 38.4rem;
+  max-width: 38.4rem;
+  min-width: 30rem;
+  width: 100%;
   height: 28rem;
   margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 16px;
-  background-color: ${({ $thema }) => ($thema ? "#000" : "#fff")};
+  background-color: ${({ theme }) => theme.card.backgroundColor};
   box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.08);
   padding: 2.8rem 2.4rem;
   @media all and (max-width: 1248px) {
-    width: 100%;
     max-width: 50rem;
-  }
-  @media all and (max-width: 768px) {
-    width: 100%;
   }
 `;
 
@@ -134,12 +130,11 @@ const EditDeleteButton = styled(DeleteButton)`
   &:hover {
     background: #ccc;
   }
-//   background: ${({ $thema }) => ($thema ? "#000" : "#fff")};
-//   color: ${({ $thema }) => (!$thema ? "#000" : "#fff")};
+  //   background: ${({ $thema }) => ($thema ? "#000" : "#fff")};
+  //   color: ${({ $thema }) => (!$thema ? "#000" : "#fff")};
 `;
 const PostInner = styled.div`
-  max-width: 124.8rem;
-  width: 100%;
+  width: 124.8rem;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   margin: 0 auto;
@@ -148,7 +143,8 @@ const PostInner = styled.div`
   position: relative;
   /* justify-content: space-evenly; */
   @media all and (max-width: 1248px) {
-    max-width: 76.8rem;
+    max-width: 108rem;
+    width: 100%;
     grid-template-columns: repeat(2, 1fr);
   }
   @media all and (max-width: 768px) {
