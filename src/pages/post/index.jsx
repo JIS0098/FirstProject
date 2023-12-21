@@ -99,7 +99,7 @@ function Post({ thema }) {
   const loadedBackgroundImg = imageLoaded ? backgroundUrl : null;
 
   return (
-    <PostBack ref={pageRef} backgroundColor={backgroundColor} backgroundUrl={loadedBackgroundImg} thema={thema}>
+    <PostBack ref={pageRef} backgroundColor={backgroundColor} $backgroundUrl={loadedBackgroundImg} thema={thema}>
       <PostHeader
         thema={thema}
         data={data}
