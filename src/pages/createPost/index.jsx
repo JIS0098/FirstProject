@@ -29,6 +29,10 @@ const CreatePost = () => {
 
   const handleToggle = () => {
     setIsChecked((prev) => !prev);
+    if (!isChecked) {
+      const defaultImage = "background-img-1.JPG";
+      setSelectedImage(defaultImage);
+    }
   };
 
   return (

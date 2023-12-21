@@ -17,7 +17,7 @@ const SelectImage = ({ onImageSelect }) => {
       setLoading(true);
       const { data } = await supabase.storage.from("background_images").list("");
 
-      data.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+      data.sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
 
       const imagePaths = data.map((item) => item.name);
 
