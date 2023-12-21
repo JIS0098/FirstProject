@@ -23,8 +23,9 @@ function PostHeader({
   showShare,
   setShare,
   toggleFalse,
+  emojiPick,
+  toggleEmojiPick,
 }) {
-  const [emojiPick, toggleEmojiPick] = useToggle(false);
   const [selectEmoji, setSelectEmoji] = useState(null);
 
   const handleEmojiSelect = (e) => {
@@ -139,7 +140,7 @@ const ToggleAddEmoji = styled.div`
   position: absolute;
   right: 19rem;
   top: 6rem;
-  z-index: 1;
+  z-index: 2;
   /* @media all and (max-width: 1248px) {
     right: 20rem;
   } */
@@ -158,7 +159,7 @@ const PostHead = styled.div`
   width: 100%;
   background-color: ${({ theme }) => theme.header};
   position: relative;
-  z-index: 1;
+  z-index: 2;
 `;
 
 const HeaderService = styled.div`
@@ -269,7 +270,7 @@ const ShareBox = styled.div`
   border: 1px solid #ccc;
   background: #fff;
   box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.08);
-  z-index: 1;
+  z-index: 2;
   @media all and (max-width: 1248px) {
     right: 0rem;
   }

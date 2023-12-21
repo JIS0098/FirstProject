@@ -93,10 +93,10 @@ function Post({ thema }) {
         dataEmoji={dataEmoji}
         setEmojiUp={setEmojiUp}
         selectedPost={selectedPost}
+        pageId={pageId}
         emojiAdd={emojiAdd}
         showShare={showShare}
         setShare={setShare}
-        pageId={pageId}
         toggleFalse={toggleFalse}
         emojiPick={emojiPick}
         toggleEmojiPick={toggleEmojiPick}
