@@ -8,7 +8,20 @@ function PostModal({ toggleModal, modalFind, modalFalse }) {
   const htmlContent = { __html: modalFind.content };
   const day = setDayYMD(modalFind.createdAt);
   const progileImg = modalFind.profileImageURL ? modalFind.profileImageURL : nullImg;
-
+  const tagColor = (tag) => {
+    if (tag === "지인") {
+      return { back: "#FFF0D6", font: "#FF8832" };
+    }
+    if (tag === "동료") {
+      return { back: "#F8F0FF", font: "#9935FF" };
+    }
+    if (tag === "가족") {
+      return { back: "#E4FBDC", font: "#2BA600" };
+    }
+    if (tag === "친구") {
+      return { back: "#E2F5FF", font: "#00A2FE" };
+    }
+  };
   return (
     <Modal
       onClick={(event) => {
@@ -32,7 +45,9 @@ function PostModal({ toggleModal, modalFind, modalFalse }) {
               <FromP>
                 From. <FromSpan>{modalFind.sender.slice(0, 25)}</FromSpan>
               </FromP>
-              <FromTag>{modalFind.relationship}</FromTag>
+              <FromTag back={tagColor(modalFind.relationship).back} font={tagColor(modalFind.relationship).font}>
+                {modalFind.relationship}
+              </FromTag>
             </FromBox>
           </FromInner>
           <Ago>{day}</Ago>
@@ -53,7 +68,7 @@ const Modal = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   height: 100%;
   position: fixed;
   top: 0;
@@ -115,7 +130,22 @@ const FromBox = styled.div`
   justify-content: space-between;
   gap: 1rem;
 `;
-const FromTag = styled.div`
+// const FromTag = styled.div`
+//   width: 4.1rem;
+//   height: 2rem;
+//   display: flex;
+//   padding: 0px 8px;
+//   justify-content: center;
+//   align-items: center;
+//   gap: 10px;
+//   border-radius: 4px;
+//   background: var(--green-100, #e4fbdc);
+//   color: var(--green-500, #2ba600);
+//   font-size: 1.4rem;
+// `;
+const FromTag = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== "back" && prop !== "font",
+})`
   width: 4.1rem;
   height: 2rem;
   display: flex;
@@ -124,8 +154,8 @@ const FromTag = styled.div`
   align-items: center;
   gap: 10px;
   border-radius: 4px;
-  background: var(--green-100, #e4fbdc);
-  color: var(--green-500, #2ba600);
+  background: ${(props) => props.back};
+  color: ${(props) => props.font};
   font-size: 1.4rem;
 `;
 const FromP = styled.p`
