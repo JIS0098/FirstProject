@@ -1,22 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { CardContent } from "./CardContent";
 import { Reactions } from "./Reactions";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import useImageLoader from "hooks/useImageLoader";
 
 function CardItem({ recipient }) {
   const { name, recentMessages, messageCount, topReactions, backgroundColor, backgroundImageURL } = recipient;
-  const [imageLoaded, setImageLoaded] = useState(false);
-
+  const imageLoaded = useImageLoader(backgroundImageURL);
   const bgImageUrl = imageLoaded ? backgroundImageURL : null;
-
-  //url을 불러오지 못하면 null처리
-  useEffect(() => {
-    const img = new Image();
-    img.src = backgroundImageURL;
-    img.onload = () => setImageLoaded(true);
-    img.onerror = () => setImageLoaded(false);
-  }, [backgroundImageURL]);
 
   return (
     <Container $bgUrl={bgImageUrl} $bgColor={backgroundColor}>
@@ -43,7 +35,7 @@ const Container = styled.div`
   border-radius: 1.6rem;
   padding: 3rem 2.4rem 2rem;
   background: ${(props) =>
-    props.$bgUrl ? `url(${props.$bgUrl}), rgba(0, 0, 0, 0.54);` : props.theme.backgroundColor[`${props.$bgColor}`]};
+    props.$bgUrl ? `url(${props.$bgUrl}), rgba(0, 0, 0, 0.5);` : props.theme.backgroundColor[`${props.$bgColor}`]};
   background-blend-mode: overlay;
   background-repeat: no-repeat;
   background-size: cover;

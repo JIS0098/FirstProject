@@ -5,7 +5,7 @@ import Delete from "../../assets/icon/deleted.svg";
 import nullImg from "../../assets/icon/person.svg";
 import useToggle from "../../hooks/useToggle";
 
-function Card({ id, onClick, name, profileImg, description, tag, ago, deleteCard = true, deleteCardClick, thema }) {
+function Card({ id, onClick, name, profileImg, description, tag, ago, deleteCard = true, deleteCardClick }) {
   const [deleteChoice, deleteChoiceToggle] = useToggle(false);
   const htmlContent = { __html: description };
   const day = setDayYMD(ago);
@@ -32,10 +32,9 @@ function Card({ id, onClick, name, profileImg, description, tag, ago, deleteCard
       }}
       deleteChoice={deleteChoice}
       deleteCard={deleteCard}
-      $thema={thema}
     >
       <CardWrap>
-        <From $thema={thema}>
+        <From>
           <FromInner>
             <ImgBox>
               <StyledImg src={profile} alt="profileImg" />
@@ -63,7 +62,7 @@ function Card({ id, onClick, name, profileImg, description, tag, ago, deleteCard
           )}
         </From>
 
-        <CardDescription $thema={thema} dangerouslySetInnerHTML={htmlContent} />
+        <CardDescription dangerouslySetInnerHTML={htmlContent} />
         <Ago>{day}</Ago>
       </CardWrap>
     </CardBox>
@@ -102,7 +101,7 @@ const CardBox = styled.div.withConfig({
   justify-content: center;
   align-items: center;
   border-radius: 16px;
-  background-color: ${({ $thema }) => ($thema ? "#000" : "#fff")};
+  background-color: ${({ theme }) => theme.card.backgroundColor};
   box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.08);
   padding: 2.8rem 2.4rem;
   opacity: ${(props) => (props.deleteChoice ? 0.5 : 1)};
@@ -125,6 +124,11 @@ const CardDescription = styled.div`
   width: 100%;
   height: 60%;
   font-weight: 400;
+  color: ${({ theme }) => theme.card.color};
+  /* display: -webkit-box; */
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
   overflow: hidden;
   word-wrap: break-word;
   white-space: pre-line;
@@ -149,7 +153,7 @@ const From = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  border-bottom: 1px solid ${({ $thema }) => (!$thema ? "#eee" : "#4f5256")};
+  border-bottom: 1px solid ${({ theme }) => theme.card.border};
 `;
 const FromBox = styled.div`
   width: 80%;
@@ -175,6 +179,7 @@ const FromTag = styled.div.withConfig({
 `;
 const FromP = styled.p`
   font-size: 2rem;
+  color: ${({ theme }) => theme.card.color};
   font-weight: 700;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -182,7 +187,6 @@ const FromP = styled.p`
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: normal;
-  color: ${({ $thema }) => (!$thema ? "#000" : "#fff")};
 `;
 const FromSpan = styled.span`
   font-weight: 400;

@@ -1,15 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
-function ProfileImgs({ list, count, thema }) {
+function ProfileImgs({ list, count, $ignore }) {
   const leng = count - 3;
   const isVisible = count > 3;
   return (
     <ProfileBox>
       {list.slice(0, 3).map((item, index) => (
-        <ProfileImg $thema={thema} key={index} $src={item?.profileImageURL} style={{ left: `${index * 20}px` }} />
+        <ProfileImg key={index} $src={item?.profileImageURL} style={{ left: `${index * 20}px` }} $ignore={$ignore} />
       ))}
-      {isVisible && <ProfileDiv>+ {leng}</ProfileDiv>}
+      {isVisible && <ProfileDiv $ignore={$ignore}>+ {leng}</ProfileDiv>}
     </ProfileBox>
   );
 }
@@ -26,7 +26,7 @@ const Profile = styled.div`
   height: 2.8rem;
   background-color: #fff;
   border-radius: 100px;
-  border: 1px solid ${({ $thema }) => (!$thema ? "#FFF" : "#4F5256")};
+  border: 1px solid ${({ $ignore, theme }) => ($ignore ? "white" : theme.border)};
   position: absolute;
 `;
 

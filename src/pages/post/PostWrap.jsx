@@ -12,7 +12,7 @@ function Loading() {
   return <>{renderItems}</>;
 }
 
-function PostWrap({ data, toggleModal, setModalClick, loading, thema }) {
+function PostWrap({ data, toggleModal, setModalClick, loading }) {
   const clickCard = (i) => {
     setModalClick(i);
   };
@@ -30,7 +30,7 @@ function PostWrap({ data, toggleModal, setModalClick, loading, thema }) {
           <SettingIcon src={setting} alt="setting" />
         </EditDeleteButton>
       </StyledLink>
-      <PostCard $thema={thema}>
+      <PostCard>
         <Link to={`/post/${params.id}/message`}>
           <ImgBox>
             <img src={MoreCardImg} alt="MoreCardImg" />
@@ -47,7 +47,6 @@ function PostWrap({ data, toggleModal, setModalClick, loading, thema }) {
                 clickCard(item.id);
                 toggleModal();
               }}
-              thema={thema}
               key={item.id}
               profileImg={item.profileImageURL}
               name={item.sender}
@@ -101,7 +100,7 @@ const PostCard = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 16px;
-  background-color: ${({ $thema }) => ($thema ? "#000" : "#fff")};
+  background-color: ${({ theme }) => theme.card.backgroundColor};
   box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.08);
   padding: 2.8rem 2.4rem;
   @media all and (max-width: 1248px) {

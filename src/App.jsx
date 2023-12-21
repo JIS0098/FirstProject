@@ -20,7 +20,7 @@ function App() {
       <ThemeProvider theme={theme[themeState]}>
         <GlobalStyles />
         {/* 여기 밑으로 컴포넌트 사용 */}
-        <Main onToggleTheme={onToggleTheme} />
+        <Main onToggleTheme={onToggleTheme} isDark={themeState === "dark"} />
       </ThemeProvider>
     </>
   );

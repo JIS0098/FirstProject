@@ -9,12 +9,14 @@ import CreateMessage from "./pages/createMessage";
 import CreatePost from "./pages/createPost";
 import NotFound from "./pages/not_found/NotFound";
 import { LocationProvider } from "contexts/LocationContext";
+import { SnowTheme } from "styles/snowTheme";
 
-function Main({ onToggleTheme }) {
+function Main({ onToggleTheme, isDark }) {
   return (
     <BrowserRouter>
       <LocationProvider>
         <Header onThemaClick={onToggleTheme} />
+        <SnowTheme isDark={isDark} />
         <Routes>
           <Route path="/">
             <Route index element={<Landing />} />
