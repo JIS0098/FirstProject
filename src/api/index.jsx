@@ -71,7 +71,7 @@ export async function getRollingPaper(pageId) {
  * @returns - 생성된 페이퍼에 대한 데이터.
  */
 export async function createRollingPaper(postData) {
-  console.log(postData);
+  // console.log(postData);
   return fetcher(`/recipients/`, options({ data: postData }));
 }
 
