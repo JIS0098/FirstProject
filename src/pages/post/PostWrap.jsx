@@ -64,11 +64,11 @@ function PostWrap({ data, toggleModal, setModalClick, loading }) {
 const BackListLink = styled(Link)`
   position: absolute;
   top: 8rem;
-  left: 2.5rem;
+  left: 2rem;
   cursor: pointer;
 `;
 const BackList = styled(motion.button)`
-  width: 11.2rem;
+  width: 12.2rem;
   height: 3.9rem;
   font-size: 1.8rem;
   font-weight: 700;
