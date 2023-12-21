@@ -46,10 +46,6 @@ function PostHeader({
     }
   };
 
-  const stopPropagation = (event) => {
-    event.stopPropagation();
-  };
-
   useEffect(() => {
     if (selectEmoji !== null) {
       const emojiUpdate = async () => {
@@ -67,7 +63,7 @@ function PostHeader({
   return (
     <PostHead onClick={() => toggleFalse()}>
       <HeaderService>
-        <ToName>To. {selectedPost?.name || "Loding..."}</ToName>
+        <ToName>To. {selectedPost?.name || "Loading..."}</ToName>
 
         <HeaderServiceBox>
           <HeaderServicePost>
@@ -100,8 +96,8 @@ function PostHeader({
             </ButtonWrap>
 
             {emojiPick ? (
-              <EmojiPickerWrap onClick={stopPropagation}>
-                <EmojiPicker onEmojiClick={handleEmojiSelect} />
+              <EmojiPickerWrap>
+                <EmojiPicker onEmojiClick={handleEmojiSelect} searchDisabled />
               </EmojiPickerWrap>
             ) : null}
 
@@ -158,6 +154,9 @@ const EmojiPickerWrap = styled.div`
   right: 0;
   top: 6rem;
   z-index: 2;
+  .epr-header {
+    display: none !important;
+  }
   @media all and (max-width: 768px) {
     left: 0;
   }
@@ -192,14 +191,14 @@ const HeaderServiceBox = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 2.8rem;
+  gap: 0.5rem;
 `;
 const HeaderServicePost = styled.div`
   display: flex;
   gap: 1.1rem;
   font-size: 1.8rem;
   color: #181818;
-  width: 23rem;
+  width: 21rem;
   @media all and (max-width: 1248px) {
     display: none;
   }

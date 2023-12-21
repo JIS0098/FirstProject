@@ -30,13 +30,15 @@ function PostWrap({ data, toggleModal, setModalClick, loading }) {
           <SettingIcon src={setting} alt="setting" />
         </EditDeleteButton>
       </StyledLink>
-      <PostCard>
-        <Link to={`/post/${params.id}/message`}>
+
+      <Link to={`/post/${params.id}/message`}>
+        <PostCard>
           <ImgBox>
             <img src={MoreCardImg} alt="MoreCardImg" />
           </ImgBox>
-        </Link>
-      </PostCard>
+        </PostCard>
+      </Link>
+
       {loading ? (
         <Loading />
       ) : (
