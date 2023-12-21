@@ -54,11 +54,11 @@ function Landing() {
           </StyledPageIntroContainer>
         </StyledLandingSectionSecond>
         <StyledGoToListButtonContainer>
-          <Link to="/list">
+          <StyledLink to="/list">
             <Button width="28rem" tabletWidth="100%">
               구경해보기
             </Button>
-          </Link>
+          </StyledLink>
         </StyledGoToListButtonContainer>
       </StyledMainContainer>
     </>
@@ -77,7 +77,6 @@ const StyledLandingSection = styled(motion.section)`
   border-radius: 16px;
   margin-bottom: 3rem;
   min-height: 30rem;
-  min-width: 360px;
   @media screen and (max-width: 1248px) {
     display: grid;
     padding: 4rem 0;
@@ -158,18 +157,21 @@ const StyledGoToListButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   min-width: 360px;
-
-  & a {
-    @media screen and (max-width: 1248px) {
-      width: 100%;
-    }
-  }
 `;
 const StyledBr = styled.br`
   display: block;
 
   @media screen and (max-width: 1248px) {
     display: none;
+  }
+`;
+
+const StyledLink = styled(Link)`
+  @media screen and (max-width: 1248px) {
+    width: 100%;
+  }
+  @media screen and (max-width: 768px) {
+    width: 60%;
   }
 `;
 

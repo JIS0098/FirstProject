@@ -27,6 +27,10 @@ const StyledContainer = styled.div`
 const InputContainer = styled.form`
   width: 60%;
   position: relative;
+
+  @media screen and (max-width: 768px) {
+    width: 80%;
+  }
 `;
 const StyledSearchBar = styled.input`
   width: 100%;
@@ -48,6 +52,16 @@ const StyledSearchBar = styled.input`
     background-size: contain;
     background-position: 1px center;
     background-repeat: no-repeat;
+  }
+
+  @media screen and (max-width: 768px) {
+    &::placeholder {
+      background-image: url(https://cdn1.iconfinder.com/data/icons/hawcons/32/698627-icon-111-search-256.png);
+      background-size: contain;
+      background-position: 1px center;
+      background-repeat: no-repeat;
+      color: rgba(0, 0, 0, 0);
+    }
   }
 `;
 const StyledSubmitBtn = styled.button`
