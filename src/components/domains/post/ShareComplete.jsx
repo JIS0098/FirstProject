@@ -38,6 +38,7 @@ const ShareFinish = styled.div`
   transform: translateX(-50%);
   gap: 1.6rem;
   animation: ${fadeInTop} 4s ease-in-out forwards;
+  z-index: 1;
 `;
 const ShareImg = styled.img`
   background-color: green;
