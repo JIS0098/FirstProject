@@ -47,8 +47,7 @@
 - 공유하기 및 KaKaoApi공유 구현   
    
 **👨 김우현** : 
-- LandingPage 레이아웃 제작 
-- Nav-bar 제작 
+- LandingPage 레이아웃 제작 & Nav-bar 제작 
 - Framer-Motion을 통한 전체페이지 Animation 구현 
 - PostApi 구현 
 - 스켈레톤Ui 제작 
