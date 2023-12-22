@@ -32,10 +32,10 @@
 |<img src="https://github.com/CodeIt-Part2-Team1/FirstProject/assets/124851297/2bda01a7-48dd-4097-b0f7-5e3bf3f1f473" width="128" height="128">|<img src="https://github.com/CodeIt-Part2-Team1/FirstProject/assets/124851297/4fd7a5fb-fa4c-4d95-9467-a2d2a5e039d1" width="128" height="128">|<img src="https://cdnimage.dailian.co.kr/news/201402/news_1391494701_419313_m_1.jpg" width="128" height="128">|<img src="https://github.com/CodeIt-Part2-Team1/FirstProject/assets/124851297/d9ce5b9e-49bb-479c-87c1-90497e35f9f5" width="128" height="128">|<img src="https://coinpan.com/files/attach/images/198/429/492/210/12ceae7a20597f3d7f920a7aef65df5b.jpg" width="128" height="128">|
 
 **👦 권부근** : 
-- Thema(Dark,White) 구현 
+- 테마프로바이더 및 전역으로 사용할 색상 설정
 - ListPage 레이아웃 제작 및 케러셀등 기능구현 
 - GetApi구현 , ListPage GetApi를 통한 배열렌더링 
-- 테마프로바이더 및 라우터 설정
+- 라우터 설정
 - 검색기능구현
    
 **🧑 김윤수** : 
