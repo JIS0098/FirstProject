@@ -2,18 +2,18 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { getRollingPaperAll } from "../../api";
 import { Button } from "../../components/commons/Button";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 import CardSection from "../../components/domains/list/CardSection";
 import SearchBar from "components/commons/SearchBar";
 import LoadingSpinner from "components/commons/LodingSpinner";
 import { LIST_TITLE } from "constants";
 
-function SearchResult({ loading, searchDatas }) {
+function SearchResult({ loading, searchDatas, onInput }) {
   if (loading) {
     return <LoadingSpinner />;
   }
 
-  if (searchDatas.length > 0) {
+  if (onInput && searchDatas.length > 0) {
     return <CardSection title={LIST_TITLE[0]} recipients={searchDatas} $resultSection={true} />;
   }
 
@@ -38,6 +38,7 @@ function ListPage() {
   const queryValue = searchParams.get("name");
   const [searchValue, setSearchValue] = useState(queryValue || ""); // 입력한 값
   const [onInput, setOnInput] = useState(false);
+  const { search } = useLocation();
 
   const handleSearchValue = (e) => {
     setSearchValue(e.target.value);
@@ -67,6 +68,10 @@ function ListPage() {
       })
       .finally(() => setLoading(false));
   }, [queryValue]);
+
+  useEffect(() => {
+    setOnInput(search.length > 0);
+  }, [search]);
 
   return (
     <>
