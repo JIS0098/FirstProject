@@ -7,28 +7,18 @@ import SelectColor from "components/domains/createPost/SelectBackground/SelectCo
 import SelectImage from "components/domains/createPost/SelectBackground/SelectImage";
 import CreateButton from "components/commons/CreateButton";
 import handleCreateButtonClick from "utils/handleCreateButtonClick";
+import { WARNING_MESSAGE } from "constants";
 
 const CreatePost = () => {
   const [isName, setIsName] = useState("");
   const [selectedImage, setSelectedImage] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
   const [isChecked, setIsChecked] = useState(false);
-  const [isAlert, setIsAlert] = useState({
-    from: false,
-    text: false,
-  });
+
   const navigate = useNavigate();
 
   const handleNameChange = (name) => {
-    if (name.length < 9) {
-      setIsName(name);
-      setIsAlert({ ...isAlert, from: false });
-    } else if (name.length === 9) {
-      alert("8글자 이하로 입력해 주세요.");
-      setIsAlert({ ...isAlert, from: true });
-    } else {
-      setIsAlert({ ...isAlert, from: true });
-    }
+    setIsName(name);
   };
 
   const handleImageSelect = (image) => {
@@ -50,7 +40,7 @@ const CreatePost = () => {
   return (
     <Wrapper>
       <Container>
-        <NameInput onChange={handleNameChange} placeholder={"받는 사람을 입력해 주세요."} name={isName}>
+        <NameInput onChange={handleNameChange} placeholder={WARNING_MESSAGE.POST_CARD}>
           To.
         </NameInput>
         <SelectBackground>
@@ -64,7 +54,7 @@ const CreatePost = () => {
           <SelectColor onColorSelect={handleColorSelect} />
         )}
         <CreateButton
-          disabled={!isName || isAlert.from || isAlert.text}
+          disabled={!isName}
           onClick={() =>
             handleCreateButtonClick({
               name: isName,

@@ -8,6 +8,7 @@ import RelationshipInputBox from "components/domains/createMessage/components/Re
 import WriteInputBox from "components/domains/createMessage/WYSIWYG";
 import { defaultProfileImg } from "assets/ProfileImgUrls";
 import { postMessage } from "api";
+import { WARNING_MESSAGE } from "constants";
 
 const CreateMessage = () => {
   const navigate = useNavigate();
@@ -52,7 +53,7 @@ const CreateMessage = () => {
   return (
     <MessageLayout>
       <MessageBox>
-        <NameInput value={isName} onChange={handleNameChange} placeholder="이름을 입력해 주세요.">
+        <NameInput onChange={handleNameChange} placeholder={WARNING_MESSAGE.POST_MESSAGE}>
           From.
         </NameInput>
         <ProfileLayout data={data} setData={setData} />

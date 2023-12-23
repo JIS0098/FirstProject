@@ -241,7 +241,7 @@ const ButtonWrap = styled.button`
   display: flex;
   padding: 6px 16px;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
   gap: 10px;
   border-radius: 6px;
   border: 1px solid #ccc;

@@ -73,18 +73,18 @@ const StyledBtnContainer = styled.div`
   align-items: center;
 `;
 const StyledAddButton = styled(motion.button)`
-  border: 1px solid #ccc;
+  border: 1px solid ${({ theme }) => theme.headerBtn.border};
   border-radius: 6px;
-  background: white;
   padding: 0.8rem 1.6rem;
   cursor: pointer;
-  color: #181818;
+  background: ${({ theme }) => theme.headerBtn.backgroundColor};
+  color: ${({ theme }) => theme.headerBtn.color};
   font-size: 1.6rem;
-  font-weight: 500;
+  font-weight: 600;
   text-wrap: nowrap;
 
   &:hover {
-    background: #f6f6f6;
+    background: ${({ theme }) => theme.headerBtn.hover};
   }
 `;
 
