@@ -11,7 +11,10 @@ const ProfileLayout = ({ data, setData }) => {
   const handledefaultImageLoad = async () => {
     const { data } = await supabase.storage.from("profile_images").list("");
 
-    data.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+    data.sort(
+      (a, b) =>
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+    );
 
     const profileUrls = data.map((item) => {
       return `https://gjbkkhzzbcjprpxlhdlu.supabase.co/storage/v1/object/public/profile_images/${item.name}`;
@@ -24,15 +27,22 @@ const ProfileLayout = ({ data, setData }) => {
     const file = e.target.files[0];
 
     if (file) {
-      await supabase.storage.from("upload_profile_image").upload(`${Date.now()}`, file);
+      await supabase.storage
+        .from("upload_profile_image")
+        .upload(`${Date.now()}`, file);
       handleImageLoad();
     }
   };
 
   const handleImageLoad = async () => {
-    const { data } = await supabase.storage.from("upload_profile_image").list("");
+    const { data } = await supabase.storage
+      .from("upload_profile_image")
+      .list("");
 
-    data.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+    data.sort(
+      (a, b) =>
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+    );
 
     const imagePaths = data.map((item) => item.name);
 
@@ -59,7 +69,11 @@ const ProfileLayout = ({ data, setData }) => {
               <ButtonIcon src={addButtonIcon} alt="사진 추가 버튼" />
             </Button>
             <ProfileImg
-              src={data && data.profileImageURL ? data.profileImageURL : defaultProfileImg}
+              src={
+                data && data.profileImageURL
+                  ? data.profileImageURL
+                  : defaultProfileImg
+              }
               alt="프로필 이미지"
             />
           </StyledUploadImgDiv>
@@ -68,13 +82,15 @@ const ProfileLayout = ({ data, setData }) => {
           <p>프로필 이미지를 선택해주세요!</p>
           <StyledImgList>
             {defaultProfileList?.map((item) => (
-              <img
-                key={item}
-                src={item}
-                onClick={(e) => {
-                  setData({ ...data, profileImageURL: e.target.src });
-                }}
-              />
+              <StyledImgWapper key={item}>
+                <img
+                  key={item}
+                  src={item}
+                  onClick={(e) => {
+                    setData({ ...data, profileImageURL: e.target.src });
+                  }}
+                />
+              </StyledImgWapper>
             ))}
           </StyledImgList>
         </StyledImgSelectBox>
@@ -82,18 +98,23 @@ const ProfileLayout = ({ data, setData }) => {
     </div>
   );
 };
+
 const ProfileImg = styled.img`
   pointer-events: none;
 `;
+
 const StyledProfileImgBox = styled.div`
   display: flex;
   align-items: center;
   gap: 3rem;
 `;
+
 const StyledUploadImgDiv = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
+  width: 9rem;
+  height: 9rem;
 
   & div {
     position: absolute;
@@ -136,23 +157,31 @@ const StyledImgList = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 0 0.5rem;
+  width: 24rem;
+  height: 6.7rem;
+`;
+
+const StyledImgWapper = styled.div`
+  margin-top: 1.2rem;
+  width: 5.5rem;
+  height: 5.5rem;
+  border-radius: 50%;
+  border: 0.1rem solid #5b5e66;
+  overflow: hidden;
 
   & img {
-    margin-top: 1.2rem;
-    width: 5.5rem;
-    border-radius: 50%;
-    border: 0.1rem solid #5b5e66;
+    width: 100%;
     cursor: pointer;
     outline: none;
 
     &:hover {
       opacity: 0.5;
     }
+  }
 
-    @media (max-width: 768px) {
-      width: 4.6rem;
-      height: 4.6rem;
-    }
+  @media (max-width: 768px) {
+    width: 4.6rem;
+    height: 4.6rem;
   }
 `;
 
