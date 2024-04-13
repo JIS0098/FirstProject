@@ -8,20 +8,20 @@ import addButtonIcon from "assets/icon/add-button.png";
 const ProfileLayout = ({ data, setData }) => {
   const [defaultProfileList, setDefaultProfileList] = useState();
 
-  const handledefaultImageLoad = async () => {
-    const { data } = await supabase.storage.from("profile_images").list("");
+  // const handledefaultImageLoad = async () => {
+  //   const { data } = await supabase.storage.from("profile_images").list("");
 
-    data.sort(
-      (a, b) =>
-        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-    );
+  //   data.sort(
+  //     (a, b) =>
+  //       new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+  //   );
 
-    const profileUrls = data.map((item) => {
-      return `https://gjbkkhzzbcjprpxlhdlu.supabase.co/storage/v1/object/public/profile_images/${item.name}`;
-    });
+  //   const profileUrls = data.map((item) => {
+  //     return `https://gjbkkhzzbcjprpxlhdlu.supabase.co/storage/v1/object/public/profile_images/${item.name}`;
+  //   });
 
-    setDefaultProfileList(profileUrls);
-  };
+  //   setDefaultProfileList(profileUrls);
+  // };
 
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
@@ -55,6 +55,27 @@ const ProfileLayout = ({ data, setData }) => {
   };
 
   useEffect(() => {
+    const handledefaultImageLoad = async () => {
+      const { data } = await supabase.storage.from("profile_images").list("");
+
+      data.sort(
+        (a, b) =>
+          new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+      );
+
+      const profileUrls = data.map((item) => {
+        return `https://gjbkkhzzbcjprpxlhdlu.supabase.co/storage/v1/object/public/profile_images/${item.name}`;
+      });
+
+      // 이미지 사전로딩
+      profileUrls.forEach((url) => {
+        const img = new Image();
+        img.src = url;
+      });
+
+      setDefaultProfileList(profileUrls);
+    };
+
     handledefaultImageLoad();
   }, []);
 
