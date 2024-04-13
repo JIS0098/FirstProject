@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import NameInput from "components/commons/NameInput";
@@ -6,19 +6,19 @@ import CreateButton from "components/commons/CreateButton";
 import ProfileLayout from "components/domains/createMessage/components/ProfileLayout";
 import RelationshipInputBox from "components/domains/createMessage/components/RelationshipInputBox";
 import WriteInputBox from "components/domains/createMessage/WYSIWYG";
-import { defaultProfileImg } from "assets/ProfileImgUrls";
 import { postMessage } from "api";
 import { WARNING_MESSAGE } from "constants";
 
 const CreateMessage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
+  const defaultProfileImgUrl = "https://i.ibb.co/SJHdNkL/profile.webp";
   const [isName, setIsName] = useState("");
   const [data, setData] = useState({
     team: "2-1",
     recipientId: +id,
     sender: null,
-    profileImageURL: defaultProfileImg,
+    profileImageURL: defaultProfileImgUrl,
     relationship: "지인",
     content: "",
     font: "Pretendard",
@@ -50,15 +50,28 @@ const CreateMessage = () => {
     }
   };
 
+  useEffect(() => {
+    const img = new Image();
+    img.src = defaultProfileImgUrl;
+  }, []);
+
   return (
     <MessageLayout>
       <MessageBox>
-        <NameInput onChange={handleNameChange} placeholder={WARNING_MESSAGE.POST_MESSAGE}>
+        <NameInput
+          onChange={handleNameChange}
+          placeholder={WARNING_MESSAGE.POST_MESSAGE}
+        >
           From.
         </NameInput>
         <ProfileLayout data={data} setData={setData} />
         <RelationshipInputBox data={data} setData={setData} />
-        <WriteInputBox isAlert={isAlert} setIsAlert={setIsAlert} data={data} setData={setData} />
+        <WriteInputBox
+          isAlert={isAlert}
+          setIsAlert={setIsAlert}
+          data={data}
+          setData={setData}
+        />
         <CreateButtonBox>
           <CreateButton
             mobileWidth="100%"
