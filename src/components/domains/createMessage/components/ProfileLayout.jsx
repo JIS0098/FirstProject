@@ -8,21 +8,6 @@ import addButtonIcon from "assets/icon/add-button.png";
 const ProfileLayout = ({ data, setData }) => {
   const [defaultProfileList, setDefaultProfileList] = useState();
 
-  // const handledefaultImageLoad = async () => {
-  //   const { data } = await supabase.storage.from("profile_images").list("");
-
-  //   data.sort(
-  //     (a, b) =>
-  //       new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-  //   );
-
-  //   const profileUrls = data.map((item) => {
-  //     return `https://gjbkkhzzbcjprpxlhdlu.supabase.co/storage/v1/object/public/profile_images/${item.name}`;
-  //   });
-
-  //   setDefaultProfileList(profileUrls);
-  // };
-
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
 
@@ -184,17 +169,19 @@ const StyledImgList = styled.div`
 
 const StyledImgWapper = styled.div`
   margin-top: 1.2rem;
+  position: relative;
   width: 5.5rem;
-  height: 5.5rem;
+  aspect-ratio: 16/9;
   border-radius: 50%;
   border: 0.1rem solid #5b5e66;
   overflow: hidden;
 
   & img {
     width: 100%;
+    height: 100%;
     cursor: pointer;
     outline: none;
-
+    position: absolute;
     &:hover {
       opacity: 0.5;
     }
